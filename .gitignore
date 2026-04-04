@@ -1,0 +1,86 @@
+# ─── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.cache/
+
+# ─── Virtual environments ─────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ─── Heavy raw datasets (8.8 GB) — download via scripts/download_datasets.py ─
+data/raw/atlas/
+data/raw/deepfashion_inshop/
+data/raw/deepfashion_multimodal/
+data/raw/fashion200k/
+data/raw/polyvore/
+data/raw/hnm/
+data/raw/hnm_real/
+# Keep sample files — useful for quick local testing
+!data/raw/*.json
+
+# ─── Pre-computed embeddings (1.4 GB) — regenerate via benchmark/embed_hnm.py
+data/processed/embeddings/*.npy
+data/processed/embeddings/*.index
+# Keep metadata files
+!data/processed/embeddings/*.json
+
+# ─── Full 253K retrieval caches (>1 GB each) — regenerate via eval_full_253k.py
+results/full/bm25_top100.json
+results/full/bm25_ner_top100.json
+results/full/dense_top100.json
+results/full/dense_query_embeddings.npy
+results/full/ce_reranked.json
+results/full/ce_ner_reranked.json
+# Keep NER cache (10 MB, expensive to recompute — 2.7 hrs)
+# results/full/ner_cache_253k.json  ← intentionally kept
+
+# ─── 10K sample retrieval caches
+results/real/hnm_bm25.json
+results/real/hnm_dense_*.json
+results/real/hnm_ce_rerank.json
+results/real/hnm_full_pipeline.json
+results/real/hnm_hybrid_configs.json
+results/real/hnm_query_understanding.json
+results/real/*_per_query.csv
+
+# ─── Marqo repo embeddings (large .pt files)
+repos/marqo-FashionCLIP/results/**/embeddings.pt
+repos/*/results/**/embeddings.pt
+
+# ─── Entire repos/ subtree (cloned third-party code, not needed for reproduction)
+repos/
+
+# ─── Log files (runtime noise)
+results/full/*_log.txt
+results/real/*.log
+
+# ─── Jupyter / notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# ─── macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ─── Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ─── HuggingFace / torch model cache (not project data)
+data/processed/torch/
+.cache/
