@@ -166,4 +166,4 @@ We want this to become a benchmark that anyone building fashion search can run a
 
 ---
 
-*MODA is built by [The FI Company](https://theficompany.com). Code and results: [github.com/hopit-ai/moda](https://github.com/hopit-ai/moda). Apache 2.0.*
+*MODA is built by [The FI Company](https://thefi.company) which is a team within [Hopit.ai](https://hopit.ai). Code and results: [github.com/hopit-ai/moda](https://github.com/hopit-ai/moda). Apache 2.0.*
