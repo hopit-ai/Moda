@@ -6,7 +6,7 @@
 
 Everyone benchmarks fashion embeddings. Marqo publishes numbers on FashionCLIP. OpenAI has CLIP. Google has SigLIP. But nobody has published what happens when you wire up a full search pipeline and measure end-to-end results on real user queries. Not embedding-to-embedding cosine similarity on academic datasets. The whole thing: lexical retrieval, dense retrieval, hybrid fusion, reranking, query understanding.
 
-We ran that experiment. 253,685 real search queries from H&M customers. 105,542 products. Eight pipeline configurations ablated one component at a time. The best configuration improved nDCG@10 by 81% over the best published fashion embedding baseline, using off-the-shelf zero-shot components. No custom training, no proprietary APIs. Total compute: a MacBook with Apple Silicon.
+We ran that experiment. 253,685 real search queries from H&M customers. 105,542 products. Eight pipeline configurations, each adding one component at a time. The best configuration improved nDCG@10 by 81% over the best published fashion embedding baseline, using off-the-shelf zero-shot components. No custom training, no proprietary APIs. Total compute: a MacBook with Apple Silicon.
 
 One widely recommended technique actively made things worse.
 
@@ -95,7 +95,7 @@ But 10K is a sample. Would it hold at full scale?
 
 We ran every configuration on the complete dataset. Pre-computed caches for BM25 results, FAISS dense results, NER extractions, and cross-encoder scores. About 16 hours wall clock on Apple Silicon.
 
-### Full ablation (253,685 queries, 105,542 products)
+### Full breakdown (253,685 queries, 105,542 products)
 
 | # | Configuration | nDCG@10 | 95% CI | MRR | Latency | vs best baseline |
 |---|---------------|---------|--------|-----|---------|-----------------|
