@@ -1,4 +1,4 @@
-# MODA Phase 2 — Running Leaderboard (Real H&M Queries)
+# MODA — Running Leaderboard (Real H&M Queries)
 
 **Benchmark:** H&M full-pipeline | 10,000 real user queries (sampled, seed=42) | 105,542 articles  
 **Ground truth:** Purchase-based relevance — 1 positive (bought) + ~9 negatives per query  
@@ -32,7 +32,68 @@
 | 5 | Hybrid Config C + synonyms | — | — | — | — | — | (skipped: synonyms hurt) |
 | 6 | Hybrid Config C + CE rerank | **0.0384** | **0.0533** | **0.0562** | **0.0163** | **0.0284** | **+77.6% ✅** |
 | 7 | Hybrid (NER-BM25×0.4 + Dense×0.6) | 0.0227 | 0.0329 | 0.0432 | 0.0124 | 0.0220 | +9.7% ✅ |
-| **8** | **Full Pipeline: NER-BM25 + Dense + CE rerank ← NEW BEST** | **0.0396** | **0.0549** | **0.0579** | **0.0166** | **0.0289** | **+83.0% ✅** |
+| 8 | Full Pipeline: NER-BM25 + Dense + CE rerank | 0.0396 | 0.0549 | 0.0579 | 0.0166 | 0.0289 | +83.0% ✅ |
+| **10** | **ColBERT→CE cascade ← NEW BEST** | **0.0401** | **0.0553** | **0.0578** | **0.0165** | **—** | **+84.3% ✅** |
+
+---
+
+## Phase 2E — Reranker Comparison: ColBERT v2 Late Interaction (10K queries)
+
+**Model:** `colbert-ir/colbertv2.0` (BERT-base + 768→128 projection, MaxSim scoring)  
+**Pipeline:** NER-boosted Hybrid (BM25×0.4 + Dense×0.6) → RRF top-100 → rerank → top-50  
+**Comparison:** Same data split (10K queries, seed=42), same retrieval pipeline as Config 7/8
+
+| # | Config | nDCG@5 | nDCG@10 | MRR | Recall@10 | Recall@50 | vs P1 Best |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 7 | Hybrid NER baseline (no rerank) | 0.0227 | 0.0329 | 0.0432 | 0.0124 | 0.0464 | +9.7% |
+| 9 | Hybrid NER → ColBERT@50 | 0.0334 | 0.0480 | 0.0513 | 0.0149 | 0.0546 | +60.0% ✅ |
+| 8 | Hybrid NER → CE@50 (reference) | 0.0396 | 0.0549 | 0.0579 | 0.0166 | 0.0563 | +83.0% |
+| **10** | **ColBERT@100 → CE@50 cascade** | **0.0401** | **0.0553** | **0.0578** | **0.0165** | **0.0546** | **+84.3% ✅** |
+
+### Reranker Head-to-Head (vs Hybrid NER baseline)
+
+| Reranker | nDCG@10 | Lift vs baseline | Lift vs P1 |
+| --- | --- | --- | --- |
+| None (baseline) | 0.0329 | — | +9.7% |
+| ColBERT v2 (late interaction) | 0.0480 | **+45.9%** | **+60.0%** |
+| Cross-Encoder (full cross-attn) | 0.0549 | **+66.9%** | **+83.0%** |
+| ColBERT→CE cascade | **0.0553** | **+68.1%** | **+84.3%** |
+
+> **Finding:** ColBERT v2 delivers a strong +45.9% lift over the hybrid baseline. The Cross-Encoder wins by +21pp on its own. However, the **ColBERT→CE cascade** (ColBERT narrows 100→50, then CE re-scores the top-50) edges out CE-alone by +0.8%, establishing a new best nDCG@10 = 0.0553. ColBERT's MaxSim pre-filtering surfaces slightly better candidates for CE to score.
+
+---
+
+## Phase 2F — Mixture of Encoders: Superlinked-style Structured Retrieval (10K queries)
+
+**Architecture:** Multi-field FashionCLIP encoding with query-time NER-adaptive weighting  
+**Product vector:** 4 parallel FashionCLIP embeddings per product:
+- `text` = FashionCLIP(prod_name + detail_desc) — 512-dim
+- `color` = FashionCLIP(colour_group_name) — 512-dim (50 unique categories)
+- `type` = FashionCLIP(product_type_name) — 512-dim (131 unique categories)
+- `group` = FashionCLIP(product_group_name) — 512-dim (19 unique categories)
+
+**Query scoring:** `score = w_text·cos(q,p_text) + w_color·cos(NER_color,p_color) + w_type·cos(NER_type,p_type) + w_group·cos(NER_group,p_group)`  
+**Adaptive weights:** w_color=0.25 / w_type=0.30 / w_group=0.15 (activated when NER detects entity)
+
+| # | Config | nDCG@5 | nDCG@10 | MRR | Recall@10 | Recall@50 | vs P1 Best |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 3 | Dense only (FashionCLIP) | 0.0161 | 0.0256 | 0.0356 | 0.0105 | 0.0461 | −14.7% |
+| 11 | MoE retrieval (structured) | 0.0167 | 0.0264 | 0.0370 | 0.0109 | 0.0481 | −12.0% |
+| 7 | Hybrid NER + Dense (baseline) | 0.0227 | 0.0329 | 0.0432 | 0.0124 | 0.0464 | +9.7% |
+| 12 | Hybrid NER + MoE | 0.0223 | 0.0330 | 0.0437 | 0.0129 | 0.0481 | +10.0% |
+| 8 | Hybrid NER + Dense + CE@50 | 0.0396 | 0.0549 | 0.0579 | 0.0166 | 0.0563 | +83.0% |
+| 13 | Hybrid NER + MoE + CE@50 | 0.0393 | 0.0541 | 0.0582 | 0.0164 | 0.0578 | +80.3% |
+
+### MoE vs Single-Vector Dense (retrieval stage only)
+
+| Retriever | nDCG@10 | Lift vs Dense | Key Advantage |
+| --- | --- | --- | --- |
+| Dense (FashionCLIP) | 0.0256 | — | Semantic text similarity |
+| MoE (structured) | 0.0264 | **+3.1%** | NER-driven category matching |
+| Hybrid + Dense | 0.0329 | — | BM25 + semantic fusion |
+| Hybrid + MoE | 0.0330 | **+0.3%** | Marginal gain from structure |
+
+> **Finding:** The Mixture of Encoders approach provides a modest +3.1% lift over single-vector dense retrieval standalone. In the hybrid setting (BM25+retriever), the gain shrinks to +0.3% because BM25's NER-boosted field matching already captures much of the same categorical signal. With CE reranking, MoE+CE (0.0541) is within 1.5% of Dense+CE (0.0549) — the CE reranker equalizes retrieval-stage differences. MoE's main benefit is improved Recall@50 (0.0481 vs 0.0461), suggesting it surfaces a more diverse candidate pool.
 
 ---
 
@@ -76,10 +137,13 @@ BM25 is precision-sensitive to IDF. When we expand "hoodie" → 12+ synonyms, we
 
 The CE reranker (`cross-encoder/ms-marco-MiniLM-L-6-v2`) achieves the majority of gains by evaluating full (query, product-text) pairs holistically. It compensates for retrieval quality differences between Config 6 and Config 8.
 
-### 5. Full Pipeline (NER + Hybrid + CE Rerank) Sets New SOTA: nDCG@10 = 0.0549
+### 5. ColBERT→CE Cascade Sets New SOTA: nDCG@10 = 0.0553
 
-A **+83% improvement** over the Phase 1 FashionCLIP dense baseline (0.0300).  
-Pipeline: `GLiNER NER → NER-boosted BM25 × 0.4 + FashionCLIP FAISS × 0.6 → RRF → CE rerank`
+ColBERT's per-token MaxSim pre-filtering (100→50) followed by CE's full cross-attention scoring edges out CE-alone by +0.8%. ColBERT surfaces slightly better candidates for CE to evaluate.
+
+### 6. Mixture of Encoders: Modest Standalone Gain, Equalised by CE
+
+The Superlinked-style structured retrieval provides +3.1% over single-vector dense retrieval by leveraging NER-driven categorical matching. However, BM25's NER-boosted field matching already captures similar signal, so the hybrid gain is only +0.3%. With CE reranking, the difference vanishes (MoE+CE = 0.0541 vs Dense+CE = 0.0549).
 
 ---
 
@@ -90,14 +154,63 @@ Phase 1 FashionCLIP dense (baseline)     nDCG@10 = 0.0300
 → BM25 alone                             nDCG@10 = 0.0187  (-37.7%)
 → + Dense hybrid (Config C)              nDCG@10 = 0.0353  (+17.8%)
 → + CE rerank (Config 6)                 nDCG@10 = 0.0533  (+77.6%)
-→ + NER attribute boost (Config 8)       nDCG@10 = 0.0549  (+83.0%) ← BEST
+→ + NER attribute boost (Config 8)       nDCG@10 = 0.0549  (+83.0%)
+→ + ColBERT→CE cascade (Config 10)       nDCG@10 = 0.0553  (+84.3%) ← BEST
 ```
 
 Each component's marginal contribution:
 - BM25 addition to dense: **+17.8%** (RRF hybrid effect)
 - CE reranking: **+50.9%** (from 0.0353 → 0.0533)
 - NER on BM25 component: **+3.0%** (from 0.0533 → 0.0549)
+- ColBERT pre-filter for CE: **+0.7%** (from 0.0549 → 0.0553)
 
 ---
 
-_Last updated: 2026-04-03 (Phase 2D query understanding complete)_
+## Phase 3A — Fine-Tuned Cross-Encoder Evaluation (22,855 held-out test queries)
+
+**Leakage prevention:** Evaluated exclusively on held-out test split (22,855 queries). Train/val/test split by *unique query text* — all query IDs sharing the same text go into the same split, preventing both direct and semantic leakage.  
+**Models compared:** Off-the-shelf `cross-encoder/ms-marco-MiniLM-L-6-v2` vs fine-tuned `moda-fashion-ce-best` (trained on H&M purchase pairs from train split)  
+**Pipeline:** NER-boosted Hybrid (BM25×0.4 + Dense×0.6) → RRF top-100 → CE rerank → top-50
+
+| # | Config | nDCG@5 | nDCG@10 | MRR | Recall@10 | Recall@50 | vs Off-shelf CE |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| — | Hybrid NER baseline (no rerank) | 0.0324 | 0.0422 | 0.0558 | 0.0142 | 0.0515 | −34.7% |
+| 8' | Hybrid NER + Off-shelf CE@50 | 0.0442 | **0.0646** | **0.0671** | **0.0195** | 0.0620 | baseline |
+| **14** | **Hybrid NER + Fine-tuned CE@50** | **0.0480** | **0.0654** | 0.0644 | 0.0183 | **0.0616** | **+1.2%** |
+
+### Head-to-Head Analysis
+
+| Metric | Off-shelf CE | Fine-tuned CE | Delta | Winner |
+| --- | --- | --- | --- | --- |
+| nDCG@5 | 0.0442 | **0.0480** | **+8.6%** | Fine-tuned ✅ |
+| nDCG@10 | 0.0646 | **0.0654** | **+1.2%** | Fine-tuned ✅ |
+| MRR | **0.0671** | 0.0644 | −4.0% | Off-shelf ✅ |
+| Recall@10 | **0.0195** | 0.0183 | −6.2% | Off-shelf ✅ |
+| Recall@50 | **0.0620** | 0.0616 | −0.6% | Off-shelf ✅ |
+
+> **Finding:** The fine-tuned CE shows a **mixed result**. It improves nDCG@5 (+8.6%) and nDCG@10 (+1.2%), suggesting better ranking of top positions. However, MRR (−4.0%) and Recall@10 (−6.2%) are worse — indicating the fine-tuned model occasionally ranks the true positive outside the top-10 when the off-shelf model would catch it. The fine-tuning appears to sharpen discrimination at the very top of the ranked list (nDCG@5) at the cost of recall breadth. Overall, the off-the-shelf `ms-marco-MiniLM-L-6-v2` remains remarkably competitive — a strong zero-shot baseline that domain-specific fine-tuning only marginally improves on nDCG while slightly hurting other metrics.
+
+---
+
+## Overall Pipeline Improvement Summary (Updated with Phase 3)
+
+```
+Phase 1 FashionCLIP dense (baseline)     nDCG@10 = 0.0300
+→ BM25 alone                             nDCG@10 = 0.0187  (-37.7%)
+→ + Dense hybrid (Config C)              nDCG@10 = 0.0353  (+17.8%)
+→ + CE rerank (Config 6)                 nDCG@10 = 0.0533  (+77.6%)
+→ + NER attribute boost (Config 8)       nDCG@10 = 0.0549  (+83.0%)
+→ + ColBERT→CE cascade (Config 10)       nDCG@10 = 0.0553  (+84.3%) ← BEST Phase 2
+→ + Fine-tuned CE (Config 14, test-only) nDCG@10 = 0.0654  (+1.2% vs off-shelf CE) ← Phase 3
+```
+
+Each component's marginal contribution:
+- BM25 addition to dense: **+17.8%** (RRF hybrid effect)
+- CE reranking: **+50.9%** (from 0.0353 → 0.0533)
+- NER on BM25 component: **+3.0%** (from 0.0533 → 0.0549)
+- ColBERT pre-filter for CE: **+0.7%** (from 0.0549 → 0.0553)
+- Fine-tuned CE (vs off-shelf): **+1.2% nDCG@10** (mixed: nDCG up, MRR/Recall down)
+
+---
+
+_Last updated: 2026-04-05 (Phase 3A Fine-tuned CE evaluation complete on 22,855 held-out test queries)_

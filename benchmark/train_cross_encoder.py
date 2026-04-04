@@ -93,30 +93,116 @@ def build_article_texts(articles_df: pd.DataFrame) -> dict[str, str]:
 
 # ─── Training data builder ────────────────────────────────────────────────────
 
+def split_query_ids(
+    qrels_path: Path,
+    queries_path: Path,
+    train_ratio: float = 0.80,
+    val_ratio: float = 0.10,
+    seed: int = RANDOM_SEED,
+) -> tuple[set[str], set[str], set[str]]:
+    """Split query IDs into disjoint train / val / test sets.
+
+    Splits by *unique query text*, not query ID. All query IDs that share
+    the same text (e.g. 14 users who searched "black dress") go into the
+    same split. This prevents the cross-encoder from seeing test query
+    texts during training — eliminating both direct and semantic leakage.
+
+    Returns (train_qids, val_qids, test_qids).
+    """
+    rng = random.Random(seed)
+
+    qid_to_text: dict[str, str] = {}
+    with open(queries_path, newline="") as f:
+        for row in csv.DictReader(f):
+            qid_to_text[row["query_id"].strip()] = row["query_text"].strip()
+
+    qids_with_qrels: list[str] = []
+    seen: set[str] = set()
+    with open(qrels_path, newline="") as f:
+        for row in csv.DictReader(f):
+            qid = row["query_id"].strip()
+            if qid not in seen:
+                qids_with_qrels.append(qid)
+                seen.add(qid)
+    qids_with_qrels.sort()
+
+    text_to_qids: dict[str, list[str]] = {}
+    for qid in qids_with_qrels:
+        qt = qid_to_text.get(qid, "")
+        text_to_qids.setdefault(qt, []).append(qid)
+
+    unique_texts = sorted(text_to_qids.keys())
+    rng.shuffle(unique_texts)
+
+    n = len(unique_texts)
+    n_train = int(n * train_ratio)
+    n_val   = int(n * val_ratio)
+
+    train_qids: set[str] = set()
+    val_qids:   set[str] = set()
+    test_qids:  set[str] = set()
+
+    for i, text in enumerate(unique_texts):
+        group = text_to_qids[text]
+        if i < n_train:
+            train_qids.update(group)
+        elif i < n_train + n_val:
+            val_qids.update(group)
+        else:
+            test_qids.update(group)
+
+    log.info("Query-text split — %d unique texts → train: %d qids  val: %d  test: %d  (seed=%d)",
+             n, len(train_qids), len(val_qids), len(test_qids), seed)
+    return train_qids, val_qids, test_qids
+
+
+SPLIT_PATH = _REPO_ROOT / "data" / "processed" / "query_splits.json"
+
+
+def save_splits(train_qids: set[str], val_qids: set[str], test_qids: set[str]):
+    """Persist query splits to disk so eval scripts use the same test set."""
+    SPLIT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    obj = {
+        "train": sorted(train_qids),
+        "val":   sorted(val_qids),
+        "test":  sorted(test_qids),
+    }
+    SPLIT_PATH.write_text(json.dumps(obj))
+    log.info("Saved query splits → %s", SPLIT_PATH)
+
+
+def load_splits() -> tuple[set[str], set[str], set[str]]:
+    """Load previously saved query splits."""
+    obj = json.loads(SPLIT_PATH.read_text())
+    return set(obj["train"]), set(obj["val"]), set(obj["test"])
+
+
 def build_training_pairs(
     qrels_path: Path,
     queries_path: Path,
     article_texts: dict[str, str],
+    train_qids: set[str],
+    val_qids: set[str],
     max_pairs: int | None = None,
-    dev_ratio: float = 0.05,
     hard_neg_per_query: int = 5,
     random_neg_per_query: int = 1,
     seed: int = RANDOM_SEED,
 ) -> tuple[list[InputExample], list[InputExample]]:
-    """
-    Build (train, dev) InputExample lists for CrossEncoder fine-tuning.
+    """Build (train, dev) InputExample lists for CrossEncoder fine-tuning.
 
-    Strategy:
-      - 1 positive  per query   (purchased article)
-      - up to `hard_neg_per_query` hard negatives (shown but not purchased)
-      - `random_neg_per_query` random negatives (sampled uniformly)
+    Only queries in ``train_qids`` produce training pairs and queries in
+    ``val_qids`` produce dev pairs. The held-out ``test_qids`` are never
+    touched — preventing data leakage when evaluating nDCG on the test set.
+
+    Strategy per query:
+      - 1 positive  (purchased article)
+      - up to ``hard_neg_per_query`` hard negatives (shown but not purchased)
+      - ``random_neg_per_query`` random negatives (sampled uniformly)
 
     This gives a ~1:6 pos:neg ratio, which matches cross-encoder training norms.
-    Hard negatives are the most informative signal for relevance ranking.
     """
     rng = random.Random(seed)
 
-    # Load queries
     log.info("Loading queries...")
     queries: dict[str, str] = {}
     with open(queries_path, newline="") as f:
@@ -126,9 +212,30 @@ def build_training_pairs(
     all_article_ids = list(article_texts.keys())
 
     log.info("Building training pairs from qrels...")
-    examples = []
+    train_examples: list[InputExample] = []
+    val_examples: list[InputExample] = []
     skipped = 0
     t0 = time.time()
+
+    def _make_pairs(qid, query_text, pos_ids, neg_ids) -> list[InputExample]:
+        pairs = []
+        pos_text = article_texts.get(pos_ids[0], "")
+        if pos_text:
+            pairs.append(InputExample(texts=[query_text, pos_text], label=1.0))
+
+        hard_sample = rng.sample(neg_ids, min(hard_neg_per_query, len(neg_ids)))
+        for nid in hard_sample:
+            neg_text = article_texts.get(nid, "")
+            if neg_text:
+                pairs.append(InputExample(texts=[query_text, neg_text], label=0.0))
+
+        for _ in range(random_neg_per_query):
+            rand_id = rng.choice(all_article_ids)
+            if rand_id not in pos_ids:
+                neg_text = article_texts.get(rand_id, "")
+                if neg_text:
+                    pairs.append(InputExample(texts=[query_text, neg_text], label=0.0))
+        return pairs
 
     with open(qrels_path, newline="") as f:
         reader = csv.DictReader(f)
@@ -139,53 +246,33 @@ def build_training_pairs(
                 skipped += 1
                 continue
 
-            pos_ids  = [x.strip() for x in row.get("positive_ids",  "").split() if x.strip()]
-            neg_ids  = [x.strip() for x in row.get("negative_ids",  "").split() if x.strip()]
-
+            pos_ids = [x.strip() for x in row.get("positive_ids", "").split() if x.strip()]
+            neg_ids = [x.strip() for x in row.get("negative_ids", "").split() if x.strip()]
             if not pos_ids:
                 skipped += 1
                 continue
 
-            # One positive (first purchased article)
-            pos_text = article_texts.get(pos_ids[0], "")
-            if pos_text:
-                examples.append(InputExample(texts=[query_text, pos_text], label=1.0))
-
-            # Hard negatives (shown, not purchased) — sample up to hard_neg_per_query
-            hard_sample = rng.sample(neg_ids, min(hard_neg_per_query, len(neg_ids)))
-            for nid in hard_sample:
-                neg_text = article_texts.get(nid, "")
-                if neg_text:
-                    examples.append(InputExample(texts=[query_text, neg_text], label=0.0))
-
-            # Random negatives
-            for _ in range(random_neg_per_query):
-                rand_id = rng.choice(all_article_ids)
-                # Avoid accidentally picking a positive
-                if rand_id not in pos_ids:
-                    neg_text = article_texts.get(rand_id, "")
-                    if neg_text:
-                        examples.append(InputExample(texts=[query_text, neg_text], label=0.0))
+            if qid in train_qids:
+                train_examples.extend(_make_pairs(qid, query_text, pos_ids, neg_ids))
+            elif qid in val_qids:
+                val_examples.extend(_make_pairs(qid, query_text, pos_ids, neg_ids))
+            # test_qids are intentionally skipped — never used for training
 
             if (i + 1) % 50_000 == 0:
                 elapsed = time.time() - t0
                 rate = (i + 1) / elapsed
-                log.info("  built %d queries → %d pairs  (%.1f q/s)", i+1, len(examples), rate)
+                log.info("  processed %d queries → train=%d  val=%d  (%.1f q/s)",
+                         i + 1, len(train_examples), len(val_examples), rate)
 
-            # Early cap
-            if max_pairs and len(examples) >= max_pairs:
+            if max_pairs and len(train_examples) >= max_pairs:
                 log.info("  reached max_pairs=%d cap", max_pairs)
                 break
 
-    log.info("Total pairs built: %d  (skipped %d queries)", len(examples), skipped)
-
-    # Shuffle and split
-    rng.shuffle(examples)
-    n_dev = max(500, int(len(examples) * dev_ratio))
-    dev   = examples[:n_dev]
-    train = examples[n_dev:]
-    log.info("Train: %d  |  Dev: %d", len(train), len(dev))
-    return train, dev
+    rng.shuffle(train_examples)
+    rng.shuffle(val_examples)
+    log.info("Total — train: %d pairs  val: %d pairs  (skipped %d queries)",
+             len(train_examples), len(val_examples), skipped)
+    return train_examples, val_examples
 
 
 # ─── Training ─────────────────────────────────────────────────────────────────
@@ -201,13 +288,24 @@ def train(args):
     articles_df = pd.read_csv(HNM_DIR / "articles.csv", dtype=str).fillna("")
     article_texts = build_article_texts(articles_df)
 
-    # ── Build training pairs ───────────────────────────────────────────────────
+    # ── Query-level train/val/test split (prevents data leakage) ────────────
+    if SPLIT_PATH.exists() and not args.resplit:
+        log.info("Loading existing query splits from %s", SPLIT_PATH)
+        train_qids, val_qids, test_qids = load_splits()
+    else:
+        train_qids, val_qids, test_qids = split_query_ids(
+            HNM_DIR / "qrels.csv", HNM_DIR / "queries.csv",
+            train_ratio=0.80, val_ratio=0.10)
+        save_splits(train_qids, val_qids, test_qids)
+
+    # ── Build training pairs (test queries are never touched) ─────────────
     train_examples, dev_examples = build_training_pairs(
         qrels_path   = HNM_DIR / "qrels.csv",
         queries_path = HNM_DIR / "queries.csv",
         article_texts = article_texts,
+        train_qids    = train_qids,
+        val_qids      = val_qids,
         max_pairs     = args.max_pairs,
-        dev_ratio     = 0.05,
         hard_neg_per_query = args.hard_negs,
         random_neg_per_query = 1,
     )
@@ -305,6 +403,8 @@ def parse_args():
                    help="Hard negatives per query (default: 5)")
     p.add_argument("--quick",     action="store_true",
                    help="Quick test: 50K pairs, 1 epoch — verify pipeline works")
+    p.add_argument("--resplit",   action="store_true",
+                   help="Re-generate train/val/test query splits (overwrites existing)")
     return p.parse_args()
 
 

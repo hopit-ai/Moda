@@ -84,3 +84,15 @@ results/real/*.log
 # ─── HuggingFace / torch model cache (not project data)
 data/processed/torch/
 .cache/
+
+# ─── Large directories (download/rebuild locally)
+models/
+data/hf_cache/
+logs/
+checkpoints/
+
+# ─── Large result files (rebuild via eval scripts)
+results/real/hnm_colbert_rerank.json
+results/real/hnm_mixture_of_encoders.json
+results/real/hnm_finetuned_ce_eval.json
+results/train_ce_quick.log

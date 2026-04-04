@@ -1,0 +1,1126 @@
+{
+  "generated_at": "2026-04-02T18:39:02.943189+00:00",
+  "tier1": [
+    {
+      "dataset": "Polyvore",
+      "model": "marqo-fashionCLIP",
+      "query_type": "category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.0308,
+          "MAP@10": 0.10637
+        },
+        "ndcg": {
+          "NDCG@1": 0.51459,
+          "NDCG@10": 0.48116
+        },
+        "precision": {
+          "P@1": 0.51459,
+          "P@10": 0.42944
+        },
+        "recall": {
+          "Recall@1": 0.0308,
+          "Recall@10": 0.15496
+        },
+        "MRR": 0.62859
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/polyvore/Marqo-FashionCLIP/category-to-product/result_category-image+text.json"
+    },
+    {
+      "dataset": "Polyvore",
+      "model": "marqo-fashionCLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.213,
+          "MAP@10": 0.30044
+        },
+        "ndcg": {
+          "NDCG@1": 0.213,
+          "NDCG@10": 0.35092
+        },
+        "precision": {
+          "P@1": 0.213,
+          "P@10": 0.05135
+        },
+        "recall": {
+          "Recall@1": 0.213,
+          "Recall@10": 0.5135
+        },
+        "MRR": 0.30044
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/polyvore/Marqo-FashionCLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "Polyvore",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.04193,
+          "MAP@10": 0.13362
+        },
+        "ndcg": {
+          "NDCG@1": 0.59682,
+          "NDCG@10": 0.54382
+        },
+        "precision": {
+          "P@1": 0.59682,
+          "P@10": 0.47347
+        },
+        "recall": {
+          "Recall@1": 0.04193,
+          "Recall@10": 0.18855
+        },
+        "MRR": 0.69647
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/polyvore/Marqo-FashionSigLIP/category-to-product/result_category-image+text.json"
+    },
+    {
+      "dataset": "Polyvore",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.2695,
+          "MAP@10": 0.36645
+        },
+        "ndcg": {
+          "NDCG@1": 0.2695,
+          "NDCG@10": 0.41842
+        },
+        "precision": {
+          "P@1": 0.2695,
+          "P@10": 0.0584
+        },
+        "recall": {
+          "Recall@1": 0.2695,
+          "Recall@10": 0.584
+        },
+        "MRR": 0.36645
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/polyvore/Marqo-FashionSigLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "DeepFashion InShop",
+      "model": "marqo-fashionCLIP",
+      "query_type": "sub-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00079,
+          "MAP@10": 0.00623
+        },
+        "ndcg": {
+          "NDCG@1": 0.875,
+          "NDCG@10": 0.76678
+        },
+        "precision": {
+          "P@1": 0.875,
+          "P@10": 0.7625
+        },
+        "recall": {
+          "Recall@1": 0.00079,
+          "Recall@10": 0.0068
+        },
+        "MRR": 0.875
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_inshop/Marqo-FashionCLIP/sub-category-to-product/result_category3-image+text.json"
+    },
+    {
+      "dataset": "DeepFashion InShop",
+      "model": "marqo-fashionCLIP",
+      "query_type": "category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00033,
+          "MAP@10": 0.00335
+        },
+        "ndcg": {
+          "NDCG@1": 0.625,
+          "NDCG@10": 0.68422
+        },
+        "precision": {
+          "P@1": 0.625,
+          "P@10": 0.7
+        },
+        "recall": {
+          "Recall@1": 0.00033,
+          "Recall@10": 0.00526
+        },
+        "MRR": 0.72247
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_inshop/Marqo-FashionCLIP/category-to-product/result_category2-image+text.json"
+    },
+    {
+      "dataset": "DeepFashion InShop",
+      "model": "marqo-fashionCLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.04821,
+          "MAP@10": 0.1475
+        },
+        "ndcg": {
+          "NDCG@1": 0.237,
+          "NDCG@10": 0.22763
+        },
+        "precision": {
+          "P@1": 0.237,
+          "P@10": 0.12805
+        },
+        "recall": {
+          "Recall@1": 0.04821,
+          "Recall@10": 0.23863
+        },
+        "MRR": 0.33066
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_inshop/Marqo-FashionCLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "DeepFashion InShop",
+      "model": "marqo-fashionCLIP",
+      "query_type": "color-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00127,
+          "MAP@10": 0.00509
+        },
+        "ndcg": {
+          "NDCG@1": 0.03483,
+          "NDCG@10": 0.03237
+        },
+        "precision": {
+          "P@1": 0.03483,
+          "P@10": 0.02898
+        },
+        "recall": {
+          "Recall@1": 0.00127,
+          "Recall@10": 0.00925
+        },
+        "MRR": 0.05466
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_inshop/Marqo-FashionCLIP/color-to-product/result_color-image+text.json"
+    },
+    {
+      "dataset": "DeepFashion InShop",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "sub-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00079,
+          "MAP@10": 0.00574
+        },
+        "ndcg": {
+          "NDCG@1": 0.875,
+          "NDCG@10": 0.74352
+        },
+        "precision": {
+          "P@1": 0.875,
+          "P@10": 0.725
+        },
+        "recall": {
+          "Recall@1": 0.00079,
+          "Recall@10": 0.00606
+        },
+        "MRR": 0.875
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_inshop/Marqo-FashionSigLIP/sub-category-to-product/result_category3-image+text.json"
+    },
+    {
+      "dataset": "DeepFashion InShop",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00198,
+          "MAP@10": 0.00815
+        },
+        "ndcg": {
+          "NDCG@1": 0.8125,
+          "NDCG@10": 0.78864
+        },
+        "precision": {
+          "P@1": 0.8125,
+          "P@10": 0.7875
+        },
+        "recall": {
+          "Recall@1": 0.00198,
+          "Recall@10": 0.01021
+        },
+        "MRR": 0.86458
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_inshop/Marqo-FashionSigLIP/category-to-product/result_category2-image+text.json"
+    },
+    {
+      "dataset": "DeepFashion InShop",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.04988,
+          "MAP@10": 0.15865
+        },
+        "ndcg": {
+          "NDCG@1": 0.2435,
+          "NDCG@10": 0.23673
+        },
+        "precision": {
+          "P@1": 0.2435,
+          "P@10": 0.1331
+        },
+        "recall": {
+          "Recall@1": 0.04988,
+          "Recall@10": 0.24765
+        },
+        "MRR": 0.33004
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_inshop/Marqo-FashionSigLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "DeepFashion InShop",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "color-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00205,
+          "MAP@10": 0.00753
+        },
+        "ndcg": {
+          "NDCG@1": 0.04229,
+          "NDCG@10": 0.03865
+        },
+        "precision": {
+          "P@1": 0.04229,
+          "P@10": 0.0342
+        },
+        "recall": {
+          "Recall@1": 0.00205,
+          "Recall@10": 0.01393
+        },
+        "MRR": 0.06661
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_inshop/Marqo-FashionSigLIP/color-to-product/result_color-image+text.json"
+    },
+    {
+      "dataset": "Fashion200K",
+      "model": "marqo-fashionCLIP",
+      "query_type": "sub-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00019,
+          "MAP@10": 0.00161
+        },
+        "ndcg": {
+          "NDCG@1": 0.74194,
+          "NDCG@10": 0.68061
+        },
+        "precision": {
+          "P@1": 0.74194,
+          "P@10": 0.66452
+        },
+        "recall": {
+          "Recall@1": 0.00019,
+          "Recall@10": 0.00174
+        },
+        "MRR": 0.79677
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/fashion200k/Marqo-FashionCLIP/sub-category-to-product/result_category2-image+text.json"
+    },
+    {
+      "dataset": "Fashion200K",
+      "model": "marqo-fashionCLIP",
+      "query_type": "category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 3e-05,
+          "MAP@10": 0.00027
+        },
+        "ndcg": {
+          "NDCG@1": 1.0,
+          "NDCG@10": 1.0
+        },
+        "precision": {
+          "P@1": 1.0,
+          "P@10": 1.0
+        },
+        "recall": {
+          "Recall@1": 3e-05,
+          "Recall@10": 0.00027
+        },
+        "MRR": 1.0
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/fashion200k/Marqo-FashionCLIP/category-to-product/result_category1-image+text.json"
+    },
+    {
+      "dataset": "Fashion200K",
+      "model": "marqo-fashionCLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.066,
+          "MAP@10": 0.12438
+        },
+        "ndcg": {
+          "NDCG@1": 0.066,
+          "NDCG@10": 0.16109
+        },
+        "precision": {
+          "P@1": 0.066,
+          "P@10": 0.02865
+        },
+        "recall": {
+          "Recall@1": 0.066,
+          "Recall@10": 0.27963
+        },
+        "MRR": 0.12467
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/fashion200k/Marqo-FashionCLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "Fashion200K",
+      "model": "marqo-fashionCLIP",
+      "query_type": "fine-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.04176,
+          "MAP@10": 0.09022
+        },
+        "ndcg": {
+          "NDCG@1": 0.0865,
+          "NDCG@10": 0.1233
+        },
+        "precision": {
+          "P@1": 0.0865,
+          "P@10": 0.04255
+        },
+        "recall": {
+          "Recall@1": 0.04176,
+          "Recall@10": 0.17101
+        },
+        "MRR": 0.13216
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/fashion200k/Marqo-FashionCLIP/fine-category-to-product/result_category3-image+text.json"
+    },
+    {
+      "dataset": "Fashion200K",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "sub-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00017,
+          "MAP@10": 0.00145
+        },
+        "ndcg": {
+          "NDCG@1": 0.74194,
+          "NDCG@10": 0.6555
+        },
+        "precision": {
+          "P@1": 0.74194,
+          "P@10": 0.64516
+        },
+        "recall": {
+          "Recall@1": 0.00017,
+          "Recall@10": 0.00166
+        },
+        "MRR": 0.85215
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/fashion200k/Marqo-FashionSigLIP/sub-category-to-product/result_category2-image+text.json"
+    },
+    {
+      "dataset": "Fashion200K",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 3e-05,
+          "MAP@10": 0.00023
+        },
+        "ndcg": {
+          "NDCG@1": 1.0,
+          "NDCG@10": 0.92642
+        },
+        "precision": {
+          "P@1": 1.0,
+          "P@10": 0.92
+        },
+        "recall": {
+          "Recall@1": 3e-05,
+          "Recall@10": 0.00025
+        },
+        "MRR": 1.0
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/fashion200k/Marqo-FashionSigLIP/category-to-product/result_category1-image+text.json"
+    },
+    {
+      "dataset": "Fashion200K",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.11075,
+          "MAP@10": 0.18577
+        },
+        "ndcg": {
+          "NDCG@1": 0.1115,
+          "NDCG@10": 0.23171
+        },
+        "precision": {
+          "P@1": 0.1115,
+          "P@10": 0.0389
+        },
+        "recall": {
+          "Recall@1": 0.11075,
+          "Recall@10": 0.37843
+        },
+        "MRR": 0.18682
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/fashion200k/Marqo-FashionSigLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "Fashion200K",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "fine-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.07214,
+          "MAP@10": 0.14597
+        },
+        "ndcg": {
+          "NDCG@1": 0.1475,
+          "NDCG@10": 0.18714
+        },
+        "precision": {
+          "P@1": 0.1475,
+          "P@10": 0.05995
+        },
+        "recall": {
+          "Recall@1": 0.07214,
+          "Recall@10": 0.24299
+        },
+        "MRR": 0.20291
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/fashion200k/Marqo-FashionSigLIP/fine-category-to-product/result_category3-image+text.json"
+    },
+    {
+      "dataset": "Atlas",
+      "model": "marqo-fashionCLIP",
+      "query_type": "sub-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00481,
+          "MAP@10": 0.03328
+        },
+        "ndcg": {
+          "NDCG@1": 0.70588,
+          "NDCG@10": 0.65845
+        },
+        "precision": {
+          "P@1": 0.70588,
+          "P@10": 0.63824
+        },
+        "recall": {
+          "Recall@1": 0.00481,
+          "Recall@10": 0.05471
+        },
+        "MRR": 0.72843
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/atlas/Marqo-FashionCLIP/sub-category-to-product/result_sub-category-image+text.json"
+    },
+    {
+      "dataset": "Atlas",
+      "model": "marqo-fashionCLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.07353,
+          "MAP@10": 0.12892
+        },
+        "ndcg": {
+          "NDCG@1": 0.109,
+          "NDCG@10": 0.16926
+        },
+        "precision": {
+          "P@1": 0.109,
+          "P@10": 0.04635
+        },
+        "recall": {
+          "Recall@1": 0.07353,
+          "Recall@10": 0.24657
+        },
+        "MRR": 0.16906
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/atlas/Marqo-FashionCLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "Atlas",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "sub-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.01456,
+          "MAP@10": 0.05556
+        },
+        "ndcg": {
+          "NDCG@1": 0.70588,
+          "NDCG@10": 0.68535
+        },
+        "precision": {
+          "P@1": 0.70588,
+          "P@10": 0.67059
+        },
+        "recall": {
+          "Recall@1": 0.01456,
+          "Recall@10": 0.06466
+        },
+        "MRR": 0.74387
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/atlas/Marqo-FashionSigLIP/sub-category-to-product/result_sub-category-image+text.json"
+    },
+    {
+      "dataset": "Atlas",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.10717,
+          "MAP@10": 0.18264
+        },
+        "ndcg": {
+          "NDCG@1": 0.164,
+          "NDCG@10": 0.23384
+        },
+        "precision": {
+          "P@1": 0.164,
+          "P@10": 0.0654
+        },
+        "recall": {
+          "Recall@1": 0.10717,
+          "Recall@10": 0.32393
+        },
+        "MRR": 0.23368
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/atlas/Marqo-FashionSigLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "DeepFashion Multimodal",
+      "model": "marqo-fashionCLIP",
+      "query_type": "category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00077,
+          "MAP@10": 0.00433
+        },
+        "ndcg": {
+          "NDCG@1": 0.8125,
+          "NDCG@10": 0.6921
+        },
+        "precision": {
+          "P@1": 0.8125,
+          "P@10": 0.68125
+        },
+        "recall": {
+          "Recall@1": 0.00077,
+          "Recall@10": 0.00476
+        },
+        "MRR": 0.8125
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_multimodal/Marqo-FashionCLIP/category-to-product/result_category2-image+text.json"
+    },
+    {
+      "dataset": "DeepFashion Multimodal",
+      "model": "marqo-fashionCLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.0045,
+          "MAP@10": 0.00845
+        },
+        "ndcg": {
+          "NDCG@1": 0.0045,
+          "NDCG@10": 0.01193
+        },
+        "precision": {
+          "P@1": 0.0045,
+          "P@10": 0.0024
+        },
+        "recall": {
+          "Recall@1": 0.0045,
+          "Recall@10": 0.0235
+        },
+        "MRR": 0.00852
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_multimodal/Marqo-FashionCLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "DeepFashion Multimodal",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00315,
+          "MAP@10": 0.01115
+        },
+        "ndcg": {
+          "NDCG@1": 0.75,
+          "NDCG@10": 0.69225
+        },
+        "precision": {
+          "P@1": 0.75,
+          "P@10": 0.68125
+        },
+        "recall": {
+          "Recall@1": 0.00315,
+          "Recall@10": 0.01411
+        },
+        "MRR": 0.79688
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_multimodal/Marqo-FashionSigLIP/category-to-product/result_category2-image+text.json"
+    },
+    {
+      "dataset": "DeepFashion Multimodal",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.008,
+          "MAP@10": 0.01477
+        },
+        "ndcg": {
+          "NDCG@1": 0.008,
+          "NDCG@10": 0.01875
+        },
+        "precision": {
+          "P@1": 0.008,
+          "P@10": 0.00315
+        },
+        "recall": {
+          "Recall@1": 0.008,
+          "Recall@10": 0.03125
+        },
+        "MRR": 0.01489
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/deepfashion_multimodal/Marqo-FashionSigLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionCLIP",
+      "query_type": "sub-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.01676,
+          "MAP@10": 0.0767
+        },
+        "ndcg": {
+          "NDCG@1": 0.66667,
+          "NDCG@10": 0.63828
+        },
+        "precision": {
+          "P@1": 0.66667,
+          "P@10": 0.61111
+        },
+        "recall": {
+          "Recall@1": 0.01676,
+          "Recall@10": 0.09385
+        },
+        "MRR": 0.69111
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionCLIP/sub-category-to-product/result_category2-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionCLIP",
+      "query_type": "category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00581,
+          "MAP@10": 0.01851
+        },
+        "ndcg": {
+          "NDCG@1": 0.71429,
+          "NDCG@10": 0.60393
+        },
+        "precision": {
+          "P@1": 0.71429,
+          "P@10": 0.58571
+        },
+        "recall": {
+          "Recall@1": 0.00581,
+          "Recall@10": 0.02376
+        },
+        "MRR": 0.71429
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionCLIP/category-to-product/result_category1-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionCLIP",
+      "query_type": "season-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 8e-05,
+          "MAP@10": 0.00028
+        },
+        "ndcg": {
+          "NDCG@1": 0.25,
+          "NDCG@10": 0.40594
+        },
+        "precision": {
+          "P@1": 0.25,
+          "P@10": 0.425
+        },
+        "recall": {
+          "Recall@1": 8e-05,
+          "Recall@10": 0.00049
+        },
+        "MRR": 0.54167
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionCLIP/season-to-product/result_season-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionCLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.15799,
+          "MAP@10": 0.24735
+        },
+        "ndcg": {
+          "NDCG@1": 0.176,
+          "NDCG@10": 0.3001
+        },
+        "precision": {
+          "P@1": 0.176,
+          "P@10": 0.0537
+        },
+        "recall": {
+          "Recall@1": 0.15799,
+          "Recall@10": 0.44714
+        },
+        "MRR": 0.26445
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionCLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionCLIP",
+      "query_type": "fine-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.0417,
+          "MAP@10": 0.1655
+        },
+        "ndcg": {
+          "NDCG@1": 0.72535,
+          "NDCG@10": 0.67348
+        },
+        "precision": {
+          "P@1": 0.72535,
+          "P@10": 0.61197
+        },
+        "recall": {
+          "Recall@1": 0.0417,
+          "Recall@10": 0.21033
+        },
+        "MRR": 0.77278
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionCLIP/fine-category-to-product/result_category3-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionCLIP",
+      "query_type": "color-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00375,
+          "MAP@10": 0.01498
+        },
+        "ndcg": {
+          "NDCG@1": 0.5,
+          "NDCG@10": 0.49538
+        },
+        "precision": {
+          "P@1": 0.5,
+          "P@10": 0.4913
+        },
+        "recall": {
+          "Recall@1": 0.00375,
+          "Recall@10": 0.02927
+        },
+        "MRR": 0.61149
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionCLIP/color-to-product/result_baseColour-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionCLIP",
+      "query_type": "usage-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 4e-05,
+          "MAP@10": 0.00042
+        },
+        "ndcg": {
+          "NDCG@1": 0.25,
+          "NDCG@10": 0.27316
+        },
+        "precision": {
+          "P@1": 0.25,
+          "P@10": 0.2625
+        },
+        "recall": {
+          "Recall@1": 4e-05,
+          "Recall@10": 0.00047
+        },
+        "MRR": 0.35417
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionCLIP/usage-to-product/result_usage-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "sub-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.01518,
+          "MAP@10": 0.10929
+        },
+        "ndcg": {
+          "NDCG@1": 0.71111,
+          "NDCG@10": 0.71687
+        },
+        "precision": {
+          "P@1": 0.71111,
+          "P@10": 0.68667
+        },
+        "recall": {
+          "Recall@1": 0.01518,
+          "Recall@10": 0.12957
+        },
+        "MRR": 0.75648
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionSigLIP/sub-category-to-product/result_category2-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 9e-05,
+          "MAP@10": 0.03621
+        },
+        "ndcg": {
+          "NDCG@1": 0.57143,
+          "NDCG@10": 0.67376
+        },
+        "precision": {
+          "P@1": 0.57143,
+          "P@10": 0.68571
+        },
+        "recall": {
+          "Recall@1": 9e-05,
+          "Recall@10": 0.04666
+        },
+        "MRR": 0.64286
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionSigLIP/category-to-product/result_category1-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "season-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 3e-05,
+          "MAP@10": 0.00018
+        },
+        "ndcg": {
+          "NDCG@1": 0.5,
+          "NDCG@10": 0.3657
+        },
+        "precision": {
+          "P@1": 0.5,
+          "P@10": 0.35
+        },
+        "recall": {
+          "Recall@1": 3e-05,
+          "Recall@10": 0.00022
+        },
+        "MRR": 0.5
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionSigLIP/season-to-product/result_season-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "text-to-image",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.17935,
+          "MAP@10": 0.27687
+        },
+        "ndcg": {
+          "NDCG@1": 0.1975,
+          "NDCG@10": 0.33262
+        },
+        "precision": {
+          "P@1": 0.1975,
+          "P@10": 0.05875
+        },
+        "recall": {
+          "Recall@1": 0.17935,
+          "Recall@10": 0.48877
+        },
+        "MRR": 0.29323
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionSigLIP/text-to-image/result_text-image.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "fine-category-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.04031,
+          "MAP@10": 0.17564
+        },
+        "ndcg": {
+          "NDCG@1": 0.70423,
+          "NDCG@10": 0.685
+        },
+        "precision": {
+          "P@1": 0.70423,
+          "P@10": 0.62958
+        },
+        "recall": {
+          "Recall@1": 0.04031,
+          "Recall@10": 0.21977
+        },
+        "MRR": 0.76317
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionSigLIP/fine-category-to-product/result_category3-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "color-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.00388,
+          "MAP@10": 0.017
+        },
+        "ndcg": {
+          "NDCG@1": 0.58696,
+          "NDCG@10": 0.51752
+        },
+        "precision": {
+          "P@1": 0.58696,
+          "P@10": 0.50217
+        },
+        "recall": {
+          "Recall@1": 0.00388,
+          "Recall@10": 0.02775
+        },
+        "MRR": 0.66434
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionSigLIP/color-to-product/result_baseColour-image+text.json"
+    },
+    {
+      "dataset": "KAGL",
+      "model": "marqo-fashionSigLIP",
+      "query_type": "usage-to-product",
+      "metrics": {
+        "mAP": {
+          "MAP@1": 0.0001,
+          "MAP@10": 0.00094
+        },
+        "ndcg": {
+          "NDCG@1": 0.375,
+          "NDCG@10": 0.40113
+        },
+        "precision": {
+          "P@1": 0.375,
+          "P@10": 0.4
+        },
+        "recall": {
+          "Recall@1": 0.0001,
+          "Recall@10": 0.00101
+        },
+        "MRR": 0.4375
+      },
+      "source_file": "repos/marqo-FashionCLIP/results/KAGL/Marqo-FashionSigLIP/usage-to-product/result_usage-image+text.json"
+    }
+  ],
+  "tier2": [
+    {
+      "model": "marqo-fashionCLIP",
+      "aggregated": {
+        "mrr": 0.1088321318773425,
+        "ap": 0.011804698585179534,
+        "ndcg@5": 0.06676265695062131,
+        "recall@5": 0.006553966047410229,
+        "p@5": 0.04938695438940657,
+        "ndcg@10": 0.08862741237152016,
+        "recall@10": 0.012473936919618782,
+        "p@10": 0.04774399215301619,
+        "ndcg@20": 0.11900142659073022,
+        "recall@20": 0.021912098246349116,
+        "p@20": 0.042435017165277096,
+        "ndcg@50": 0.1774991411113185,
+        "recall@50": 0.039673252095794996,
+        "p@50": 0.030931829328102012,
+        "mean_latency_ms": 0.035387236689358524,
+        "p95_latency_ms": 0.04041616339236498,
+        "n_queries": 4078
+      },
+      "source_file": "results/hnm_dense_fashion-clip.json"
+    },
+    {
+      "model": "CLIP ViT-B/32",
+      "aggregated": {
+        "mrr": 0.11539400102639084,
+        "ap": 0.011820684589082607,
+        "ndcg@5": 0.07513170813121257,
+        "recall@5": 0.006930284918276031,
+        "p@5": 0.053065228052967144,
+        "ndcg@10": 0.09659948039697394,
+        "recall@10": 0.012522934045807342,
+        "p@10": 0.048504168710152035,
+        "ndcg@20": 0.12867449290943403,
+        "recall@20": 0.02219121889089508,
+        "p@20": 0.04324423737126042,
+        "ndcg@50": 0.1844729064728627,
+        "recall@50": 0.038709211532963625,
+        "p@50": 0.030358018636586562,
+        "mean_latency_ms": 0.03373300719594235,
+        "p95_latency_ms": 0.03788117319345473,
+        "n_queries": 4078
+      },
+      "source_file": "results/hnm_dense_clip.json"
+    },
+    {
+      "model": "marqo-fashionSigLIP",
+      "aggregated": {
+        "mrr": 0.09042970799829327,
+        "ap": 0.008730786162862976,
+        "ndcg@5": 0.05786845237136175,
+        "recall@5": 0.005371616081874417,
+        "p@5": 0.03982344286414909,
+        "ndcg@10": 0.07654217104637386,
+        "recall@10": 0.010012412320770415,
+        "p@10": 0.03773908778813144,
+        "ndcg@20": 0.10401338587537423,
+        "recall@20": 0.017381387038340797,
+        "p@20": 0.03336194212849436,
+        "ndcg@50": 0.15221184426819737,
+        "recall@50": 0.030893563182242754,
+        "p@50": 0.023967631191760666,
+        "mean_latency_ms": 0.03428740393554919,
+        "p95_latency_ms": 0.04108401481062174,
+        "n_queries": 4078
+      },
+      "source_file": "results/hnm_dense_fashion-siglip.json"
+    }
+  ]
+}

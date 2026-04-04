@@ -390,6 +390,9 @@ def build_article_text(row: dict) -> str:
     return " | ".join(parts)
 
 
+DEFAULT_CE_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+
+
 def _ce_rerank_pass(
     label: str,
     cache_path: Path,
@@ -398,6 +401,7 @@ def _ce_rerank_pass(
     hybrid_lists: list[list[str]],
     articles: dict[str, dict],
     force: bool,
+    ce_model_path: str | None = None,
     CHECKPOINT_EVERY: int = 5000,
 ) -> dict[str, list[str]]:
     """Run cross-encoder over pre-computed hybrid candidate lists; resume from cache_path."""
@@ -416,8 +420,9 @@ def _ce_rerank_pass(
     done_qids = set(results.keys())
     import torch
     device = "mps" if torch.backends.mps.is_available() else "cpu"
-    ce = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2",
-                      max_length=512, device=device)
+    model_name = ce_model_path or DEFAULT_CE_MODEL
+    log.info("%s: loading CE model → %s", label, model_name)
+    ce = CrossEncoder(model_name, max_length=512, device=device)
 
     art_text: dict[str, str] = {}
 
@@ -463,6 +468,7 @@ def stage3_ce_rerank(
     dense_results: dict[str, list[str]],
     articles: dict[str, dict],
     force: bool = False,
+    ce_model_path: str | None = None,
 ):
     """CE rerank: (1) plain Hybrid C → Config 6; (2) NER-Hybrid → Config 8."""
     qids = [q[0] for q in queries]
@@ -474,6 +480,7 @@ def stage3_ce_rerank(
     _ce_rerank_pass(
         "CE [plain Hybrid C → Config 6]", CE_CACHE,
         qids, texts, hybrid_plain, articles, force,
+        ce_model_path=ce_model_path,
     )
 
     if not BM25_NER_CACHE.exists():
@@ -489,6 +496,7 @@ def stage3_ce_rerank(
     _ce_rerank_pass(
         "CE [NER Hybrid → Config 8]", CE_NER_CACHE,
         qids, texts, hybrid_ner, articles, force,
+        ce_model_path=ce_model_path,
     )
 
 
@@ -599,10 +607,11 @@ def stage4_evaluate(
             agg.get("recall@10", 0),
         )
 
-    # Save
-    out_path = OUT_DIR / "full_ablation.json"
+    # Save — use distinct filenames so test-only results don't overwrite full results
+    suffix = "_test" if len(queries) < 100_000 else ""
+    out_path = OUT_DIR / f"full_ablation{suffix}.json"
     out_path.write_text(json.dumps(all_results, indent=2))
-    log.info("Full ablation results → %s", out_path)
+    log.info("Ablation results (%d queries) → %s", len(queries), out_path)
     return all_results
 
 
@@ -632,12 +641,32 @@ def print_final_table(results: dict):
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
+QUERY_SPLITS_PATH = _REPO_ROOT / "data" / "processed" / "query_splits.json"
+
+
+def load_test_qids() -> set[str]:
+    """Load the held-out test query IDs from the split file."""
+    if not QUERY_SPLITS_PATH.exists():
+        raise FileNotFoundError(
+            f"No query splits found at {QUERY_SPLITS_PATH}. "
+            "Run train_cross_encoder.py first to generate train/val/test splits."
+        )
+    obj = json.loads(QUERY_SPLITS_PATH.read_text())
+    return set(obj["test"])
+
+
 def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument("--stages", default="all",
                    help="Comma-separated stages: 1,2,3,4 or 'all'")
     p.add_argument("--force", action="store_true",
                    help="Recompute even if cache exists")
+    p.add_argument("--test-only", action="store_true",
+                   help="Evaluate only on held-out test queries (prevents data leakage "
+                        "when comparing fine-tuned vs zero-shot models)")
+    p.add_argument("--ce-model", type=str, default=None,
+                   help="Path to a fine-tuned CrossEncoder model for Stage 3. "
+                        "If not set, uses the default ms-marco zero-shot model.")
     return p.parse_args()
 
 
@@ -655,6 +684,14 @@ def main():
     log.info("=" * 60)
 
     queries, qrels = load_benchmark()
+
+    if args.test_only:
+        test_qids = load_test_qids()
+        all_count = len(queries)
+        queries = [(qid, qt) for qid, qt in queries if qid in test_qids]
+        qrels   = {qid: v for qid, v in qrels.items() if qid in test_qids}
+        log.info("--test-only: filtered %d → %d queries (held-out test set)",
+                 all_count, len(queries))
 
     # ── Stage 1: BM25 + FAISS retrieval (~24 min BM25, ~8 min FAISS) ─────────
     if 1 in run_stages:
@@ -676,7 +713,8 @@ def main():
         bm25_results  = json.loads(BM25_CACHE.read_text())
         dense_results = json.loads(DENSE_CACHE.read_text())
         articles = load_articles()
-        stage3_ce_rerank(queries, bm25_results, dense_results, articles, force=args.force)
+        stage3_ce_rerank(queries, bm25_results, dense_results, articles,
+                         force=args.force, ce_model_path=args.ce_model)
 
     # ── Stage 4: Compute metrics for all configs (fast, all in-memory) ────────
     if 4 in run_stages:

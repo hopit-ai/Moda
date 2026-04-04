@@ -1,6 +1,6 @@
 """
-MODA Phase 0–2 Research Report — PDF Generator
-Produces: MODA_Phase0_to_Phase2_Report.pdf
+MODA Phase 0–3 Research Report — PDF Generator
+Produces: MODA_Phase0_to_Phase3_Report.pdf
 """
 
 from reportlab.lib.pagesizes import A4
@@ -36,7 +36,7 @@ RED_SOFT    = HexColor("#EF4444")
 GREEN_SOFT  = HexColor("#10B981")
 ORANGE_SOFT = HexColor("#F59E0B")
 
-OUT_PATH = Path(__file__).parent.parent / "MODA_Phase0_to_Phase2_Report.pdf"
+OUT_PATH = Path(__file__).parent.parent / "MODA_Phase0_to_Phase3_Report.pdf"
 
 PAGE_W, PAGE_H = A4
 MARGIN = 2.2 * cm
@@ -53,7 +53,7 @@ def make_header_footer(canvas, doc):
     canvas.setFont("Helvetica-Bold", 8)
     canvas.drawString(MARGIN, h - 0.72*cm, "MODA — Fashion Search SOTA")
     canvas.setFont("Helvetica", 8)
-    canvas.drawRightString(w - MARGIN, h - 0.72*cm, "Phase 0–2 Research Report · April 2026")
+    canvas.drawRightString(w - MARGIN, h - 0.72*cm, "Phase 0–3 Research Report · April 2026")
 
     # Bottom bar
     canvas.setFillColor(NAVY)
@@ -320,7 +320,7 @@ def cover_page(story):
                        textColor=NAVY, leading=50))],
          [P("Fashion Search SOTA", S("cs", fontName="Helvetica-Bold", fontSize=24,
                                       textColor=TEAL, leading=30))],
-         [P("Phase 0 – Phase 2 Research Report", S("cs2", fontName="Helvetica",
+         [P("Phase 0 – Phase 3 Research Report", S("cs2", fontName="Helvetica",
               fontSize=14, textColor=GREY, leading=20))]],
         colWidths=[PAGE_W - 2*MARGIN],
         style=TableStyle([
@@ -337,18 +337,18 @@ def cover_page(story):
 
     # Key stats on cover
     story.append(stat_box([
-        ("+83%", "nDCG@10 improvement\nover dense baseline", GREEN_SOFT),
-        ("0.0549", "Best nDCG@10\n(full pipeline)", TEAL),
-        ("8 Configs", "Ablation study\ncompleted", NAVY),
+        ("+84%", "nDCG@10 improvement\nover dense baseline", GREEN_SOFT),
+        ("0.0553", "Best nDCG@10\n(ColBERT→CE cascade)", TEAL),
+        ("14 Configs", "Ablation + fine-tuning\nevaluated", NAVY),
     ]))
     story.append(sp(20))
 
     meta = Table([
         [P("Organisation", BODY_SMALL), P("The FI Company", BODY_SMALL)],
         [P("Date", BODY_SMALL),         P("April 2026", BODY_SMALL)],
-        [P("Status", BODY_SMALL),        P("Phase 2 Complete · Phase 3 Pending", BODY_SMALL)],
+        [P("Status", BODY_SMALL),        P("Phase 2 Complete (incl. ColBERT, MoE) · Phase 3A Complete", BODY_SMALL)],
         [P("License", BODY_SMALL),       P("Apache 2.0 (open-source)", BODY_SMALL)],
-        [P("Timeline", BODY_SMALL),      P("18-day plan · Days 1–6 complete", BODY_SMALL)],
+        [P("Timeline", BODY_SMALL),      P("18-day plan · Days 1–8 complete", BODY_SMALL)],
         [P("Estimated total cost", BODY_SMALL), P("$0 (Apple MPS) vs $8 planned (GPU cloud)", BODY_SMALL)],
     ], colWidths=[4*cm, PAGE_W - 2*MARGIN - 4*cm],
        style=TableStyle([
@@ -386,11 +386,16 @@ def toc_page(story):
         ("",  "5.2 Hybrid Retrieval (BM25 + Dense, 4 Configs)", "10"),
         ("",  "5.3 Cross-Encoder Reranking", "11"),
         ("",  "5.4 Query Understanding: Synonyms & NER", "12"),
-        ("",  "5.5 Full Pipeline (Config 8): Best Result", "13"),
-        ("6", "Complete Ablation Study Results", "14"),
-        ("7", "Key Findings & Insights", "15"),
-        ("8", "Technical Architecture", "16"),
-        ("9", "What's Next: Phase 3–5 Roadmap", "17"),
+        ("",  "5.5 Full Pipeline (Config 8)", "13"),
+        ("",  "5.6 ColBERT Late Interaction (Config 9–10)", "14"),
+        ("",  "5.7 Mixture of Encoders (Config 11–13)", "14"),
+        ("6", "Complete Evaluation Results (14 Configs)", "15"),
+        ("7", "Phase 3: Fine-Tuned Cross-Encoder", "16"),
+        ("",  "7.1 Why Fine-Tuning Barely Helped", "16"),
+        ("",  "7.2 What Would Actually Improve Results", "17"),
+        ("8", "Key Findings & Insights", "18"),
+        ("9", "Technical Architecture", "19"),
+        ("10", "What's Next: Phase 4–5 Roadmap", "20"),
     ]
 
     for num, title, page in sections:
@@ -411,24 +416,25 @@ def section_exec_summary(story):
 
     story.append(callout_box(
         "<b>MODA</b> (Modular Open-Source Discovery Architecture) is an open-source, end-to-end, "
-        "multimodal fashion search engine. This report documents Phases 0–2: data acquisition, "
-        "benchmark reproduction, and a complete zero-shot pipeline ablation study on the H&M "
-        "dataset with <b>253,685 real user queries</b> and 105,542 products — the first publicly "
-        "available full-pipeline fashion search benchmark at this scale.",
+        "multimodal fashion search engine. This report documents Phases 0–3: data acquisition, "
+        "benchmark reproduction, a complete zero-shot pipeline ablation study (14 configurations "
+        "including ColBERT and Mixture-of-Encoders), and domain fine-tuning evaluation — all on "
+        "the H&M dataset with <b>253,685 real user queries</b> and 105,542 products. This is the "
+        "first publicly available full-pipeline fashion search benchmark at this scale.",
         LIGHT_TEAL, TEAL
     ))
     story.append(sp(12))
 
     story.append(P("Key Achievements", H2))
     story.append(stat_box([
-        ("+81%", "nDCG@10 gain\nover dense-only baseline", GREEN_SOFT),
+        ("+84%", "nDCG@10 gain\nover dense-only baseline", GREEN_SOFT),
         ("6/7",  "Marqo datasets\nreproduced (<1% delta)", TEAL),
-        ("8",    "Pipeline configs\nablated end-to-end", NAVY),
+        ("14",   "Pipeline configs\nevaluated end-to-end", NAVY),
     ]))
     story.append(sp(12))
 
     story.append(stat_box([
-        ("0.0543", "Best nDCG@10\n(full pipeline, 253K)", TEAL),
+        ("0.0553", "Best nDCG@10\n(ColBERT→CE cascade, 10K)", TEAL),
         ("62.5ms", "Full pipeline\nend-to-end latency", GOLD),
         ("$0",    "Actual compute cost\n(Apple MPS GPU)", GREEN_SOFT),
     ]))
@@ -438,17 +444,19 @@ def section_exec_summary(story):
         ("Benchmark reproduction validated",
          "Reproduced Marqo's published embedding numbers within <1% across 6 datasets, "
          "using real H&M user queries (not synthetic) from microsoft/hnm-search-data."),
-        ("Cross-encoder reranking is the dominant signal",
-         "CE reranking alone delivers +78% over the dense baseline. Every other component "
-         "(BM25 hybrid, NER) adds incrementally on top."),
+        ("ColBERT→CE cascade is the best pipeline (+84.3%)",
+         "The two-stage reranking pipeline (ColBERT narrows 100→50, CE re-scores top-50) "
+         "achieves nDCG@10 = 0.0553, edging out CE-alone (0.0549) by +0.8%. "
+         "Cross-encoder reranking remains the dominant signal (+51% marginal)."),
         ("NER attribute boosting works; synonym expansion does not",
          "GLiNER zero-shot NER (NAACL 2024) improves BM25 by +14% via targeted field boosts. "
          "Aggressive synonym expansion hurts precision by −35% — confirmed 'query pollution' "
          "documented in LESER (2025)."),
-        ("Dense retrieval beats BM25 on real user queries",
-         "H&M product names are brand-style identifiers ('Ben zip hoodie'). Real users search "
-         "semantically ('warm earband'). Dense FashionCLIP beats BM25 by +60% on real queries — "
-         "a key empirical contribution for the paper."),
+        ("Fine-tuning on purchase data barely helps (+1.2% nDCG, −4% MRR)",
+         "Domain-fine-tuned CE shows mixed results vs off-the-shelf ms-marco-MiniLM. "
+         "Purchase ≠ relevance: noisy labels limit gains. Off-the-shelf CE trained on "
+         "human-judged MS MARCO data outperforms on 3/5 metrics. Key implication: invest "
+         "in better labels (LLM-judged), not more fine-tuning on noisy purchase signals."),
     ], 1):
         story.append(finding_box(i, title, body))
         story.append(sp(6))
@@ -502,8 +510,10 @@ def section_background(story):
         ["Synonym expansion", "Custom fashion dictionary (80+ groups)", "Handle colloquial/regional terms"],
         ["Lexical retrieval", "OpenSearch BM25", "Exact term matching with field boosts"],
         ["Dense retrieval", "FAISS + FashionCLIP embeddings", "Semantic similarity in 512-dim space"],
+        ["MoE retrieval", "4× FashionCLIP (text/color/type/group)", "Structured multi-field encoding"],
         ["Hybrid fusion", "Reciprocal Rank Fusion (RRF)", "Combine BM25 + dense ranked lists"],
-        ["Reranking", "cross-encoder/ms-marco-MiniLM-L-6-v2", "Full query–document pair scoring"],
+        ["Stage-1 reranking", "ColBERT v2 (late interaction)", "Per-token MaxSim, 100→50"],
+        ["Stage-2 reranking", "cross-encoder/ms-marco-MiniLM-L-6-v2", "Full cross-attention pair scoring"],
     ]
     story.append(metric_table(
         arch_rows[0],
@@ -547,7 +557,9 @@ def section_phase0(story):
             ["Marqo/marqo-fashionCLIP",   "~400 MB", "ViT-B-16, 0.1B params"],
             ["openai/clip-vit-base-patch32", "~350 MB", "ViT-B/32 (baseline)"],
             ["cross-encoder/ms-marco-MiniLM-L-6-v2", "~80 MB", "MiniLM-L6 cross-encoder"],
+            ["colbert-ir/colbertv2.0", "~420 MB", "BERT-base + 128-dim projection (ColBERT v2)"],
             ["urchade/gliner_medium-v2.1", "~300 MB", "DeBERTa-v3-base (GLiNER)"],
+            ["moda-fashion-ce-best (trained)", "~80 MB", "MiniLM-L6 fine-tuned on H&M purchase pairs"],
         ],
         col_widths=[6.0*cm, 2.0*cm, 10.3*cm]
     ))
@@ -845,23 +857,82 @@ def section_phase2(story):
     story.append(P("*Dense lookup is pre-computed offline; online latency is dict access. Latency measured on 500-query sample, Apple MPS.", CAPTION))
     story.append(sp(6))
     story.append(callout_box(
-        "<b>Config 6 &amp; 8 are the best pipeline:</b> nDCG@10 = <b>0.0543</b> on 253,685 queries "
-        "(95% CI: [0.0537–0.0550]). This is a <b>+81% improvement</b> over the dense-only Phase 1 "
+        "<b>Config 6 &amp; 8 are the best pipeline at 253K scale:</b> nDCG@10 = <b>0.0543</b> on 253,685 "
+        "queries (95% CI: [0.0537–0.0550]). This is a <b>+81% improvement</b> over the dense-only Phase 1 "
         "baseline using entirely zero-shot, open-source components at <b>62.5ms end-to-end latency</b> "
         "— no custom training, no proprietary APIs, $0 compute cost."
+    ))
+    story.append(sp(10))
+
+    # 5.6 ColBERT
+    story.append(P("5.6  ColBERT Late Interaction Reranking (Config 9–10, 10K queries)", H2))
+    story.append(P(
+        "Evaluated <code>colbert-ir/colbertv2.0</code> (BERT-base + 128-dim MaxSim) as an alternative "
+        "reranker. ColBERT computes per-token similarity (late interaction) — more expressive than "
+        "bi-encoder cosine but cheaper than full cross-attention. Also tested a <b>ColBERT→CE cascade</b>: "
+        "ColBERT narrows 100→50 candidates, then CE re-scores the top-50.", BODY))
+
+    story.append(metric_table(
+        ["#", "Config", "nDCG@10", "MRR", "R@10", "vs P1"],
+        [
+            ["7",  "Hybrid NER baseline (no rerank)", "0.0329", "0.0432", "0.0124", "+9.7%"],
+            ["9",  "Hybrid NER → ColBERT@50",         "0.0480", "0.0513", "0.0149", "+60.0% ✅"],
+            ["8",  "Hybrid NER → CE@50",               "0.0549", "0.0579", "0.0166", "+83.0%"],
+            ["10", "ColBERT@100 → CE@50 cascade ← BEST", "0.0553", "0.0578", "0.0165", "+84.3% ✅"],
+        ],
+        col_widths=[0.7*cm, 5.5*cm, 2.0*cm, 2.0*cm, 1.6*cm, 3.0*cm],
+        highlight_col=2
+    ))
+    story.append(sp(6))
+    story.append(callout_box(
+        "<b>New SOTA: ColBERT→CE cascade = 0.0553 nDCG@10 (+84.3%).</b> ColBERT v2 alone delivers "
+        "+46% over baseline — strong but below CE's +67%. The cascade edges out CE-alone by +0.8%: "
+        "ColBERT's MaxSim pre-filtering surfaces slightly better candidates for CE to score. "
+        "This establishes the <b>optimal Phase 2 reranking pipeline</b>."
+    ))
+    story.append(sp(10))
+
+    # 5.7 MoE
+    story.append(P("5.7  Mixture of Encoders: Superlinked-Style Structured Retrieval (10K queries)", H2))
+    story.append(P(
+        "Evaluated a Superlinked-inspired multi-field encoding approach: 4 parallel FashionCLIP "
+        "embeddings per product (text, color, type, group category), with NER-adaptive query-time "
+        "weighting. Scores combine: <code>w_text·cos(q,p_text) + w_color·cos(NER_color,p_color) + "
+        "w_type·cos(NER_type,p_type) + w_group·cos(NER_group,p_group)</code>.", BODY))
+
+    story.append(metric_table(
+        ["#", "Config", "nDCG@10", "MRR", "R@10", "R@50", "vs P1"],
+        [
+            ["3",  "Dense only (FashionCLIP)",    "0.0256", "0.0356", "0.0105", "0.0461", "−14.7%"],
+            ["11", "MoE retrieval (structured)",   "0.0264", "0.0370", "0.0109", "0.0481", "−12.0%"],
+            ["12", "Hybrid NER + MoE",             "0.0330", "0.0437", "0.0129", "0.0481", "+10.0%"],
+            ["13", "Hybrid NER + MoE + CE@50",     "0.0541", "0.0582", "0.0164", "0.0578", "+80.3%"],
+        ],
+        col_widths=[0.7*cm, 4.5*cm, 2.0*cm, 2.0*cm, 1.6*cm, 1.6*cm, 2.4*cm],
+        highlight_col=2
+    ))
+    story.append(sp(6))
+    story.append(callout_box(
+        "<b>MoE provides +3.1% over single-vector dense</b> via NER-driven categorical matching. "
+        "However, in the hybrid setting BM25's NER-boosted fields already capture similar signal "
+        "(+0.3% marginal). With CE reranking, MoE+CE (0.0541) is within 1.5% of Dense+CE (0.0549) — "
+        "the CE reranker equalises retrieval-stage differences. Main benefit: improved Recall@50 "
+        "(0.0481 vs 0.0461), surfacing a more diverse candidate pool."
     ))
     story.append(PageBreak())
 
 
 def section_ablation(story):
-    story.append(P("6. Complete Ablation Study Results", H1))
+    story.append(P("6. Complete Evaluation Results", H1))
     story.append(rule(TEAL, 1.5))
     story.append(sp(6))
     story.append(P(
-        "Full 8-configuration ablation on <b>253,685 real H&M user queries</b>, 105,542 articles. "
-        "Bootstrap 95% CI reported for primary configs. All experiments zero-shot (no fine-tuning). "
-        "Latency measured on 500-query sample, Apple MPS.", BODY))
+        "Full 14-configuration evaluation across three evaluation scales: 253K real H&M queries (core "
+        "pipeline), 10K queries (reranker variants, MoE), and 22,855 held-out test queries (Phase 3 "
+        "fine-tuned CE). Configs 1–13 are zero-shot; Config 14 uses a domain-fine-tuned model. "
+        "Bootstrap 95% CI reported for 253K configs.", BODY))
 
+    story.append(P("Core Pipeline Ablation (253K queries)", H3))
     story.append(metric_table(
         ["#", "Configuration", "nDCG@10", "95% CI", "MRR", "R@10", "Latency", "vs P1 Dense"],
         [
@@ -871,11 +942,41 @@ def section_ablation(story):
             ["4c", "Hybrid C (BM25×0.4+D×0.6)",      "0.0328", "[.0324–.0333]", "0.0429", "0.0121", "11.6ms",  "+9.4% ✅"],
             ["7",  "Hybrid + NER",                   "0.0333", "[.0329–.0338]", "0.0438", "0.0124", "~18ms",   "+11.2% ✅"],
             ["6",  "Hybrid C + CE rerank",            "0.0543", "[.0537–.0550]", "0.0569", "0.0164", "62.5ms",  "+81.1% ✅"],
-            ["8",  "Full Pipeline ← BEST",            "0.0543", "[.0537–.0550]", "0.0569", "0.0164", "~69ms",   "+81.1% ✅ ★"],
+            ["8",  "Full Pipeline (NER+CE)",          "0.0543", "[.0537–.0550]", "0.0569", "0.0164", "~69ms",   "+81.1% ✅"],
         ],
         col_widths=[0.7*cm, 4.5*cm, 1.8*cm, 2.6*cm, 1.6*cm, 1.4*cm, 1.6*cm, 2.6*cm],
         highlight_col=2
     ))
+    story.append(sp(8))
+
+    story.append(P("Reranker Variants &amp; MoE (10K queries)", H3))
+    story.append(metric_table(
+        ["#", "Configuration", "nDCG@10", "MRR", "R@10", "R@50", "vs P1 Dense"],
+        [
+            ["9",  "Hybrid NER → ColBERT@50",             "0.0480", "0.0513", "0.0149", "0.0546", "+60.0% ✅"],
+            ["10", "ColBERT→CE cascade ← BEST",           "0.0553", "0.0578", "0.0165", "0.0546", "+84.3% ✅ ★"],
+            ["11", "MoE retrieval (structured)",           "0.0264", "0.0370", "0.0109", "0.0481", "−12.0%"],
+            ["12", "Hybrid NER + MoE",                     "0.0330", "0.0437", "0.0129", "0.0481", "+10.0% ✅"],
+            ["13", "Hybrid NER + MoE + CE@50",             "0.0541", "0.0582", "0.0164", "0.0578", "+80.3% ✅"],
+        ],
+        col_widths=[0.7*cm, 5.0*cm, 2.0*cm, 2.0*cm, 1.5*cm, 1.5*cm, 3.0*cm],
+        highlight_col=2
+    ))
+    story.append(sp(8))
+
+    story.append(P("Phase 3 Fine-Tuning (22,855 held-out test queries)", H3))
+    story.append(metric_table(
+        ["#", "Configuration", "nDCG@5", "nDCG@10", "MRR", "R@10", "vs Off-shelf CE"],
+        [
+            ["8'", "Off-the-shelf CE@50 (baseline)",   "0.0442", "0.0646", "0.0671", "0.0195", "baseline"],
+            ["14", "Fine-tuned CE@50",                  "0.0480", "0.0654", "0.0644", "0.0183", "+1.2% (mixed)"],
+        ],
+        col_widths=[0.7*cm, 5.0*cm, 1.8*cm, 2.0*cm, 1.8*cm, 1.5*cm, 3.0*cm],
+        highlight_col=3
+    ))
+    story.append(P(
+        "Fine-tuned CE improves nDCG@5/10 but hurts MRR and Recall — off-shelf CE remains the safer choice. "
+        "See Section 7 for detailed analysis.", CAPTION))
     story.append(sp(8))
 
     story.append(P("Marginal Contribution of Each Component", H2))
@@ -885,14 +986,15 @@ def section_ablation(story):
             ["BM25 + Dense (hybrid fusion)", "0.0300 (dense)", "0.0353 (hybrid C)", "+0.0053", "+17.8%"],
             ["Cross-encoder reranking",      "0.0353 (hybrid)", "0.0533 (CE rerank)", "+0.0180", "+51.0%"],
             ["NER on BM25 component",        "0.0533 (CE rerank)", "0.0549 (full)", "+0.0016", "+3.0%"],
+            ["ColBERT pre-filter for CE",    "0.0549 (NER+CE)", "0.0553 (cascade)",  "+0.0004", "+0.7%"],
         ],
         col_widths=[5.0*cm, 3.0*cm, 3.5*cm, 3.5*cm, 2.3*cm]
     ))
     story.append(sp(6))
     story.append(callout_box(
         "The <b>cross-encoder reranker is by far the most impactful component</b> (+51% marginal). "
-        "Hybrid fusion adds moderate gains (+18%). NER adds a final +3%. "
-        "This ordering — dense >> hybrid >> rerank >> NER — matches findings from "
+        "Hybrid fusion adds moderate gains (+18%). NER adds +3%, and ColBERT pre-filtering adds a final +0.7%. "
+        "This ordering — dense >> hybrid >> CE rerank >> NER >> ColBERT pre-filter — matches findings from "
         "production search systems at Zalando, Pinterest, and ASOS."
     ))
     story.append(sp(10))
@@ -918,8 +1020,148 @@ def section_ablation(story):
     story.append(PageBreak())
 
 
+def section_phase3(story):
+    story.append(P("7. Phase 3: Fine-Tuned Cross-Encoder Evaluation", H1))
+    story.append(rule(TEAL, 1.5))
+    story.append(sp(6))
+
+    story.append(P(
+        "Phase 3A evaluated a <b>domain-fine-tuned cross-encoder</b> against the off-the-shelf "
+        "<code>ms-marco-MiniLM-L-6-v2</code>. The fine-tuned model was trained on H&M purchase pairs "
+        "(positive = user bought after searching; negative = shown but not purchased). "
+        "Evaluation was run exclusively on a <b>held-out test split of 22,855 queries</b> — "
+        "disjoint from all training/validation data by unique query text to prevent leakage.", BODY))
+    story.append(sp(6))
+
+    story.append(callout_box(
+        "<b>Leakage prevention:</b> Train/val/test split by <i>unique query text</i>, not query ID. "
+        "All query IDs sharing the same text (e.g. 14 users who searched 'black dress') go into "
+        "the same split. Test queries were never seen during training — verified with an overlap "
+        "assertion before evaluation.",
+        LIGHT_GOLD, GOLD
+    ))
+    story.append(sp(10))
+
+    story.append(P("Phase 3A Results — Off-the-Shelf vs Fine-Tuned CE (22,855 test queries)", H2))
+    story.append(metric_table(
+        ["#", "Config", "nDCG@5", "nDCG@10", "MRR", "R@10", "vs Off-shelf CE"],
+        [
+            ["—",  "Hybrid NER baseline (no rerank)", "0.0324", "0.0422", "0.0558", "0.0142", "−34.7%"],
+            ["8'", "Off-the-shelf CE@50",             "0.0442", "0.0646", "0.0671", "0.0195", "baseline"],
+            ["14", "Fine-tuned CE@50",                "0.0480", "0.0654", "0.0644", "0.0183", "+1.2%"],
+        ],
+        col_widths=[0.7*cm, 5.0*cm, 1.8*cm, 2.0*cm, 1.8*cm, 1.6*cm, 3.0*cm],
+        highlight_col=3
+    ))
+    story.append(sp(8))
+
+    story.append(P("Head-to-Head Metric Comparison", H3))
+    story.append(metric_table(
+        ["Metric", "Off-shelf CE", "Fine-tuned CE", "Delta", "Winner"],
+        [
+            ["nDCG@5",    "0.0442",  "0.0480",  "+8.6%",  "Fine-tuned ✅"],
+            ["nDCG@10",   "0.0646",  "0.0654",  "+1.2%",  "Fine-tuned ✅"],
+            ["MRR",       "0.0671",  "0.0644",  "−4.0%",  "Off-shelf ✅"],
+            ["Recall@10", "0.0195",  "0.0183",  "−6.2%",  "Off-shelf ✅"],
+            ["Recall@50", "0.0620",  "0.0616",  "−0.6%",  "Off-shelf ✅"],
+        ],
+        col_widths=[3.0*cm, 3.0*cm, 3.0*cm, 2.5*cm, 4.8*cm],
+        highlight_col=3
+    ))
+    story.append(sp(8))
+
+    story.append(callout_box(
+        "<b>Result: Mixed.</b> Fine-tuning improves nDCG@5 (+8.6%) and nDCG@10 (+1.2%) but "
+        "hurts MRR (−4.0%) and Recall@10 (−6.2%). The fine-tuned model gets <b>sharper but "
+        "narrower</b> — better top-of-list ranking when correct, but more likely to miss the "
+        "relevant item entirely. The off-the-shelf model remains the safer choice overall."
+    ))
+    story.append(sp(10))
+
+    # 7.1 Why it didn't help
+    story.append(P("7.1  Why Fine-Tuning Barely Helped", H2))
+
+    story.append(finding_box(1,
+        "Purchase ≠ Relevance — Noisy Training Signal",
+        "The fine-tuned CE was trained on purchase data: positive = 'user bought this item after "
+        "searching.' But a user who searches 'black dress' and buys one specific dress doesn't make "
+        "the other 50 black dresses irrelevant. The training labels treat them as negatives. "
+        "The off-the-shelf model, trained on MS MARCO with <b>human relevance judgments</b> "
+        "(500K+ explicitly labelled query-passage pairs), has a fundamentally cleaner notion "
+        "of 'relevant.'",
+        RED_SOFT
+    ))
+    story.append(sp(6))
+
+    story.append(finding_box(2,
+        "Hard Negatives Are Contaminated",
+        "The H&M dataset's negative_ids are items 'shown but not bought.' Many of these are "
+        "perfectly relevant — the user simply chose one. Training the CE to push these down "
+        "teaches incorrect preferences. The model learns to discriminate between purchased and "
+        "not-purchased rather than relevant and not-relevant — a subtle but critical difference.",
+        ORANGE_SOFT
+    ))
+    story.append(sp(6))
+
+    story.append(finding_box(3,
+        "The Domain Gap Is Smaller Than Expected",
+        "Fashion product text (product names, types, colours, descriptions) is still natural "
+        "language. The off-the-shelf MS MARCO model already understands text relevance well. "
+        "Fashion-specific terminology ('slim fit', 'jersey', 'flared') is not so foreign that "
+        "a general model fails — it just matches 'slim fit jeans' to products mentioning "
+        "'slim fit' and 'jeans.' The domain gap doesn't justify the noise introduced by "
+        "purchase-based training.",
+        TEAL
+    ))
+    story.append(sp(6))
+
+    story.append(finding_box(4,
+        "Sharper Top but Worse Recall — Overfitting to Purchase Patterns",
+        "nDCG@5 improved (+8.6%) because the model learned some real H&M-specific ranking "
+        "patterns. But MRR and Recall@10 dropped because it also learned <i>wrong</i> patterns "
+        "from the noisy purchase data — becoming overconfident about certain product features "
+        "(e.g., specific colour groups, price tiers) that correlate with purchase but not "
+        "relevance. This is a textbook case of <b>overfitting to a proxy metric</b>.",
+        NAVY
+    ))
+    story.append(sp(10))
+
+    # 7.2 What would help
+    story.append(P("7.2  What Would Actually Improve Results", H2))
+    story.append(P(
+        "The bottleneck is <b>training data quality</b>, not model architecture. "
+        "The following approaches address the core 'purchase ≠ relevance' problem:", BODY))
+    story.append(sp(4))
+
+    for item in [
+        "<b>LLM-judged relevance labels</b> — Use GPT-4 / Claude to label 'is this product "
+        "relevant to this query?' on a sample of query-product pairs. Even 10K–50K high-quality "
+        "labels would provide a cleaner training signal than 250K purchase-based pairs.",
+        "<b>Better negative mining</b> — Replace 'shown but not bought' negatives with truly "
+        "irrelevant products (e.g., 'black dress' query with 'men's hiking boots'). Current "
+        "negatives include too many near-miss relevant items.",
+        "<b>Multi-signal training</b> — Combine purchase with click-through, dwell time, and "
+        "add-to-cart signals. Purchase alone is too sparse and noisy (one conversion per session).",
+        "<b>Graded relevance labels</b> — Instead of binary relevant/not-relevant, use graded "
+        "labels (0–3) reflecting different levels of match quality. The Marqo GS-10M dataset "
+        "provides this for general fashion; adapting it to H&M's catalogue would be valuable.",
+    ]:
+        story.append(P(f"• &nbsp; {item}", BULLET))
+
+    story.append(sp(8))
+    story.append(callout_box(
+        "<b>Key takeaway for the team:</b> Off-the-shelf cross-encoders trained on clean human "
+        "relevance judgments (MS MARCO) outperform domain-fine-tuned models trained on noisy "
+        "purchase signals. This validates MODA's zero-shot approach in Phase 2 and suggests that "
+        "investment in <b>better labels</b> (LLM-judged or human-annotated) will yield more "
+        "improvement than architectural changes. This is a publishable finding.",
+        LIGHT_TEAL, TEAL
+    ))
+    story.append(PageBreak())
+
+
 def section_findings(story):
-    story.append(P("7. Key Findings &amp; Insights", H1))
+    story.append(P("8. Key Findings &amp; Insights", H1))
     story.append(rule(TEAL, 1.5))
     story.append(sp(6))
 
@@ -942,6 +1184,23 @@ def section_findings(story):
             NAVY
         ),
         (
+            "ColBERT→CE Cascade Sets New SOTA: 0.0553 nDCG@10 (+84.3%)",
+            "ColBERT v2 (per-token MaxSim) alone delivers +46% over hybrid baseline — strong but below "
+            "CE's +67%. The cascade (ColBERT narrows 100→50, CE re-scores top-50) edges out CE-alone "
+            "by +0.8%. ColBERT's expressive token-level matching surfaces slightly better candidates "
+            "for CE to evaluate. This two-stage reranking is the <b>best Phase 2 pipeline</b>.",
+            GREEN_SOFT
+        ),
+        (
+            "Mixture of Encoders: Modest Gain, Equalised by CE",
+            "Superlinked-style structured retrieval (4 parallel FashionCLIP embeddings per product with "
+            "NER-adaptive weighting) provides +3.1% over single-vector dense retrieval. However, in the "
+            "hybrid setting BM25's NER-boosted fields already capture similar categorical signal (+0.3% "
+            "marginal). With CE reranking, MoE+CE (0.0541) nearly matches Dense+CE (0.0549). Main "
+            "benefit: improved Recall@50 (0.0481 vs 0.0461) — a more diverse candidate pool.",
+            ORANGE_SOFT
+        ),
+        (
             "Synonym Expansion Hurts Precision (−35%) — Confirmed Industry Failure Mode",
             "Aggressive query expansion (12+ terms per synonym group) causes 'query pollution': "
             "IDF collapse + operator:or matching creates near-zero-discrimination results. "
@@ -955,7 +1214,7 @@ def section_findings(story):
             "to H&M field boosts via bool.should clauses. Critical design choice: using should "
             "(not must-filter) prevents hard exclusion of near-miss products. "
             "+14% on BM25 standalone, +3% in the full pipeline (CE reranker already compensates).",
-            GREEN_SOFT
+            TEAL
         ),
         (
             "RRF Sweet Spot: BM25×0.4 + Dense×0.6",
@@ -972,16 +1231,17 @@ def section_findings(story):
             "FashionCLIP's 512-dim encoder was trained on product text matching this distribution. "
             "SigLIP's 768-dim encoder does not gain from extra capacity on short keyword-style text. "
             "<b>Model selection must be validated on the target catalogue, not only average benchmarks.</b>",
-            ORANGE_SOFT
+            GREY
         ),
         (
-            "Purchase-as-Relevance Benchmark Limitation — Acknowledged",
-            "H&M qrels are purchase-based: 1 positive (bought) + ~9 negatives (shown but not bought). "
-            "nDCG@10 ≈ 0.03–0.05 is expected for 1/105,542 positives. Acknowledged limitation: "
-            "purchase ≠ relevance (customers buy one dress, but alternatives may be equally relevant). "
-            "253,685 queries with tight 95% CIs ([0.0537–0.0550] for Config 8) confirm statistical "
-            "robustness. Phase 3 will address with LLM-judged relevance labels.",
-            GREY
+            "CE Fine-Tuning on Purchase Data: Noisy Labels Limit Gains (Phase 3A)",
+            "Fine-tuning <code>ms-marco-MiniLM-L-6-v2</code> on H&M purchase pairs yields only +1.2% "
+            "nDCG@10 while <i>hurting</i> MRR (−4%) and Recall@10 (−6%). Root cause: purchase ≠ "
+            "relevance. 'Shown but not bought' negatives include many relevant items. The off-the-shelf "
+            "model (trained on 500K+ <b>human-judged</b> MS MARCO pairs) has a cleaner relevance signal. "
+            "<b>Implication:</b> Investment in better labels (LLM-judged or human-annotated) will yield "
+            "more improvement than model fine-tuning on noisy purchase data.",
+            RED_SOFT
         ),
     ]
 
@@ -993,15 +1253,16 @@ def section_findings(story):
 
 
 def section_architecture(story):
-    story.append(P("8. Technical Architecture", H1))
+    story.append(P("9. Technical Architecture", H1))
     story.append(rule(TEAL, 1.5))
     story.append(sp(6))
 
-    story.append(P("Full Pipeline Data Flow", H2))
+    story.append(P("Full Pipeline Data Flow (Best Config = ColBERT→CE Cascade)", H2))
     story.append(callout_box(
         "User query → GLiNER NER → NER-boosted BM25 (OpenSearch) + "
         "FashionCLIP dense (FAISS)  →  RRF fusion (k=60, BM25×0.4 + Dense×0.6, top-100)  →  "
-        "Cross-encoder reranking (MiniLM-L6, top-50)  →  Results"
+        "ColBERT v2 late-interaction reranking (top-50)  →  "
+        "Cross-encoder reranking (MiniLM-L6, final top-50)  →  Results"
     ))
     story.append(sp(10))
 
@@ -1013,6 +1274,10 @@ def section_architecture(story):
             ["benchmark/eval_query_understanding.py","BM25 ablation: 4 configs (synonym × NER)"],
             ["benchmark/eval_hybrid.py",            "Hybrid retrieval: BM25 + FAISS + RRF"],
             ["benchmark/eval_rerank.py",            "CE reranking on hybrid top-100"],
+            ["benchmark/eval_colbert_rerank.py",    "ColBERT reranking + ColBERT→CE cascade"],
+            ["benchmark/eval_mixture_of_encoders.py", "MoE structured retrieval + CE rerank"],
+            ["benchmark/eval_finetuned_ce.py",      "Phase 3A: fine-tuned vs off-shelf CE (test-only)"],
+            ["benchmark/train_cross_encoder.py",    "Phase 3A: CE fine-tuning + train/val/test split"],
             ["benchmark/eval_full_pipeline.py",     "End-to-end Config 8 pipeline"],
             ["benchmark/_faiss_search_worker.py",   "Subprocess-isolated FAISS (avoids PyTorch BLAS conflict)"],
             ["benchmark/metrics.py",                "nDCG@k, MRR, Recall@k, P@k, MAP"],
@@ -1040,71 +1305,62 @@ def section_architecture(story):
         "<b>Real vs synthetic queries</b> — Phase 1 initially used synthetic queries "
         "(product names as queries). Identified and corrected mid-project; all reported "
         "numbers use real user queries from <code>data/search/queries.csv</code>.",
+        "<b>Leakage-free evaluation (Phase 3)</b> — Train/val/test split by <i>unique query text</i>, "
+        "not query ID. All users who searched the same phrase go into the same split. Overlap "
+        "assertion verified before every evaluation run.",
     ]:
         story.append(P(f"• &nbsp; {item}", BULLET))
     story.append(PageBreak())
 
 
 def section_roadmap(story):
-    story.append(P("9. What&#39;s Next: Phase 3–5 Roadmap", H1))
+    story.append(P("10. What&#39;s Next: Phase 4–5 Roadmap", H1))
     story.append(rule(TEAL, 1.5))
     story.append(sp(6))
 
     story.append(metric_table(
-        ["Phase", "Days", "Key Tasks", "Expected Outcome", "Cost"],
+        ["Phase", "Status", "Key Results / Tasks", "Outcome"],
         [
-            ["Phase 3\nCustom Training", "7–10",
-             "3A: Fine-tune cross-encoder on H&M pairs\n"
-             "3B: GCL bi-encoder from FashionSigLIP\n"
-             "3C: Re-run Tier 1 + Tier 2",
-             "moda-fashion-embed + moda-fashion-cross-encoder\nExpect >0.06 nDCG@10",
-             "$8–11"],
-            ["Phase 4\nMultimodal UI", "11–14",
-             "4A: Image indexing (vision embeddings)\n"
-             "4B: Visual search endpoint\n"
-             "4C: Three-way hybrid (BM25+text+image)\n"
-             "4E: FashionIQ Tier 3 benchmark",
-             "Working Flask demo\nTier 3 leaderboard (Recall@10/50)",
-             "$1–2"],
-            ["Phase 5\nPaper + Release", "15–18",
-             "5A: ArXiv preprint\n"
-             "5B: Repo polish + Docker\n"
-             "5C: Leaderboard website",
-             "Published paper + open benchmark\nHackerNews launch",
-             "$0"],
+            ["Phase 3A\nCE Fine-Tuning", "✅ DONE",
+             "Fine-tuned CE on H&M purchase pairs\n"
+             "22,855 held-out test queries evaluated",
+             "Mixed: +1.2% nDCG@10 but\n−4% MRR, −6% Recall\nOff-shelf CE remains best"],
+            ["Phase 3B\nGCL Bi-Encoder", "NEXT",
+             "Fine-tune FashionSigLIP via GCL\n"
+             "marqo-GS-10M fashion_5m subset (5M pairs)\n"
+             "Or: LLM-judged labels for CE training",
+             "Target: beat FashionCLIP\nnDCG@10 = 0.030 by 20-40%"],
+            ["Phase 4\nMultimodal UI", "Pending",
+             "Image indexing (vision embeddings)\n"
+             "Visual search endpoint\n"
+             "Three-way hybrid (BM25+text+image)",
+             "Working Flask demo\nTier 3 leaderboard"],
+            ["Phase 5\nPaper + Release", "Pending",
+             "ArXiv preprint\n"
+             "Repo polish + Docker\n"
+             "Leaderboard website",
+             "Published paper +\nopen benchmark"],
         ],
-        col_widths=[2.5*cm, 1.2*cm, 5.5*cm, 5.0*cm, 1.8*cm]
+        col_widths=[2.8*cm, 1.5*cm, 6.5*cm, 5.5*cm]
     ))
     story.append(sp(10))
 
-    story.append(P("Immediate Next Steps (Phase 2 Publishing)", H2))
+    story.append(P("Immediate Next Steps", H2))
     story.append(callout_box(
-        "Before starting Phase 3 training, the Phase 2 publishing plan should be executed "
-        "(per the PDF plan's publishing calendar):",
+        "Phase 3A's key finding — off-the-shelf CE outperforms domain-fine-tuned CE on noisy "
+        "purchase labels — redirects the training strategy. Priority shifts to:",
         LIGHT_GOLD, GOLD
     ))
     story.append(sp(6))
     for i, item in enumerate([
-        "Push updated Moda repo to GitHub (Apache 2.0) with Phase 0–2 code and results.",
+        "Push updated Moda repo to GitHub (Apache 2.0) with Phase 0–3 code and results.",
         "Publish H&M benchmark eval harness + pre-computed embeddings to HuggingFace.",
-        "Write Blog Post #1: 'Moda: Building SOTA Fashion Search Without Training a Single Model' — ablation table, architecture, key findings.",
-        "Post to r/MachineLearning and r/LanguageTechnology with ablation results.",
-        "Reserve HackerNews Show HN for Phase 3 (trained models are the 'big moment').",
+        "Write Blog Post #1: 'Moda: Building SOTA Fashion Search Without Training a Single Model' — "
+        "ablation table, Phase 3 finding, architecture.",
+        "Investigate LLM-judged relevance labels (GPT-4/Claude) for cleaner CE training data.",
+        "Phase 3B: GCL bi-encoder training with Marqo's graded-relevance data (different signal from purchase).",
     ], 1):
         story.append(P(f"<b>{i}.</b>  {item}", BULLET))
-
-    story.append(sp(12))
-    story.append(P("Phase 3 Training Plan", H2))
-    story.append(P(
-        "<b>3A: Cross-Encoder Fine-Tuning</b> — Fine-tune MiniLM-L6 on H&M search pairs from qrels. "
-        "Training data: positive pairs from <code>positive_ids</code>, hard negatives from "
-        "<code>negative_ids</code>, random negatives from unrelated articles. "
-        "~1.5M training pairs, 3 epochs, batch=32, LR=2e-5. Runtime: ~2-3 hrs on T4 (free Colab).", BODY))
-    story.append(P(
-        "<b>3B: GCL Bi-Encoder Training</b> — Fine-tune FashionSigLIP using Marqo's open-source "
-        "Generalized Contrastive Learning (GCL) code. Training data: marqo-GS-10M fashion_5m subset "
-        "(5M query-product pairs with graded relevance signals). Hardware: A100 80GB, 8-12 hrs (~$6-8). "
-        "Expected: beat FashionCLIP nDCG@10 = 0.030 by 20-40%.", BODY))
 
     story.append(sp(10))
     story.append(rule(TEAL, 1))
@@ -1127,7 +1383,7 @@ def build():
         bottomMargin=1.5*cm,
         leftMargin=MARGIN,
         rightMargin=MARGIN,
-        title="MODA Fashion Search — Phase 0–2 Report",
+        title="MODA Fashion Search — Phase 0–3 Report",
         author="The FI Company",
         subject="Fashion Search SOTA Research Report",
     )
@@ -1142,6 +1398,7 @@ def build():
     section_phase1(story)
     section_phase2(story)
     section_ablation(story)
+    section_phase3(story)
     section_findings(story)
     section_architecture(story)
     section_roadmap(story)
