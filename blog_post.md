@@ -52,6 +52,8 @@ Microsoft's H&M Search Data on HuggingFace has 253,685 real search queries from 
 
 We started with 10,000 queries to check directionality before committing to the full run.
 
+A note on how we got here: our first attempt used product names as queries ("Ben zip hoodie" searching for Ben zip hoodie). The numbers looked great. Too great. Product-name-as-query is a common shortcut in search benchmarking, and it produces inflated results because you're measuring exact-match recall, not search quality. We threw those numbers out and rebuilt the benchmark on real queries from `data/search/queries.csv`. If you're building a search benchmark and using product titles as queries, you should probably stop.
+
 ### BM25 loses badly on fashion
 
 | Method | nDCG@10 | vs dense baseline |
@@ -111,7 +113,15 @@ We ran every configuration on the complete dataset. Pre-computed caches for BM25
 | 6 | Hybrid + CE rerank | 0.0543 | [.0537-.0550] | 0.0569 | 62.5ms | +81.1% |
 | 7 | Full pipeline (+ NER) | 0.0543 | [.0537-.0550] | 0.0569 | ~69ms | +81.1% |
 
-The numbers held. The 10K sample was within 1% of the full run. Bootstrap 95% confidence intervals are tight.
+The numbers held. Here's the 10K-to-253K comparison:
+
+| Config | 10K sample | 253K full | Drift |
+|--------|-----------|-----------|-------|
+| Dense baseline | 0.0300 | 0.0265 | -11.7% |
+| Full pipeline | 0.0549 | 0.0543 | -1.1% |
+| Relative gain | +83% | +81% | stable |
+
+The dense baseline shifted more than the full pipeline did. The pipeline is more stable across sample sizes than any individual component, which makes sense: combining multiple signals averages out the noise in each one. Bootstrap 95% confidence intervals on the full run are tight ([0.0537, 0.0550] for the best config).
 
 One thing we didn't expect: Config 6 and Config 8 produce identical results. NER adds nothing when the cross-encoder is already in the pipeline. The cross-encoder sees the full query-document pair and already captures what NER was contributing. In the final analysis, the pipeline is really three components: dense retrieval, hybrid fusion, and cross-encoder reranking.
 
@@ -139,6 +149,12 @@ This ordering (dense >> hybrid >> rerank >> NER) matches what production search 
 | Full pipeline | 62.5ms | ~58ms | ~92ms |
 
 62.5ms end-to-end. The cross-encoder is the bottleneck at ~51ms, but 100 candidates through a 22M-parameter model is hard to beat on cost/quality tradeoff.
+
+### Engineering footnote
+
+If you're building a similar pipeline, one thing that cost us hours: PyTorch and FAISS share BLAS libraries, and loading both in the same Python process causes segfaults. We run FAISS search in a subprocess (`_faiss_search_worker.py`) with no PyTorch imports. The cross-encoder runs in the main process. Ugly, but it works, and we haven't found a cleaner solution.
+
+We also patched Marqo's eval harness to run on Apple MPS (their code hardcodes CUDA autocast). If you're trying to reproduce on a Mac, the patched version is in the repo.
 
 ---
 
