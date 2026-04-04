@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 200" font-family="Inter, -apple-system, system-ui, sans-serif">
+  <defs>
+    <filter id="sh" x="-4%" y="-8%" width="108%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="200" rx="12" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="450" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1e293b">Three-phase validation methodology</text>
+
+  <!-- Phase 1: Marqo reproduction -->
+  <rect x="30" y="52" width="250" height="120" rx="10" fill="white" stroke="#6366f1" stroke-width="2" filter="url(#sh)"/>
+  <rect x="30" y="52" width="250" height="30" rx="10" fill="#6366f1"/>
+  <rect x="30" y="72" width="250" height="8" fill="#6366f1"/>
+  <text x="155" y="72" text-anchor="middle" font-size="11" font-weight="600" fill="white">1. Validate the harness</text>
+  <text x="155" y="100" text-anchor="middle" font-size="10" fill="#4338ca">Reproduce Marqo's published</text>
+  <text x="155" y="114" text-anchor="middle" font-size="10" fill="#4338ca">numbers on 6 fashion datasets</text>
+  <rect x="108" y="130" width="94" height="20" rx="10" fill="#ede9fe"/>
+  <text x="155" y="144" text-anchor="middle" font-size="9" font-weight="600" fill="#6366f1">&lt;1% delta</text>
+  <text x="155" y="165" text-anchor="middle" font-size="8" fill="#a5b4fc">Trust established</text>
+
+  <!-- Arrow 1-2 -->
+  <path d="M280,112 L325,112" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+
+  <!-- Phase 2: 10K sample -->
+  <rect x="325" y="52" width="250" height="120" rx="10" fill="white" stroke="#f59e0b" stroke-width="2" filter="url(#sh)"/>
+  <rect x="325" y="52" width="250" height="30" rx="10" fill="#f59e0b"/>
+  <rect x="325" y="72" width="250" height="8" fill="#f59e0b"/>
+  <text x="450" y="72" text-anchor="middle" font-size="11" font-weight="600" fill="white">2. Check directionality</text>
+  <text x="450" y="100" text-anchor="middle" font-size="10" fill="#92400e">10K real H&amp;M queries</text>
+  <text x="450" y="114" text-anchor="middle" font-size="10" fill="#92400e">8 pipeline configs tested</text>
+  <rect x="398" y="130" width="104" height="20" rx="10" fill="#fef3c7"/>
+  <text x="450" y="144" text-anchor="middle" font-size="9" font-weight="600" fill="#d97706">+83% best config</text>
+  <text x="450" y="165" text-anchor="middle" font-size="8" fill="#fbbf24">Direction confirmed</text>
+
+  <!-- Arrow 2-3 -->
+  <path d="M575,112 L620,112" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+
+  <!-- Phase 3: Full 253K -->
+  <rect x="620" y="52" width="250" height="120" rx="10" fill="white" stroke="#10b981" stroke-width="2" filter="url(#sh)"/>
+  <rect x="620" y="52" width="250" height="30" rx="10" fill="#10b981"/>
+  <rect x="620" y="72" width="250" height="8" fill="#10b981"/>
+  <text x="745" y="72" text-anchor="middle" font-size="11" font-weight="600" fill="white">3. Confirm at scale</text>
+  <text x="745" y="100" text-anchor="middle" font-size="10" fill="#065f46">253,685 real queries</text>
+  <text x="745" y="114" text-anchor="middle" font-size="10" fill="#065f46">Bootstrap 95% confidence intervals</text>
+  <rect x="683" y="130" width="124" height="20" rx="10" fill="#ecfdf5"/>
+  <text x="745" y="144" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">+81% [.0537-.0550]</text>
+  <text x="745" y="165" text-anchor="middle" font-size="8" fill="#34d399">Results hold (&lt;1% drift)</text>
+
+  <!-- Bottom summary -->
+  <text x="450" y="192" text-anchor="middle" font-size="10" fill="#64748b">Reproduce known results first. Test direction on a sample. Confirm on the full dataset.</text>
+</svg>

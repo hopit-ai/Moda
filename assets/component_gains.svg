@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" font-family="Inter, -apple-system, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bar1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="bar4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <linearGradient id="bar5" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="barFinal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="760" height="400" rx="12" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="380" y="32" text-anchor="middle" font-size="17" font-weight="700" fill="#1e293b">Component-by-component breakdown</text>
+  <text x="380" y="50" text-anchor="middle" font-size="11" fill="#64748b">nDCG@10 on 253,685 H&amp;M queries</text>
+
+  <!-- Chart area -->
+  <!-- Y axis -->
+  <line x1="200" y1="72" x2="200" y2="360" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Grid lines and labels -->
+  <line x1="200" y1="360" x2="720" y2="360" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="190" y="364" text-anchor="end" font-size="9" fill="#94a3b8">0.00</text>
+
+  <line x1="200" y1="306" x2="720" y2="306" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="190" y="310" text-anchor="end" font-size="9" fill="#94a3b8">0.01</text>
+
+  <line x1="200" y1="252" x2="720" y2="252" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="190" y="256" text-anchor="end" font-size="9" fill="#94a3b8">0.02</text>
+
+  <line x1="200" y1="198" x2="720" y2="198" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="190" y="202" text-anchor="end" font-size="9" fill="#94a3b8">0.03</text>
+
+  <line x1="200" y1="144" x2="720" y2="144" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="190" y="148" text-anchor="end" font-size="9" fill="#94a3b8">0.04</text>
+
+  <line x1="200" y1="90" x2="720" y2="90" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="190" y="94" text-anchor="end" font-size="9" fill="#94a3b8">0.05</text>
+
+  <!-- Scale: 0.00 = y:360, 0.06 = y:36. Each 0.01 = 54px -->
+  <!-- BM25 only: 0.0187 -> 360 - (0.0187 * 5400) = 360 - 100.98 = 259 -->
+  <!-- Dense only: 0.0265 -> 360 - 143.1 = 217 -->
+  <!-- Hybrid: 0.0328 -> 360 - 177.12 = 183 -->
+  <!-- Hybrid+NER: 0.0333 -> 360 - 179.82 = 180 -->
+  <!-- Hybrid+CE: 0.0543 -> 360 - 293.22 = 67 -->
+  <!-- Full: 0.0543 -> 67 -->
+
+  <!-- Bar 1: BM25 only -->
+  <rect x="220" y="259" width="68" height="101" rx="4" fill="url(#bar2)" opacity="0.85"/>
+  <text x="254" y="252" text-anchor="middle" font-size="10" font-weight="600" fill="#d97706">0.0187</text>
+  <text x="254" y="382" text-anchor="middle" font-size="9" fill="#64748b">BM25</text>
+  <text x="254" y="393" text-anchor="middle" font-size="8" fill="#94a3b8">only</text>
+
+  <!-- Bar 2: Dense only -->
+  <rect x="312" y="217" width="68" height="143" rx="4" fill="url(#bar1)" opacity="0.85"/>
+  <text x="346" y="210" text-anchor="middle" font-size="10" font-weight="600" fill="#2563eb">0.0265</text>
+  <text x="346" y="382" text-anchor="middle" font-size="9" fill="#64748b">Dense</text>
+  <text x="346" y="393" text-anchor="middle" font-size="8" fill="#94a3b8">(FashionCLIP)</text>
+
+  <!-- Bar 3: Hybrid -->
+  <rect x="404" y="183" width="68" height="177" rx="4" fill="url(#bar3)" opacity="0.85"/>
+  <text x="438" y="176" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">0.0328</text>
+  <text x="438" y="382" text-anchor="middle" font-size="9" fill="#64748b">Hybrid</text>
+  <text x="438" y="393" text-anchor="middle" font-size="8" fill="#94a3b8">(BM25+Dense)</text>
+
+  <!-- Bar 4: Hybrid + NER -->
+  <rect x="496" y="180" width="68" height="180" rx="4" fill="url(#bar5)" opacity="0.85"/>
+  <text x="530" y="173" text-anchor="middle" font-size="10" font-weight="600" fill="#7c3aed">0.0333</text>
+  <text x="530" y="382" text-anchor="middle" font-size="9" fill="#64748b">+ NER</text>
+  <text x="530" y="393" text-anchor="middle" font-size="8" fill="#94a3b8">boost</text>
+
+  <!-- Bar 5: Hybrid + CE rerank (the big one) -->
+  <rect x="588" y="67" width="68" height="293" rx="4" fill="url(#bar4)" opacity="0.9"/>
+  <text x="622" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="#dc2626">0.0543</text>
+  <text x="622" y="382" text-anchor="middle" font-size="9" fill="#64748b">+ CE</text>
+  <text x="622" y="393" text-anchor="middle" font-size="8" fill="#94a3b8">rerank</text>
+
+  <!-- Gain annotations -->
+  <!-- Dense to Hybrid -->
+  <line x1="380" y1="217" x2="404" y2="183" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <rect x="374" y="192" width="46" height="14" rx="7" fill="#ecfdf5"/>
+  <text x="397" y="202" text-anchor="middle" font-size="8" font-weight="600" fill="#059669">+17.8%</text>
+
+  <!-- Hybrid to CE rerank -->
+  <path d="M564,180 C576,180 576,67 588,67" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,2" fill="none"/>
+  <rect x="556" y="114" width="46" height="14" rx="7" fill="#fef2f2"/>
+  <text x="579" y="124" text-anchor="middle" font-size="8" font-weight="700" fill="#dc2626">+51.0%</text>
+
+  <!-- Overall gain bracket -->
+  <line x1="700" y1="217" x2="700" y2="67" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="696" y1="217" x2="704" y2="217" stroke="#1e293b" stroke-width="1.5"/>
+  <line x1="696" y1="67" x2="704" y2="67" stroke="#1e293b" stroke-width="1.5"/>
+  <rect x="706" y="132" width="48" height="18" rx="9" fill="#1e293b"/>
+  <text x="730" y="145" text-anchor="middle" font-size="9" font-weight="700" fill="white">+81%</text>
+</svg>

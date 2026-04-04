@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Inter, -apple-system, system-ui, sans-serif">
+  <defs>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="queryGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+    <linearGradient id="nerGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="bm25Grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="denseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="fusionGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="ceGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <linearGradient id="resultGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="520" rx="12" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="450" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">MODA Pipeline Architecture</text>
+  <text x="450" y="56" text-anchor="middle" font-size="12" fill="#64748b">Query to results in 62.5ms</text>
+
+  <!-- Query input -->
+  <rect x="340" y="74" width="220" height="46" rx="23" fill="url(#queryGrad)" filter="url(#shadow)"/>
+  <text x="450" y="101" text-anchor="middle" font-size="13" font-weight="600" fill="white">User Query</text>
+  <text x="450" y="114" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.7)">"navy slim fit jeans mens"</text>
+
+  <!-- Arrow down from query -->
+  <path d="M450,120 L450,148" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowGray)"/>
+  <defs><marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8"/></marker></defs>
+
+  <!-- NER box -->
+  <rect x="310" y="150" width="280" height="56" rx="10" fill="url(#nerGrad)" filter="url(#shadow)"/>
+  <text x="450" y="174" text-anchor="middle" font-size="13" font-weight="600" fill="white">GLiNER NER (Zero-Shot)</text>
+  <text x="450" y="194" text-anchor="middle" font-size="9.5" fill="rgba(255,255,255,0.8)">color: navy | type: jeans | gender: mens | fit: slim</text>
+
+  <!-- Split arrow -->
+  <path d="M450,206 L450,230 L250,230 L250,258" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowGray)"/>
+  <path d="M450,206 L450,230 L650,230 L650,258" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowGray)"/>
+
+  <!-- BM25 box (left) -->
+  <rect x="120" y="260" width="260" height="72" rx="10" fill="white" stroke="#d97706" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="120" y="260" width="260" height="26" rx="10" fill="url(#bm25Grad)"/>
+  <rect x="120" y="276" width="260" height="4" fill="url(#bm25Grad)"/>
+  <text x="250" y="279" text-anchor="middle" font-size="12" font-weight="600" fill="white">BM25 (OpenSearch)</text>
+  <text x="250" y="302" text-anchor="middle" font-size="9" fill="#92400e">prod_name^4 | product_type^3 | colour^2</text>
+  <text x="250" y="316" text-anchor="middle" font-size="9" fill="#92400e">+ NER field boosts (bool.should)</text>
+  <text x="370" y="326" text-anchor="end" font-size="8" fill="#a8a29e">11.5ms</text>
+
+  <!-- Dense box (right) -->
+  <rect x="520" y="260" width="260" height="72" rx="10" fill="white" stroke="#2563eb" stroke-width="2" filter="url(#shadow)"/>
+  <rect x="520" y="260" width="260" height="26" rx="10" fill="url(#denseGrad)"/>
+  <rect x="520" y="276" width="260" height="4" fill="url(#denseGrad)"/>
+  <text x="650" y="279" text-anchor="middle" font-size="12" font-weight="600" fill="white">Dense Retrieval (FAISS)</text>
+  <text x="650" y="302" text-anchor="middle" font-size="9" fill="#1e40af">FashionCLIP 512-dim embeddings</text>
+  <text x="650" y="316" text-anchor="middle" font-size="9" fill="#1e40af">Cosine similarity, top-100</text>
+  <text x="770" y="326" text-anchor="end" font-size="8" fill="#a8a29e">&lt;1ms (cached)</text>
+
+  <!-- Merge arrows -->
+  <path d="M250,332 L250,358 L450,358 L450,376" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowGray)"/>
+  <path d="M650,332 L650,358 L450,358 L450,376" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowGray)"/>
+
+  <!-- Weight labels on merge arrows -->
+  <rect x="207" y="342" width="44" height="16" rx="8" fill="#fef3c7"/>
+  <text x="229" y="353" text-anchor="middle" font-size="8" font-weight="600" fill="#92400e">x 0.4</text>
+  <rect x="648" y="342" width="44" height="16" rx="8" fill="#dbeafe"/>
+  <text x="670" y="353" text-anchor="middle" font-size="8" font-weight="600" fill="#1e40af">x 0.6</text>
+
+  <!-- RRF Fusion -->
+  <rect x="310" y="378" width="280" height="44" rx="10" fill="url(#fusionGrad)" filter="url(#shadow)"/>
+  <text x="450" y="400" text-anchor="middle" font-size="13" font-weight="600" fill="white">RRF Hybrid Fusion (k=60)</text>
+  <text x="450" y="414" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.8)">Top-100 candidates | 0.1ms</text>
+
+  <!-- Arrow down -->
+  <path d="M450,422 L450,440" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowGray)"/>
+
+  <!-- CE Rerank -->
+  <rect x="280" y="442" width="340" height="44" rx="10" fill="url(#ceGrad)" filter="url(#shadow)"/>
+  <text x="450" y="464" text-anchor="middle" font-size="13" font-weight="600" fill="white">Cross-Encoder Reranking (MiniLM-L6)</text>
+  <text x="450" y="478" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.8)">100 pairs scored, top-50 returned | 50.9ms</text>
+
+  <!-- Arrow down -->
+  <path d="M450,486 L450,502" stroke="#94a3b8" stroke-width="2" fill="none" marker-end="url(#arrowGray)"/>
+
+  <!-- Results -->
+  <rect x="355" y="500" width="190" height="14" rx="7" fill="url(#resultGrad)"/>
+  <text x="450" y="511" text-anchor="middle" font-size="9" font-weight="600" fill="white">Ranked Results</text>
+
+  <!-- Gain annotations (right side) -->
+  <line x1="780" y1="290" x2="780" y2="400" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="790" y="350" font-size="8" fill="#059669" font-weight="600">+17.8%</text>
+
+  <line x1="780" y1="420" x2="780" y2="478" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="790" y="454" font-size="8" fill="#dc2626" font-weight="600">+51.0%</text>
+</svg>

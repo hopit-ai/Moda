@@ -10,6 +10,8 @@ We ran that experiment. 253,685 real search queries from H&M customers. 105,542 
 
 One widely recommended technique actively made things worse.
 
+![Three-phase validation methodology](assets/methodology.svg)
+
 ---
 
 ## First, we needed to trust our own numbers
@@ -75,6 +77,8 @@ Pick your embedding model based on your actual catalog, not average benchmark sc
 
 ### Building up the pipeline
 
+![MODA pipeline architecture](assets/pipeline_architecture.svg)
+
 With FashionCLIP as the dense backbone, we added components one at a time.
 
 Hybrid fusion (BM25 + dense, combined via Reciprocal Rank Fusion): we tested four weight combinations. BM25 x 0.4 + dense x 0.6 worked best. Push BM25 higher and vocabulary mismatch starts pulling in garbage.
@@ -110,6 +114,8 @@ We ran every configuration on the complete dataset. Pre-computed caches for BM25
 The numbers held. The 10K sample was within 1% of the full run. Bootstrap 95% confidence intervals are tight.
 
 One thing we didn't expect: Config 6 and Config 8 produce identical results. NER adds nothing when the cross-encoder is already in the pipeline. The cross-encoder sees the full query-document pair and already captures what NER was contributing. In the final analysis, the pipeline is really three components: dense retrieval, hybrid fusion, and cross-encoder reranking.
+
+![Component-by-component breakdown](assets/component_gains.svg)
 
 ### What each component actually adds
 
