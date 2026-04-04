@@ -1,6 +1,6 @@
-# We benchmarked end-to-end fashion search on 253K real queries
+# Open benchmark harness for fashion search
 
-*Open-source ablation study: +81% nDCG@10 over the best published fashion embedding baseline, no training required.*
+*Even 0 extra training can give you >75% gains.*
 
 ---
 
