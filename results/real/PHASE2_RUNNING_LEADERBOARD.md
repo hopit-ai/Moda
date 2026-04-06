@@ -192,7 +192,102 @@ Each component's marginal contribution:
 
 ---
 
-## Overall Pipeline Improvement Summary (Updated with Phase 3)
+## Phase 3B — LLM-Trained Cross-Encoder (22,855 held-out test queries) ← NEW SOTA
+
+**Key insight:** Phase 3A showed fine-tuning on noisy purchase labels barely helped (+1.2%). Phase 3B replaces those labels with **42,800 LLM-judged relevance scores** (GPT-4o-mini via PaleblueDot API, graded 0-3) and retrains the CE with MSE loss on normalized labels.
+
+**Training data:** 42,800 query-product pairs labeled by GPT-4o-mini with a fashion relevance rubric (0=irrelevant, 1=partial, 2=good, 3=exact match). Score distribution: 27.7% score-0, 21.1% score-1, 25.0% score-2, 26.2% score-3.  
+**Training:** 3 epochs, batch=32, lr=2e-5, CECorrelationEvaluator → Spearman=0.903  
+**Pipeline:** NER-boosted Hybrid (BM25×0.4 + Dense×0.6) → RRF top-100 → CE rerank → top-50
+
+| # | Config | nDCG@10 | MRR | Recall@10 | vs Off-shelf CE |
+| --- | --- | --- | --- | --- | --- |
+| — | Hybrid NER baseline (no rerank) | 0.0422 | 0.0558 | 0.0142 | −34.7% |
+| 8' | Hybrid NER + Off-shelf CE@50 | 0.0646 | 0.0671 | 0.0195 | baseline |
+| 14 | Hybrid NER + Fine-tuned CE@50 (Phase 3A) | 0.0654 | 0.0644 | 0.0183 | +1.2% |
+| **15** | **Hybrid NER + LLM-trained CE@50 (Phase 3B)** | **0.0747** | **0.0755** | **0.0217** | **+15.7% ✅** |
+
+### Phase 3 Head-to-Head (all models, same 22,855 test queries)
+
+| Metric | Off-shelf CE | Fine-tuned CE (3A) | LLM-trained CE (3B) | 3B vs Off-shelf |
+| --- | --- | --- | --- | --- |
+| nDCG@10 | 0.0646 | 0.0654 (+1.2%) | **0.0747** | **+15.7% ✅** |
+| MRR | 0.0671 | 0.0644 (−4.0%) | **0.0755** | **+12.5% ✅** |
+| Recall@10 | 0.0195 | 0.0183 (−6.2%) | **0.0217** | **+11.3% ✅** |
+
+> **Finding:** LLM-judged labels are a **game-changer**. The LLM-trained CE improves **every metric** substantially over both the off-the-shelf and Phase 3A models:
+> - **+15.7% nDCG@10** vs off-the-shelf (0.0646 → 0.0747)
+> - **+14.2% nDCG@10** vs Phase 3A fine-tuned (0.0654 → 0.0747)
+> - **+12.5% MRR** — better top-1 ranking
+> - **+11.3% Recall@10** — catches more relevant items
+>
+> This proves the Phase 3A hypothesis: **data quality, not model capacity, was the bottleneck**. The same 22M-param MiniLM-L6 architecture, trained on 42.8K clean graded labels instead of 2.5M noisy binary purchase labels, delivers dramatically better results. GPT-4o-mini's semantic relevance judgments are a far more reliable training signal than purchase logs.
+
+---
+
+## Phase 3C — Fine-Tuned Bi-Encoder (22,855 held-out test queries)
+
+**Key insight:** Instead of just improving the reranker, Phase 3C improves the *retriever* itself. We fine-tune FashionCLIP's text encoder with InfoNCE contrastive loss, using **retriever-mined hard negatives** labeled by GPT-4o-mini.
+
+**Data generation:**
+1. Sample 5,000 unique train queries (leakage-free — disjoint from test)
+2. Retrieve top-20 from FashionCLIP for each → 100,000 (query, product) pairs
+3. Label each with GPT-4o-mini (0-3 relevance scale) → 100K labels, 0 failures
+4. Extract contrastive triplets: positive (score 2-3) + hard negative (score 0) → 24,433 triplets
+
+**Training:** 5 epochs, batch=64 (grad_accum=4), lr=1e-6, InfoNCE + in-batch negatives + mined hard negatives, FP16 autocast on Apple M4 Max MPS — 41.6 min total  
+**Val accuracy:** 66.5% (baseline) → 99.4% (fine-tuned) on triplet ranking task
+
+| # | Config | nDCG@10 | MRR | Recall@10 | vs Baseline |
+| --- | --- | --- | --- | --- | --- |
+| 3 | Baseline FashionCLIP (dense only) | 0.0229 | 0.0208 | 0.0433 | baseline |
+| **16** | **Fine-tuned FashionCLIP (dense only)** | **0.0444** | **0.0405** | **0.0811** | **+94.2% ✅** |
+
+### Dense Retrieval Head-to-Head
+
+| Metric | Baseline FashionCLIP | Fine-tuned FashionCLIP | Delta |
+| --- | --- | --- | --- |
+| nDCG@10 | 0.0229 | **0.0444** | **+94.2%** |
+| MRR | 0.0208 | **0.0405** | **+94.7%** |
+| Recall@10 | 0.0433 | **0.0811** | **+87.3%** |
+
+> **Finding:** Fine-tuning FashionCLIP on retriever-mined hard negatives with LLM labels **nearly doubles** dense retrieval quality across all metrics. The model learns exactly where it previously failed — products that it ranked highly but were irrelevant according to GPT-4o-mini. This is the largest single-stage improvement in the entire project (+94.2%), and it happens at the *retrieval stage* rather than the reranking stage. Improved retrieval means the downstream reranker receives better candidates, potentially compounding gains.
+
+---
+
+## Phase 3 — Combined Pipeline Evaluation (2×3 Factorial, 22,855 test queries)
+
+**Apples-to-apples comparison:** All 6 configs share the same BM25-NER retrieval, same test queries, same qrels.
+
+### Retriever × Reranker Matrix (nDCG@10)
+
+|  | No Rerank | Off-shelf CE | LLM-trained CE (3B) |
+| --- | --- | --- | --- |
+| Baseline FashionCLIP | 0.0422 | 0.0646 | 0.0747 |
+| Fine-tuned FashionCLIP (3C) | 0.0515 (+22.0%) | 0.0650 (+0.6%) | **0.0757 (+1.3%)** |
+
+### Full Results
+
+| # | Config | nDCG@10 | MRR | R@10 | vs A0 baseline |
+| --- | --- | --- | --- | --- | --- |
+| A0 | Baseline Hybrid (no rerank) | 0.0422 | 0.0558 | 0.0142 | baseline |
+| B0 | Fine-tuned Hybrid (no rerank) | 0.0515 | 0.0740 | 0.0188 | +22.0% |
+| A1 | Baseline + Off-shelf CE | 0.0646 | 0.0671 | 0.0195 | +53.1% |
+| B1 | Fine-tuned + Off-shelf CE | 0.0650 | 0.0723 | 0.0207 | +54.0% |
+| A2 | Baseline + LLM-trained CE | 0.0747 | 0.0755 | 0.0217 | +77.0% |
+| **B2** | **Fine-tuned + LLM-trained CE** | **0.0757** | **0.0799** | **0.0243** | **+79.4%** |
+
+### Key Findings from Combined Evaluation
+
+1. **B2 is the new project SOTA** (nDCG@10 = 0.0757), combining the fine-tuned retriever with LLM-trained CE
+2. **LLM-trained CE is the dominant component**: A2 vs A1 = +15.7% nDCG, vs B1 vs A1 = +0.6% from retriever alone with off-shelf CE
+3. **Retriever fine-tuning compounds with LLM CE**: B2 vs A2 = +1.3% nDCG, but +5.8% MRR and +12.0% Recall@10 — the fine-tuned retriever surfaces better candidates that the LLM CE can score
+4. **Off-shelf CE equalises retriever gains**: B1 vs A1 = +0.6% nDCG — a generic CE compensates for retriever weaknesses, but gains appear in MRR (+7.7%) and Recall (+6.2%)
+5. **Gains are sub-additive on nDCG but additive on Recall**: The retriever's +22% hybrid lift compresses to +1.3% after LLM CE on nDCG, but Recall@10 improves +12.0% — better candidates enter the pool even if CE re-orders similarly
+
+---
+
+## Overall Pipeline Improvement Summary
 
 ```
 Phase 1 FashionCLIP dense (baseline)     nDCG@10 = 0.0300
@@ -201,7 +296,10 @@ Phase 1 FashionCLIP dense (baseline)     nDCG@10 = 0.0300
 → + CE rerank (Config 6)                 nDCG@10 = 0.0533  (+77.6%)
 → + NER attribute boost (Config 8)       nDCG@10 = 0.0549  (+83.0%)
 → + ColBERT→CE cascade (Config 10)       nDCG@10 = 0.0553  (+84.3%) ← BEST Phase 2
-→ + Fine-tuned CE (Config 14, test-only) nDCG@10 = 0.0654  (+1.2% vs off-shelf CE) ← Phase 3
+→ + Fine-tuned CE (Phase 3A, purchase)   nDCG@10 = 0.0654  (+1.2% vs off-shelf CE)
+→ + LLM-trained CE (Phase 3B, GPT-4o)   nDCG@10 = 0.0747  (+15.7% vs off-shelf CE)
+→ + Fine-tuned bi-encoder (Phase 3C)     nDCG@10 = 0.0444  (+94.2% dense retrieval)
+→ + Combined B2 (3C retriever + 3B CE)   nDCG@10 = 0.0757  (+1.3% vs 3B) ← NEW BEST
 ```
 
 Each component's marginal contribution:
@@ -209,8 +307,11 @@ Each component's marginal contribution:
 - CE reranking: **+50.9%** (from 0.0353 → 0.0533)
 - NER on BM25 component: **+3.0%** (from 0.0533 → 0.0549)
 - ColBERT pre-filter for CE: **+0.7%** (from 0.0549 → 0.0553)
-- Fine-tuned CE (vs off-shelf): **+1.2% nDCG@10** (mixed: nDCG up, MRR/Recall down)
+- Fine-tuned CE on purchase data: **+1.2%** (marginal, noisy labels)
+- **LLM-trained CE on GPT-4o labels: +15.7%** (clean graded labels — biggest reranker gain)
+- **Fine-tuned bi-encoder: +94.2%** dense retrieval, **+1.3%** end-to-end with LLM CE
+- **Combined best (B2): +79.4%** over baseline hybrid (from 0.0422 → 0.0757)
 
 ---
 
-_Last updated: 2026-04-05 (Phase 3A Fine-tuned CE evaluation complete on 22,855 held-out test queries)_
+_Last updated: 2026-04-06 (Phase 3 combined eval complete — B2 SOTA nDCG@10=0.0757, MRR=0.0799, R@10=0.0243 on 22,855 test queries)_

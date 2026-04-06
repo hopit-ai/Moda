@@ -53,6 +53,9 @@ results/real/hnm_hybrid_configs.json
 results/real/hnm_query_understanding.json
 results/real/*_per_query.csv
 
+# ─── Per-query CSVs at top level (regenerate via eval scripts)
+results/hnm_dense_*_per_query.csv
+
 # ─── Marqo repo embeddings (large .pt files)
 repos/marqo-FashionCLIP/results/**/embeddings.pt
 repos/*/results/**/embeddings.pt
@@ -81,8 +84,15 @@ results/real/*.log
 *.swo
 *~
 
-# ─── HuggingFace / torch model cache (not project data)
+# ─── Processed data (labels, embeddings metadata — regenerate via scripts)
+data/processed/*.jsonl
 data/processed/torch/
+
+# ─── Raw images (55 GB — download via scripts/download_hnm_images.py)
+data/raw/hnm_images/
+data/raw/hnm_hf_snapshot/
+
+# ─── HuggingFace / torch model cache (not project data)
 .cache/
 
 # ─── Large directories (download/rebuild locally)

@@ -1,0 +1,32 @@
+[
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=274x400 at 0x1300C8190>",
+    "category": "Day Dresses",
+    "text": "tibi knit long sleeve dress",
+    "item_ID": "100002074_1"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=138x400 at 0x1300C82D0>",
+    "category": "Boots",
+    "text": "michael kors leather over-the-knee boots",
+    "item_ID": "100002074_2"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=400x351 at 0x1300C8410>",
+    "category": "Handbags",
+    "text": "givenchy leather medium antigona duffel black",
+    "item_ID": "100002074_3"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=400x217 at 0x1300C8550>",
+    "category": "Sunglasses",
+    "text": "bottega veneta acetate leather sunglasses",
+    "item_ID": "100002074_4"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=229x400 at 0x1300C8690>",
+    "category": "Floral Decor",
+    "text": "pier imports stem",
+    "item_ID": "100002074_5"
+  }
+]

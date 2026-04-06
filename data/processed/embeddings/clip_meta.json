@@ -1,0 +1,13 @@
+{
+  "model_name": "clip",
+  "safe_name": "clip",
+  "n_articles": 105542,
+  "embed_dim": 512,
+  "batch_size": 128,
+  "device": "mps",
+  "elapsed_seconds": 219.29,
+  "throughput_items_per_sec": 481.3,
+  "embeddings_path": "data/processed/embeddings/clip_embeddings.npy",
+  "article_ids_path": "data/processed/embeddings/clip_article_ids.json",
+  "faiss_index_path": "data/processed/embeddings/clip_faiss.index"
+}

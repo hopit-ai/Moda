@@ -1,0 +1,42 @@
+[
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=266x430 at 0x11CD174D0>",
+    "category1": "dresses",
+    "category2": "mini and short dresses",
+    "category3": "green seamed a-line dress",
+    "text": "green dress. the dress is made of a shiny material and has a boat neckline. it is a short dress with a straight cut and is worn by a woman.",
+    "item_ID": "51727804_0"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=151x365 at 0x12E9CE490>",
+    "category1": "dresses",
+    "category2": "casual and day dresses",
+    "category3": "red contemporary metallic floral print cami dress",
+    "text": "dress with a multicolored pattern. the dress has a strapless design and a flowy skirt. the pattern consists of a mix of blue, red, and white colors. the dress is a summer style and is suitable for a beach or a casual outing.",
+    "item_ID": "54686996_0"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=167x352 at 0x12E9CE350>",
+    "category1": "dresses",
+    "category2": "casual and day dresses",
+    "category3": "red contemporary metallic floral print cami dress",
+    "text": "dress. the dress is multicolored with a pattern of red, blue, and white. it has a halter neckline and a flowy skirt. the dress is made of a lightweight material, possibly cotton or linen. the dress is styled in a bohemian fashion, with a loose fit and a flowy skirt.",
+    "item_ID": "54686996_1"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=141x365 at 0x12E9CE5D0>",
+    "category1": "dresses",
+    "category2": "casual and day dresses",
+    "category3": "red contemporary metallic floral print cami dress",
+    "text": "dress with a multicolored print. the dress has a black and white pattern with red, blue, and yellow accents. the dress is a sleeveless, midi-length style with a v-neckline. the dress is made of a lightweight material, possibly cotton or rayon. the dress is styled in a bohemian fashion, with a flowy and relaxed fit.",
+    "item_ID": "54686996_3"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=152x352 at 0x12E9CEAD0>",
+    "category1": "dresses",
+    "category2": "casual and day dresses",
+    "category3": "white eyelet cotton dress",
+    "text": "white dress with lace detailing. the dress has a fitted bodice and a flared skirt. the lace detailing is scattered throughout the dress, adding a delicate touch to the overall design. the dress is a sleeveless style, making it a versatile option for various occasions.",
+    "item_ID": "54946109_0"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=1000x1447 at 0x12E9CEFD0>",
+    "gender": "Men",
+    "category": "Ethnic Wear",
+    "sub-category": "Dhoti Kurta",
+    "text": "Plain Dupion Silk Dhoti Kurta in Fawn",
+    "item_ID": "Men-Ethnic_Wear-Dhoti_Kurta_plain-dupion-silk-dhoti-kurta-in-fawn-v1-mht26"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=1000x1447 at 0x12E9CF110>",
+    "gender": "Men",
+    "category": "Ethnic Wear",
+    "sub-category": "Dhoti Kurta",
+    "text": "Solid Color Dupion Silk Dhoti Kurta in Royal Blue",
+    "item_ID": "Men-Ethnic_Wear-Dhoti_Kurta_solid-color-dupion-silk-dhoti-kurta-in-royal-blue-v1-mtr453"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=1000x1447 at 0x12E9CF250>",
+    "gender": "Men",
+    "category": "Ethnic Wear",
+    "sub-category": "Dhoti Kurta",
+    "text": "Solid Color Rayon Asymmetric Dhoti Kurta in Black",
+    "item_ID": "Men-Ethnic_Wear-Dhoti_Kurta_solid-color-rayon-asymmetric-dhoti-kurta-in-black-v1-mxh176"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=1000x1447 at 0x12E9CF390>",
+    "gender": "Men",
+    "category": "Ethnic Wear",
+    "sub-category": "Dhoti Kurta",
+    "text": "Solid Color Art Silk Kurta Set in Beige",
+    "item_ID": "Men-Ethnic_Wear-Dhoti_Kurta_solid-color-art-silk-kurta-set-in-beige-v1-mxh187"
+  },
+  {
+    "image": "<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=1000x1447 at 0x12E9CF4D0>",
+    "gender": "Men",
+    "category": "Ethnic Wear",
+    "sub-category": "Dhoti Kurta",
+    "text": "Solid Color Rayon Kurta Set in Black",
+    "item_ID": "Men-Ethnic_Wear-Dhoti_Kurta_solid-color-rayon-kurta-set-in-black-v1-mxh188"
+  }
+]

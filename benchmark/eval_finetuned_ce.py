@@ -1,10 +1,8 @@
 """
-MODA Phase 3 — Fine-Tuned Cross-Encoder Evaluation (Leak-Free)
+MODA Phase 3 — Cross-Encoder Evaluation (Leak-Free)
 
-Compares off-the-shelf vs fine-tuned CE rerankers using ONLY the held-out
-test split from train_cross_encoder.py.  This guarantees zero data leakage:
-  - train_cross_encoder.py splits queries by unique text into 80/10/10
-  - This script loads the same split and evaluates on test queries only
+Compares off-the-shelf, Phase 3A fine-tuned, and Phase 3B LLM-trained CE
+rerankers using ONLY the held-out test split from train_cross_encoder.py.
 
 Pipeline (same as Phase 2 Config 8):
   NER-boosted BM25 × 0.4 + FashionCLIP × 0.6 → RRF top-100 → CE rerank → top-50
@@ -12,7 +10,8 @@ Pipeline (same as Phase 2 Config 8):
 Configs evaluated:
   1. Hybrid NER baseline (no rerank)        — retrieval quality reference
   2. Hybrid NER + off-the-shelf CE@50       — ms-marco-MiniLM-L-6-v2
-  3. Hybrid NER + fine-tuned CE@50          — moda-fashion-ce-best
+  3. Hybrid NER + fine-tuned CE@50          — moda-fashion-ce-best (Phase 3A)
+  4. Hybrid NER + LLM-trained CE@50         — moda-fashion-ce-llm-best (Phase 3B)
 
 Usage:
   python benchmark/eval_finetuned_ce.py
@@ -64,6 +63,7 @@ log = logging.getLogger(__name__)
 
 SPLIT_PATH = _REPO_ROOT / "data" / "processed" / "query_splits.json"
 FINETUNED_CE = str(_REPO_ROOT / "models" / "moda-fashion-ce-best")
+LLM_TRAINED_CE = str(_REPO_ROOT / "models" / "moda-fashion-ce-llm-best")
 OFFSHELF_CE = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 RESULTS_PATH = RESULTS_DIR / "hnm_finetuned_ce_eval.json"
 
@@ -150,7 +150,7 @@ def main():
     res_offshelf = evaluate(
         offshelf_results, qrels, label="Hybrid_NER_CE_offshelf@50")
 
-    # ── 8. Fine-tuned CE reranking ──────────────────────────────────────────
+    # ── 8. Fine-tuned CE reranking (Phase 3A) ───────────────────────────────
     log.info("CE reranking with FINE-TUNED model: %s", FINETUNED_CE)
     finetuned_lists = ce_rerank_batch(
         texts, hybrid_lists, articles, model_name=FINETUNED_CE)
@@ -158,12 +158,26 @@ def main():
     res_finetuned = evaluate(
         finetuned_results, qrels, label="Hybrid_NER_CE_finetuned@50")
 
-    # ── 9. Save results ────────────────────────────────────────────────────
+    # ── 9. LLM-trained CE reranking (Phase 3B) ──────────────────────────
     all_results = {
         "Hybrid_NER_baseline": res_baseline,
         "Hybrid_NER_CE_offshelf@50": res_offshelf,
         "Hybrid_NER_CE_finetuned@50": res_finetuned,
     }
+
+    llm_ce_path = Path(LLM_TRAINED_CE)
+    if llm_ce_path.exists():
+        log.info("CE reranking with LLM-TRAINED model: %s", LLM_TRAINED_CE)
+        llm_lists = ce_rerank_batch(
+            texts, hybrid_lists, articles, model_name=LLM_TRAINED_CE)
+        llm_results = {qid: lst for qid, lst in zip(qids, llm_lists)}
+        res_llm = evaluate(
+            llm_results, qrels, label="Hybrid_NER_CE_llm_trained@50")
+        all_results["Hybrid_NER_CE_llm_trained@50"] = res_llm
+    else:
+        log.warning("LLM-trained CE not found at %s — skipping", LLM_TRAINED_CE)
+
+    # ── 10. Save results ────────────────────────────────────────────────────
     output = {
         "configs": all_results,
         "settings": {
@@ -172,6 +186,7 @@ def main():
             "test_qids_total": len(test_qids),
             "offshelf_model": OFFSHELF_CE,
             "finetuned_model": FINETUNED_CE,
+            "llm_trained_model": LLM_TRAINED_CE,
             "pool_size": TOP_K_RERANK,
             "rerank_top_k": TOP_K_FINAL,
         },
@@ -180,11 +195,11 @@ def main():
         json.dump(output, f, indent=2)
     log.info("Results saved → %s", RESULTS_PATH)
 
-    # ── 10. Print comparison ────────────────────────────────────────────────
+    # ── 11. Print comparison ────────────────────────────────────────────────
     ref_ndcg = res_offshelf["metrics"]["ndcg@10"]
 
     print("\n" + "=" * 90)
-    print("PHASE 3 — Fine-Tuned CE Evaluation (TEST SPLIT ONLY — Zero Leakage)")
+    print("PHASE 3 — CE Evaluation (TEST SPLIT ONLY — Zero Leakage)")
     print(f"  {len(queries):,} test queries  |  Pool: {TOP_K_RERANK} → Top-{TOP_K_FINAL}"
           f"  |  Split: {len(test_qids):,} held-out test qids")
     print("=" * 90)

@@ -1,0 +1,42 @@
+[
+  {
+    "image": "<PIL.WebPImagePlugin.WebPImageFile image mode=RGB size=153x224 at 0x11C873C50>",
+    "category1": "men",
+    "category2": "denim",
+    "category3": null,
+    "text": "The lower clothing is of long length. The fabric is cotton and it has plaid patterns.",
+    "item_ID": "MEN-Denim-id_00000080-01_7_additional"
+  },
+  {
+    "image": "<PIL.WebPImagePlugin.WebPImageFile image mode=RGB size=153x224 at 0x11C873ED0>",
+    "category1": "men",
+    "category2": "denim",
+    "category3": null,
+    "text": "His tank top has sleeves cut off, cotton fabric and pure color patterns. The neckline of it is round. The pants this man wears is of long length. The pants are with cotton fabric and pure color patterns.",
+    "item_ID": "MEN-Denim-id_00000089-01_7_additional"
+  },
+  {
+    "image": "<PIL.WebPImagePlugin.WebPImageFile image mode=RGB size=153x224 at 0x12E9CC550>",
+    "category1": "men",
+    "category2": "denim",
+    "category3": null,
+    "text": "His sweater has long sleeves, cotton fabric and stripe patterns. The neckline of it is lapel. The gentleman wears a long pants. The pants are with cotton fabric and solid color patterns.",
+    "item_ID": "MEN-Denim-id_00000089-02_7_additional"
+  },
+  {
+    "image": "<PIL.WebPImagePlugin.WebPImageFile image mode=RGB size=153x224 at 0x12E9CC410>",
+    "category1": "men",
+    "category2": "denim",
+    "category3": null,
+    "text": "His shirt has short sleeves, cotton fabric and pure color patterns. It has a crew neckline. The person wears a long pants. The pants are with cotton fabric and solid color patterns.",
+    "item_ID": "MEN-Denim-id_00000089-03_7_additional"
+  },
+  {
+    "image": "<PIL.WebPImagePlugin.WebPImageFile image mode=RGB size=153x224 at 0x12E9CC2D0>",
+    "category1": "men",
+    "category2": "denim",
+    "category3": null,
+    "text": "The sweater the person wears has long sleeves, its fabric is denim, and it has solid color patterns. The sweater has a lapel neckline. The person wears a long pants, with cotton fabric and solid color patterns.",
+    "item_ID": "MEN-Denim-id_00000089-04_7_additional"
+  }
+]

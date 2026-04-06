@@ -1,0 +1,52 @@
+[
+  {
+    "image": "<PIL.WebPImagePlugin.WebPImageFile image mode=RGB size=224x224 at 0x11CD16120>",
+    "category1": "men",
+    "category2": "denim",
+    "category3": null,
+    "color": "Black",
+    "description": "['Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation. ', 'Woven', 'Zip fly', '79% cotton, 20% polyester, 1% spandex', '31.5\" inseam, 34\" waist, 10\" rise', 'Measured from Size 32', 'Machine wash cold', 'Made in China']",
+    "text": "Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation.  || Woven || Zip fly || 79% cotton, 20% polyester, 1% spandex || 31.5\" inseam, 34\" waist, 10\" rise || Measured from Size 32 || Machine wash cold",
+    "item_ID": "MEN_Denim_id_00000080_01_1_front"
+  },
+  {
+    "image": "<PIL.WebPImagePlugin.WebPImageFile image mode=RGB size=224x224 at 0x11C872210>",
+    "category1": "men",
+    "category2": "denim",
+    "category3": null,
+    "color": "Black",
+    "description": "['Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation. ', 'Woven', 'Zip fly', '79% cotton, 20% polyester, 1% spandex', '31.5\" inseam, 34\" waist, 10\" rise', 'Measured from Size 32', 'Machine wash cold', 'Made in China']",
+    "text": "Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation.  || Woven || Zip fly || 79% cotton, 20% polyester, 1% spandex || 31.5\" inseam, 34\" waist, 10\" rise || Measured from Size 32 || Machine wash cold",
+    "item_ID": "MEN_Denim_id_00000080_01_2_side"
+  },
+  {
+    "image": "<PIL.WebPImagePlugin.WebPImageFile image mode=RGB size=224x224 at 0x11C1B1A90>",
+    "category1": "men",
+    "category2": "denim",
+    "category3": null,
+    "color": "Black",
+    "description": "['Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation. ', 'Woven', 'Zip fly', '79% cotton, 20% polyester, 1% spandex', '31.5\" inseam, 34\" waist, 10\" rise', 'Measured from Size 32', 'Machine wash cold', 'Made in China']",
+    "text": "Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation.  || Woven || Zip fly || 79% cotton, 20% polyester, 1% spandex || 31.5\" inseam, 34\" waist, 10\" rise || Measured from Size 32 || Machine wash cold",
+    "item_ID": "MEN_Denim_id_00000080_01_3_back"
+  },
+  {
+    "image": "<PIL.WebPImagePlugin.WebPImageFile image mode=RGB size=224x224 at 0x11C1B1E50>",
+    "category1": "men",
+    "category2": "denim",
+    "category3": null,
+    "color": "Black",
+    "description": "['Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation. ', 'Woven', 'Zip fly', '79% cotton, 20% polyester, 1% spandex', '31.5\" inseam, 34\" waist, 10\" rise', 'Measured from Size 32', 'Machine wash cold', 'Made in China']",
+    "text": "Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation.  || Woven || Zip fly || 79% cotton, 20% polyester, 1% spandex || 31.5\" inseam, 34\" waist, 10\" rise || Measured from Size 32 || Machine wash cold",
+    "item_ID": "MEN_Denim_id_00000080_01_7_additional"
+  },
+  {
+    "image": "<PIL.WebPImagePlugin.WebPImageFile image mode=RGB size=224x224 at 0x11C8725D0>",
+    "category1": "men",
+    "category2": "denim",
+    "category3": null,
+    "color": "Brown",
+    "description": "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+    "text": "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+    "item_ID": "MEN_Denim_id_00000089_01_1_front"
+  }
+]

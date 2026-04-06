@@ -1,0 +1,13 @@
+{
+  "model_name": "fashion-clip",
+  "safe_name": "fashion-clip",
+  "n_articles": 105542,
+  "embed_dim": 512,
+  "batch_size": 128,
+  "device": "mps",
+  "elapsed_seconds": 254.21,
+  "throughput_items_per_sec": 415.2,
+  "embeddings_path": "data/processed/embeddings/fashion-clip_embeddings.npy",
+  "article_ids_path": "data/processed/embeddings/fashion-clip_article_ids.json",
+  "faiss_index_path": "data/processed/embeddings/fashion-clip_faiss.index"
+}

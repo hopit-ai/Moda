@@ -1,0 +1,13 @@
+{
+  "model_name": "fashion-siglip",
+  "safe_name": "fashion-siglip",
+  "n_articles": 105542,
+  "embed_dim": 768,
+  "batch_size": 64,
+  "device": "mps",
+  "elapsed_seconds": 2005.4,
+  "throughput_items_per_sec": 52.6,
+  "embeddings_path": "data/processed/embeddings/fashion-siglip_embeddings.npy",
+  "article_ids_path": "data/processed/embeddings/fashion-siglip_article_ids.json",
+  "faiss_index_path": "data/processed/embeddings/fashion-siglip_faiss.index"
+}

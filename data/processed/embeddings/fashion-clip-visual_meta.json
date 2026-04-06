@@ -1,0 +1,10 @@
+{
+  "model": "fashion-clip",
+  "encoder": "vision",
+  "n_images": 105092,
+  "embed_dim": 512,
+  "batch_size": 64,
+  "device": "mps",
+  "elapsed_seconds": 2526.3,
+  "throughput_img_per_sec": 41.6
+}

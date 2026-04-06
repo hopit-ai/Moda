@@ -1,7 +1,7 @@
 # MODA — Modular Open-Source Discovery Architecture
 
 **The first open-source, end-to-end, ablation-complete benchmark for fashion search.**  
-253,685 real user queries · 105,542 H&M products · 8 pipeline configs · zero training cost · $0 compute
+253,685 real user queries · 105,542 H&M products · 18 pipeline configs · nDCG@10 = 0.0757 (+152% over baseline)
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
@@ -26,8 +26,47 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 | Hybrid + NER boost | 0.0333 | [0.0329–0.0338] | 0.0438 | ~18ms | +25.7% |
 | **Full Pipeline (Hybrid + CE rerank)** | **0.0543** | **[0.0537–0.0550]** | **0.0569** | **62.5ms** | **+104.9%** |
 
+### Phase 3 — LLM-Guided Training (22,855 held-out test queries)
+
+| Config | nDCG@10 | MRR | R@10 | vs Baseline |
+|---|---|---|---|---|
+| Off-the-shelf CE@50 | 0.0646 | 0.0671 | 0.0195 | CE baseline |
+| Fine-tuned CE@50 (purchase labels) | 0.0654 | 0.0644 | 0.0183 | +1.2% |
+| LLM-trained CE@50 (GPT-4o-mini labels) | 0.0747 | 0.0755 | 0.0217 | +15.7% |
+| Fine-tuned FashionCLIP (dense only) | 0.0444 | 0.0405 | 0.0811 | +94.2% (dense) |
+| **Fine-tuned retriever + LLM CE (B2)** | **0.0757** | **0.0799** | **0.0243** | **+79.4% ✅ SOTA** |
+
+### Retriever × Reranker Matrix (nDCG@10)
+
+| | No Rerank | Off-shelf CE | LLM-trained CE |
+|---|---|---|---|
+| Baseline FashionCLIP | 0.0422 | 0.0646 | 0.0747 |
+| Fine-tuned FashionCLIP | 0.0515 (+22%) | 0.0650 (+0.6%) | **0.0757 (+1.3%)** |
+
+> **Phase 3 breakthroughs:** LLM-judged labels transformed both stages. Cross-encoder: 42.8K GPT-4o-mini graded labels → **+15.7% nDCG@10**. Bi-encoder: 100K retriever-mined hard negatives + LLM labels → **+94.2% dense retrieval**. Combined (B2): **nDCG@10 = 0.0757, MRR = 0.0799, Recall@10 = 0.0243** — new project SOTA. Gains are sub-additive on nDCG but additive on Recall (+12%).
+
+### Phase 4 — Multimodal Retrieval
+
+| Step | What | Command | Status |
+|------|------|---------|--------|
+| **4A** | Download H&M product images (105K) | `python scripts/download_hnm_images.py` | Done |
+| **4B** | Embed images with FashionCLIP vision encoder, build FAISS index | `python benchmark/embed_hnm_images.py` | Done |
+| **4C** | Text-to-image retrieval channel | (integrated in eval scripts) | Done |
+| **4D** | Zero-shot multimodal eval (baseline + fine-tuned text encoder) | `python benchmark/eval_multimodal_pipeline.py` | Done |
+| **4E** | LLM labels for image hard negatives (PaleblueDot GPT-4o-mini) | `python benchmark/generate_image_labels.py` | Done |
+| **4F** | Joint text+image fine-tuning (both CLIP encoders, contrastive + alignment) | `python benchmark/train_multimodal.py` | Running |
+| **4G** | Re-embed images with 4F model + multimodal pipeline eval | `bash scripts/run_phase4g_multimodal_eval.sh` | Waiting for 4F |
+| **4H** | Three-Tower training (query/text/image towers, novel architecture) | `python benchmark/train_three_tower.py` | Pending |
+| **4I** | Three-Tower full benchmark evaluation | `python benchmark/eval_three_tower.py` | Pending |
+
+**4E** produces `data/processed/image_retriever_labels.jsonl` via PaleblueDot (`openai/gpt-4o-mini`). Both **4F** and **4H** consume this file alongside Phase 3C text labels (`biencoder_retriever_labels.jsonl`).
+
+**4F** fine-tunes both FashionCLIP encoders with contrastive loss + alignment regularisation. **4G** re-embeds 105K images with the 4F checkpoint and reruns multimodal pipeline eval (auto-starts after 4F saves `best/`). Run 4G standalone: `bash scripts/run_phase4g_multimodal_eval.sh`
+
+**4H** is a novel **Three-Tower Fashion Retriever (3TFR)**: dedicated **query tower** (CLIP text encoder + projection MLP), frozen **text tower**, frozen **image tower** — all projecting into a single 512-dim space. Product embeddings are precomputed offline; only the query tower trains. **4I** evaluates 4H on the full 22,855 test queries with BM25 hybrid + CE reranking.
+
 *Dense vectors are pre-computed; online latency is dict lookup.  
-Latency measured on Apple M-series (MPS). All compute: **$0**.
+Latency measured on Apple M-series (MPS).
 
 > **Framing note:** Absolute nDCG values are low because ground truth is purchase-based (1 bought item per query against 105K products). This is a **benchmark and ablation study** — the relative gains between configs are the finding.
 
@@ -43,7 +82,11 @@ Latency measured on Apple M-series (MPS). All compute: **$0**.
 
 4. **NER attribute boosting helps (+9%)** — GLiNER zero-shot NER maps query entities to H&M fields via `bool.should` boosts without hard-filtering.
 
-5. **FashionCLIP > FashionSigLIP on H&M** — Short brand-style product titles match CLIP's training distribution better than SigLIP's caption-optimized encoder.
+5. **LLM-judged labels >> purchase labels for CE training (+15.7%)** — Fine-tuning on purchase data barely helped (+1.2%). Replacing with 42.8K GPT-4o-mini graded relevance scores yields nDCG@10=0.0747. Data quality is the bottleneck, not model capacity.
+
+6. **Retriever-mined hard negatives + LLM labels = +94.2% dense retrieval** — Fine-tuning FashionCLIP with contrastive loss on 24K triplets (mined from its own top-20 failures, labeled by GPT-4o-mini) nearly doubles retrieval quality. The model learns exactly where it was wrong.
+
+7. **FashionCLIP > FashionSigLIP on H&M** — Short brand-style product titles match CLIP's training distribution better than SigLIP's caption-optimized encoder.
 
 ---
 
@@ -168,6 +211,10 @@ MODA/
 │   ├── models.py               ← FashionCLIP / FashionSigLIP loaders
 │   ├── metrics.py              ← nDCG, MRR, Recall, AP (with unit tests)
 │   ├── train_cross_encoder.py  ← Phase 3: CE fine-tuning on H&M data
+│   ├── train_multimodal.py     ← Phase 4F: joint text+image fine-tuning
+│   ├── train_three_tower.py    ← Phase 4H: three-tower architecture training
+│   ├── eval_multimodal_pipeline.py ← Phase 4D/4G: multimodal pipeline eval
+│   ├── eval_three_tower.py     ← Phase 4I: three-tower benchmark eval
 │   └── _faiss_search_worker.py ← FAISS subprocess (avoids BLAS conflicts)
 │
 ├── scripts/
@@ -221,8 +268,10 @@ Each query in `qrels.csv` has:
 | **0** | Data acquisition + OpenSearch + FAISS infrastructure | ✅ Complete |
 | **1** | Marqo 7-dataset embedding benchmark reproduction (<1% delta) | ✅ Complete |
 | **2** | Zero-shot full pipeline: BM25 + NER + Hybrid + CE rerank (253K queries) | ✅ Complete |
-| **3** | Fine-tuned cross-encoder + bi-encoder on H&M purchase data | 🔜 Next |
-| **4** | Multimodal search (image + text queries) | 🔜 Planned |
+| **3** | LLM-guided cross-encoder + bi-encoder fine-tuning (nDCG@10 = 0.0757 SOTA) | ✅ Complete |
+| **4A–4G** | Multimodal search: image embeddings, joint fine-tuning (4F), re-embed + eval (4G) | 🔄 In Progress |
+| **4H** | Three-Tower Fashion Retriever training (novel architecture) | 🔜 Pending |
+| **4I** | Three-Tower full benchmark evaluation | 🔜 Pending |
 | **5** | Paper + HuggingFace release | 🔜 Planned |
 
 ---
