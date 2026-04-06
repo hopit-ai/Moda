@@ -222,19 +222,54 @@ The cross-encoder is the single most impactful addition. Off the shelf, 50ms ext
 
 ---
 
-## What's coming in Phase 3 (sneak peek)
+## What's coming next
 
-Phase 2 used all off-the-shelf models. No training. The obvious next question: what happens if we train models specifically for this catalog?
+Phase 2 used all off-the-shelf models. No training. The rest of the roadmap is about pushing further.
 
-We tried three things:
+### Phase 3: Fine-tuned models (done, blog coming soon)
 
-First, we fine-tuned the cross-encoder on H&M purchase data. 1.5 million training pairs. The results were... not what we expected. It turns out that purchase labels are noisier than they look, and training on noisy labels doesn't help as much as you'd think.
+We trained custom models for both the retriever and the reranker. Three experiments:
 
-Second, we tried replacing the training data entirely. Instead of using purchase signals, we had GPT-4o-mini grade 42,800 query-product pairs on a 0-3 relevance scale. Same model architecture, different labels. The results changed the story.
+The cross-encoder was fine-tuned on H&M purchase data. 1.5 million training pairs. The results were not what we expected. Purchase labels are noisier than they look, and training on noisy labels didn't move the needle much.
 
-Third, we fine-tuned the embedding model itself, not just the reranker. We used the retriever's own mistakes as training signal: products it ranked highly but that the LLM said were irrelevant.
+So we replaced the labels. Instead of using purchase signals, we had GPT-4o-mini grade 42,800 query-product pairs on a 0-3 relevance scale. Same model architecture, different data. That changed the story.
 
-The full Phase 3 results are coming in the next post. The short version: data quality was the bottleneck all along, not model capacity. And fixing it cost about $3.
+We also fine-tuned the embedding model itself by mining its own mistakes: products it ranked highly but the LLM said were irrelevant. Those became hard negatives for contrastive training.
+
+The full Phase 3 write-up is coming in a separate post. The short version: data quality was the bottleneck, not model capacity. Fixing it cost about $3.
+
+### Phase 4: Multimodal (images)
+
+Fashion is visual. A customer searching "floral midi dress" has a picture in their head. Text-only retrieval can match the words but not the look.
+
+Phase 4 adds image retrieval as a third signal alongside BM25 and text embeddings. The plan:
+
+- Embed all 105K H&M product images using FashionCLIP's vision encoder
+- Add a text-to-image retrieval channel (query text matched against product images)
+- Build a three-way hybrid: BM25 + text-to-text + text-to-image, fused via RRF
+- Visual search: upload a photo, find similar products
+- Joint text+image fine-tuning so both encoders improve together
+
+We're also exploring a Three-Tower architecture: a dedicated query tower, a frozen text tower, and a frozen image tower, all projecting into one shared space. Product embeddings get precomputed offline. Only the query tower trains.
+
+The research question: does adding image retrieval improve results beyond what text-only hybrid already captures? For queries like "red plaid shirt" the text probably covers it. For queries like "that dress from the instagram ad" it probably doesn't.
+
+### Phase 5: Mixture-of-encoders (revisited properly)
+
+We tested a Superlinked-style mixture-of-encoders in Phase 2 but couldn't do it justice without trained per-field encoders. Phase 5 revisits this with encoders actually designed for each data type:
+
+- A trained color encoder (where "navy" is near "dark blue," not "dark brown")
+- A categorical product-type encoder (where "trousers" is near "jeans")
+- A numeric price encoder
+- FashionCLIP for free-text descriptions
+
+These get concatenated into one vector per product and indexed together. Query-time weighting lets you adjust which fields matter for each query without re-indexing.
+
+### Phase 6: Paper and benchmark standardization
+
+The end goal is an ArXiv preprint and a live leaderboard that anyone can submit results to. We want MODA to be the benchmark you run when evaluating a fashion search system, the way [BEIR](https://github.com/beir-cellar/beir) is for general retrieval or WANDS is for e-commerce.
+
+That means: Dockerized reproduction (one command to run everything), clear submission guidelines, and results that are independently verifiable.
 
 ---
 
