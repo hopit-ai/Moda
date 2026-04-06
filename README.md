@@ -263,16 +263,18 @@ Each query in `qrels.csv` has:
 
 ## Phase Roadmap
 
-| Phase | Description | Status |
-|---|---|---|
-| **0** | Data acquisition + OpenSearch + FAISS infrastructure | ✅ Complete |
-| **1** | Marqo 7-dataset embedding benchmark reproduction (<1% delta) | ✅ Complete |
-| **2** | Zero-shot full pipeline: BM25 + NER + Hybrid + CE rerank (253K queries) | ✅ Complete |
-| **3** | LLM-guided cross-encoder + bi-encoder fine-tuning (nDCG@10 = 0.0757 SOTA) | ✅ Complete |
-| **4A–4G** | Multimodal search: image embeddings, joint fine-tuning (4F), re-embed + eval (4G) | 🔄 In Progress |
-| **4H** | Three-Tower Fashion Retriever training (novel architecture) | 🔜 Pending |
-| **4I** | Three-Tower full benchmark evaluation | 🔜 Pending |
-| **5** | Paper + HuggingFace release | 🔜 Planned |
+| Phase | Focus | What | Status |
+|---|---|---|---|
+| **1** | Benchmark validation | Reproduce Marqo's 7-dataset embedding benchmark (<1% delta). Build eval harness. | ✅ Complete |
+| **2** | Zero-shot pipeline | BM25 + dense + hybrid + NER + CE rerank + ColBERT cascade. 253K real queries, 11 configs, component-by-component breakdown. | ✅ Complete |
+| **3** | Trained models | LLM-judged labels for CE (+15.7%). Fine-tuned bi-encoder on retriever-mined hard negatives (+94%). MoE with trained per-field encoders. | 🔄 In progress |
+| **4** | Multimodal + LookBench | Image embeddings, text-to-image retrieval, three-way hybrid, Three-Tower architecture. [LookBench](https://arxiv.org/abs/2601.14706) as Tier 3 visual retrieval benchmark. | 🔜 Next |
+| **5** | Search experience | Data augmentation (LLM query variants, catalog enrichment). Faceted navigation, partitioned indexes, auto-suggest, query relaxation. End-to-end demo. | 🔜 Planned |
+
+Three benchmark tiers maintained:
+- **Tier 1:** Marqo 7-dataset (embedding quality)
+- **Tier 2:** H&M 253K queries (full-pipeline search quality)
+- **Tier 3:** LookBench (visual retrieval, attribute-supervised, contamination-aware)
 
 ---
 
