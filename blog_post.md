@@ -133,9 +133,25 @@ ColBERT alone as a reranker was decent but couldn't match the cross-encoder. The
 
 ### A note on mixture-of-encoders
 
+> **Note:** This experiment is exploratory and is **not included in the Phase 1–2 benchmark results**. Superlinked's Mixture-of-Encoders (MoE) concept requires type-specific trained encoders (e.g., a learned color embedding, a categorical product-type encoder). Our zero-shot implementation below reuses the same FashionCLIP text encoder for all four fields, which is not a fair test of the architecture. We plan to revisit MoE properly in Phase 3 with trained field-specific encoders.
+
 We also experimented with a [Superlinked-style](https://superlinked.com/vectorhub/articles/airbnb-search-benchmarking) mixture-of-encoders approach: encoding title, color, product type, and group as separate vectors instead of one combined text string. We're not including those numbers in Phase 2 results because a proper implementation requires trained field-specific encoders (a learned color embedding, a categorical type encoder, etc.), not the same general-purpose text model applied four times. Using FashionCLIP for all four fields fragmented context without adding signal, and the results reflected that.
 
+We implemented a preliminary version with four FashionCLIP encoders (title, color, type, group) and concatenated the resulting vectors.
+
+| # | Config | nDCG@10 | vs Phase 1 |
+|---|--------|---------|-----------|
+| 11 | MoE retrieval only | 0.0264 | -12.0% |
+| 12 | Hybrid NER + MoE | 0.0330 | +10.0% |
+| 13 | Hybrid NER + MoE + CE rerank | 0.0541 | +80.3% |
+
+MoE retrieval on its own performed worse than single-encoder FashionCLIP (-12%). Encoding "Dark Blue" as a standalone text string through FashionCLIP doesn't produce meaningful color representations — FashionCLIP was trained on full product descriptions, not isolated attribute values. Applying the same text encoder four times just fragments context without adding specialisation. This result should not be taken as a verdict on the MoE concept itself, only on this zero-shot approximation.
+
 We plan to revisit this in Phase 3 with properly trained per-field encoders, where the idea has a fair shot.
+
+On 10K queries, the best zero-shot pipeline (excluding the MoE aside) was the ColBERT-to-CE cascade at nDCG@10 = 0.0553. That's +84% over the dense baseline.
+
+But 10K is a sample. Would it hold at full scale?
 
 ---
 

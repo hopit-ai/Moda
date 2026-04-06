@@ -63,7 +63,9 @@
 
 ---
 
-## Phase 2F — Mixture of Encoders: Superlinked-style Structured Retrieval (10K queries)
+## Phase 2F — Mixture of Encoders: Superlinked-style Structured Retrieval (10K queries) — EXPLORATORY, NOT CORE BENCHMARK
+
+> **Note:** This experiment is exploratory and is **excluded from the core Phase 1–2 benchmark results**. Superlinked's MoE concept requires type-specific trained encoders. Our implementation reuses FashionCLIP for all four fields, which is not a fair test of the architecture. These numbers are included for transparency only.
 
 **Architecture:** Multi-field FashionCLIP encoding with query-time NER-adaptive weighting  
 **Product vector:** 4 parallel FashionCLIP embeddings per product:
@@ -141,9 +143,9 @@ The CE reranker (`cross-encoder/ms-marco-MiniLM-L-6-v2`) achieves the majority o
 
 ColBERT's per-token MaxSim pre-filtering (100→50) followed by CE's full cross-attention scoring edges out CE-alone by +0.8%. ColBERT surfaces slightly better candidates for CE to evaluate.
 
-### 6. Mixture of Encoders: Modest Standalone Gain, Equalised by CE
+### 6. Mixture of Encoders: Exploratory (Not Core Benchmark)
 
-The Superlinked-style structured retrieval provides +3.1% over single-vector dense retrieval by leveraging NER-driven categorical matching. However, BM25's NER-boosted field matching already captures similar signal, so the hybrid gain is only +0.3%. With CE reranking, the difference vanishes (MoE+CE = 0.0541 vs Dense+CE = 0.0549).
+The Superlinked-style structured retrieval was tested with the same FashionCLIP encoder for all four fields — this is not a fair test of the MoE concept, which requires type-specific trained encoders. Results are included for transparency but excluded from the core Phase 1–2 benchmark. We plan to revisit with trained field-specific encoders in future work.
 
 ---
 

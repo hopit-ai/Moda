@@ -38,7 +38,7 @@
 
 ## 1. Executive Summary
 
-MODA (Modular Open-Source Discovery Architecture) is an open-source, end-to-end, multimodal fashion search engine. This report documents Phases 0–3: data acquisition, benchmark reproduction, a complete zero-shot pipeline ablation study (14 configurations including ColBERT and Mixture-of-Encoders), and domain fine-tuning — all on the H&M dataset with 253,685 real user queries and 105,542 products. This is the first publicly available full-pipeline fashion search benchmark at this scale.
+MODA (Modular Open-Source Discovery Architecture) is an open-source, end-to-end, multimodal fashion search engine. This report documents Phases 0–3: data acquisition, benchmark reproduction, a complete zero-shot pipeline ablation study (11 core configurations including ColBERT late interaction and two-stage reranking cascades), and domain fine-tuning — all on the H&M dataset with 253,685 real user queries and 105,542 products. This is the first publicly available full-pipeline fashion search benchmark at this scale.
 
 ### Key Achievements
 
@@ -95,7 +95,7 @@ Fashion search sits at the intersection of computer vision, natural language und
 | Synonym expansion | Custom fashion dictionary (80+ groups) | Handle colloquial/regional terms |
 | Lexical retrieval | OpenSearch BM25 | Exact term matching with field boosts |
 | Dense retrieval | FAISS + FashionCLIP embeddings | Semantic similarity in 512-dim space |
-| MoE retrieval | 4× FashionCLIP (text/color/type/group) | Structured multi-field encoding |
+| MoE retrieval *(exploratory, not in core benchmark)* | 4× FashionCLIP (text/color/type/group) | Structured multi-field encoding |
 | Hybrid fusion | Reciprocal Rank Fusion (RRF) | Combine BM25 + dense ranked lists |
 | Stage-1 reranking | ColBERT v2 (late interaction) | Per-token MaxSim, 100→50 |
 | Stage-2 reranking | cross-encoder/ms-marco-MiniLM-L-6-v2 | Full cross-attention pair scoring |
@@ -205,7 +205,9 @@ FashionCLIP (0.0300 nDCG@10) becomes the Phase 1 baseline. All improvements meas
 | 8 | Hybrid NER → CE@50 | 0.0549 | +83.0% |
 | **10** | **ColBERT@100 → CE@50 cascade** | **0.0553** | **+84.3%** |
 
-### 5.6 Mixture of Encoders (Config 11–13, 10K queries)
+### 5.6 Mixture of Encoders (Config 11–13, 10K queries) — Exploratory, Not Part of Core Benchmark
+
+> **Caveat:** This experiment is exploratory and is **excluded from the core Phase 1–2 benchmark**. Superlinked's MoE concept requires type-specific trained encoders (e.g., learned color embeddings, categorical product-type encoders). Our implementation reuses the same FashionCLIP text encoder for all four fields, which is not a fair test of the architecture. We include these numbers for transparency but they should not be taken as a verdict on MoE. We plan to revisit with trained field-specific encoders in future work.
 
 | # | Config | nDCG@10 | vs P1 |
 |---|---|---|---|
@@ -229,7 +231,7 @@ FashionCLIP (0.0300 nDCG@10) becomes the Phase 1 baseline. All improvements meas
 | 6 | Hybrid C + CE rerank | 0.0543 | [.0537–.0550] | 0.0569 | 0.0164 | +81.1% |
 | 8 | Full Pipeline (NER+CE) | 0.0543 | [.0537–.0550] | 0.0569 | 0.0164 | +81.1% |
 
-### Reranker Variants & MoE (10K queries)
+### Reranker Variants & MoE (10K queries) — MoE configs are exploratory, not core benchmark
 
 | # | Configuration | nDCG@10 | MRR | R@10 | vs P1 |
 |---|---|---|---|---|---|

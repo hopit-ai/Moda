@@ -1,9 +1,29 @@
 """
 MODA Phase 2 — Mixture of Encoders (Superlinked-style) Retrieval
 
-Encodes each product attribute with a specialized encoder and concatenates
-into a structured product vector.  At query time, NER-extracted entities
-determine per-field weights — no retraining, no re-indexing.
+STATUS: EXPLORATORY — NOT PART OF THE CORE PHASE 1–2 BENCHMARK
+========================================================================
+This experiment is included for transparency but is excluded from the
+official Phase 1–2 results. Superlinked's MoE architecture assumes each
+field is encoded by a *type-specific trained encoder* (e.g. a learned
+color embedding that maps "navy" near "dark blue" but away from "dark
+brown", a categorical product-type encoder, etc.). Our implementation
+reuses the same general-purpose FashionCLIP text encoder for all four
+fields. FashionCLIP was trained on full product descriptions, not isolated
+attribute values — encoding "Dark Blue" in isolation produces a poor
+colour representation. The -12% result vs single-vector dense is expected:
+we're diluting one well-functioning 512-dim text representation with
+three poorly-functioning 512-dim attribute representations.
+
+This is NOT a verdict on the MoE concept. It is a verdict on applying the
+same text encoder four times, which is not what Superlinked proposes.
+Proper MoE requires trained field-specific encoders and is deferred to
+future work.
+========================================================================
+
+Encodes each product attribute with a separate FashionCLIP encoder and
+concatenates into a structured product vector.  At query time, NER-extracted
+entities determine per-field weights — no retraining, no re-indexing.
 
 Architecture (per product):
   text_block  = FashionCLIP(prod_name + detail_desc)          512-dim
