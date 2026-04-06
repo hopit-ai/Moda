@@ -131,18 +131,11 @@ We also tested [ColBERT v2](https://github.com/stanford-futuredata/ColBERT) ([Sa
 
 ColBERT alone as a reranker was decent but couldn't match the cross-encoder. The interesting result: using ColBERT as a pre-filter (100 candidates down to 50) before the cross-encoder slightly beat the single-stage approach. ColBERT removes noise that the cross-encoder would otherwise waste capacity on.
 
-### Mixture-of-encoders (Superlinked-style)
+### A note on mixture-of-encoders
 
-[Superlinked's approach](https://superlinked.com/vectorhub/articles/airbnb-search-benchmarking) encodes each product attribute with a separate encoder. Instead of stuffing "navy slim fit jeans, Menswear, Dark Blue, Trousers" into one text string, you encode the title, color, product type, and group each in their own vector and concatenate them.
+We also experimented with a [Superlinked-style](https://superlinked.com/vectorhub/articles/airbnb-search-benchmarking) mixture-of-encoders approach: encoding title, color, product type, and group as separate vectors instead of one combined text string. We're not including those numbers in Phase 2 results because a proper implementation requires trained field-specific encoders (a learned color embedding, a categorical type encoder, etc.), not the same general-purpose text model applied four times. Using FashionCLIP for all four fields fragmented context without adding signal, and the results reflected that.
 
-| Config | nDCG@10 | vs baseline |
-|--------|---------|------------|
-| Mixture-of-encoders retrieval only | 0.0264 | -12.0% |
-| MoE + BM25 hybrid + cross-encoder | 0.0541 | +80.3% |
-
-The structured encoding idea didn't help when we used the same text model (FashionCLIP) for all four fields. Encoding "Dark Blue" as a standalone string through a model trained on full product descriptions doesn't produce better color representations. The idea probably needs encoders actually designed for each data type: a learned color embedding, a numeric price encoder, a categorical encoder. With the same text model four times, you're just fragmenting context without gaining anything.
-
-Once the cross-encoder sits on top, both approaches converge to roughly the same quality. The reranker compensates for whatever the retriever missed.
+We plan to revisit this in Phase 3 with properly trained per-field encoders, where the idea has a fair shot.
 
 ---
 
