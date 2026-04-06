@@ -8,7 +8,7 @@ If you search "navy summer dress" on most fashion sites, you'll get results that
 
 Fashion search is harder than general e-commerce search, and almost nobody talks about why. A furniture store sells a "walnut mid-century coffee table" and customers search for "walnut mid-century coffee table." The words match. Fashion doesn't work that way. H&M names a hoodie "Ben zip hoodie." Nobody searches for "Ben." They search for "zip hoodie" or "black hoodie mens" or just "hoodie." There's a gap between how products are named and how people look for them, and it's wider in fashion than anywhere else.
 
-We wanted to measure that gap. More specifically, we wanted to know: if you take the best available tools and assemble a complete search pipeline, component by component, how much does each piece actually contribute? And can you do this without training any custom models?
+We wanted to measure that gap. More specifically, we wanted to know: if you take the best available tools and assemble a complete search pipeline, component by component, how much does each piece actually contribute? And can you do this without training any custom models, for starters atleast?
 
 Nobody had published those numbers in a manner where people can run their own benchmarks. [Marqo](https://www.marqo.ai/) has open-source fashion embedding models ([FashionCLIP and FashionSigLIP](https://github.com/marqo-ai/marqo-FashionCLIP)) with benchmark results on academic datasets. [Algolia](https://www.algolia.com/) and [Bloomreach](https://www.bloomreach.com/) have proprietary fashion search products but no published retrieval metrics. [Superlinked](https://superlinked.com/) has a framework but no public benchmark numbers. No one had put together a full pipeline, run it on real user queries, and shown what each component adds.
 
@@ -16,9 +16,9 @@ So we built one. Open source, reproducible, on real data.
 
 ---
 
-## Why we picked this project and how we planned it
+## Why we picked this problem and how we planned it
 
-We started with a question: what would it take to build a credible, open benchmark for fashion search?
+We started with a question: What would it take to build a credible, open benchmark for fashion search?
 
 Credible meant three things. First, real user queries, not synthetic ones generated from product titles. Second, a dataset large enough that the results would be statistically robust. Third, a validated evaluation harness, meaning we wouldd need to reproduce someone else's published numbers before publishing our own.
 
