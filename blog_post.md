@@ -6,6 +6,8 @@
 
 If you search "navy summer dress" on most fashion sites, you'll get results that include navy winter coats, summer hats, and random dresses that happen to have "navy" somewhere in the description. The search bar looks simple. The problem behind it is not. When you talk about Search infrastructure, Fashion might not be the first thing to come to your mind but it happens to be the hardest of the search problems that exist. Fashion is visual and yes people search for even vibes!
 
+![Keyword search vs full pipeline: same query, very different results](assets/search_comparison.svg)
+
 Fashion search is harder than general e-commerce search, and almost nobody talks about why. A furniture store sells a "walnut mid-century coffee table" and customers search for "walnut mid-century coffee table." The words match. Fashion doesn't work that way. H&M names a hoodie "Ben zip hoodie." Nobody searches for "Ben." They search for "zip hoodie" or "black hoodie mens" or just "hoodie." There's a gap between how products are named and how people look for them, and it's wider in fashion than anywhere else.
 
 We wanted to measure that gap. More specifically, we wanted to know: if you take the best available tools and assemble a complete search pipeline, component by component, how much does each piece actually contribute? And can you do this without training any custom models, for starters atleast?

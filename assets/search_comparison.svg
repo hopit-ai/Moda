@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 580" font-family="Inter, -apple-system, system-ui, sans-serif">
+  <defs>
+    <filter id="sh" x="-3%" y="-3%" width="106%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <linearGradient id="searchBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <clipPath id="roundClip"><rect width="130" height="140" rx="6"/></clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="920" height="580" rx="12" fill="#fafafa"/>
+
+  <!-- Search bar -->
+  <rect x="230" y="18" width="460" height="42" rx="21" fill="url(#searchBar)" stroke="#cbd5e1" stroke-width="1.5" filter="url(#sh)"/>
+  <circle cx="256" cy="39" r="10" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="263" y1="46" x2="268" y2="51" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+  <text x="280" y="44" font-size="14" fill="#1e293b">"navy summer dress"</text>
+
+  <!-- LEFT: Keyword search -->
+  <rect x="20" y="80" width="430" height="488" rx="10" fill="white" stroke="#fca5a5" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="20" y="80" width="430" height="36" rx="10" fill="#fef2f2"/>
+  <rect x="20" y="106" width="430" height="6" fill="#fef2f2"/>
+  <text x="235" y="103" text-anchor="middle" font-size="13" font-weight="600" fill="#dc2626">Keyword search (BM25)</text>
+  <text x="235" y="130" text-anchor="middle" font-size="10" fill="#94a3b8">Matches words, not meaning</text>
+
+  <!-- Bad result 1: Navy winter coat -->
+  <rect x="40" y="148" width="390" height="88" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1" filter="url(#sh)"/>
+  <rect x="52" y="158" width="68" height="68" rx="6" fill="#e2e8f0"/>
+  <text x="86" y="190" text-anchor="middle" font-size="20">🧥</text>
+  <text x="86" y="208" text-anchor="middle" font-size="7" fill="#94a3b8">COAT</text>
+  <text x="132" y="176" font-size="11" font-weight="600" fill="#1e293b">Arctic <tspan fill="#dc2626" font-weight="700">Navy</tspan> Parka Coat</text>
+  <text x="132" y="192" font-size="9" fill="#64748b">Heavy winter outerwear, fur-lined hood</text>
+  <text x="132" y="208" font-size="9" fill="#64748b">Matched: <tspan fill="#dc2626">"navy"</tspan></text>
+  <rect x="132" y="214" width="86" height="16" rx="8" fill="#fef2f2"/>
+  <text x="175" y="225" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">Wrong category</text>
+
+  <!-- Bad result 2: Summer hat -->
+  <rect x="40" y="246" width="390" height="88" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1" filter="url(#sh)"/>
+  <rect x="52" y="256" width="68" height="68" rx="6" fill="#e2e8f0"/>
+  <text x="86" y="288" text-anchor="middle" font-size="20">👒</text>
+  <text x="86" y="306" text-anchor="middle" font-size="7" fill="#94a3b8">HAT</text>
+  <text x="132" y="274" font-size="11" font-weight="600" fill="#1e293b">Straw <tspan fill="#dc2626" font-weight="700">Summer</tspan> Sun Hat</text>
+  <text x="132" y="290" font-size="9" fill="#64748b">Wide-brim beach hat, natural straw</text>
+  <text x="132" y="306" font-size="9" fill="#64748b">Matched: <tspan fill="#dc2626">"summer"</tspan></text>
+  <rect x="132" y="312" width="86" height="16" rx="8" fill="#fef2f2"/>
+  <text x="175" y="323" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">Wrong category</text>
+
+  <!-- Bad result 3: Random dress with "navy" in description -->
+  <rect x="40" y="344" width="390" height="88" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1" filter="url(#sh)"/>
+  <rect x="52" y="354" width="68" height="68" rx="6" fill="#e2e8f0"/>
+  <text x="86" y="386" text-anchor="middle" font-size="20">👗</text>
+  <text x="86" y="404" text-anchor="middle" font-size="7" fill="#94a3b8">DRESS</text>
+  <text x="132" y="372" font-size="11" font-weight="600" fill="#1e293b">Elsa Floral Maxi <tspan fill="#dc2626" font-weight="700">Dress</tspan></text>
+  <text x="132" y="388" font-size="9" fill="#64748b">Pink/white floral, winter collection</text>
+  <text x="132" y="404" font-size="9" fill="#64748b">Matched: <tspan fill="#dc2626">"dress"</tspan> (wrong color, wrong season)</text>
+  <rect x="132" y="410" width="86" height="16" rx="8" fill="#fef2f2"/>
+  <text x="175" y="421" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">Wrong attributes</text>
+
+  <!-- Bad result 4 -->
+  <rect x="40" y="442" width="390" height="88" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1" filter="url(#sh)"/>
+  <rect x="52" y="452" width="68" height="68" rx="6" fill="#e2e8f0"/>
+  <text x="86" y="484" text-anchor="middle" font-size="20">👖</text>
+  <text x="86" y="502" text-anchor="middle" font-size="7" fill="#94a3b8">PANTS</text>
+  <text x="132" y="470" font-size="11" font-weight="600" fill="#1e293b"><tspan fill="#dc2626" font-weight="700">Navy</tspan> Slim Chinos</text>
+  <text x="132" y="486" font-size="9" fill="#64748b">Men's casual trousers, navy blue</text>
+  <text x="132" y="502" font-size="9" fill="#64748b">Matched: <tspan fill="#dc2626">"navy"</tspan> (right color, wrong everything else)</text>
+  <rect x="132" y="508" width="86" height="16" rx="8" fill="#fef2f2"/>
+  <text x="175" y="519" text-anchor="middle" font-size="8" font-weight="600" fill="#dc2626">Wrong category</text>
+
+  <!-- Problem annotation -->
+  <text x="235" y="556" text-anchor="middle" font-size="9" fill="#ef4444">Each result matches a keyword but misses the intent</text>
+
+  <!-- RIGHT: MODA pipeline -->
+  <rect x="470" y="80" width="430" height="488" rx="10" fill="white" stroke="#86efac" stroke-width="1.5" filter="url(#sh)"/>
+  <rect x="470" y="80" width="430" height="36" rx="10" fill="#f0fdf4"/>
+  <rect x="470" y="106" width="430" height="6" fill="#f0fdf4"/>
+  <text x="685" y="103" text-anchor="middle" font-size="13" font-weight="600" fill="#16a34a">MODA pipeline (hybrid + reranking)</text>
+  <text x="685" y="130" text-anchor="middle" font-size="10" fill="#94a3b8">Understands meaning, ranks by relevance</text>
+
+  <!-- Good result 1 -->
+  <rect x="490" y="148" width="390" height="88" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" filter="url(#sh)"/>
+  <rect x="502" y="158" width="68" height="68" rx="6" fill="#dbeafe"/>
+  <text x="536" y="190" text-anchor="middle" font-size="20">👗</text>
+  <text x="536" y="208" text-anchor="middle" font-size="7" fill="#1e40af">NAVY</text>
+  <text x="582" y="176" font-size="11" font-weight="600" fill="#1e293b">Linen A-Line Summer Dress</text>
+  <text x="582" y="192" font-size="9" fill="#64748b">Navy blue, lightweight linen, sleeveless</text>
+  <text x="582" y="208" font-size="9" fill="#059669">Relevance: navy + summer + dress</text>
+  <rect x="582" y="214" width="52" height="16" rx="8" fill="#dcfce7"/>
+  <text x="608" y="225" text-anchor="middle" font-size="8" font-weight="700" fill="#16a34a">Score: 3</text>
+
+  <!-- Good result 2 -->
+  <rect x="490" y="246" width="390" height="88" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" filter="url(#sh)"/>
+  <rect x="502" y="256" width="68" height="68" rx="6" fill="#dbeafe"/>
+  <text x="536" y="288" text-anchor="middle" font-size="20">👗</text>
+  <text x="536" y="306" text-anchor="middle" font-size="7" fill="#1e40af">NAVY</text>
+  <text x="582" y="274" font-size="11" font-weight="600" fill="#1e293b">Jersey Wrap Midi Dress</text>
+  <text x="582" y="290" font-size="9" fill="#64748b">Dark navy, stretch jersey, V-neck</text>
+  <text x="582" y="306" font-size="9" fill="#059669">Relevance: navy + dress + warm-weather fabric</text>
+  <rect x="582" y="312" width="52" height="16" rx="8" fill="#dcfce7"/>
+  <text x="608" y="323" text-anchor="middle" font-size="8" font-weight="700" fill="#16a34a">Score: 3</text>
+
+  <!-- Good result 3 -->
+  <rect x="490" y="344" width="390" height="88" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" filter="url(#sh)"/>
+  <rect x="502" y="354" width="68" height="68" rx="6" fill="#dbeafe"/>
+  <text x="536" y="386" text-anchor="middle" font-size="20">👗</text>
+  <text x="536" y="404" text-anchor="middle" font-size="7" fill="#1e40af">NAVY</text>
+  <text x="582" y="372" font-size="11" font-weight="600" fill="#1e293b">Cotton Shirt Dress</text>
+  <text x="582" y="388" font-size="9" fill="#64748b">Navy, button-front, cotton poplin</text>
+  <text x="582" y="404" font-size="9" fill="#059669">Relevance: navy + dress + summer weight</text>
+  <rect x="582" y="410" width="52" height="16" rx="8" fill="#dcfce7"/>
+  <text x="608" y="421" text-anchor="middle" font-size="8" font-weight="700" fill="#16a34a">Score: 2</text>
+
+  <!-- Good result 4 -->
+  <rect x="490" y="442" width="390" height="88" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1" filter="url(#sh)"/>
+  <rect x="502" y="452" width="68" height="68" rx="6" fill="#dbeafe"/>
+  <text x="536" y="484" text-anchor="middle" font-size="20">👗</text>
+  <text x="536" y="502" text-anchor="middle" font-size="7" fill="#1e40af">DARK BLUE</text>
+  <text x="582" y="470" font-size="11" font-weight="600" fill="#1e293b">Tiered Sundress</text>
+  <text x="582" y="486" font-size="9" fill="#64748b">Dark blue, ruffled tiers, spaghetti strap</text>
+  <text x="582" y="502" font-size="9" fill="#059669">Relevance: dark blue ≈ navy, sundress = summer</text>
+  <rect x="582" y="508" width="52" height="16" rx="8" fill="#dcfce7"/>
+  <text x="608" y="519" text-anchor="middle" font-size="8" font-weight="700" fill="#16a34a">Score: 2</text>
+
+  <!-- Good annotation -->
+  <text x="685" y="556" text-anchor="middle" font-size="9" fill="#16a34a">Dense retrieval + reranking understands "navy summer dress" as a single concept</text>
+</svg>
