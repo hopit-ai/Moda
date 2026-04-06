@@ -6,7 +6,7 @@
 
 Everyone benchmarks fashion embeddings. Marqo publishes numbers on FashionCLIP. OpenAI has CLIP. Google has SigLIP. But nobody has published what happens when you wire up a full search pipeline and measure end-to-end results on real user queries. Not embedding-to-embedding cosine similarity on academic datasets. The whole thing: lexical retrieval, dense retrieval, hybrid fusion, reranking, query understanding.
 
-We ran that experiment. 253,685 real search queries from H&M customers. 105,542 products. Eight pipeline configurations, each adding one component at a time. The best configuration improved nDCG@10 by 81% over the best published fashion embedding baseline, using off-the-shelf zero-shot components. No custom training, no proprietary APIs. Total compute: a MacBook with Apple Silicon.
+We ran that experiment. 253,685 real search queries from H&M customers. 105,542 products. Fourteen pipeline configurations including ColBERT late interaction, Superlinked-style mixture-of-encoders, and two-stage reranking cascades. The best zero-shot configuration improved nDCG@10 by 84% over the best published fashion embedding baseline, using off-the-shelf components. No custom training, no proprietary APIs. Total compute: a MacBook with Apple Silicon.
 
 One widely recommended technique actively made things worse.
 
@@ -91,7 +91,35 @@ NER attribute boosting: GLiNER (zero-shot NER, NAACL 2024) extracts color, type,
 
 Synonym expansion: we built an 80+ group fashion synonym dictionary (jacket/coat/blazer, pants/trousers/slacks, etc.). It hurt performance by 35%. Expanding "hoodie" to 12+ synonyms (sweatshirt, jumper, pullover...) collapses IDF weights and every product starts matching on something. Ranking precision disappears. This failure mode is documented in LESER (2025) and LEAPS (2026). We removed synonyms from the final pipeline.
 
-On 10K queries, the full pipeline (hybrid + cross-encoder + NER) hit nDCG@10 = 0.0549. That's +83% over the dense baseline.
+### ColBERT late interaction
+
+We also tested ColBERT v2, which keeps per-token embeddings instead of compressing each document into a single vector. The idea is that token-level matching ("navy" in the query aligns with "navy" in the product) should outperform a single-vector cosine similarity that has to cram everything into one number.
+
+| # | Config | nDCG@10 | vs Phase 1 |
+|---|--------|---------|-----------|
+| 9 | Hybrid NER, ColBERT rerank (100 to 50) | 0.0480 | +60.0% |
+| 8 | Hybrid NER, CE rerank (100 to 50) | 0.0549 | +83.0% |
+| 10 | ColBERT first pass (100 to 50), then CE on top-50 | 0.0553 | +84.3% |
+
+ColBERT alone as a reranker underperforms the cross-encoder by a fair margin (0.0480 vs 0.0549). Late interaction is faster but less expressive than full cross-attention. The interesting result is the two-stage cascade: ColBERT narrows 100 candidates to 50, then the cross-encoder re-scores those 50. This slightly beat the single-stage CE (0.0553 vs 0.0549). The improvement is small, but it suggests ColBERT acts as a useful pre-filter that removes noise before the cross-encoder sees it.
+
+### Mixture-of-encoders (Superlinked-style)
+
+Superlinked's approach encodes each product attribute with a specialized encoder and concatenates the vectors. Instead of stuffing "navy slim fit jeans, Menswear, Dark Blue, Trousers" into one text string and embedding it, you encode each field separately: one vector for the title, one for color, one for product type, one for group. At query time you weight which fields matter more.
+
+We implemented this with four FashionCLIP encoders (title, color, type, group) and concatenated the resulting vectors.
+
+| # | Config | nDCG@10 | vs Phase 1 |
+|---|--------|---------|-----------|
+| 11 | MoE retrieval only | 0.0264 | -12.0% |
+| 12 | Hybrid NER + MoE | 0.0330 | +10.0% |
+| 13 | Hybrid NER + MoE + CE rerank | 0.0541 | +80.3% |
+
+MoE retrieval on its own actually performed worse than single-encoder FashionCLIP (-12%). Encoding "Dark Blue" as a standalone text string through FashionCLIP doesn't produce better color representations than including it in the product text, because FashionCLIP was trained on full product descriptions, not isolated attribute values. The structured encoding idea makes more sense with encoders that are designed for each data type (a learned color embedding, a numeric price encoder). With the same text encoder applied four times, you're just fragmenting context.
+
+Once the cross-encoder is on top, MoE results (0.0541) converge to roughly the same place as the standard pipeline (0.0543). The CE compensates for whatever the retriever missed.
+
+On 10K queries, the best zero-shot pipeline was the ColBERT-to-CE cascade at nDCG@10 = 0.0553. That's +84% over the dense baseline.
 
 But 10K is a sample. Would it hold at full scale?
 
@@ -168,7 +196,7 @@ Synonym expansion, which is recommended in basically every search engineering gu
 
 Pick your embedding model based on your catalog, not benchmark rankings. FashionCLIP (512-dim) beat the supposedly better FashionSigLIP (768-dim) on H&M because H&M product text is short and structured. Benchmark averages hide this kind of thing.
 
-If you add one component to dense retrieval, make it a cross-encoder reranker. Off the shelf, 50ms extra latency, +51% improvement. Nothing else came close.
+If you add one component to dense retrieval, make it a cross-encoder reranker. Off the shelf, 50ms extra latency, +51% improvement. Nothing else came close. ColBERT as a pre-filter adds a marginal +0.7% on top, which may or may not be worth the complexity. Mixture-of-encoders with the same underlying text model didn't help; the idea needs type-specific encoders (learned color embeddings, numeric encoders) to realize its potential.
 
 ---
 
@@ -182,7 +210,9 @@ nDCG@10 of 0.054 looks low if you're used to benchmarks like WANDS (0.76). The d
 
 This is Phase 2 of MODA (Modular Open-Source Discovery Architecture). Code, eval harness, and results are all open source.
 
-Phase 3 trains custom models: a fashion cross-encoder fine-tuned on H&M pairs, and a GCL-trained bi-encoder using Marqo's open source methodology. Phase 4 adds image search. Phase 5 publishes the full benchmark as a preprint with a live leaderboard.
+Phase 3 is done. We fine-tuned both the retriever and the cross-encoder, and the results changed the story significantly. The short version: $3 worth of LLM-judged relevance labels did more for search quality than any amount of pipeline engineering. We'll write that up separately.
+
+Phase 4 adds image search. Phase 5 publishes the full benchmark as a preprint with a live leaderboard.
 
 We want this to become a benchmark that anyone building fashion search can run against. If you try it on your catalog, we'd like to hear what you find.
 
