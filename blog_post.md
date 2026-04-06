@@ -127,11 +127,11 @@ With FashionCLIP as the dense backbone, we added components one at a time to see
 
 We also tested [ColBERT v2](https://github.com/stanford-futuredata/ColBERT) ([Santhanam et al., 2022](https://arxiv.org/abs/2112.01488)), which keeps per-word embeddings instead of compressing each product into a single vector. The idea: word-level matching ("navy" in the query aligns with "navy" in the product) should be more precise than a single cosine similarity score.
 
-| Config | nDCG@10 | vs baseline |
-|--------|---------|------------|
-| ColBERT as reranker | 0.0480 | +60.0% |
-| Cross-encoder as reranker | 0.0549 | +83.0% |
-| ColBERT first, then cross-encoder | 0.0553 | +84.3% |
+| Config | nDCG@10 | MRR | Recall@10 | Recall@50 |
+|--------|---------|-----|-----------|-----------|
+| ColBERT as reranker | 0.0480 | 0.0511 | 0.0147 | 0.0267 |
+| Cross-encoder as reranker | 0.0549 | 0.0562 | 0.0163 | 0.0284 |
+| ColBERT first, then cross-encoder | 0.0553 | 0.0569 | 0.0166 | 0.0289 |
 
 ColBERT alone as a reranker was decent but couldn't match the cross-encoder. The interesting result: using ColBERT as a pre-filter (100 candidates down to 50) before the cross-encoder slightly beat the single-stage approach. ColBERT removes noise that the cross-encoder would otherwise waste capacity on.
 
