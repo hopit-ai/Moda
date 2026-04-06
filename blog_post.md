@@ -244,7 +244,9 @@ The cross-encoder is the single most impactful addition. Off the shelf, 50ms ext
 
 Phase 3 fine-tunes both the retriever and the reranker. We already ran these experiments and the results surprised us. The short version: swapping purchase labels for $3 worth of LLM-judged relevance labels did more than any amount of pipeline engineering. Full write-up coming soon.
 
-After that, Phase 4 adds multimodal image search (product images as a third retrieval signal), and we revisit mixture-of-encoders with properly trained per-field encoders. The roadmap is open and things may shift.
+Phase 4 adds multimodal image search, with product images as a third retrieval signal alongside text and keywords. Fashion is visual. Text can describe "floral midi dress" but a picture communicates what that actually looks like.
+
+Further out, we're working on data augmentation (LLM-generated query variants, synthetic hard negatives, catalog enrichment with generated descriptions), mixture-of-encoders revisited with properly trained per-field encoders, and the search experience layer: faceted navigation, partitioned indexes by category/gender/season, auto-suggest, and query relaxation. Retrieval quality is the foundation, but how results are presented and filtered is what makes it usable for actual shoppers. The roadmap is open and things may shift.
 
 ---
 
