@@ -4,13 +4,13 @@
 
 ---
 
-If you search "navy summer dress" on most fashion sites, you'll get results that include navy winter coats, summer hats, and random dresses that happen to have "navy" somewhere in the description. The search bar looks simple. The problem behind it is not.
+If you search "navy summer dress" on most fashion sites, you'll get results that include navy winter coats, summer hats, and random dresses that happen to have "navy" somewhere in the description. The search bar looks simple. The problem behind it is not. When you talk about Search infrastructure, Fashion might not be the first thing to come to your mind but it happens to be the hardest of the search problems that exist. Fashion is visual and yes people search for even vibes!
 
 Fashion search is harder than general e-commerce search, and almost nobody talks about why. A furniture store sells a "walnut mid-century coffee table" and customers search for "walnut mid-century coffee table." The words match. Fashion doesn't work that way. H&M names a hoodie "Ben zip hoodie." Nobody searches for "Ben." They search for "zip hoodie" or "black hoodie mens" or just "hoodie." There's a gap between how products are named and how people look for them, and it's wider in fashion than anywhere else.
 
 We wanted to measure that gap. More specifically, we wanted to know: if you take the best available tools and assemble a complete search pipeline, component by component, how much does each piece actually contribute? And can you do this without training any custom models?
 
-Nobody had published those numbers. Marqo has open-source fashion embedding models (FashionCLIP, FashionSigLIP) with benchmark results on academic datasets. Algolia and Bloomreach have proprietary fashion search products but no published retrieval metrics. Superlinked has a framework but no public benchmark numbers. No one had put together a full pipeline, run it on real user queries, and shown what each component adds.
+Nobody had published those numbers in a manner where people can run their own benchmarks. Marqo has open-source fashion embedding models (FashionCLIP, FashionSigLIP) with benchmark results on academic datasets. Algolia and Bloomreach have proprietary fashion search products but no published retrieval metrics. Superlinked has a framework but no public benchmark numbers. No one had put together a full pipeline, run it on real user queries, and shown what each component adds.
 
 So we built one. Open source, reproducible, on real data.
 
@@ -20,15 +20,15 @@ So we built one. Open source, reproducible, on real data.
 
 We started with a question: what would it take to build a credible, open benchmark for fashion search?
 
-Credible meant three things. First, real user queries, not synthetic ones generated from product titles. Second, a dataset large enough that the results would be statistically robust. Third, a validated evaluation harness, meaning we'd need to reproduce someone else's published numbers before publishing our own.
+Credible meant three things. First, real user queries, not synthetic ones generated from product titles. Second, a dataset large enough that the results would be statistically robust. Third, a validated evaluation harness, meaning we wouldd need to reproduce someone else's published numbers before publishing our own.
 
 We found our dataset in Microsoft's H&M Search Data on HuggingFace: 253,685 real search queries from H&M customers, linked to 105,542 products. When a customer searched and bought something, that purchase becomes the relevance signal. It's not perfect (more on that later), but it's real.
 
-For validation, we decided to reproduce Marqo's published fashion embedding benchmark first. If our numbers matched theirs, we'd know our measurement infrastructure was sound before building on top of it.
+For validation, we decided to reproduce Marqo's published fashion embedding benchmark first. If our numbers matched theirs, we would know our measurement infrastructure was sound before building on top of it.
 
 The plan had three phases. Phase 1: reproduce known results, build the eval harness. Phase 2: assemble a complete pipeline from off-the-shelf components and measure each one's contribution. Phase 3: train custom models and see how much further we could push.
 
-This post covers Phases 1 and 2. Phase 3 is done and the results surprised us, but that's a separate post.
+This post covers Phases 1 and 2. Phase 3 is nearly done and the results surprised us, but that's a separate post.
 
 ---
 
