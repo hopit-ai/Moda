@@ -16,15 +16,28 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 
 ---
 
-## Key Results (253,685 real queries × 105,542 articles)
+## Key Results — Phase 2 (253,685 real queries × 105,542 articles)
 
-| Config | nDCG@10 | 95% CI | MRR | Latency | vs Dense Baseline |
-|---|---|---|---|---|---|
-| BM25 only | 0.0186 | [0.0183–0.0190] | 0.0227 | 11.5ms | −37.9% |
-| Dense only (FashionCLIP) | 0.0265 | [0.0261–0.0269] | 0.0369 | <1ms* | baseline |
-| Hybrid (BM25×0.4 + Dense×0.6) | 0.0328 | [0.0324–0.0333] | 0.0429 | 11.6ms | +23.8% |
-| Hybrid + NER boost | 0.0333 | [0.0329–0.0338] | 0.0438 | ~18ms | +25.7% |
-| **Full Pipeline (Hybrid + CE rerank)** | **0.0543** | **[0.0537–0.0550]** | **0.0569** | **62.5ms** | **+104.9%** |
+### Retrieval quality
+
+| Config | nDCG@10 | 95% CI | MRR | AP | Recall@10 | Recall@50 | P@10 | vs Dense |
+|---|---|---|---|---|---|---|---|---|
+| BM25 only | 0.0186 | [0.0183–0.0190] | 0.0227 | 0.0040 | 0.0059 | 0.0251 | 0.0058 | −29.8% |
+| BM25 + NER boost | 0.0204 | [0.0200–0.0207] | 0.0260 | 0.0048 | 0.0069 | 0.0298 | 0.0068 | −23.0% |
+| Dense only (FashionCLIP) | 0.0265 | [0.0261–0.0269] | 0.0369 | 0.0071 | 0.0106 | 0.0462 | 0.0105 | baseline |
+| Hybrid (BM25×0.4 + Dense×0.6) | 0.0328 | [0.0324–0.0333] | 0.0429 | 0.0075 | 0.0121 | 0.0457 | 0.0121 | +23.8% |
+| Hybrid + NER boost | 0.0333 | [0.0329–0.0338] | 0.0438 | 0.0078 | 0.0124 | 0.0470 | 0.0124 | +25.7% |
+| **Full Pipeline (Hybrid + CE)** | **0.0543** | **[0.0537–0.0550]** | **0.0569** | **0.0091** | **0.0164** | **0.0559** | **0.0163** | **+104.9%** |
+
+### Latency (Apple M-series, per query)
+
+| Stage | Mean | p50 | p95 |
+|---|---|---|---|
+| BM25 (OpenSearch) | 11.5ms | 9.7ms | 18.2ms |
+| Dense lookup (FAISS, pre-computed) | <1ms | <1ms | <1ms |
+| RRF fusion | 0.1ms | 0.1ms | 0.2ms |
+| CE rerank (100 candidates) | 50.9ms | 47.7ms | 73.3ms |
+| **Full pipeline end-to-end** | **62.5ms** | **~58ms** | **~92ms** |
 
 ### Phase 3 — LLM-Guided Training (22,855 held-out test queries)
 
@@ -69,6 +82,8 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 Latency measured on Apple M-series (MPS).
 
 > **Framing note:** Absolute nDCG values are low because ground truth is purchase-based (1 bought item per query against 105K products). This is a **benchmark and component breakdown** — the relative gains between configs are the finding.
+>
+> **Metrics computed per config:** nDCG@10, MRR, AP, Recall@{5,10,20,50}, Precision@{5,10,20,50}, 95% bootstrap CI for nDCG@10, and per-stage latency (mean/p50/p95). Full metric dumps: `results/full/full_ablation.json`, `results/full/latency_results.json`.
 
 ---
 
@@ -80,13 +95,28 @@ Latency measured on Apple M-series (MPS).
 
 3. **Synonym expansion hurts (−32 to −58%)** — Confirms LESER (2025) / LEAPS-Taobao (2026) "query pollution" failure mode. Aggressive expansion causes IDF collapse.
 
-4. **NER attribute boosting helps (+9%)** — GLiNER zero-shot NER maps query entities to H&M fields via `bool.should` boosts without hard-filtering.
+4. **NER attribute boosting helps (+9%)** — [GLiNER](https://github.com/urchade/GLiNER) (`urchade/gliner_medium-v2.1`, NAACL 2024) zero-shot NER maps query entities to H&M fields via `bool.should` boosts without hard-filtering.
 
 5. **LLM-judged labels >> purchase labels for CE training (+15.7%)** — Fine-tuning on purchase data barely helped (+1.2%). Replacing with 42.8K GPT-4o-mini graded relevance scores yields nDCG@10=0.0747. Data quality is the bottleneck, not model capacity.
 
 6. **Retriever-mined hard negatives + LLM labels = +94.2% dense retrieval** — Fine-tuning FashionCLIP with contrastive loss on 24K triplets (mined from its own top-20 failures, labeled by GPT-4o-mini) nearly doubles retrieval quality. The model learns exactly where it was wrong.
 
 7. **FashionCLIP > FashionSigLIP on H&M** — Short brand-style product titles match CLIP's training distribution better than SigLIP's caption-optimized encoder.
+
+---
+
+## Models & Components
+
+| Component | Model / Library | Source | Role |
+|---|---|---|---|
+| Dense retrieval | [Marqo-FashionCLIP](https://huggingface.co/Marqo/marqo-fashionCLIP) (ViT-B/32, 512-dim) | `open_clip` | Bi-encoder embedding + FAISS index |
+| Lexical retrieval | [OpenSearch 2.11](https://opensearch.org/) BM25 | Docker | Keyword matching with field boosts |
+| NER | [GLiNER](https://github.com/urchade/GLiNER) `urchade/gliner_medium-v2.1` (NAACL 2024) | `gliner>=0.1.0` | Zero-shot fashion attribute extraction |
+| Cross-encoder reranker | [ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2) (22M params) | `sentence-transformers` | L2 pair-wise reranking |
+| Hybrid fusion | Reciprocal Rank Fusion (RRF) | Custom | Combines BM25 + dense ranked lists |
+| LLM labeling (Phase 3+) | `openai/gpt-4o-mini` via [PaleblueDot AI](https://palebluedot.ai) | REST API | Graded relevance scores (0–3) |
+
+> **Note on GLiNER:** We use the **original GLiNER** ([urchade/GLiNER](https://github.com/urchade/GLiNER), NAACL 2024), not [GLiNER2](https://github.com/fastino-ai/GLiNER2) (EMNLP 2025). GLiNER2 is a newer multi-task successor; we have not benchmarked it in MODA yet.
 
 ---
 

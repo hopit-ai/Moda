@@ -350,6 +350,47 @@ class FashionNER:
         return results
 
 
+class FashionNER2:
+    """
+    Zero-shot fashion attribute extraction using GLiNER2 (EMNLP 2025).
+
+    GLiNER2 extends the original GLiNER architecture with multi-task support
+    (NER + classification + structured extraction + relation extraction)
+    in a single 205M-parameter model. CPU-friendly, no fine-tuning needed.
+
+    Model: fastino/gliner2-base-v1 — default base model.
+    API is drop-in compatible with FashionNER via the same extract() interface.
+    """
+
+    def __init__(self, model_name: str = "fastino/gliner2-base-v1",
+                 threshold: float = 0.4):
+        from gliner2 import GLiNER2
+        log.info("Loading GLiNER2 model: %s", model_name)
+        self.model = GLiNER2.from_pretrained(model_name)
+        self.threshold = threshold
+        self.labels = NER_LABELS
+        log.info("GLiNER2 ready")
+
+    def extract(self, query: str) -> dict[str, list[str]]:
+        """
+        Extract fashion entities from a query.
+
+        Returns same format as FashionNER: {"color": ["red"], "garment type": ["dress"], ...}
+        """
+        result_raw = self.model.extract_entities(
+            query, self.labels, threshold=self.threshold
+        )
+        entities = result_raw.get("entities", {})
+        return {
+            label: [t.lower().strip() for t in texts]
+            for label, texts in entities.items() if texts
+        }
+
+    def extract_batch(self, queries: list[str]) -> list[dict[str, list[str]]]:
+        """Batch extraction — more efficient than one-by-one."""
+        return [self.extract(q) for q in queries]
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # 3. Boosted OpenSearch Query Builder
 #    Combines synonym expansion + NER attribute boosts into a single query
