@@ -1,6 +1,6 @@
 # MODA
 
-**The first open-source, end-to-end, ablation-complete benchmark for fashion search.**  
+**The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
 253,685 real user queries · 105,542 H&M products · 18 pipeline configs · nDCG@10 = 0.0757 (+152% over baseline)
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
@@ -10,7 +10,7 @@
 ## What is this?
 
 Nobody has published open-source, full-pipeline fashion search benchmarks on real user queries.  
-Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put it all together and ablated it.
+Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put it all together and measured what each piece contributes.
 
 **MODA fills that gap.** We built a complete retrieval pipeline (BM25 + dense + hybrid + NER + cross-encoder reranking), ran it against 253,685 real H&M purchase queries, isolated the contribution of every component, and published everything — code, results, methodology.
 
@@ -68,7 +68,7 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 *Dense vectors are pre-computed; online latency is dict lookup.  
 Latency measured on Apple M-series (MPS).
 
-> **Framing note:** Absolute nDCG values are low because ground truth is purchase-based (1 bought item per query against 105K products). This is a **benchmark and ablation study** — the relative gains between configs are the finding.
+> **Framing note:** Absolute nDCG values are low because ground truth is purchase-based (1 bought item per query against 105K products). This is a **benchmark and component breakdown** — the relative gains between configs are the finding.
 
 ---
 
@@ -170,7 +170,7 @@ If interrupted, re-run the same command — each stage resumes from its checkpoi
 
 **Output:** `results/full/full_ablation.json`
 
-### Step 5 — Reproduce 10K sample ablation (faster, for iteration)
+### Step 5 — Reproduce 10K sample breakdown (faster, for iteration)
 
 ```bash
 # BM25 + dense + hybrid configs (no CE, ~15 min)
@@ -179,7 +179,7 @@ python benchmark/eval_hybrid.py
 # Full pipeline including CE rerank (~2 hrs on 10K)
 python benchmark/eval_full_pipeline.py
 
-# Query understanding ablation (synonyms vs NER)
+# Query understanding comparison (synonyms vs NER)
 python benchmark/eval_query_understanding.py
 ```
 
@@ -201,9 +201,9 @@ python benchmark/eval_marqo_7dataset.py --models fashion-clip fashion-siglip
 MODA/
 ├── benchmark/
 │   ├── eval_full_253k.py       ← Main 253K evaluation pipeline (staged, checkpointed)
-│   ├── eval_hybrid.py          ← BM25 + hybrid ablation (10K sample)
+│   ├── eval_hybrid.py          ← BM25 + hybrid breakdown (10K sample)
 │   ├── eval_full_pipeline.py   ← Full pipeline with CE rerank (10K sample)
-│   ├── eval_query_understanding.py  ← Synonym vs NER ablation
+│   ├── eval_query_understanding.py  ← Synonym vs NER comparison
 │   ├── eval_marqo_7dataset.py  ← Phase 1 Marqo benchmark reproduction
 │   ├── embed_hnm.py            ← Article embedding + FAISS index builder
 │   ├── index_hnm_opensearch.py ← OpenSearch indexing
