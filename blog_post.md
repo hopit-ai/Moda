@@ -165,15 +165,16 @@ We ran every configuration on the complete dataset. About 16 hours on Apple Sili
 
 ### Full breakdown (253,685 queries, 105,542 products)
 
-| # | Configuration | nDCG@10 | 95% CI | MRR | Latency | vs best baseline |
-|---|---------------|---------|--------|-----|---------|-----------------|
-| 1 | BM25 only | 0.0187 | [.0183-.0190] | 0.0227 | 11.5ms | -37.8% |
-| 2 | BM25 + NER boost | 0.0204 | [.0200-.0207] | 0.0260 | ~18ms | -32.1% |
-| 3 | Dense only (FashionCLIP) | 0.0265 | [.0261-.0269] | 0.0369 | <1ms | -11.8% |
-| 4 | Hybrid (BM25x0.4 + dense x0.6) | 0.0328 | [.0324-.0333] | 0.0429 | 11.6ms | +9.4% |
-| 5 | Hybrid + NER | 0.0333 | [.0329-.0338] | 0.0438 | ~18ms | +11.2% |
-| 6 | Hybrid + CE rerank | 0.0543 | [.0537-.0550] | 0.0569 | 62.5ms | +81.1% |
-| 7 | Full pipeline (+ NER) | 0.0543 | [.0537-.0550] | 0.0569 | ~69ms | +81.1% |
+| Config | nDCG@10 | 95% CI | MRR | AP | Recall@10 | Recall@50 | P@10 | vs Dense |
+|--------|---------|--------|-----|----|-----------|-----------|----|----------|
+| BM25 only | 0.0186 | [.0183-.0190] | 0.0227 | 0.0040 | 0.0059 | 0.0251 | 0.0058 | -29.8% |
+| BM25 + NER boost | 0.0204 | [.0200-.0207] | 0.0260 | 0.0048 | 0.0069 | 0.0298 | 0.0068 | -23.0% |
+| Dense only (FashionCLIP) | 0.0265 | [.0261-.0269] | 0.0369 | 0.0071 | 0.0106 | 0.0462 | 0.0105 | baseline |
+| Hybrid (BM25x0.4 + Dense x0.6) | 0.0328 | [.0324-.0333] | 0.0429 | 0.0075 | 0.0121 | 0.0457 | 0.0121 | +23.8% |
+| Hybrid + NER boost | 0.0333 | [.0329-.0338] | 0.0438 | 0.0078 | 0.0124 | 0.0470 | 0.0124 | +25.7% |
+| **Full pipeline (Hybrid + CE)** | **0.0543** | **[.0537-.0550]** | **0.0569** | **0.0091** | **0.0164** | **0.0559** | **0.0163** | **+104.9%** |
+
+AP is Average Precision. P@10 is Precision at 10. Full metric dumps including Recall@{5,20,50} and Precision@{5,20,50} are in `results/full/full_ablation.json`.
 
 The 10K sample results held. Here's the comparison:
 
