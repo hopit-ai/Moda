@@ -287,7 +287,7 @@ If you use this benchmark or code, please cite:
   title  = {MODA: The First Open Benchmark for End-to-End Fashion Search},
   author = {Hopit AI},
   year   = {2026},
-  url    = {https://github.com/your-username/moda}
+  url    = {https://github.com/hopit-ai/moda}
 }
 ```
 
