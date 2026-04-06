@@ -131,8 +131,8 @@
     "pool_size": 100,
     "rerank_top_k": 50,
     "offshelf_ce": "cross-encoder/ms-marco-MiniLM-L-6-v2",
-    "llm_trained_ce": "/Users/rohit.anand/Desktop/Hobby/MODA/models/moda-fashion-ce-llm-best",
-    "finetuned_bienc": "/Users/rohit.anand/Desktop/Hobby/MODA/models/moda-fashionclip-finetuned/best",
+    "llm_trained_ce": "models/models/moda-fashion-ce-llm-best",
+    "finetuned_bienc": "models/models/moda-fashionclip-finetuned/best",
     "elapsed_min": 165.9
   }
 }

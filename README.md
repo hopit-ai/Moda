@@ -285,7 +285,7 @@ If you use this benchmark or code, please cite:
 ```bibtex
 @misc{moda2026,
   title  = {MODA: The First Open Benchmark for End-to-End Fashion Search},
-  author = {Rohit Anand},
+  author = {Hopit AI},
   year   = {2026},
   url    = {https://github.com/your-username/moda}
 }
