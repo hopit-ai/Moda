@@ -88,10 +88,10 @@ We started with a 10,000-query sample to check directionality before committing 
 
 [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) is the standard keyword-matching algorithm that most search engines use. You type "zip hoodie," it finds products with those words. [Dense retrieval](https://arxiv.org/abs/2007.15207) uses AI embeddings to understand meaning: it knows "zip hoodie" and "hooded sweatshirt with zipper" are the same thing, even if the words don't match.
 
-| Method | nDCG@10 | vs dense baseline |
-|--------|---------|-------------------|
-| BM25 only | 0.0187 | -37.7% |
-| FashionCLIP dense | 0.0300 | baseline |
+| Method | nDCG@10 | MRR | Recall@10 | Recall@50 | vs dense |
+|--------|---------|-----|-----------|-----------|----------|
+| BM25 only | 0.0187 | 0.0227 | 0.0059 | 0.0251 | -29.8% |
+| FashionCLIP dense | 0.0265 | 0.0369 | 0.0106 | 0.0462 | baseline |
 
 On general e-commerce benchmarks like [WANDS](https://github.com/wayfair/WANDS) (furniture), BM25 is competitive with dense retrieval. On fashion, it loses by 38%. The reason is the vocabulary gap we mentioned: "Ben zip hoodie" vs "zip hoodie." Dense embeddings bridge that gap. BM25 cannot.
 
