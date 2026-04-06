@@ -88,10 +88,12 @@ We started with a 10,000-query sample to check directionality before committing 
 
 [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) is the standard keyword-matching algorithm that most search engines use. You type "zip hoodie," it finds products with those words. [Dense retrieval](https://arxiv.org/abs/2007.15207) uses AI embeddings to understand meaning: it knows "zip hoodie" and "hooded sweatshirt with zipper" are the same thing, even if the words don't match.
 
-| Method | nDCG@10 | MRR | Recall@10 | Recall@50 | vs dense |
-|--------|---------|-----|-----------|-----------|----------|
-| BM25 only | 0.0187 | 0.0227 | 0.0059 | 0.0251 | -29.8% |
-| FashionCLIP dense | 0.0265 | 0.0369 | 0.0106 | 0.0462 | baseline |
+| Method | nDCG@10 | MRR | Recall@10 | Recall@50 |
+|--------|---------|-----|-----------|-----------|
+| BM25 only | 0.0187 | 0.0227 | 0.0059 | 0.0251 |
+| FashionCLIP dense | 0.0265 | 0.0369 | 0.0106 | 0.0462 |
+
+BM25 loses across the board: -30% on nDCG@10, -38% on MRR, -44% on Recall@10, -46% on Recall@50. The coverage gap (Recall) is even wider than the ranking gap (nDCG).
 
 On general e-commerce benchmarks like [WANDS](https://github.com/wayfair/WANDS) (furniture), BM25 is competitive with dense retrieval. On fashion, it loses by 38%. The reason is the vocabulary gap we mentioned: "Ben zip hoodie" vs "zip hoodie." Dense embeddings bridge that gap. BM25 cannot.
 
@@ -99,11 +101,11 @@ If you're running fashion search on keyword matching alone, this is the gap you'
 
 ### Picking the right embedding model matters more than you'd think
 
-| Model | nDCG@10 |
-|-------|---------|
-| Marqo-FashionCLIP | 0.0300 |
-| CLIP ViT-B/32 | 0.0265 |
-| Marqo-FashionSigLIP | 0.0232 |
+| Model | nDCG@10 | MRR | Recall@10 | Recall@50 |
+|-------|---------|-----|-----------|-----------|
+| Marqo-FashionCLIP | 0.0300 | 0.0341 | 0.0105 | 0.0197 |
+| CLIP ViT-B/32 | 0.0265 | 0.0312 | 0.0086 | 0.0177 |
+| Marqo-FashionSigLIP | 0.0232 | 0.0260 | 0.0077 | 0.0148 |
 
 FashionCLIP beat FashionSigLIP on H&M, even though SigLIP wins on Marqo's own 7-dataset benchmark. H&M product text is short and keyword-style ("Ben zip hoodie"), not the natural language captions SigLIP was optimized for. The model that wins on average benchmarks isn't always the one that wins on your catalog.
 
