@@ -1,4 +1,4 @@
-# MODA — Modular Open-Source Discovery Architecture
+# MODA
 
 **The first open-source, end-to-end, ablation-complete benchmark for fashion search.**  
 253,685 real user queries · 105,542 H&M products · 18 pipeline configs · nDCG@10 = 0.0757 (+152% over baseline)

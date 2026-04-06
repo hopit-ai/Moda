@@ -416,7 +416,7 @@ def section_exec_summary(story):
     story.append(sp(6))
 
     story.append(callout_box(
-        "<b>MODA</b> (Modular Open-Source Discovery Architecture) is an open-source, end-to-end, "
+        "<b>MODA</b> is an open-source, end-to-end, "
         "multimodal fashion search engine. This report documents Phases 0–3: data acquisition, "
         "benchmark reproduction, a complete zero-shot pipeline ablation study (14 configurations "
         "including ColBERT and Mixture-of-Encoders), and domain fine-tuning evaluation — all on "

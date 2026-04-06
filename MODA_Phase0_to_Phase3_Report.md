@@ -38,7 +38,7 @@
 
 ## 1. Executive Summary
 
-MODA (Modular Open-Source Discovery Architecture) is an open-source, end-to-end, multimodal fashion search engine. This report documents Phases 0–3: data acquisition, benchmark reproduction, a complete zero-shot pipeline ablation study (11 core configurations including ColBERT late interaction and two-stage reranking cascades), and domain fine-tuning — all on the H&M dataset with 253,685 real user queries and 105,542 products. This is the first publicly available full-pipeline fashion search benchmark at this scale.
+MODA is an open-source, end-to-end, multimodal fashion search engine. This report documents Phases 0–3: data acquisition, benchmark reproduction, a complete zero-shot pipeline ablation study (11 core configurations including ColBERT late interaction and two-stage reranking cascades), and domain fine-tuning — all on the H&M dataset with 253,685 real user queries and 105,542 products. This is the first publicly available full-pipeline fashion search benchmark at this scale.
 
 ### Key Achievements
 
