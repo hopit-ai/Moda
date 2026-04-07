@@ -60,7 +60,7 @@ def make_header_footer(canvas, doc):
     canvas.rect(0, 0, w, 0.9*cm, fill=1, stroke=0)
     canvas.setFillColor(WHITE)
     canvas.setFont("Helvetica", 7.5)
-    canvas.drawString(MARGIN, 0.32*cm, "© The FI Company · Apache 2.0")
+    canvas.drawString(MARGIN, 0.32*cm, "© The FI Company · MIT License")
     canvas.drawRightString(w - MARGIN, 0.32*cm,
                            f"Page {doc.page}")
     canvas.restoreState()
@@ -74,7 +74,7 @@ def make_first_page(canvas, doc):
     canvas.rect(0, 0, w, 0.9*cm, fill=1, stroke=0)
     canvas.setFillColor(WHITE)
     canvas.setFont("Helvetica", 7.5)
-    canvas.drawString(MARGIN, 0.32*cm, "© The FI Company · Apache 2.0")
+    canvas.drawString(MARGIN, 0.32*cm, "© The FI Company · MIT License")
     canvas.drawRightString(w - MARGIN, 0.32*cm, "Page 1")
     canvas.restoreState()
 
@@ -347,7 +347,7 @@ def cover_page(story):
         [P("Organisation", BODY_SMALL), P("The FI Company", BODY_SMALL)],
         [P("Date", BODY_SMALL),         P("April 2026", BODY_SMALL)],
         [P("Status", BODY_SMALL),        P("Phase 2 Complete · Phase 3A+3B Complete (LLM-trained CE = new SOTA)", BODY_SMALL)],
-        [P("License", BODY_SMALL),       P("Apache 2.0 (open-source)", BODY_SMALL)],
+        [P("License", BODY_SMALL),       P("MIT (open-source)", BODY_SMALL)],
         [P("Timeline", BODY_SMALL),      P("18-day plan · Days 1–8 complete", BODY_SMALL)],
         [P("Estimated total cost", BODY_SMALL), P("$0 (Apple MPS) vs $8 planned (GPU cloud)", BODY_SMALL)],
     ], colWidths=[4*cm, PAGE_W - 2*MARGIN - 4*cm],
@@ -1388,7 +1388,7 @@ def section_roadmap(story):
     ))
     story.append(sp(6))
     for i, item in enumerate([
-        "Push updated Moda repo to GitHub (Apache 2.0) with Phase 0–3 code and results.",
+        "Push updated Moda repo to GitHub (MIT) with Phase 0–3 code and results.",
         "Publish H&M benchmark eval harness + pre-computed embeddings to HuggingFace.",
         "Write Blog Post #1: 'Data Quality > Model Size: LLM-Judged Labels for Fashion Search' — "
         "Phase 3 finding, ablation table, architecture.",

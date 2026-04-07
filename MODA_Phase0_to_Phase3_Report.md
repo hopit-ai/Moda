@@ -12,7 +12,7 @@
 | Organisation | The FI Company |
 | Date | April 2026 |
 | Status | Phase 3 Complete — Fine-tuned retriever + LLM-trained CE = SOTA |
-| License | Apache 2.0 (open-source) |
+| License | MIT (open-source) |
 | Timeline | 18-day plan · Days 1–10 complete |
 | Estimated total cost | ~$3 (LLM labels via PaleblueDot) + $0 compute (Apple MPS) |
 

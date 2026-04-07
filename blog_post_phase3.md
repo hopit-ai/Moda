@@ -161,4 +161,4 @@ Phase 4 adds multimodal image search. Phase 5 publishes the full benchmark as a 
 
 ---
 
-*MODA is built by [The FI Company](https://thefi.company) which is a project within [Hopit.ai](https://hopit.ai). Code and results: [github.com/hopit-ai/moda](https://github.com/hopit-ai/moda). Apache 2.0.*
+*MODA is built by [The FI Company](https://thefi.company) which is a project within [Hopit.ai](https://hopit.ai). Code and results: [github.com/hopit-ai/moda](https://github.com/hopit-ai/moda). MIT License.*

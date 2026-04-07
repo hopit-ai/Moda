@@ -3,7 +3,7 @@
 **The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
 253,685 real user queries · 105,542 H&M products · 18 pipeline configs · nDCG@10 = 0.0757 (+152% over baseline)
 
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
@@ -325,4 +325,4 @@ If you use this benchmark or code, please cite:
 
 ## License
 
-Apache 2.0 — see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE).
