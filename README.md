@@ -316,8 +316,8 @@ Each query in `qrels.csv` has:
 | Phase | Focus | What | Status |
 |---|---|---|---|
 | **1** | Benchmark validation | Reproduce Marqo's 7-dataset embedding benchmark (<1% delta). Build eval harness. | ✅ Complete |
-| **2** | Zero-shot pipeline | BM25 + dense + hybrid + NER + CE rerank + ColBERT cascade. 253K real queries, 11 configs, component-by-component breakdown. | ✅ Complete |
-| **3** | Trained models | LLM-judged labels for CE (+15.7%). Fine-tuned bi-encoder on retriever-mined hard negatives (+94%). GLiNER2 ablation. | ✅ Complete |
+| **2** | Zero-shot pipeline | BM25 + dense + hybrid + NER + CE rerank. 253K real queries, 11 configs, component-by-component breakdown. GLiNER v1 vs GLiNER2 ablation. | ✅ Complete |
+| **3** | Trained models | LLM-judged labels for CE (+15.7%). Fine-tuned bi-encoder on retriever-mined hard negatives (+94%). | ✅ Complete |
 | **4** | Multimodal retrieval | Image embeddings, text-to-image retrieval, joint fine-tuning (4A–4G done). Three-Tower architecture (4H–4I pending). | 🔄 In progress |
 | **5** | Search experience | Data augmentation (LLM query variants, catalog enrichment). Faceted navigation, partitioned indexes, auto-suggest, query relaxation. End-to-end demo. | 🔜 Planned |
 
