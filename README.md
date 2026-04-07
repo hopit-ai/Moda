@@ -1,7 +1,7 @@
 # MODA
 
 **The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
-253,685 real user queries · 105,542 H&M products · 18 pipeline configs · nDCG@10 = 0.0757 (+152% over baseline)
+253,685 real user queries · 105,542 H&M products · 25+ pipeline configs · nDCG@10 = 0.0764 (+188% over dense baseline)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -67,8 +67,8 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 | **4C** | Text-to-image retrieval channel | (integrated in eval scripts) | Done |
 | **4D** | Zero-shot multimodal eval (baseline + fine-tuned text encoder) | `python benchmark/eval_multimodal_pipeline.py` | Done |
 | **4E** | LLM labels for image hard negatives (PaleblueDot GPT-4o-mini) | `python benchmark/generate_image_labels.py` | Done |
-| **4F** | Joint text+image fine-tuning (both CLIP encoders, contrastive + alignment) | `python benchmark/train_multimodal.py` | Running |
-| **4G** | Re-embed images with 4F model + multimodal pipeline eval | `bash scripts/run_phase4g_multimodal_eval.sh` | Waiting for 4F |
+| **4F** | Joint text+image fine-tuning (both CLIP encoders, contrastive + alignment) | `python benchmark/train_multimodal.py` | Done |
+| **4G** | Re-embed images with 4F model + multimodal pipeline eval | `bash scripts/run_phase4g_multimodal_eval.sh` | Done |
 | **4H** | Three-Tower training (query/text/image towers, novel architecture) | `python benchmark/train_three_tower.py` | Pending |
 | **4I** | Three-Tower full benchmark evaluation | `python benchmark/eval_three_tower.py` | Pending |
 
@@ -77,6 +77,19 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 **4F** fine-tunes both FashionCLIP encoders with contrastive loss + alignment regularisation. **4G** re-embeds 105K images with the 4F checkpoint and reruns multimodal pipeline eval (auto-starts after 4F saves `best/`). Run 4G standalone: `bash scripts/run_phase4g_multimodal_eval.sh`
 
 **4H** is a novel **Three-Tower Fashion Retriever (3TFR)**: dedicated **query tower** (CLIP text encoder + projection MLP), frozen **text tower**, frozen **image tower** — all projecting into a single 512-dim space. Product embeddings are precomputed offline; only the query tower trains. **4I** evaluates 4H on the full 22,855 test queries with BM25 hybrid + CE reranking.
+
+#### 4G Results — Fine-tuned Multimodal Pipeline (22,855 test queries)
+
+| Config | nDCG@10 | MRR | R@10 |
+|--------|---------|-----|------|
+| Image only | 0.0432 | 0.0647 | 0.0178 |
+| 2-way hybrid (BM25 + text) | 0.0616 | 0.0807 | 0.0224 |
+| 2-way hybrid (text + image) | 0.0551 | 0.0805 | 0.0225 |
+| 3-way hybrid (BM25 + text + image) | 0.0618 | 0.0852 | 0.0233 |
+| 3-way hybrid + off-shelf CE | 0.0660 | 0.0744 | 0.0212 |
+| **3-way hybrid + LLM-trained CE** | **0.0764** | **0.0837** | **0.0252** |
+
+> **4F training:** 5 epochs, 21.3 hrs on Apple MPS. Text accuracy 0.642 → 0.994 (+35.2%), image accuracy 0.650 → 0.974. Joint fine-tuning with contrastive + alignment loss. **4G result:** 3-way hybrid + LLM CE achieves nDCG@10=0.0764, matching Phase 3 SOTA while adding an image retrieval channel. The image channel adds +0.9% nDCG and +5.9% MRR over BM25+text alone.
 
 *Dense vectors are pre-computed; online latency is dict lookup.  
 Latency measured on Apple M-series (MPS).
@@ -103,6 +116,10 @@ Latency measured on Apple M-series (MPS).
 
 7. **FashionCLIP > FashionSigLIP on H&M** — Short brand-style product titles match CLIP's training distribution better than SigLIP's caption-optimized encoder.
 
+8. **GLiNER2 improves NER extraction but not full-pipeline quality** — GLiNER2 (`fastino/gliner2-base-v1`, EMNLP 2025) boosts BM25+NER by +16% over GLiNER v1, but the full pipeline delta is only +0.8%. Dense retrieval and CE reranking absorb the NER improvement.
+
+9. **Image channel adds marginal but real gains** — Joint text+image fine-tuning (Phase 4F) achieves 0.994 text accuracy / 0.974 image accuracy. 3-way hybrid (BM25 + text + image) + LLM CE reaches nDCG@10=0.0764, adding +0.9% nDCG and +5.9% MRR over the text-only pipeline.
+
 ---
 
 ## Models & Components
@@ -116,7 +133,7 @@ Latency measured on Apple M-series (MPS).
 | Hybrid fusion | Reciprocal Rank Fusion (RRF) | Custom | Combines BM25 + dense ranked lists |
 | LLM labeling (Phase 3+) | `openai/gpt-4o-mini` via [PaleblueDot AI](https://palebluedot.ai) | REST API | Graded relevance scores (0–3) |
 
-> **Note on GLiNER:** We use the **original GLiNER** ([urchade/GLiNER](https://github.com/urchade/GLiNER), NAACL 2024), not [GLiNER2](https://github.com/fastino-ai/GLiNER2) (EMNLP 2025). GLiNER2 is a newer multi-task successor; we have not benchmarked it in MODA yet.
+> **GLiNER v1 vs GLiNER2 ablation (10K queries):** We benchmarked both [GLiNER](https://github.com/urchade/GLiNER) (`urchade/gliner_medium-v2.1`, NAACL 2024) and [GLiNER2](https://github.com/fastino-ai/GLiNER2) (`fastino/gliner2-base-v1`, EMNLP 2025). GLiNER2 extracts better entities at the BM25 stage (+16% nDCG@10), but once dense retrieval and CE reranking are added the gap shrinks to +0.8% (Full pipeline: v1=0.0549, v2=0.0553). We keep GLiNER v1 as the default since the full-pipeline delta is negligible. Run the ablation: `python benchmark/eval_gliner2_ablation.py`
 
 ---
 
@@ -245,6 +262,7 @@ MODA/
 │   ├── train_three_tower.py    ← Phase 4H: three-tower architecture training
 │   ├── eval_multimodal_pipeline.py ← Phase 4D/4G: multimodal pipeline eval
 │   ├── eval_three_tower.py     ← Phase 4I: three-tower benchmark eval
+│   ├── eval_gliner2_ablation.py← GLiNER v1 vs GLiNER2 NER ablation (10K)
 │   └── _faiss_search_worker.py ← FAISS subprocess (avoids BLAS conflicts)
 │
 ├── scripts/
@@ -261,6 +279,8 @@ MODA/
 │   │   └── PHASE2_FULL_LEADERBOARD.md  ← Full results leaderboard
 │   └── real/
 │       ├── PHASE2_RUNNING_LEADERBOARD.md  ← 10K sample leaderboard
+│       ├── gliner2_ablation.json          ← GLiNER v1 vs GLiNER2 results
+│       ├── phase4g_multimodal_eval.log    ← Phase 4G evaluation log
 │       └── ner_cache_10k.json             ← Pre-computed GLiNER (10K)
 │
 ├── data/
@@ -269,7 +289,7 @@ MODA/
 │   └── processed/
 │       └── embeddings/         ← FAISS indexes + article ID lists (gitignored, ~1.4 GB)
 │
-├── MODA_Phase0_to_Phase2_Report.pdf  ← Full research report
+├── MODA_Phase0_to_Phase3_Report.pdf  ← Full research report (Phases 0–3)
 ├── requirements.txt
 └── README.md
 ```
@@ -297,8 +317,8 @@ Each query in `qrels.csv` has:
 |---|---|---|---|
 | **1** | Benchmark validation | Reproduce Marqo's 7-dataset embedding benchmark (<1% delta). Build eval harness. | ✅ Complete |
 | **2** | Zero-shot pipeline | BM25 + dense + hybrid + NER + CE rerank + ColBERT cascade. 253K real queries, 11 configs, component-by-component breakdown. | ✅ Complete |
-| **3** | Trained models | LLM-judged labels for CE (+15.7%). Fine-tuned bi-encoder on retriever-mined hard negatives (+94%). MoE with trained per-field encoders. | 🔄 In progress |
-| **4** | Multimodal + LookBench | Image embeddings, text-to-image retrieval, three-way hybrid, Three-Tower architecture. [LookBench](https://arxiv.org/abs/2601.14706) as Tier 3 visual retrieval benchmark. | 🔜 Next |
+| **3** | Trained models | LLM-judged labels for CE (+15.7%). Fine-tuned bi-encoder on retriever-mined hard negatives (+94%). GLiNER2 ablation. | ✅ Complete |
+| **4** | Multimodal retrieval | Image embeddings, text-to-image retrieval, joint fine-tuning (4A–4G done). Three-Tower architecture (4H–4I pending). | 🔄 In progress |
 | **5** | Search experience | Data augmentation (LLM query variants, catalog enrichment). Faceted navigation, partitioned indexes, auto-suggest, query relaxation. End-to-end demo. | 🔜 Planned |
 
 Three benchmark tiers maintained:
