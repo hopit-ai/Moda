@@ -6,7 +6,6 @@ Starting assumption: Phase 1-2 is done. We have:
 - OpenSearch index with 105K articles, FAISS indexes for FashionCLIP/SigLIP/CLIP
 - GLiNER v1 + GLiNER2 NER caches (10K + 253K queries)
 - ColBERT cascade results (10K)
-- `query_splits.json` with train/val/test split by unique query text
 - Working eval harness (metrics.py, eval_full_253k.py, etc.)
 
 Everything below is from scratch.
@@ -36,6 +35,8 @@ Goal: Train domain-specific models for each pipeline component. Show that target
 **Output:** `data/processed/query_splits.json`
 **Verify:** No query text appears in multiple splits. Print split sizes.
 
+> **Watch out:** Split by unique `query_text`, not by `query_id`. The same text "black dress" can have dozens of query IDs (different users searching the same thing). If you split by ID, the same query text leaks across splits. After splitting, assert: `set(train_texts) & set(test_texts) == empty`. Also check that the positive article IDs in test aren't disproportionately concentrated in a few popular products — if they are, the test set is measuring popularity, not retrieval quality.
+
 ---
 
 ### 3.2 — Generate LLM relevance labels for cross-encoder training
@@ -62,6 +63,8 @@ Goal: Train domain-specific models for each pipeline component. Show that target
 **Cost:** ~$2-3 for 100K pairs via GPT-4o-mini
 **Verify:** Check score distribution (should be roughly balanced, not all 0s or all 3s). Spot-check 50 labels manually.
 
+> **Watch out:** Use the **off-the-shelf Phase 2 retriever** (baseline FashionCLIP) to mine candidates, not a fine-tuned one. If you mine from a model trained on this data, your hard negatives are easy negatives. The product text sent to the LLM must be the same concatenation used at eval time: `prod_name | product_type_name | colour_group_name | section_name | detail_desc[:200]`. If you send different fields to the LLM vs the cross-encoder, the labels won't transfer. Also: never include test-split queries in the labeling batch. Filter strictly by `query_splits.json` train IDs before sampling.
+
 ---
 
 ### 3.3 — Fine-tune cross-encoder on LLM labels
@@ -83,6 +86,8 @@ Goal: Train domain-specific models for each pipeline component. Show that target
 **Hardware:** T4 GPU (Colab free) or Apple MPS. ~2-3 hours.
 **Verify:** Val loss decreasing. Test nDCG@10 should be meaningfully above off-shelf CE (target: +10-15%).
 
+> **Watch out:** The label normalization matters. Score 0→0.0, 1→0.33, 2→0.67, 3→1.0. If you use raw integers as labels with BCEWithLogitsLoss, the loss function interprets 0 and 3 on different scales than 0.0 and 1.0. Validate on the **val split**, never touch test during training. If val loss plateaus or increases, stop early. Don't fall back to using train data as validation if val set is small — raise an error instead (the existing code has a fallback that creates val from train, which is a leakage risk we identified in the audit).
+
 ---
 
 ### 3.4 — Fine-tune cross-encoder on purchase labels (comparison)
@@ -101,6 +106,8 @@ Goal: Train domain-specific models for each pipeline component. Show that target
 **Input:** `qrels.csv` + `query_splits.json` + `articles.csv`
 **Output:** `models/moda-fashion-ce-purchase/`
 **Verify:** Compare test nDCG@10 vs 3.3. Expected: purchase CE barely beats off-shelf (+1-2%), LLM CE beats both (+10-15%).
+
+> **Watch out:** The H&M `negative_ids` in qrels are products **shown but not bought** — these are grade=1 in our eval scheme (partially relevant), not grade=0 (irrelevant). But here we're training them as label=0.0 negatives. This is the core noise problem: many negative_ids are actually decent results the user just didn't purchase. Use all `positive_ids` for each query, not just the first one (the existing `train_cross_encoder.py` only uses `pos_ids[0]` which throws away data). Random negatives should be sampled from articles **not** in either positive_ids or negative_ids for that query.
 
 ---
 
@@ -124,6 +131,8 @@ Goal: Train domain-specific models for each pipeline component. Show that target
 **Cost:** ~$1 (if reusing labels from 3.2, otherwise ~$1-2 additional)
 **Verify:** Check that hard negatives are genuinely hard (visually or textually plausible but wrong). Spot-check 30 triplets.
 
+> **Watch out:** Mine from the **baseline off-the-shelf FashionCLIP**, not the fine-tuned one from 3.6. You're mining the baseline model's mistakes as training data for itself. If you accidentally mine from an already-fine-tuned model, the negatives are too easy and training won't help. Also verify that FAISS embeddings are L2-normalized before search (cosine similarity requires this). If normalization is missing, rankings are wrong and your "hard negatives" are random noise. The query embeddings and article embeddings must use the same `encode_texts_clip()` call with `normalize=True`.
+
 ---
 
 ### 3.6 — Fine-tune FashionCLIP bi-encoder
@@ -145,6 +154,8 @@ Goal: Train domain-specific models for each pipeline component. Show that target
 **Output:** `models/moda-fashion-embed/` (fine-tuned text encoder)
 **Hardware:** Apple MPS (~4-6 hours) or T4 (~2-3 hours)
 **Verify:** Dense-only nDCG@10 on test split. Target: +50-100% over baseline FashionCLIP.
+
+> **Watch out:** InfoNCE with in-batch negatives assumes that for query_i in the batch, every other positive product_j (j≠i) is a negative. This breaks if two queries in the same batch share the same positive product (e.g. two users both bought article X). Shuffle triplets but verify no article_id appears as both positive and in-batch-negative within a batch. Keep the vision encoder fully frozen (`requires_grad=False`) — if you accidentally train it here, the FAISS image index from Phase 4 will be misaligned. After training, rebuild the text FAISS index with the new encoder and re-evaluate. Don't compare the fine-tuned model against the old FAISS index — the embedding space has changed.
 
 ---
 
@@ -168,6 +179,8 @@ Goal: Train domain-specific models for each pipeline component. Show that target
 **Hardware:** T4 or MPS, ~1-2 hours
 **Verify:** Run on 100 test queries, compare extracted entities vs off-the-shelf GLiNER2. Should get more precise color/type/fit extraction.
 
+> **Watch out:** The structured fields aren't perfect NER labels. `prod_name` = "Ben zip hoodie" and `product_type_name` = "Hoodie" — but the NER span in the text should be "zip hoodie", not "Hoodie". The structured field gives you the category, not the exact span boundary. You need a span-matching step: find where in `prod_name` the `product_type_name` value (or a synonym) appears and mark that span. If the value doesn't appear in the text (e.g. `product_type_name` = "Vest top" but `prod_name` = "Lina tank"), skip that example rather than forcing a wrong span. Also: `colour_group_name` = "Dark Blue" but the text might say "Navy" — use the COLOR_MAP from `query_expansion.py` to map between H&M color names and common query terms. Train on **articles from train-split queries only** (articles that appear as positives/negatives in train queries) to prevent test data from influencing NER training.
+
 ---
 
 ### 3.8 — Mixture-of-Encoders with trained field encoders
@@ -182,7 +195,6 @@ Goal: Train domain-specific models for each pipeline component. Show that target
 1. Get all unique `colour_group_name` values from H&M (~50 values)
 2. Generate pairwise similarity labels using GPT-4o-mini: "Is navy similar to dark blue?" → score 0-1. ~1,225 pairs for 50 colors.
 3. Train a small embedding model: Embedding(50, 64) → L2 normalize. Loss: cosine similarity should match LLM score.
-4. Alternative: use LLM to cluster colors into groups (blues, reds, neutrals, etc.) and train with cluster-based contrastive loss.
 
 **Category encoder (64-dim):**
 1. Get all unique `product_type_name` values (~100 values)
@@ -190,22 +202,22 @@ Goal: Train domain-specific models for each pipeline component. Show that target
 3. Same architecture: Embedding(100, 64) → L2 normalize.
 
 **Group encoder (32-dim):**
-1. `product_group_name` has ~20 values. Small enough for a learned embedding table.
-2. Train with product co-occurrence: groups that frequently appear together in outfits should be closer.
-3. Or use LLM: "Is Garment Upper body related to Garment Lower body?" (yes, they form outfits).
+1. `product_group_name` has ~20 values. Learned embedding table.
+2. Train with LLM pairwise similarity.
 
 **Concatenation:**
 1. Per product: `concat(FashionCLIP_text(512), color_enc(64), category_enc(64), group_enc(32))` = 672-dim
 2. Build FAISS index on 672-dim vectors for all 105K products
 3. Per query: extract attributes via fine-tuned GLiNER2 (from 3.7), encode each with matching field encoder
 4. Query vector: `concat(FashionCLIP_query(512), color_query(64), category_query(64), group_query(32))`
-5. If NER doesn't detect an attribute (e.g. no color in query), zero out that block in the query vector
-6. Cosine search against product FAISS index
+5. Cosine search against product FAISS index
 
 **Input:** H&M structured fields + GPT-4o-mini for pairwise similarity + fine-tuned FashionCLIP from 3.6
 **Output:** `models/moda-color-encoder/`, `models/moda-category-encoder/`, `models/moda-group-encoder/`, + FAISS index
 **Cost:** ~$1 for LLM similarity labels (small vocabularies). Training: minutes on CPU.
 **Verify:** MoE retrieval nDCG@10 should beat single-encoder FashionCLIP (unlike Phase 2 which lost -12%). Run full pipeline with MoE retriever + LLM-trained CE.
+
+> **Watch out:** When NER doesn't detect an attribute (e.g. query "summer dress" has no color), do NOT zero out the color block in the query vector. Zeroing a 64-dim block in a 672-dim vector changes the cosine geometry — products with strong color signals get penalized relative to products with weak ones. Instead, use a **default vector** for missing attributes: the mean of all color embeddings (represents "any color"). Same for category and group. The LLM pairwise similarity labels must be symmetric: if "navy" ~ "dark blue" = 0.9, then "dark blue" ~ "navy" must also = 0.9. Verify this. The NER entity text needs to be mapped to H&M vocabulary values before encoding: user says "navy" but H&M calls it "Dark Blue". Use the existing `COLOR_MAP` and `GARMENT_TYPE_MAP` from `query_expansion.py` for this mapping. If a query entity doesn't map to any H&M vocab value, fall back to the default vector, don't crash.
 
 ---
 
@@ -238,6 +250,8 @@ Run fine-tuned FashionCLIP (3.6) on all 7 datasets to verify it doesn't degrade 
 - Tier 1 cross-check results
 - Upload models to HuggingFace: moda-fashion-ce, moda-fashion-embed, moda-fashion-ner, moda-color-encoder, moda-category-encoder
 
+> **Watch out:** Every retriever variant needs its own FAISS index. Don't run the fine-tuned FashionCLIP queries against the baseline FashionCLIP FAISS index — the embedding space changed after fine-tuning. Re-embed all 105K articles with each retriever variant and build separate indexes. For the MoE retriever, the FAISS index is 672-dim, not 512-dim — make sure the index dimensionality matches. The BM25 component and NER boosts stay the same across all configs (same OpenSearch index, same GLiNER2 NER). Only the dense retrieval and reranking change. All 12 configs must be evaluated on the **same test split** — don't resplit between experiments. For the Tier 1 cross-check: the fine-tuned text encoder must work with FashionCLIP's vision encoder (frozen). If the text encoder drifted too far during training, text-to-image tasks on Marqo's benchmark will degrade. Report both improvements and regressions honestly.
+
 ---
 
 ## PHASE 4: Multimodal
@@ -262,6 +276,8 @@ Goal: Add image understanding. Fashion is visual. Text search alone can't captur
 **Output:** `data/raw/hnm_images/` (~105K images)
 **Verify:** Match article count against articles.csv. Report coverage.
 
+> **Watch out:** Not all 105,542 articles will have images. Some products in the catalog may have been delisted or images may be missing from the dataset. Track coverage: how many articles have images vs total. Products without images must be excluded from image-based retrieval and MoE (they'd have zero image vectors) but should remain in BM25 and text-dense indexes. Report the coverage number (e.g. "98,234 of 105,542 articles have images") rather than silently ignoring missing ones. Also check for corrupt or tiny images (< 10x10 pixels) — these produce garbage embeddings.
+
 ---
 
 ### 4.2 — Embed product images with FashionCLIP vision encoder
@@ -283,28 +299,32 @@ Goal: Add image understanding. Fashion is visual. Text search alone can't captur
 **Hardware:** T4 (~1-2 hours) or MPS (~3-4 hours)
 **Verify:** Query a few text embeddings against image index. "red dress" should return images of red dresses.
 
+> **Watch out:** The image preprocessing MUST match what FashionCLIP was trained with — use `open_clip.create_model_and_transforms()` and apply the returned `preprocess_val` transform, don't roll your own resize/normalize. The text encoder and vision encoder must be from the **same** FashionCLIP checkpoint. If you mix text embeddings from FashionCLIP with image embeddings from SigLIP, they're in different vector spaces and cosine similarity is meaningless. L2-normalize image embeddings the same way as text embeddings (`normalize=True`). The article_ids.json for the image index must match the article_ids.json for the text index — same order, same IDs — or your retrieval results will map to wrong products.
+
 ---
 
 ### 4.3 — Download and prepare LookBench
 
 **What:** Download LookBench dataset and evaluation code. Set up as Tier 3 benchmark.
 
-**Why:** LookBench is a live, contamination-aware, attribute-supervised fashion image retrieval benchmark. It tests visual retrieval quality, which our Tier 1 and Tier 2 don't cover. 4 subsets from easy (studio flat-lay) to hard (real street outfits).
+**Why:** LookBench is a live, contamination-aware, attribute-supervised fashion image retrieval benchmark. 4 subsets from easy (studio flat-lay) to hard (real street outfits). Published SOTA: GR-Pro 67.38% Fine R@1.
 
 **How:**
 1. Clone LookBench repo (code + evaluation scripts)
-2. Download all 4 subsets from their data release:
+2. Download all 4 subsets:
    - RealStudioFlat: 1,011 queries, ~62K corpus images
    - AIGen-Studio: 192 queries, ~59K corpus images
    - RealStreetLook: 1,000 queries, ~61K corpus images
    - AIGen-StreetLook: 160 queries, ~59K corpus images
 3. Download corpus images for each subset
 4. Verify dataset integrity: check query counts, corpus sizes, attribute annotations
-5. Run their eval code with CLIP ViT-L/14 to reproduce their published baseline numbers
+5. Run their eval code with CLIP ViT-L/14 to reproduce their published baseline
 
 **Input:** LookBench release (GitHub + data download)
 **Output:** `data/raw/lookbench/` with all 4 subsets, working eval pipeline
 **Verify:** Reproduce CLIP ViT-L/14 baseline from paper (Fine R@1 ~39.79% overall)
+
+> **Watch out:** LookBench is **image-to-image retrieval**, not text-to-image. Queries are image crops (detected garments from photos), not text strings. This is fundamentally different from our Tier 2 (text queries). Use their exact eval code and metrics — Fine Recall@1 requires matching both the garment category AND all annotated attributes. Coarse Recall@1 only requires category match. Don't reimplementing their metrics; subtle differences in attribute matching logic will produce incomparable numbers. Their corpus includes ~58K Fashion200K distractor images mixed with ranked gallery images — this is intentional, don't filter them out. Check their preprocessing (image resolution, crop handling) and match it exactly.
 
 ---
 
@@ -312,15 +332,13 @@ Goal: Add image understanding. Fashion is visual. Text search alone can't captur
 
 **What:** Evaluate all our existing models on LookBench to establish Tier 3 baselines.
 
-**Why:** We need to know where our models stand on visual retrieval before fine-tuning for it.
-
 **How:**
 Run LookBench eval on:
 1. CLIP ViT-B/32 (generic baseline)
 2. Marqo-FashionCLIP (our Phase 2 text backbone)
 3. Marqo-FashionSigLIP
-4. Fine-tuned FashionCLIP from Phase 3 (text encoder only, vision encoder still off-the-shelf)
-5. GR-Lite (LookBench's own open model, DINOv3-based) — external SOTA reference
+4. Fine-tuned FashionCLIP from Phase 3 (text encoder fine-tuned, vision encoder still off-the-shelf)
+5. GR-Lite (LookBench's own open model, DINOv3-based)
 
 Metrics: Fine Recall@1, Coarse Recall@1, nDCG@5 per subset + overall.
 
@@ -328,13 +346,15 @@ Metrics: Fine Recall@1, Coarse Recall@1, nDCG@5 per subset + overall.
 **Output:** Tier 3 leaderboard with 5 models x 4 subsets
 **Verify:** Our Marqo-FashionCLIP numbers should be close to LookBench's published 63.24%.
 
+> **Watch out:** LookBench evaluates the **vision encoder only** (image query → image corpus). For CLIP-based models, this means encoding both query and corpus images with the vision encoder, not the text encoder. Our Phase 3 fine-tuning only touched the text encoder, so the vision encoder is still baseline FashionCLIP — expect Phase 3 models to perform identically to baseline on LookBench. This is expected and not a failure. The improvement will come in Phase 4 after joint training. GR-Lite uses DINOv3 (vision-only, no text encoder at all) — it's a different architecture family, not directly comparable on Tier 2 but fair game on Tier 3.
+
 ---
 
 ### 4.5 — Text-to-image retrieval on H&M
 
 **What:** Add a text-to-image retrieval channel: query text encoded by FashionCLIP text encoder, searched against product image vectors.
 
-**Why:** Products sometimes have attributes visible in the image but not mentioned in the text. A "floral pattern" might be in the photo but the title just says "Summer Dress." Text-to-image catches these.
+**Why:** Products sometimes have attributes visible in the image but not mentioned in the text. A "floral pattern" might be in the photo but the title just says "Summer Dress."
 
 **How:**
 1. For each query, encode with FashionCLIP text encoder (same as Phase 2)
@@ -346,19 +366,21 @@ Metrics: Fine Recall@1, Coarse Recall@1, nDCG@5 per subset + overall.
 **Output:** Text-to-image retrieval results + metrics
 **Verify:** Compare vs text-to-text retrieval. Image channel may be weaker standalone but complementary.
 
+> **Watch out:** Text-to-image retrieval through CLIP works because text and image encoders project into the same space. But this assumes the text encoder and vision encoder are from the **same model and checkpoint**. If you fine-tuned the text encoder in Phase 3 but not the vision encoder, the shared space is partially broken — the text encoder has drifted. Test both: baseline text encoder → baseline image index (proper alignment), and fine-tuned text encoder → baseline image index (may be misaligned). If the fine-tuned text encoder performs worse on text-to-image, that's expected drift and motivates the joint fine-tuning in 4.8.
+
 ---
 
 ### 4.6 — Three-way hybrid retrieval
 
 **What:** Fuse three retrieval signals via RRF: BM25 + text-to-text dense + text-to-image dense.
 
-**Why:** The core experiment. Does adding image retrieval improve text search results?
+**Why:** The core Phase 4 experiment. Does adding image retrieval improve text search results?
 
 **How:**
 1. For each query, get top-100 from:
    - BM25 (with NER boosts from fine-tuned GLiNER2)
    - Text-to-text dense (fine-tuned FashionCLIP)
-   - Text-to-image dense (fine-tuned FashionCLIP text → product images)
+   - Text-to-image dense (FashionCLIP text → product images)
 2. RRF fusion with weight grid search:
    - BM25: 0.3-0.4
    - Text-to-text: 0.3-0.5
@@ -370,23 +392,27 @@ Metrics: Fine Recall@1, Coarse Recall@1, nDCG@5 per subset + overall.
 **Output:** Best 3-way hybrid weights + nDCG@10/MRR/Recall on test split
 **Verify:** Does 3-way beat 2-way? How much does the image channel add?
 
+> **Watch out:** Tune RRF weights on the **val split only**. Pick the best weights, then run once on test. If you tune on test, you're overfitting to the test set and the numbers aren't real. The three retrieval channels will have different article coverage (some products have images, some don't). The image channel will return only image-available products. RRF handles this naturally (products not returned by a channel just don't get that channel's score), but be aware that the image channel is systematically missing ~7K products. This could hurt Recall if the purchased product happens to be one without an image. Report this coverage gap.
+
 ---
 
 ### 4.7 — Generate LLM labels for image hard negatives
 
-**What:** Mine hard negatives from the image retrieval channel and label with GPT-4o-mini.
+**What:** Mine hard negatives from the image retrieval channel and label them.
 
-**Why:** Needed for training the vision encoder. Same approach as 3.5 but for images.
+**Why:** Needed for fine-tuning the vision encoder. Same approach as 3.5 but for images.
 
 **How:**
 1. For each of ~5K train queries, run text-to-image retrieval, take top-20 image matches
-2. Send (query_text, product_image_description) pairs to GPT-4o-mini for 0-3 scoring
-3. Or: use a VLM (GPT-4o with vision) to directly judge query vs product image
-4. Products scored 0 by LLM but ranked in top-20 = image hard negatives
+2. For scoring, build product text from the matched article's fields and send (query_text, product_text) to GPT-4o-mini for 0-3 scoring
+3. Products scored 0 by LLM but ranked in top-20 by image retriever = image hard negatives
+4. Save to `data/processed/image_retriever_labels.jsonl`
 
 **Input:** Text-to-image retrieval results + GPT-4o-mini API
 **Output:** `data/processed/image_retriever_labels.jsonl`
 **Cost:** ~$1-2
+
+> **Watch out:** We're labeling the **image retriever's** mistakes, not the text retriever's. The hard negatives here are products whose images look relevant to the query but whose actual content doesn't match. These are different from the text hard negatives in 3.5 — don't merge the two files. Using a VLM (GPT-4o with vision) to directly judge query text vs product image would be more accurate than text-only LLM judging, but also ~10x more expensive. If budget allows, label a 500-pair VLM subset and compare quality against text-only LLM labels. If they agree >90%, stick with text-only.
 
 ---
 
@@ -408,13 +434,15 @@ Metrics: Fine Recall@1, Coarse Recall@1, nDCG@5 per subset + overall.
 **Hardware:** T4 recommended (~6-8 hours), MPS possible but slow (~15-20 hours)
 **Verify:** Re-embed all images with fine-tuned vision encoder. Rebuild FAISS index. Re-run 3-way hybrid + CE.
 
+> **Watch out:** Alignment regularization is critical. Without it, the text encoder drifts toward the training data and text-to-text retrieval on queries outside the training set degrades. Specifically: compute cosine similarity between fine-tuned and pretrained embeddings for a held-out sample — if it drops below 0.8, the model has drifted too far and you need to increase the regularization weight. After training, you MUST re-embed both text and images for all 105K products and rebuild both FAISS indexes. The old indexes are invalid because the embedding space changed. Check that text-to-text retrieval (Tier 2) doesn't regress — if it does, the joint training hurt more than it helped. Vision encoder learning rate should be 5-10x lower than text encoder because it has more parameters and is more prone to catastrophic forgetting.
+
 ---
 
 ### 4.9 — Three-Tower Fashion Retriever
 
-**What:** Novel architecture: dedicated query tower (trainable MLP on top of CLIP text encoder), frozen text product tower, frozen image product tower. All project into shared 512-dim space.
+**What:** Novel architecture: dedicated query tower (trainable MLP), frozen text product tower, frozen image product tower. All project into shared 512-dim space.
 
-**Why:** Product embeddings (text + image) can be precomputed offline. Only the query tower runs at serving time. This is more practical for production where you don't want to re-embed 105K products every time the query model changes.
+**Why:** Product embeddings can be precomputed offline. Only the query tower runs at serving time. Practical for production.
 
 **How:**
 1. Architecture:
@@ -423,13 +451,15 @@ Metrics: Fine Recall@1, Coarse Recall@1, nDCG@5 per subset + overall.
    - Image product tower: FashionCLIP vision encoder (frozen) → 512-dim
    - Product embedding = mean(text_embedding, image_embedding)
 2. Training: only query tower MLP is trainable
-3. Loss: query embedding should be close to product embedding for relevant products
+3. Loss: query embedding close to product embedding for relevant products
 4. Use same triplets as 4.8
 
 **Input:** Triplets + FashionCLIP encoders
 **Output:** `models/moda-three-tower/` (query tower MLP weights)
 **Hardware:** Fast — only training a small MLP. ~1-2 hours on MPS.
 **Verify:** Compare vs symmetric retrieval (4.8). Is the asymmetric query tower competitive?
+
+> **Watch out:** The product embedding `mean(text_emb, image_emb)` only works if both are in the same space, same scale, and L2-normalized. Verify that `||text_emb|| ≈ ||image_emb|| ≈ 1.0` before averaging. If one is larger, it dominates the mean. For products without images, the product embedding is just the text embedding — don't average with a zero vector (that halves the magnitude). The query tower MLP must output L2-normalized vectors to match the product embeddings. The product embeddings are precomputed and frozen during training — don't accidentally backpropagate through them. Check `requires_grad=False` on both product towers.
 
 ---
 
@@ -438,13 +468,15 @@ Metrics: Fine Recall@1, Coarse Recall@1, nDCG@5 per subset + overall.
 **What:** Run all Phase 4 models on LookBench. Submit to leaderboard.
 
 **How:**
-1. Re-run LookBench eval with:
+1. Run LookBench eval with:
    - Joint fine-tuned model (4.8)
    - Three-Tower model (4.9)
 2. Compare against baselines from 4.4
 3. Submit best result to LookBench leaderboard
 
 **Output:** Updated Tier 3 leaderboard. Public submission.
+
+> **Watch out:** LookBench is image-to-image. The Three-Tower model has an asymmetric query tower that encodes text, not images. It doesn't apply to LookBench directly. For LookBench, use the joint fine-tuned vision encoder from 4.8. The Three-Tower is only evaluated on Tier 2 (H&M text queries). Don't claim Three-Tower results on LookBench — it wasn't designed for image queries.
 
 ---
 
@@ -461,6 +493,8 @@ Metrics: Fine Recall@1, Coarse Recall@1, nDCG@5 per subset + overall.
 
 **Output:** Working visual search endpoint in the demo app.
 
+> **Watch out:** The uploaded image needs the exact same preprocessing as the indexed images (same `preprocess_val` transform from open_clip). If a user uploads a phone photo (variable size, EXIF rotation, different aspect ratio), handle that gracefully before passing to the model. Strip EXIF, convert to RGB, apply the standard CLIP transform. Don't normalize twice.
+
 ---
 
 ## PHASE 5: Search experience + data augmentation
@@ -473,17 +507,19 @@ Goal: Make the search system usable for actual shoppers. Improve data quality.
 
 **What:** Generate 3-5 paraphrases per real query using GPT-4o-mini.
 
-**Why:** 253K queries is a lot, but many are short and ambiguous. Paraphrases expand training data without new human labels. "navy dress" becomes "dark blue dress", "navy colored dress", "dress in navy blue."
+**Why:** Expands training data without new human labels. "navy dress" becomes "dark blue dress", "navy colored dress", "dress in navy blue."
 
 **How:**
 1. Sample 10K unique queries from train split
 2. Prompt: "Generate 3-5 search query paraphrases for: {query}. Keep the same intent, vary the wording."
 3. Deduplicate against existing queries
-4. Use augmented queries for iterative hard negative mining (retrieve → label → train → repeat)
+4. Use augmented queries for iterative hard negative mining
 
 **Input:** Train queries + GPT-4o-mini
 **Output:** `data/processed/augmented_queries.jsonl` (~30-50K additional queries)
 **Cost:** ~$1-2
+
+> **Watch out:** Paraphrases must preserve intent. "black dress" → "dark colored dress" is fine. "black dress" → "black shoes" changes the category entirely. Validate a random sample of 100 augmented queries manually. Also: paraphrases should generate varied vocabulary, not just reword the same terms. "hoodie" should produce "sweatshirt with hood", "pullover hoodie", "hooded top" — not "hoodie garment", "hoodie clothing", "hoodie item" which are the lazy LLM outputs. Check for this. Don't use augmented queries for evaluation, only for training. They go into the train split only.
 
 ---
 
@@ -491,10 +527,10 @@ Goal: Make the search system usable for actual shoppers. Improve data quality.
 
 **What:** Generate detailed product descriptions from product images using a vision-language model.
 
-**Why:** H&M's `detail_desc` field is often sparse or missing. "Jersey top" tells you nothing about the neckline, pattern, or fit. A VLM can describe what's visible in the product image: "crew neck, short sleeve, navy and white horizontal stripes, relaxed fit."
+**Why:** H&M's `detail_desc` field is often sparse. "Jersey top" doesn't mention the neckline, pattern, or fit visible in the product image.
 
 **How:**
-1. For each product image, call a VLM (Qwen2.5-VL or GPT-4o-mini with vision): "Describe this clothing product in detail: color, pattern, neckline, sleeve length, fit, material if visible."
+1. For each product image, call a VLM: "Describe this clothing product in detail: color, pattern, neckline, sleeve length, fit, material if visible."
 2. Append generated description to existing product text
 3. Re-index in OpenSearch (improves BM25)
 4. Re-embed with FashionCLIP (improves dense retrieval)
@@ -505,101 +541,96 @@ Goal: Make the search system usable for actual shoppers. Improve data quality.
 **Cost:** ~$3-5 for 105K images via GPT-4o-mini with vision
 **Verify:** Compare search quality before/after enrichment on test split.
 
+> **Watch out:** VLM descriptions supplement existing text, they don't replace it. Concatenate: `original_text + " | " + vlm_description`. If you overwrite, you lose the original product name which is critical for exact-match queries. The VLM may hallucinate attributes not visible in the image (e.g. "cotton blend" when the material isn't visible). This is acceptable for retrieval (false enrichment is better than missing description) but would be a problem for structured faceting. Don't use VLM-generated attributes for faceted filters without validation. Re-indexing in OpenSearch means rebuilding the entire index — not just updating documents — because the analyzer and field mappings need to accommodate the new text. Budget ~20 minutes for full re-index of 105K enriched articles.
+
 ---
 
 ### 5.3 — Iterative hard negative mining (ANCE-style)
 
 **What:** Retrieve → label → train → re-retrieve → re-label → re-train. Multiple rounds.
 
-**Why:** After one round of fine-tuning (Phase 3), the retriever's mistakes change. The hard negatives from round 1 may no longer be hard. Mining new hard negatives from the improved retriever and retraining should push quality further.
+**Why:** After one round of fine-tuning, the retriever's mistakes change. Mining new hard negatives from the improved retriever pushes quality further.
 
 **How:**
 1. Round 1: already done in Phase 3 (3.5 → 3.6)
 2. Round 2: use the fine-tuned retriever from 3.6, retrieve top-20 for 5K train queries, label with GPT-4o-mini, build new triplets, retrain
 3. Round 3: repeat with round-2 model
-4. Typically 2-3 rounds is enough before diminishing returns
+4. Typically 2-3 rounds before diminishing returns
 
 **Input:** Fine-tuned retriever + GPT-4o-mini
 **Output:** Iteratively improved retriever models
 **Cost:** ~$1 per round for LLM labels
 **Verify:** nDCG@10 should improve with each round, flattening by round 3.
 
+> **Watch out:** Each round MUST re-embed all 105K articles with the latest model and rebuild the FAISS index before mining. If you mine from the round-1 model's index but using round-2 model's query encoding, the rankings are wrong because the index and query are in different embedding spaces. This is the most common bug in iterative training. Also: the new hard negatives from round 2 should genuinely be different from round 1. If >80% of the hard negatives are the same products, the model isn't learning new failure modes and another round won't help. Track overlap between rounds.
+
 ---
 
 ### 5.4 — Faceted navigation
 
-**What:** Add structured filters alongside search results: color, category, gender, price range.
-
-**Why:** Fashion shoppers filter. "Show me dresses" then filter by "blue" and "under $50." Facets don't replace ranking but they let users narrow results efficiently.
+**What:** Add structured filters alongside search results: color, category, gender, price.
 
 **How:**
-1. OpenSearch aggregations on structured fields:
-   - `colour_group_name` → color facets with counts
-   - `product_type_name` → category facets
-   - `index_group_name` → gender facets (Menswear, Ladieswear, etc.)
-   - `price` → range buckets ($0-25, $25-50, $50-100, $100+)
-2. Return aggregations alongside search results in API response
-3. When user clicks a facet, add it as a `post_filter` in OpenSearch (doesn't affect aggregation counts)
+1. OpenSearch aggregations on structured fields
+2. Return aggregations alongside search results
+3. When user clicks a facet, add as `post_filter`
 4. Build UI: filter sidebar with checkboxes and counts
 
-**Input:** Existing OpenSearch index (already has all fields)
+**Input:** Existing OpenSearch index
 **Output:** Faceted search API + UI
-**Verify:** Filter "Ladieswear" + "Black" should show only black women's products. Counts should be accurate.
+**Verify:** Filter "Ladieswear" + "Black" should show only black women's products.
+
+> **Watch out:** Use `post_filter`, not `filter`, for faceted search. Regular `filter` affects both results AND aggregation counts, so clicking "Black" would hide the count for "Blue" — the user can't see other color options. `post_filter` filters results but keeps aggregation counts for the full result set, which is what shoppers expect. The `colour_group_name` values in H&M data are high-level groups ("Dark Blue", "Light Orange"), not user-friendly names ("Navy", "Coral"). Map to display names in the UI using the COLOR_MAP from `query_expansion.py`.
 
 ---
 
 ### 5.5 — Partitioned indexes
 
-**What:** Split the OpenSearch index by gender (Menswear, Ladieswear, Kids, etc.). Route queries to the right partition based on NER-detected gender.
-
-**Why:** Searching 105K products when NER detects "mens" means 70K women's/kids products are noise. Partitioning reduces corpus size and improves precision.
+**What:** Split the OpenSearch index by gender. Route queries to the right partition based on NER.
 
 **How:**
-1. Create separate OpenSearch indexes: `moda_menswear`, `moda_ladieswear`, `moda_kids`, `moda_general`
-2. When NER detects gender in query, route to that partition
-3. When no gender detected, search across all (or search `moda_general` which has everything)
-4. Compare: partitioned search vs single-index with filter. Measure latency + nDCG.
+1. Create separate indexes: `moda_menswear`, `moda_ladieswear`, `moda_kids`, `moda_general`
+2. NER detects gender → route to partition
+3. No gender detected → search general (all products)
+4. Compare: partitioned vs single-index-with-filter
 
 **Input:** NER output + articles with `index_group_name`
 **Output:** Partitioned indexes + routing logic
-**Verify:** "mens hoodie" should only search menswear index. Latency should drop.
+
+> **Watch out:** Some products have ambiguous or missing `index_group_name`. "Divided" is an H&M section that spans genders. Unisex items (accessories, some basics) need to exist in all partitions or in a dedicated "general" partition. If you put them in only one partition, queries without gender terms won't find them in the other partitions. Also: the FAISS dense indexes need to be partitioned the same way as OpenSearch. If BM25 searches the menswear partition but dense searches the full 105K catalog, the RRF fusion is comparing different candidate pools. Either partition both or partition neither.
 
 ---
 
 ### 5.6 — Auto-suggest
 
-**What:** As the user types, suggest query completions from the real query log.
-
-**Why:** 253K real queries is a strong suggestion corpus. If a user types "nav", suggest "navy dress", "navy hoodie", "navy slim fit jeans."
+**What:** Query completion from the 253K real query log as the user types.
 
 **How:**
-1. Build a prefix trie from all unique query texts
-2. For each prefix, rank suggestions by frequency (how many times that query appeared)
-3. API endpoint: `GET /suggest?q=nav` → `["navy dress", "navy hoodie", "navy slim fit jeans"]`
-4. Alternative: OpenSearch completion suggester on a dedicated field
+1. Build prefix trie from unique query texts, weighted by frequency
+2. API endpoint: `GET /suggest?q=nav` → `["navy dress", "navy hoodie", ...]`
 
 **Input:** `queries.csv` (253K queries)
 **Output:** Suggest API endpoint
-**Verify:** Type "bl" → should suggest "black dress", "black hoodie", "blazer", etc.
+
+> **Watch out:** The query log may contain PII (people sometimes type names or addresses into search bars), offensive terms, or garbled text (keyboard mashing). Filter the query corpus before building the trie: remove queries shorter than 2 characters, queries containing digits (likely order IDs), and queries that appear only once (likely typos). A frequency threshold of ≥3 occurrences is a reasonable starting point.
 
 ---
 
 ### 5.7 — Query relaxation
 
-**What:** When a query returns too few results, automatically relax constraints and notify the user.
-
-**Why:** "navy slim fit v-neck cashmere sweater mens" might return 0 results. Dropping "v-neck" or "cashmere" may surface relevant products.
+**What:** When a query returns too few results, automatically drop constraints and notify the user.
 
 **How:**
 1. If search returns < 5 results:
-2. Use NER to identify query attributes
-3. Drop attributes in priority order (least important first): pattern → material → fit → gender → color → type
+2. NER identifies query attributes
+3. Drop attributes in priority order: pattern → material → fit → gender → color → type
 4. Re-search with relaxed query
-5. Show user: "Showing results for navy slim fit sweater mens (relaxed from navy slim fit v-neck cashmere sweater mens)"
+5. Show user: "Showing results for navy dress (relaxed from navy slim fit v-neck cashmere sweater mens)"
 
 **Input:** NER output + search results
 **Output:** Query relaxation logic + UI messaging
-**Verify:** Queries that return 0 results should now return something reasonable. Check 50 zero-result queries.
+
+> **Watch out:** Don't drop "type" (the garment category) unless absolutely necessary — relaxing "navy slim fit jeans" to "navy slim fit" removes the most important constraint and returns random navy products. The priority order should keep type and color last. Also: relaxation should be transparent. If you silently drop "slim fit" without telling the user, they'll see regular-fit jeans and think the search is broken. Always show what was relaxed. Set a floor: if even the most relaxed query (just the garment type) returns < 5 results, show what you have rather than relaxing further.
 
 ---
 
@@ -612,17 +643,18 @@ Goal: Make the search system usable for actual shoppers. Improve data quality.
 - Image search (upload photo → similar products)
 - Faceted filters (color, category, gender, price)
 - Auto-suggest as you type
-- "More like this" from any result (image similarity)
+- "More like this" from any result
 - Query relaxation with transparent messaging
 
 **How:**
-1. Flask or FastAPI backend serving all search endpoints
+1. Flask or FastAPI backend
 2. React or simple HTML/JS frontend
 3. Docker Compose: OpenSearch + FAISS service + API server + frontend
 4. One command to start everything
 
 **Output:** `docker-compose up` → working fashion search demo at localhost:3000
-**Verify:** End-to-end walkthrough: search "navy summer dress", filter by color, click a result, try "more like this", upload a photo.
+
+> **Watch out:** Docker Compose startup order matters. OpenSearch takes 15-30 seconds to initialize. The API server needs to wait for OpenSearch to be healthy before indexing or searching. Use `depends_on` with a healthcheck, or a startup script with a retry loop. The FAISS index lives in memory — for 105K products at 512-dim, that's ~200MB, fine for a demo. But if you load multiple FAISS indexes (text, image, MoE at 672-dim), total memory grows. Keep the demo container's memory limit above 4GB. Serve product images from disk or a CDN, not from OpenSearch — don't store base64 images in the search index.
 
 ---
 
