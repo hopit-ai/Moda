@@ -255,4 +255,12 @@ Further out, we're working on data augmentation (LLM-generated query variants, s
 
 ---
 
+## A note on hardware and scalability
+
+Everything in this benchmark ran on a single MacBook with Apple Silicon. OpenSearch on one node, FAISS in memory, cross-encoder on MPS. Total cost: $0. We did this deliberately to show what's possible on community hardware without cloud GPU budgets.
+
+The 62.5ms end-to-end latency is from this single-machine setup. Every component in the stack scales horizontally. OpenSearch shards across nodes. FAISS indexes can be partitioned and queried in parallel. Cross-encoder inference batches across GPUs. On production hardware with dedicated machines for each stage, the latency would be significantly lower. We haven't optimized for speed yet because the benchmark is about measuring quality contributions, not chasing milliseconds. But nothing here is architecturally bound to a single machine.
+
+---
+
 *MODA is built by [The FI Company](https://thefi.company) which is a project within [Hopit.ai](https://hopit.ai). Code and results: [github.com/hopit-ai/moda](https://github.com/hopit-ai/moda). MIT License.*
