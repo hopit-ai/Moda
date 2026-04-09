@@ -64,6 +64,12 @@ MODEL_CONFIGS: dict[str, dict] = {
         "run_name": "Marqo-FashionSigLIP",
         "label": "Marqo-FashionSigLIP",
     },
+    "fashion-clip-ft": {
+        "model_name": "MoDA-FashionCLIP-FT",
+        "pretrained": str(_REPO_ROOT / "models" / "moda-fashionclip-finetuned" / "best" / "model_state_dict.pt"),
+        "run_name": "MoDA-FashionCLIP-FT",
+        "label": "MoDA-FashionCLIP (fine-tuned)",
+    },
 }
 
 # Published numbers from Marqo paper (for verification)

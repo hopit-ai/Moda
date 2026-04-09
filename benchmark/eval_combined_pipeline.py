@@ -13,8 +13,9 @@ Reranker variants:
   0. No reranker (hybrid retrieval only)
   1. Off-the-shelf CE (cross-encoder/ms-marco-MiniLM-L-6-v2)
   2. LLM-trained CE (Phase 3B — moda-fashion-ce-llm-best)
+  3. Attr-conditioned CE (Phase 3.8 Path B — moda-fashion-ce-attr-best)
 
-That gives 2×3 = 6 configs, all on 22,855 test queries.
+That gives 2×4 = 8 configs, all on 22,855 test queries.
 
 Usage:
   python benchmark/eval_combined_pipeline.py
@@ -37,6 +38,8 @@ from tqdm import tqdm
 _REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 
+from sentence_transformers import CrossEncoder
+
 from benchmark.eval_full_pipeline import (
     load_benchmark,
     load_articles,
@@ -46,6 +49,7 @@ from benchmark.eval_full_pipeline import (
     rrf_fusion,
     evaluate,
     ce_rerank_batch,
+    _build_article_text,
     RESULTS_DIR,
     DENSE_MODEL,
     BM25_WEIGHT,
@@ -70,6 +74,64 @@ MODEL_DIR = _REPO_ROOT / "models"
 FINETUNED_BIENC = MODEL_DIR / "moda-fashionclip-finetuned" / "best"
 OFFSHELF_CE = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 LLM_TRAINED_CE = str(MODEL_DIR / "moda-fashion-ce-llm-best")
+ATTR_CE = str(MODEL_DIR / "moda-fashion-ce-attr-best")
+
+
+def _build_tagged_article_text(row: dict) -> str:
+    """Attribute-tagged product text for the Attr-conditioned CE."""
+    parts = []
+    name = str(row.get("prod_name", "")).strip()
+    if name:
+        parts.append(name)
+    desc = str(row.get("detail_desc", "")).strip()
+    if desc:
+        parts.append(desc[:150])
+    text = " | ".join(parts)
+    for tag, field in [
+        ("[COLOR]", "colour_group_name"),
+        ("[TYPE]", "product_type_name"),
+        ("[SEC]", "section_name"),
+        ("[GROUP]", "product_group_name"),
+    ]:
+        val = str(row.get(field, "")).strip()
+        if val:
+            text += f" {tag} {val}"
+    return text
+
+
+def ce_rerank_batch_custom(
+    queries: list[str],
+    candidate_lists: list[list[str]],
+    articles: dict[str, dict],
+    model_name: str,
+    text_fn=_build_article_text,
+    batch_size: int = 64,
+    top_k: int = TOP_K_FINAL,
+) -> list[list[str]]:
+    """CE reranking with a pluggable article text builder."""
+    log.info("Loading cross-encoder: %s...", model_name)
+    ce = CrossEncoder(model_name, max_length=512)
+    text_cache: dict[str, str] = {}
+
+    def get_text(aid: str) -> str:
+        if aid not in text_cache:
+            text_cache[aid] = text_fn(articles.get(aid, {}))
+        return text_cache[aid]
+
+    results = []
+    label = Path(model_name).stem[:25]
+    for query, candidates in tqdm(
+        zip(queries, candidate_lists),
+        total=len(queries), desc=f"CE({label})", ncols=80,
+    ):
+        if not candidates:
+            results.append([])
+            continue
+        pairs = [(query, get_text(cid)) for cid in candidates]
+        scores = ce.predict(pairs, batch_size=batch_size, show_progress_bar=False)
+        ranked = sorted(zip(candidates, scores), key=lambda x: -x[1])
+        results.append([cid for cid, _ in ranked[:top_k]])
+    return results
 
 
 def load_test_query_ids() -> set[str]:
@@ -85,9 +147,11 @@ def load_test_query_ids() -> set[str]:
 
 def main():
     p = argparse.ArgumentParser(
-        description="MODA Phase 3 — Combined pipeline evaluation (2×3 factorial)")
+        description="MODA Phase 3 — Combined pipeline evaluation (2×4 factorial)")
     p.add_argument("--n_queries", type=int, default=0,
                    help="Sample N test queries (0 = use all ~22K)")
+    p.add_argument("--ner-model", type=str, default=None,
+                   help="Path to fine-tuned NER model (GLiNER2 adapter dir)")
     args = p.parse_args()
 
     t_start = time.time()
@@ -115,7 +179,7 @@ def main():
     texts = [q[1] for q in queries]
 
     # ── 2. NER (shared across all configs) ────────────────────────────────────
-    ner_cache = load_or_compute_ner(queries)
+    ner_cache = load_or_compute_ner(queries, ner_model=args.ner_model)
 
     # ── 3. BM25-NER retrieval (shared) ────────────────────────────────────────
     client = OpenSearch(
@@ -200,6 +264,27 @@ def main():
     else:
         log.warning("LLM-trained CE not found at %s — skipping", LLM_TRAINED_CE)
 
+    # ── 8b. CE reranking — Attr-conditioned (Phase 3.8 Path B) ───────────────
+    attr_ce_path = Path(ATTR_CE)
+    if attr_ce_path.exists():
+        log.info("\n--- Retriever A × Attr-conditioned CE ---")
+        a3_lists = ce_rerank_batch_custom(
+            texts, hybrid_baseline_lists, articles,
+            model_name=ATTR_CE, text_fn=_build_tagged_article_text)
+        a3_results = {qid: lst for qid, lst in zip(qids, a3_lists)}
+        all_results["A3_Baseline_AttrCE"] = evaluate(
+            a3_results, qrels, label="A3_Baseline_AttrCE")
+
+        log.info("\n--- Retriever B × Attr-conditioned CE ---")
+        b3_lists = ce_rerank_batch_custom(
+            texts, hybrid_finetuned_lists, articles,
+            model_name=ATTR_CE, text_fn=_build_tagged_article_text)
+        b3_results = {qid: lst for qid, lst in zip(qids, b3_lists)}
+        all_results["B3_FineTuned_AttrCE"] = evaluate(
+            b3_results, qrels, label="B3_FineTuned_AttrCE")
+    else:
+        log.warning("Attr-conditioned CE not found at %s — skipping", ATTR_CE)
+
     # ── 9. Save results ──────────────────────────────────────────────────────
     elapsed = time.time() - t_start
     output = {
@@ -215,6 +300,7 @@ def main():
             "rerank_top_k": TOP_K_FINAL,
             "offshelf_ce": OFFSHELF_CE,
             "llm_trained_ce": LLM_TRAINED_CE,
+            "attr_ce": ATTR_CE,
             "finetuned_bienc": str(FINETUNED_BIENC),
             "elapsed_min": round(elapsed / 60, 1),
         },
@@ -241,10 +327,11 @@ def main():
         )
     print("-" * 100)
 
-    # Show the 2×3 matrix
+    # Show the 2×4 matrix
     print("\n  RETRIEVER × RERANKER MATRIX (nDCG@10):")
-    print(f"  {'':30} {'No Rerank':>12} {'Off-shelf CE':>14} {'LLM-trained CE':>16}")
-    print(f"  {'-'*72}")
+    print(f"  {'':30} {'No Rerank':>12} {'Off-shelf CE':>14}"
+          f" {'LLM-trained CE':>16} {'Attr-cond CE':>14}")
+    print(f"  {'-'*88}")
 
     def get_ndcg(key):
         r = all_results.get(key)
@@ -252,18 +339,22 @@ def main():
 
     baseline_vals = [get_ndcg("A0_Baseline_Hybrid_NoRerank"),
                      get_ndcg("A1_Baseline_OffshelfCE"),
-                     get_ndcg("A2_Baseline_LLMtrainedCE")]
+                     get_ndcg("A2_Baseline_LLMtrainedCE"),
+                     get_ndcg("A3_Baseline_AttrCE")]
     finetuned_vals = [get_ndcg("B0_FineTuned_Hybrid_NoRerank"),
                       get_ndcg("B1_FineTuned_OffshelfCE"),
-                      get_ndcg("B2_FineTuned_LLMtrainedCE")]
+                      get_ndcg("B2_FineTuned_LLMtrainedCE"),
+                      get_ndcg("B3_FineTuned_AttrCE")]
 
     def fmt(v):
         return f"{v:.4f}" if v is not None else "  N/A"
 
     print(f"  {'Baseline FashionCLIP':<30} {fmt(baseline_vals[0]):>12}"
-          f" {fmt(baseline_vals[1]):>14} {fmt(baseline_vals[2]):>16}")
+          f" {fmt(baseline_vals[1]):>14} {fmt(baseline_vals[2]):>16}"
+          f" {fmt(baseline_vals[3]):>14}")
     print(f"  {'Fine-tuned FashionCLIP (3C)':<30} {fmt(finetuned_vals[0]):>12}"
-          f" {fmt(finetuned_vals[1]):>14} {fmt(finetuned_vals[2]):>16}")
+          f" {fmt(finetuned_vals[1]):>14} {fmt(finetuned_vals[2]):>16}"
+          f" {fmt(finetuned_vals[3]):>14}")
 
     # Deltas
     print(f"\n  {'Retriever lift (B vs A)':<30}", end="")

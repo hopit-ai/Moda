@@ -64,8 +64,65 @@ log = logging.getLogger(__name__)
 SPLIT_PATH = _REPO_ROOT / "data" / "processed" / "query_splits.json"
 FINETUNED_CE = str(_REPO_ROOT / "models" / "moda-fashion-ce-best")
 LLM_TRAINED_CE = str(_REPO_ROOT / "models" / "moda-fashion-ce-llm-best")
+ATTR_CE = str(_REPO_ROOT / "models" / "moda-fashion-ce-attr-best")
 OFFSHELF_CE = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 RESULTS_PATH = RESULTS_DIR / "hnm_finetuned_ce_eval.json"
+
+
+def _build_tagged_article_text(row: dict) -> str:
+    """Article text with explicit attribute tags for attr-conditioned CE."""
+    parts = []
+    name = str(row.get("prod_name", "")).strip()
+    if name:
+        parts.append(name)
+    desc = str(row.get("detail_desc", "")).strip()
+    if desc:
+        parts.append(desc[:150])
+    text = " | ".join(parts)
+    for tag, field in [
+        ("[COLOR]", "colour_group_name"),
+        ("[TYPE]", "product_type_name"),
+        ("[SEC]", "section_name"),
+        ("[GROUP]", "product_group_name"),
+    ]:
+        val = str(row.get(field, "")).strip()
+        if val:
+            text += f" {tag} {val}"
+    return text
+
+
+def ce_rerank_batch_tagged(
+    queries: list[str],
+    candidate_lists: list[list[str]],
+    articles: dict[str, dict],
+    model_name: str,
+    batch_size: int = 64,
+    top_k: int = TOP_K_FINAL,
+) -> list[list[str]]:
+    """CE reranking using tagged article text format."""
+    from sentence_transformers.cross_encoder import CrossEncoder as CE
+    log.info("Loading attr-conditioned CE: %s...", model_name)
+    ce = CE(model_name, max_length=512)
+
+    tagged_texts: dict[str, str] = {}
+
+    def get_text(aid: str) -> str:
+        if aid not in tagged_texts:
+            tagged_texts[aid] = _build_tagged_article_text(articles.get(aid, {}))
+        return tagged_texts[aid]
+
+    results = []
+    from tqdm import tqdm as _tqdm
+    for query, candidates in _tqdm(zip(queries, candidate_lists),
+                                    total=len(queries), desc="CE-attr rerank", ncols=80):
+        if not candidates:
+            results.append([])
+            continue
+        pairs = [(query, get_text(cid)) for cid in candidates]
+        scores = ce.predict(pairs, batch_size=batch_size, show_progress_bar=False)
+        ranked = sorted(zip(candidates, scores), key=lambda x: -x[1])
+        results.append([cid for cid, _ in ranked[:top_k]])
+    return results
 
 
 def load_test_query_ids() -> set[str]:
@@ -177,6 +234,19 @@ def main():
     else:
         log.warning("LLM-trained CE not found at %s — skipping", LLM_TRAINED_CE)
 
+    # ── 9b. Attribute-conditioned CE reranking (Path B) ────────────────────
+    attr_ce_path = Path(ATTR_CE)
+    if attr_ce_path.exists():
+        log.info("CE reranking with ATTR-CONDITIONED model: %s", ATTR_CE)
+        attr_lists = ce_rerank_batch_tagged(
+            texts, hybrid_lists, articles, model_name=ATTR_CE)
+        attr_results = {qid: lst for qid, lst in zip(qids, attr_lists)}
+        res_attr = evaluate(
+            attr_results, qrels, label="Hybrid_NER_CE_attr@50")
+        all_results["Hybrid_NER_CE_attr@50"] = res_attr
+    else:
+        log.warning("Attr-conditioned CE not found at %s — skipping", ATTR_CE)
+
     # ── 10. Save results ────────────────────────────────────────────────────
     output = {
         "configs": all_results,
@@ -187,6 +257,7 @@ def main():
             "offshelf_model": OFFSHELF_CE,
             "finetuned_model": FINETUNED_CE,
             "llm_trained_model": LLM_TRAINED_CE,
+            "attr_conditioned_model": ATTR_CE,
             "pool_size": TOP_K_RERANK,
             "rerank_top_k": TOP_K_FINAL,
         },

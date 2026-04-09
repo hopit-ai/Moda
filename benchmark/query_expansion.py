@@ -365,8 +365,15 @@ class FashionNER2:
     def __init__(self, model_name: str = "fastino/gliner2-base-v1",
                  threshold: float = 0.4):
         from gliner2 import GLiNER2
-        log.info("Loading GLiNER2 model: %s", model_name)
-        self.model = GLiNER2.from_pretrained(model_name)
+        from pathlib import Path
+        adapter_cfg = Path(model_name) / "adapter_config.json"
+        if adapter_cfg.exists():
+            log.info("Loading GLiNER2 base + LoRA adapter from %s", model_name)
+            self.model = GLiNER2.from_pretrained("fastino/gliner2-base-v1")
+            self.model.load_adapter(model_name)
+        else:
+            log.info("Loading GLiNER2 model: %s", model_name)
+            self.model = GLiNER2.from_pretrained(model_name)
         self.threshold = threshold
         self.labels = NER_LABELS
         log.info("GLiNER2 ready")

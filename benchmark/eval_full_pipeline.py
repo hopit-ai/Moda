@@ -52,7 +52,7 @@ sys.path.insert(0, str(_REPO_ROOT))
 
 from benchmark.metrics import compute_all_metrics, aggregate_metrics
 from benchmark.query_expansion import (
-    SynonymExpander, FashionNER,
+    SynonymExpander, FashionNER, FashionNER2,
     LABEL_TO_FIELD, COLOR_MAP, GARMENT_TYPE_MAP, GENDER_MAP,
 )
 
@@ -128,22 +128,38 @@ def load_articles() -> dict[str, dict]:
 def load_or_compute_ner(
     queries: list[tuple[str, str]],
     force_recompute: bool = False,
+    ner_model: str | None = None,
 ) -> dict[str, dict[str, list[str]]]:
-    """Load NER cache from disk or compute fresh with GLiNER."""
+    """Load NER cache from disk or compute fresh with GLiNER/GLiNER2.
 
-    if NER_CACHE_PATH.exists() and not force_recompute:
-        log.info("Loading NER cache from disk: %s", NER_CACHE_PATH)
-        with open(NER_CACHE_PATH) as f:
+    Args:
+        ner_model: If provided, use this model (path or HF name) via
+                   FashionNER2 and store results in a separate cache file.
+                   If None, use the default GLiNER v1 + default cache.
+    """
+    if ner_model:
+        safe = Path(ner_model).name
+        cache_path = RESULTS_DIR / f"ner_cache_{safe}.json"
+    else:
+        cache_path = NER_CACHE_PATH
+
+    if cache_path.exists() and not force_recompute:
+        log.info("Loading NER cache from disk: %s", cache_path)
+        with open(cache_path) as f:
             cache = json.load(f)
-        # Check if it covers our query set
         qids = {qid for qid, _ in queries}
         if qids.issubset(set(cache.keys())):
             log.info("NER cache hit — %d entries", len(cache))
             return cache
         log.info("NER cache stale — recomputing...")
 
-    log.info("Computing NER with GLiNER (urchade/gliner_medium-v2.1)...")
-    ner = FashionNER(model_name="urchade/gliner_medium-v2.1", threshold=0.4)
+    if ner_model:
+        log.info("Computing NER with GLiNER2 model: %s ...", ner_model)
+        ner = FashionNER2(model_name=ner_model, threshold=0.4)
+    else:
+        log.info("Computing NER with GLiNER (urchade/gliner_medium-v2.1)...")
+        ner = FashionNER(model_name="urchade/gliner_medium-v2.1", threshold=0.4)
+
     cache: dict[str, dict[str, list[str]]] = {}
     t0 = time.time()
     for i, (qid, text) in enumerate(queries):
@@ -154,11 +170,11 @@ def load_or_compute_ner(
             log.info("  NER: %d/%d  (%.1f q/s, ~%.0fs remaining)",
                      i + 1, len(queries), rate,
                      (len(queries) - i - 1) / rate)
-    del ner   # free RAM before FAISS operations
+    del ner
 
-    with open(NER_CACHE_PATH, "w") as f:
+    with open(cache_path, "w") as f:
         json.dump(cache, f)
-    log.info("NER cache saved → %s  (%.1fs)", NER_CACHE_PATH, time.time() - t0)
+    log.info("NER cache saved → %s  (%.1fs)", cache_path, time.time() - t0)
     return cache
 
 

@@ -1,0 +1,50 @@
+2026-04-09 03:14:03,918 INFO ============================================================
+2026-04-09 03:14:03,918 INFO MODA Phase 1 — Tier 1: Marqo 7-Dataset Benchmark
+2026-04-09 03:14:03,918 INFO Models   : ['fashion-clip', 'fashion-siglip', 'fashion-clip-ft']
+2026-04-09 03:14:03,918 INFO Datasets : ['deepfashion_inshop', 'deepfashion_multimodal', 'fashion200k', 'atlas', 'polyvore']
+2026-04-09 03:14:03,918 INFO ============================================================
+2026-04-09 03:14:03,921 INFO ✓ fashion-clip × deepfashion_inshop: tasks=['sub-category-to-product', 'category-to-product', 'text-to-image', 'color-to-product']
+2026-04-09 03:14:03,923 INFO ✓ fashion-clip × deepfashion_multimodal: tasks=['category-to-product', 'text-to-image']
+2026-04-09 03:14:03,926 INFO ✓ fashion-clip × fashion200k: tasks=['sub-category-to-product', 'category-to-product', 'text-to-image', 'fine-category-to-product']
+2026-04-09 03:14:03,927 INFO ✓ fashion-clip × atlas: tasks=['sub-category-to-product', 'text-to-image']
+2026-04-09 03:14:03,929 INFO ✓ fashion-clip × polyvore: tasks=['category-to-product', 'text-to-image']
+2026-04-09 03:14:03,931 INFO ✓ fashion-siglip × deepfashion_inshop: tasks=['sub-category-to-product', 'category-to-product', 'text-to-image', 'color-to-product']
+2026-04-09 03:14:03,933 INFO ✓ fashion-siglip × deepfashion_multimodal: tasks=['category-to-product', 'text-to-image']
+2026-04-09 03:14:03,936 INFO ✓ fashion-siglip × fashion200k: tasks=['sub-category-to-product', 'category-to-product', 'text-to-image', 'fine-category-to-product']
+2026-04-09 03:14:03,937 INFO ✓ fashion-siglip × atlas: tasks=['sub-category-to-product', 'text-to-image']
+2026-04-09 03:14:03,939 INFO ✓ fashion-siglip × polyvore: tasks=['category-to-product', 'text-to-image']
+2026-04-09 03:14:03,941 INFO ✓ fashion-clip-ft × deepfashion_inshop: tasks=['sub-category-to-product', 'category-to-product', 'text-to-image', 'color-to-product']
+2026-04-09 03:14:03,943 INFO ✓ fashion-clip-ft × deepfashion_multimodal: tasks=['category-to-product', 'text-to-image']
+2026-04-09 03:14:03,943 INFO ✓ fashion-clip-ft × fashion200k: tasks=[]
+2026-04-09 03:14:03,945 INFO ✓ fashion-clip-ft × atlas: tasks=['sub-category-to-product', 'text-to-image']
+2026-04-09 03:14:03,946 INFO ✓ fashion-clip-ft × polyvore: tasks=['category-to-product', 'text-to-image']
+2026-04-09 03:14:03,947 INFO Raw results saved to /Users/rohit.anand/Desktop/Hobby/MODA/results/tier1/tier1_raw_results.json
+2026-04-09 03:14:03,948 INFO Leaderboard saved to /Users/rohit.anand/Desktop/Hobby/MODA/results/tier1/tier1_leaderboard.md
+
+# MODA Tier 1 Leaderboard — Marqo 7-Dataset Benchmark
+
+_Generated: 2026-04-08 21:44 UTC_
+
+## Text-to-Image Retrieval
+
+| Model | Avg Recall@1 | Avg Recall@10 | Avg MRR | Note |
+| --- | --- | --- | --- | --- |
+| Marqo-FashionCLIP | 0.081 | 0.260 | 0.187 | Marqo published: R@1=0.094 |
+| Marqo-FashionSigLIP | 0.109 | 0.313 | 0.226 | Marqo published: R@1=0.121 |
+| MoDA-FashionCLIP (fine-tuned) | 0.081 | 0.245 | 0.195 |  |
+
+## Category-to-Product Retrieval
+
+| Model | Avg P@1 | Avg P@10 | Avg MRR |
+| --- | --- | --- | --- |
+| Marqo-FashionCLIP | 0.738 | 0.703 | 0.791 |
+| Marqo-FashionSigLIP | 0.790 | 0.716 | 0.839 |
+| MoDA-FashionCLIP (fine-tuned) | 0.663 | 0.621 | 0.738 |
+
+## Sub-Category-to-Product Retrieval
+
+| Model | Avg P@1 | Avg P@10 | Avg MRR |
+| --- | --- | --- | --- |
+| Marqo-FashionCLIP | 0.774 | 0.688 | 0.800 |
+| Marqo-FashionSigLIP | 0.774 | 0.680 | 0.824 |
+| MoDA-FashionCLIP (fine-tuned) | 0.699 | 0.686 | 0.762 |
