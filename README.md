@@ -62,7 +62,9 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 
 | Step | What | Command | Status |
 |------|------|---------|--------|
-| **4.3** | Download LookBench (HF subsets + official eval repo) | `python scripts/download_lookbench.py` | Script ready |
+| **4.3** | Download LookBench (HF subsets + official eval repo) | `python scripts/download_lookbench.py` | Done |
+| **4.4** | LookBench vision baselines (MODA metrics + JSON) | `python benchmark/eval_lookbench_baseline.py` | Script ready |
+| **4.4b** | Export Parquet for cloned `look-bench` eval | `python scripts/export_lookbench_parquet.py` | Script ready |
 | **4A** | Download H&M product images (105K) | `python scripts/download_hnm_images.py` | Done |
 | **4B** | Embed images with FashionCLIP vision encoder, build FAISS index | `python benchmark/embed_hnm_images.py` | Done |
 | **4C** | Text-to-image retrieval channel | (integrated in eval scripts) | Done |
@@ -70,8 +72,8 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 | **4E** | LLM labels for image hard negatives (PaleblueDot GPT-4o-mini) | `python benchmark/generate_image_labels.py` | Done |
 | **4F** | Joint text+image fine-tuning (both CLIP encoders, contrastive + alignment) | `python benchmark/train_multimodal.py` | Done |
 | **4G** | Re-embed images with 4F model + multimodal pipeline eval | `bash scripts/run_phase4g_multimodal_eval.sh` | Done |
-| **4H** | Three-Tower training (query/text/image towers, novel architecture) | `python benchmark/train_three_tower.py` | Pending |
-| **4I** | Three-Tower full benchmark evaluation | `python benchmark/eval_three_tower.py` | Pending |
+| **4H** | Three-Tower training (query/text/image towers, novel architecture) | `python benchmark/train_three_tower.py` (add `--quick` for smoke test) | Runnable — train to populate `models/moda-3tower/best/` |
+| **4I** | Three-Tower full benchmark evaluation | `python benchmark/eval_three_tower.py` | Runnable after **4H** (needs OpenSearch + CE weights) |
 
 **4E** produces `data/processed/image_retriever_labels.jsonl` via PaleblueDot (`openai/gpt-4o-mini`). Both **4F** and **4H** consume this file alongside Phase 3C text labels (`biencoder_retriever_labels.jsonl`).
 

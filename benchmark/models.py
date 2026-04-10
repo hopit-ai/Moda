@@ -245,6 +245,47 @@ def encode_images_clip(
     return np.vstack(all_embeddings)
 
 
+def encode_pil_images_clip(
+    images: list,
+    model: Any,
+    preprocess: Any,
+    device: str,
+    batch_size: int = 64,
+    normalize: bool = True,
+) -> np.ndarray:
+    """Encode a list of PIL (or decodeable) images with a CLIP vision tower.
+
+    Args:
+        images: List of PIL.Image.Image (RGB) or objects accepted by ``preprocess``.
+        model: open_clip model with ``encode_image``.
+        preprocess: open_clip image transform.
+        device: Torch device.
+        batch_size: Batch size for forward passes.
+        normalize: L2-normalize embeddings.
+
+    Returns:
+        Float32 array ``(N, D)``.
+    """
+    import torch
+    from tqdm import tqdm
+
+    out: list[np.ndarray] = []
+    model.eval()
+    with torch.no_grad():
+        for start in tqdm(
+            range(0, len(images), batch_size),
+            desc="Encoding images (CLIP)",
+            leave=False,
+        ):
+            batch = images[start : start + batch_size]
+            t = torch.stack([preprocess(im.convert("RGB")) for im in batch]).to(device)
+            feat = model.encode_image(t)
+            if normalize:
+                feat = feat / feat.norm(dim=-1, keepdim=True)
+            out.append(feat.cpu().numpy().astype(np.float32))
+    return np.vstack(out)
+
+
 def encode_texts_st(
     texts: list[str],
     model: Any,

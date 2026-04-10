@@ -31,6 +31,7 @@ data/raw/hnm/
 data/raw/hnm_real/
 # LookBench (~2+ GB HF + clone) — scripts/download_lookbench.py
 data/raw/lookbench/datasets/
+data/raw/lookbench/parquet_export/
 data/raw/lookbench/look-bench/
 # Keep sample files — useful for quick local testing
 !data/raw/*.json
