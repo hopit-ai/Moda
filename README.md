@@ -62,6 +62,7 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 
 | Step | What | Command | Status |
 |------|------|---------|--------|
+| **4.3** | Download LookBench (HF subsets + official eval repo) | `python scripts/download_lookbench.py` | Script ready |
 | **4A** | Download H&M product images (105K) | `python scripts/download_hnm_images.py` | Done |
 | **4B** | Embed images with FashionCLIP vision encoder, build FAISS index | `python benchmark/embed_hnm_images.py` | Done |
 | **4C** | Text-to-image retrieval channel | (integrated in eval scripts) | Done |

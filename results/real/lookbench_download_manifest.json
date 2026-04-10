@@ -1,0 +1,17 @@
+{
+  "out_root": "data/raw/lookbench",
+  "hf_dataset_id": "srpone/look-bench",
+  "official_repo": "https://github.com/SerendipityOneInc/look-bench.git",
+  "subsets_requested": [
+    "real_studio_flat",
+    "aigen_studio",
+    "real_streetlook",
+    "aigen_streetlook",
+    "noise"
+  ],
+  "hf_downloads": [],
+  "git_clone": {
+    "status": "ok",
+    "path": "data/raw/lookbench/look-bench"
+  }
+}
