@@ -9,9 +9,170 @@
     "aigen_streetlook",
     "noise"
   ],
-  "hf_downloads": [],
+  "hf_downloads": [
+    {
+      "config": "real_studio_flat",
+      "status": "ok",
+      "path": "data/raw/lookbench/datasets/real_studio_flat",
+      "splits": {
+        "query": {
+          "rows": 1011,
+          "columns": [
+            "image",
+            "raw_image",
+            "category",
+            "main_attribute",
+            "other_attributes",
+            "bbox",
+            "item_ID",
+            "task",
+            "difficulty"
+          ]
+        },
+        "gallery": {
+          "rows": 3951,
+          "columns": [
+            "image",
+            "raw_image",
+            "category",
+            "main_attribute",
+            "other_attributes",
+            "bbox",
+            "item_ID",
+            "task",
+            "difficulty"
+          ]
+        }
+      }
+    },
+    {
+      "config": "aigen_studio",
+      "status": "ok",
+      "path": "data/raw/lookbench/datasets/aigen_studio",
+      "splits": {
+        "query": {
+          "rows": 193,
+          "columns": [
+            "image",
+            "raw_image",
+            "category",
+            "main_attribute",
+            "other_attributes",
+            "bbox",
+            "item_ID",
+            "task",
+            "difficulty"
+          ]
+        },
+        "gallery": {
+          "rows": 979,
+          "columns": [
+            "image",
+            "raw_image",
+            "category",
+            "main_attribute",
+            "other_attributes",
+            "bbox",
+            "item_ID",
+            "task",
+            "difficulty"
+          ]
+        }
+      }
+    },
+    {
+      "config": "real_streetlook",
+      "status": "ok",
+      "path": "data/raw/lookbench/datasets/real_streetlook",
+      "splits": {
+        "query": {
+          "rows": 981,
+          "columns": [
+            "image",
+            "raw_image",
+            "category",
+            "main_attribute",
+            "other_attributes",
+            "bbox",
+            "item_ID",
+            "task",
+            "difficulty"
+          ]
+        },
+        "gallery": {
+          "rows": 3278,
+          "columns": [
+            "image",
+            "raw_image",
+            "category",
+            "main_attribute",
+            "other_attributes",
+            "bbox",
+            "item_ID",
+            "task",
+            "difficulty"
+          ]
+        }
+      }
+    },
+    {
+      "config": "aigen_streetlook",
+      "status": "ok",
+      "path": "data/raw/lookbench/datasets/aigen_streetlook",
+      "splits": {
+        "query": {
+          "rows": 160,
+          "columns": [
+            "image",
+            "raw_image",
+            "category",
+            "main_attribute",
+            "other_attributes",
+            "bbox",
+            "item_ID",
+            "task",
+            "difficulty"
+          ]
+        },
+        "gallery": {
+          "rows": 571,
+          "columns": [
+            "image",
+            "raw_image",
+            "category",
+            "main_attribute",
+            "other_attributes",
+            "bbox",
+            "item_ID",
+            "task",
+            "difficulty"
+          ]
+        }
+      }
+    },
+    {
+      "config": "noise",
+      "status": "ok",
+      "path": "data/raw/lookbench/datasets/noise",
+      "splits": {
+        "gallery": {
+          "rows": 58275,
+          "columns": [
+            "image",
+            "raw_image",
+            "category",
+            "main_attribute",
+            "other_attributes",
+            "bbox",
+            "item_ID",
+            "task",
+            "difficulty"
+          ]
+        }
+      }
+    }
+  ],
   "git_clone": {
-    "status": "ok",
-    "path": "data/raw/lookbench/look-bench"
+    "status": "skipped"
   }
 }
