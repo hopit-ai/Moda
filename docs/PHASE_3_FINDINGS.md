@@ -557,7 +557,9 @@ No single improvement is transformative alone. The +79.4% total lift comes from 
 |---|---|
 | Phase 3.9 comprehensive eval | `results/real/phase3_9_comprehensive_eval.json` |
 | Full pipeline eval (BM25+NER) | `results/real/phase3_combined_eval.json` |
-| CE fine-tuning eval | `results/real/hnm_finetuned_ce_eval.json` |
+| CE fine-tuning eval (off-shelf / purchase / LLM CE, 22.8K) | `results/real/hnm_finetuned_ce_eval.json` |
+| Phase 2 MoE exploratory (10K) | `results/real/hnm_mixture_of_encoders.json` |
+| ColBERT + CE eval | `results/real/hnm_colbert_rerank.json` |
 | Bi-encoder eval | `results/real/phase3c_biencoder_eval.json` |
 | Fused item tower eval | `results/real/phase3_fused_item_tower_eval.json` |
 | Tier 1 leaderboard | `results/tier1/tier1_leaderboard.md` |

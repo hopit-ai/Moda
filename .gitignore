@@ -106,7 +106,5 @@ logs/
 checkpoints/
 
 # ─── Large result files (rebuild via eval scripts)
-results/real/hnm_colbert_rerank.json
-results/real/hnm_mixture_of_encoders.json
-results/real/hnm_finetuned_ce_eval.json
+# Small metric summaries below are tracked for reproducibility / blog (4–8 KB each).
 results/train_ce_quick.log
