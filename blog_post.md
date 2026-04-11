@@ -247,11 +247,13 @@ The cross-encoder is the single most impactful addition. Off the shelf, 50ms ext
 
 ## What's coming next
 
-Phase 3 fine-tunes both the retriever and the reranker. We've already run these experiments and the results surprised us. The short version: swapping purchase labels for $3 worth of LLM-judged relevance labels did more than any amount of pipeline engineering. Full write-up coming soon.
+Phase 2 deliberately used zero training. The next phases remove that constraint, and the gains we're already seeing are surprising.
 
-Phase 4 adds multimodal image search, with product images as a third retrieval signal. Fashion is visual. Text can describe "floral midi dress" but a picture communicates what that actually looks like. We'll also benchmark against [LookBench](https://arxiv.org/abs/2601.14706), a new live benchmark for fashion image retrieval.
+Phase 3 fine-tunes both the retriever and the reranker. We train the cross-encoder on LLM-judged relevance labels instead of noisy purchase data, and fine-tune FashionCLIP on its own retrieval mistakes (hard negatives mined from its top-20 failures, scored by GPT-4o-mini). We also revisit mixture-of-encoders properly this time: trained color encoders where "navy" is actually near "dark blue," trained category encoders where "jeans" is near "trousers," concatenated with the fine-tuned text encoder into a single product vector. Early results are already in, and the short version is that $3 worth of LLM labels did more than all the pipeline engineering in Phase 2. Full write-up coming soon.
 
-Further out, we're working on data augmentation, mixture-of-encoders with trained per-field encoders, and the search experience layer: faceted navigation, partitioned indexes, auto-suggest, and query relaxation.
+Phase 4 goes multimodal. Fashion is visual. A query like "floral midi dress" has a picture in the shopper's head that text alone can't match. We're adding product image embeddings as a third retrieval signal (BM25 + text-dense + image-dense), joint text-and-image encoder fine-tuning, and a Three-Tower architecture where a dedicated query encoder projects into a shared product space. We'll benchmark against [LookBench](https://arxiv.org/abs/2601.14706), a live attribute-supervised fashion image retrieval benchmark where the current open SOTA is 65.7% Fine Recall@1.
+
+Phase 5 builds the search experience: data augmentation (LLM query paraphrasing, VLM catalog enrichment), faceted navigation, partitioned indexes by gender and category, auto-suggest from the query log, and query relaxation when searches return too few results.
 
 ---
 
