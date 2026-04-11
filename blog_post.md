@@ -4,25 +4,25 @@
 
 ---
 
-Try searching "navy summer dress" on your favorite fashion site. Count how many results are actually navy summer dresses. You'll probably find a navy winter parka (matched "navy"), a straw summer hat (matched "summer"), a pink floral dress (matched "dress"), and maybe some navy men's chinos thrown in for good measure. Each result matched a word. None of them matched the intent.
+Try searching "navy summer dress" on your favorite fashion site. Count how many results are actually navy summer dresses. You will probably find a navy winter parka (matched "navy"), a straw summer hat (matched "summer"), a pink floral dress (matched "dress"), and maybe some navy men's chinos thrown in for good measure. Each result matched a word. None of them matched the intent.
 
 ![Keyword search vs full pipeline: same query, very different results](assets/search_comparison.svg)
 
-This isn't a solved problem pretending to be one. Fashion search is genuinely harder than other e-commerce search, and most of the industry treats it like a configuration issue rather than a research problem. A furniture store sells a "walnut mid-century coffee table" and customers search for "walnut mid-century coffee table." The words overlap. Fashion doesn't work that way. H&M calls a hoodie "Ben zip hoodie." Nobody searches for "Ben." They search for "zip hoodie" or "black hoodie mens" or just "hoodie." The gap between how fashion products are named and how people look for them is wider than in any other e-commerce vertical we've seen.
+This problem is not solved, even though it looks like it should be. Fashion search is genuinely harder than other e-commerce search, and most of the industry treats it like a configuration issue rather than a research problem. A furniture store sells a "walnut mid-century coffee table" and customers search for "walnut mid-century coffee table." The words overlap. Fashion does not work that way. H&M calls a hoodie "Ben zip hoodie." Nobody searches for "Ben." They search for "zip hoodie" or "black hoodie mens" or just "hoodie." The gap between how fashion products are named and how people look for them is wider than in any other e-commerce vertical we have seen.
 
 We spent two weeks measuring that gap. 253,685 search queries derived from H&M customer purchase data. 105,542 products. Eleven pipeline configurations, each adding one component at a time, from basic keyword search all the way to hybrid retrieval with neural reranking and named entity recognition. We also tested [ColBERT](https://github.com/stanford-futuredata/ColBERT) late-interaction models and a [Superlinked](https://superlinked.com/)-style mixture-of-encoders approach. The best zero-shot configuration improved nDCG@10 by 81% over the best published fashion embedding baseline. No training, no proprietary APIs, total compute cost of $0 on a MacBook.
 
-Some of what we found confirmed conventional wisdom. Some of it didn't. One technique recommended in every search engineering guide actively destroyed ranking precision.
+Some of what we found confirmed conventional wisdom. Some of it did not. One technique recommended in every search engineering guide actively destroyed ranking precision.
 
 ---
 
 ## Why fashion search needs its own benchmark
 
-If you look at published search benchmarks, they're either general e-commerce (like [WANDS](https://github.com/wayfair/WANDS) from Wayfair, which is mostly furniture) or academic fashion datasets (like [DeepFashion](https://huggingface.co/datasets/Marqo/deepfashion-inshop) and [Fashion200K](https://huggingface.co/datasets/Marqo/fashion200k)) that test embedding quality in isolation. [Marqo](https://www.marqo.ai/) has done good work here, releasing [FashionCLIP and FashionSigLIP](https://github.com/marqo-ai/marqo-FashionCLIP) with benchmarks across 7 fashion datasets. [Algolia](https://www.algolia.com/) and [Bloomreach](https://www.bloomreach.com/) have commercial fashion search products but publish no retrieval metrics. [Superlinked](https://superlinked.com/) has an interesting framework but no public numbers.
+If you look at published search benchmarks, they are either general e-commerce (like [WANDS](https://github.com/wayfair/WANDS) from Wayfair, which is mostly furniture) or academic fashion datasets (like [DeepFashion](https://huggingface.co/datasets/Marqo/deepfashion-inshop) and [Fashion200K](https://huggingface.co/datasets/Marqo/fashion200k)) that test embedding quality in isolation. [Marqo](https://www.marqo.ai/) has done good work here, releasing [FashionCLIP and FashionSigLIP](https://github.com/marqo-ai/marqo-FashionCLIP) with benchmarks across 7 fashion datasets. [Algolia](https://www.algolia.com/) and [Bloomreach](https://www.bloomreach.com/) have commercial fashion search products but publish no retrieval metrics. [Superlinked](https://superlinked.com/) has an interesting framework but no public numbers.
 
 What nobody had done was put together a complete search pipeline on purchase-grounded queries and measure what each component contributes. Not embedding cosine similarity on curated academic datasets. The whole system: keyword retrieval, dense retrieval, hybrid fusion, reranking, query understanding, all wired together and tested on queries linked to actual purchase behavior.
 
-That's what we built. Open source, reproducible, on real data.
+We built that. Open source, reproducible, on real purchase data.
 
 ---
 
@@ -30,9 +30,9 @@ That's what we built. Open source, reproducible, on real data.
 
 We started with three constraints for credibility.
 
-First, queries grounded in purchase behavior. Our first attempt used product names as queries ("Ben zip hoodie" searching for Ben zip hoodie). The numbers looked great. Too great. Product-name-as-query is a common benchmarking shortcut, and it inflates results because you're measuring exact-match recall, not search quality. We threw those numbers out.
+First, queries grounded in purchase behavior. Our first attempt used product names as queries ("Ben zip hoodie" searching for Ben zip hoodie). The numbers looked great. Too great. Product-name-as-query is a common benchmarking shortcut, and it inflates results because you are measuring exact-match recall, not search quality. We threw those numbers out.
 
-We switched to [Microsoft's H&M Search Data](https://huggingface.co/datasets/microsoft/hnm-search-data) on HuggingFace. A note on what this dataset is: the queries are synthetically generated from H&M's real purchase transactions, not captured from actual search logs. Microsoft took the original [H&M Kaggle competition data](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations) (31.8M real transactions, 105K real products, real customer demographics) and generated query-product pairs from it. The purchases are real. The queries are reconstructed. This is a limitation we want to be upfront about: these queries may not fully reflect the messiness of real search behavior (typos, vague intent, exploratory browsing). But they do capture realistic purchase-grounded relevance, and at 253,685 queries across 105,542 products, the scale is large enough for statistically robust comparisons between pipeline configurations.
+We switched to [Microsoft's H&M Search Data](https://huggingface.co/datasets/microsoft/hnm-search-data) on HuggingFace. A note on what this dataset actually is: the queries are synthetically generated from H&M's real purchase transactions, not captured from actual search logs. Microsoft took the original [H&M Kaggle competition data](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations) (31.8M real transactions, 105K real products, real customer demographics) and generated query-product pairs from it. The purchases are real. The queries are reconstructed. This is a limitation we want to be upfront about: these queries may not fully reflect the messiness of real search behavior (typos, vague intent, exploratory browsing). But they do capture realistic purchase-grounded relevance, and at 253,685 queries across 105,542 products, the scale is large enough for statistically robust comparisons between pipeline configurations.
 
 Second, a dataset large enough for statistical confidence. 253,685 queries with bootstrap 95% confidence intervals tight enough to distinguish all configs from each other.
 
@@ -42,11 +42,11 @@ Third, a validated evaluation harness. Before publishing our own numbers, we rep
 
 ## How we measure search quality (for non-IR folks)
 
-If you've worked in fashion merchandising or e-commerce but haven't spent time in information retrieval research, the metrics we report might be unfamiliar. Here's what they mean for a person browsing a fashion website.
+If you have worked in fashion merchandising or e-commerce but have not spent time in information retrieval research, the metrics we report might be unfamiliar. Here is what they mean for a person browsing a fashion website.
 
 **[nDCG@10](https://en.wikipedia.org/wiki/Discounted_cumulative_gain#Normalized_DCG)** (Normalized Discounted Cumulative Gain at 10) answers: "Of the first 10 results shown, how many are relevant and are the best ones near the top?" A score of 1.0 means every result in the top 10 is relevant and perfectly ordered. Our best score is 0.054. That sounds low, but with only 1 "correct" product out of 105,542 candidates, it makes sense. More on this later.
 
-**[MRR](https://en.wikipedia.org/wiki/Mean_reciprocal_rank)** (Mean Reciprocal Rank) answers: "How far does the shopper scroll to find the first good result?" If the right product is result #1, MRR = 1.0. If it's result #3, MRR = 0.33. Averaged across all queries.
+**[MRR](https://en.wikipedia.org/wiki/Mean_reciprocal_rank)** (Mean Reciprocal Rank) answers: "How far does the shopper scroll to find the first good result?" If the right product is result #1, MRR = 1.0. If it is result #3, MRR = 0.33. Averaged across all queries.
 
 **[Recall@10](https://en.wikipedia.org/wiki/Precision_and_recall#Recall)** answers: "Does the relevant product appear anywhere in the top 10?" If yes, 1.0. If the shopper has to go past page one to find what they want, 0.0.
 
@@ -82,15 +82,15 @@ Every number matched within 1-2%. When we report numbers below, the measurement 
 
 ## Phase 2: What each component actually contributes
 
-One deliberate constraint in Phase 2: no training. Every model is used off the shelf, exactly as published. We didn't fine-tune the embedding model, didn't train the cross-encoder on fashion data, didn't even train a query classifier. The question we wanted to answer was: how far can you get with smart pipeline engineering alone, using components anyone can download from HuggingFace in five minutes? This matters because training custom models is expensive, slow, and requires labeled data most teams don't have. If you can get +81% from just plugging things together the right way, that changes the build-vs-train calculus.
+One deliberate constraint in Phase 2: no training. Every model is used off the shelf, exactly as published. We did not fine-tune the embedding model, did not train the cross-encoder on fashion data, did not even train a query classifier. The question we wanted to answer was: how far can you get with pipeline engineering alone, using components anyone can download from HuggingFace in five minutes? This matters because training custom models is expensive, slow, and requires labeled data most teams do not have. If you can get +81% from plugging things together the right way, that changes the build-vs-train calculus.
 
 We started with 10,000 queries to check directionality, then ran the full 253,685. The 10K sample was within 1% of the final numbers, so the sample was representative. All results below are from the full run.
 
 ### Finding 1: Dense retrieval crushes keyword search on fashion
 
-**How BM25 works:** [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) scores each product by counting how many query words appear in the product text, weighted by how rare each word is across the catalog (a word appearing in 100 products is less useful than one appearing in 5). It also accounts for document length so that longer descriptions don't get unfair advantage. It's the backbone of Elasticsearch, OpenSearch, and most production search systems. Fast, well-understood, and works well when query vocabulary overlaps with product vocabulary. The problem: it has no concept of meaning. "hoodie" and "hooded sweatshirt" are different words to BM25.
+[BM25](https://en.wikipedia.org/wiki/Okapi_BM25) scores each product by counting how many query words appear in the product text, weighted by how rare each word is across the catalog. A word appearing in 100 products is less useful than one appearing in 5. BM25 also accounts for document length so longer descriptions do not get unfair advantage. It is the backbone of Elasticsearch, OpenSearch, and most production search systems. Fast, well understood, and it works well when query vocabulary overlaps with product vocabulary. The problem: it has no concept of meaning. "Hoodie" and "hooded sweatshirt" are completely different words to BM25.
 
-**How dense retrieval works:** [Dense retrieval](https://arxiv.org/abs/2007.15207) takes a different approach. A neural network (in our case, FashionCLIP) reads the query text and compresses it into a single vector of 512 numbers. The same network does the same for every product description. Products whose vectors point in a similar direction are considered relevant. The key property: the network has learned that "hoodie" and "hooded sweatshirt" mean similar things, so their vectors are close even though the words don't overlap. All 105K product vectors are pre-computed and stored in a [FAISS](https://github.com/facebookresearch/faiss) index for fast nearest-neighbor search.
+[Dense retrieval](https://arxiv.org/abs/2007.15207) takes a different approach. A neural network (in our case, FashionCLIP) reads the query text and compresses it into a single vector of 512 numbers. The same network does the same for every product description. Products whose vectors point in a similar direction are considered relevant. The network has learned that "hoodie" and "hooded sweatshirt" mean similar things, so their vectors end up close even though the words do not overlap. All 105K product vectors are pre-computed and stored in a [FAISS](https://github.com/facebookresearch/faiss) index for fast nearest-neighbor search.
 
 | Method | nDCG@10 | MRR | Recall@10 | Recall@50 |
 |--------|---------|-----|-----------|-----------|
@@ -99,9 +99,9 @@ We started with 10,000 queries to check directionality, then ran the full 253,68
 
 BM25 loses across the board: -30% on nDCG@10, -38% on MRR, -44% on Recall@10, -46% on Recall@50. The coverage gap (Recall) is even wider than the ranking gap (nDCG).
 
-This is the opposite of what general e-commerce benchmarks show. On [WANDS](https://github.com/wayfair/WANDS) (furniture), BM25 holds its own against dense retrieval. On fashion, it gets crushed. The reason is straightforward once you look at the data: H&M product names are brand-creative identifiers ("Ben zip hoodie", "Tigra knitted headband") while real users search functionally ("zip hoodie", "warm earband"). Dense embeddings can bridge that vocabulary gap. BM25 cannot.
+This is the opposite of what general e-commerce benchmarks show. On [WANDS](https://github.com/wayfair/WANDS) (furniture), BM25 holds its own against dense retrieval. On fashion, it gets crushed. The reason is straightforward once you look at the data: H&M product names are brand-creative identifiers ("Ben zip hoodie", "Tigra knitted headband") while users search functionally ("zip hoodie", "warm earband"). Dense embeddings bridge that vocabulary gap. BM25 cannot.
 
-If you're running fashion search on keyword matching alone, this is the quality you're leaving on the table.
+If you are running fashion search on keyword matching alone, this is the quality gap you are living with.
 
 ### Finding 2: The embedding model that wins on benchmarks may lose on your catalog
 
@@ -125,23 +125,23 @@ With FashionCLIP as the dense backbone, we added one component at a time.
 
 **Cross-encoder reranking** works differently from both BM25 and dense retrieval. In dense retrieval, the query and product are encoded separately into vectors, then compared with a dot product. This is fast (you pre-compute product vectors once) but limited: each side is compressed independently and they never "see" each other. A cross-encoder removes that wall. It takes the query and product text, concatenates them into a single input ("navy summer dress [SEP] Linen A-Line Dress, Dark Blue, Ladieswear, lightweight summer fabric"), and feeds the combined text through a transformer model that attends across both sides simultaneously. The model outputs a single relevance score.
 
-This means it can understand compositional queries that embedding similarity misses. "Relaxed fit navy summer dress" isn't just the sum of "relaxed" + "fit" + "navy" + "summer" + "dress." The cross-encoder reads it as a unified request and can evaluate whether a product satisfies all the constraints together. The cost: you can't pre-compute anything, so the model runs at query time on every candidate. That's why we only apply it to the top 100 from hybrid retrieval, not the full 105K catalog.
+This means it can understand compositional queries that embedding similarity misses. "Relaxed fit navy summer dress" is not just the sum of "relaxed" + "fit" + "navy" + "summer" + "dress." The cross-encoder reads it as a unified request and evaluates whether a product satisfies all the constraints together. The cost: you cannot pre-compute anything, so the model runs at query time on every candidate. That is why we only apply it to the top 100 from hybrid retrieval, not the full 105K catalog.
 
-We used [ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2), a 22-million-parameter model originally trained on web search queries (not fashion). Even without any fashion-specific training, it was the single most impactful addition: +51% on top of hybrid results, at 50ms extra latency. That result is part of why we wanted to establish a zero-training baseline first. A generic web-search reranker, applied out of the box, contributed more than every other component combined.
+We used [ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2), a 22-million-parameter model originally trained on web search queries, not fashion. Even without any fashion-specific training, it was the single most impactful addition: +51% on top of hybrid results, at 50ms extra latency. That result is part of why we wanted to establish a zero-training baseline first. A generic web-search reranker, applied out of the box, contributed more than every other component combined.
 
 **NER attribute boosting** adds structured understanding to what is otherwise a bag-of-words query. NER (Named Entity Recognition) is the task of identifying specific types of information in text. In a general context, NER finds person names, locations, dates. In fashion search, we define custom entity types: color, garment type, material, fit style, occasion, gender, pattern. Given a query like "navy slim fit jeans mens," NER extracts {color: navy, fit: slim fit, type: jeans, gender: mens}.
 
-Why would this help? Because BM25 and dense retrieval both treat the query as a flat string. They don't know that "navy" is a color constraint and "mens" is a gender constraint. NER gives us that structure, and we can use it to boost products that match on the right fields. If NER detects a color, we add a boost on the `colour_group_name` field in OpenSearch. If it detects a garment type, we boost `product_type_name`. We use `bool.should` clauses (soft boosts, not hard filters) so products that miss one attribute can still appear if they're strong on everything else.
+Why would this help? Because BM25 and dense retrieval both treat the query as a flat string. They do not know that "navy" is a color constraint and "mens" is a gender constraint. NER gives us that structure, and we can use it to boost products that match on the right fields. If NER detects a color, we add a boost on the `colour_group_name` field in OpenSearch. If it detects a garment type, we boost `product_type_name`. We use `bool.should` clauses (soft boosts, not hard filters) so products that miss one attribute can still appear if they are strong on everything else.
 
-We tested both [GLiNER](https://github.com/urchade/GLiNER) (urchade/gliner_medium-v2.1, [NAACL 2024](https://aclanthology.org/2024.naacl-long.300/)) and [GLiNER2](https://github.com/fastino-ai/GLiNER2) (fastino/gliner2-base-v1, EMNLP 2025). Both are "zero-shot" NER models, meaning they can extract entity types they've never been trained on, just from a text description of what to look for. No fashion-specific training data needed. GLiNER2 improved BM25+NER by +16% over v1 at the retrieval stage. In the full pipeline with the cross-encoder on top, the gap narrowed to +0.8% (nDCG@10: 0.0549 vs 0.0553). Better entity extraction becomes more valuable in the fine-tuning stages though: cleaner attribute labels mean better training data for field-specific encoders, more precise hard negative mining, and higher quality LLM labeling prompts.
+We tested both [GLiNER](https://github.com/urchade/GLiNER) (urchade/gliner_medium-v2.1, [NAACL 2024](https://aclanthology.org/2024.naacl-long.300/)) and [GLiNER2](https://github.com/fastino-ai/GLiNER2) (fastino/gliner2-base-v1, EMNLP 2025). Both are "zero-shot" NER models, meaning they can extract entity types they have never been trained on, just from a text description of what to look for. No fashion-specific training data needed. GLiNER2 improved BM25+NER by +16% over v1 at the retrieval stage. In the full pipeline with the cross-encoder on top, the gap narrowed to +0.8% (nDCG@10: 0.0549 vs 0.0553). Better entity extraction becomes more valuable in the fine-tuning stages though: cleaner attribute labels mean better training data for field-specific encoders, more precise hard negative mining, and higher quality LLM labeling prompts.
 
-**Synonym expansion** was the technique we expected to help and it didn't. We built an 80+ group fashion synonym dictionary grounded in H&M's own taxonomy (jacket/coat/blazer, pants/trousers/slacks, etc.). It hurt performance by 35%. Expanding "hoodie" to 12 synonyms (sweatshirt, jumper, pullover...) collapses keyword weights and every product starts matching on something. Ranking precision disappears. This failure mode is documented in the research literature ([LESER, 2025](https://arxiv.org/abs/2509.05570); [LEAPS, 2026](https://arxiv.org/abs/2601.05513)). We removed synonyms from the final pipeline.
+**Synonym expansion** was the technique we expected to help and it did not. We built an 80+ group fashion synonym dictionary grounded in H&M's own taxonomy (jacket/coat/blazer, pants/trousers/slacks, etc.). It hurt performance by 35%. Expanding "hoodie" to 12 synonyms (sweatshirt, jumper, pullover...) collapses keyword weights and every product starts matching on something. Ranking precision disappears. This failure mode is documented in the research literature ([LESER, 2025](https://arxiv.org/abs/2509.05570); [LEAPS, 2026](https://arxiv.org/abs/2601.05513)). We removed synonyms from the final pipeline.
 
 ### ColBERT: late interaction as a reranker
 
 We tested [ColBERT v2](https://github.com/stanford-futuredata/ColBERT) ([Santhanam et al., 2022](https://arxiv.org/abs/2112.01488)), which sits between dense retrieval and cross-encoders on the cost/quality spectrum.
 
-Here's the intuition. Dense retrieval compresses "Linen A-Line Summer Dress, Navy Blue, Lightweight, Sleeveless" into one vector. All the information about color, material, silhouette, and sleeve length gets squeezed into a single point in 512-dimensional space. Some information survives, some doesn't. A cross-encoder avoids this compression entirely by reading query and product together, but that's too expensive to run on 105K products.
+Here is the intuition. Dense retrieval compresses "Linen A-Line Summer Dress, Navy Blue, Lightweight, Sleeveless" into one vector. All the information about color, material, silhouette, and sleeve length gets squeezed into a single point in 512-dimensional space. Some information survives, some does not. A cross-encoder avoids this compression entirely by reading query and product together, but that is too expensive to run on 105K products.
 
 ColBERT's compromise: keep a separate vector for every word in the product (so "Linen" gets one vector, "A-Line" gets another, "Navy" gets another). At search time, each query word finds its single best-matching word in the product (the "MaxSim" operation). "Navy" in the query aligns with "Navy" in the product. "Dress" aligns with "Dress." The per-word max similarities are summed into a final score. The product-side vectors can be pre-computed and stored, so the cost is between dense (one dot product per product) and cross-encoder (full transformer pass per product).
 
@@ -151,7 +151,7 @@ ColBERT's compromise: keep a separate vector for every word in the product (so "
 | Cross-encoder as reranker | 0.0549 | 0.0562 | 0.0163 | 0.0284 |
 | ColBERT first, then cross-encoder | 0.0553 | 0.0569 | 0.0166 | 0.0289 |
 
-ColBERT alone as a reranker couldn't match the cross-encoder. But using ColBERT as a pre-filter (100 candidates down to 50, then cross-encoder on the 50) slightly beat the single-stage approach. ColBERT removes noise that the cross-encoder would otherwise waste capacity on.
+ColBERT alone as a reranker could not match the cross-encoder. But using ColBERT as a pre-filter (100 candidates down to 50, then cross-encoder on the 50) slightly beat the single-stage approach. ColBERT removes noise that the cross-encoder would otherwise waste capacity on.
 
 ### A note on mixture-of-encoders
 
@@ -188,7 +188,7 @@ The 10K sample held:
 
 Multi-signal pipelines are more stable across sample sizes than individual components. Bootstrap 95% confidence intervals on 253K queries are tight ([0.0537, 0.0550] for the best config).
 
-One result we didn't expect: the full pipeline with NER and without NER produced identical numbers. The cross-encoder already captures what NER was providing. The effective pipeline is three components: dense retrieval, hybrid fusion, and cross-encoder reranking.
+One result we did not expect: the full pipeline with NER and without NER produced identical numbers. The cross-encoder already captures what NER was providing. The effective pipeline is three components: dense retrieval, hybrid fusion, and cross-encoder reranking.
 
 ![Component-by-component breakdown](assets/component_gains.svg)
 
@@ -215,7 +215,7 @@ This ordering matches what production search teams at Zalando, Pinterest, and AS
 
 ### Engineering footnote
 
-If you're building a similar pipeline, one thing that cost us hours: [PyTorch](https://pytorch.org/) and [FAISS](https://github.com/facebookresearch/faiss) share BLAS libraries, and loading both in the same Python process causes segfaults. We run FAISS search in a subprocess with no PyTorch imports. The cross-encoder runs in the main process. Ugly, but it works.
+If you are building a similar pipeline, one thing that cost us hours: [PyTorch](https://pytorch.org/) and [FAISS](https://github.com/facebookresearch/faiss) share BLAS libraries, and loading both in the same Python process causes segfaults. We run FAISS search in a subprocess with no PyTorch imports. The cross-encoder runs in the main process. Not elegant, but it works, and we have not found a cleaner solution.
 
 We also patched Marqo's eval harness to run on Apple MPS (their code hardcodes CUDA autocast). The patched version is in the repo.
 
@@ -227,7 +227,7 @@ nDCG@10 of 0.054 looks concerning if you compare it to benchmarks like WANDS whe
 
 In [WANDS](https://github.com/wayfair/WANDS), each query has many products labeled as relevant. In H&M, each query has exactly 1 positive: the specific product the customer bought. Out of 105,542 products. A customer searches "black summer dress," browses 20 dresses, and buys one. The other 19 are scored as negatives in our benchmark even though they might have been perfectly fine.
 
-nDCG@10 in the 0.03-0.05 range is expected with this setup. The relative improvements between pipeline configurations (+81% from dense to full pipeline) are what matters. Absolute numbers are not comparable across benchmarks with different relevance structures.
+nDCG@10 in the 0.03-0.05 range is expected with this setup. The relative improvements between pipeline configurations (+81% from dense to full pipeline) are what matter. Absolute numbers are not comparable across benchmarks with different relevance structures.
 
 ---
 
@@ -235,23 +235,23 @@ nDCG@10 in the 0.03-0.05 range is expected with this setup. The relative improve
 
 Every result in Phase 2 used models exactly as downloaded from HuggingFace. No training, no fine-tuning, no labeled data, no GPU rentals. The entire benchmark ran on a laptop. That was the point: establish what you can get for free before spending time and money on custom models.
 
-The pipeline matters more than the embedding. The best fashion embeddings give you nDCG@10 of 0.030. Adding hybrid fusion and a cross-encoder, both off-the-shelf, gets you to 0.054. That's 81% better with zero training.
+The pipeline matters more than the embedding. The best fashion embeddings give you nDCG@10 of 0.030. Adding hybrid fusion and a cross-encoder, both off-the-shelf, gets you to 0.054. 81% better with zero training.
 
-Fashion search has a vocabulary problem that keyword search can't solve. Products have brand-creative names. Users search functionally. Dense retrieval bridges this gap. If you're running fashion search on keyword matching alone, test it against a dense retrieval baseline.
+Fashion search has a vocabulary problem that keyword search cannot solve. Products have brand-creative names. Users search functionally. Dense retrieval bridges this gap. If you are running fashion search on keyword matching alone, test it against a dense retrieval baseline.
 
-Synonym expansion made things worse by 35%. We didn't see that coming.
+Synonym expansion made things worse by 35%. We did not see that coming.
 
 The cross-encoder is the single most impactful addition. Off the shelf, 50ms extra latency, +51% improvement. If you add one thing to your search pipeline, add a reranker.
 
 ---
 
-## What's coming next
+## What is coming next
 
-Phase 2 deliberately used zero training. The next phases remove that constraint, and the gains we're already seeing are surprising.
+Phase 2 deliberately used zero training. The next phases remove that constraint, and the gains we are already seeing are surprising.
 
 Phase 3 fine-tunes both the retriever and the reranker. We train the cross-encoder on LLM-judged relevance labels instead of noisy purchase data, and fine-tune FashionCLIP on its own retrieval mistakes (hard negatives mined from its top-20 failures, scored by GPT-4o-mini). We also revisit mixture-of-encoders properly this time: trained color encoders where "navy" is actually near "dark blue," trained category encoders where "jeans" is near "trousers," concatenated with the fine-tuned text encoder into a single product vector. Early results are already in, and the short version is that $3 worth of LLM labels did more than all the pipeline engineering in Phase 2. Full write-up coming soon.
 
-Phase 4 goes multimodal. Fashion is visual. A query like "floral midi dress" has a picture in the shopper's head that text alone can't match. We're adding product image embeddings as a third retrieval signal (BM25 + text-dense + image-dense), joint text-and-image encoder fine-tuning, and a Three-Tower architecture where a dedicated query encoder projects into a shared product space. We'll benchmark against [LookBench](https://arxiv.org/abs/2601.14706), a live attribute-supervised fashion image retrieval benchmark where the current open SOTA is 65.7% Fine Recall@1.
+Phase 4 goes multimodal. Fashion is visual. A query like "floral midi dress" has a picture in the shopper's head that text alone cannot match. We are adding product image embeddings as a third retrieval signal (BM25 + text-dense + image-dense), joint text-and-image encoder fine-tuning, and a Three-Tower architecture where a dedicated query encoder projects into a shared product space. We will benchmark against [LookBench](https://arxiv.org/abs/2601.14706), a live attribute-supervised fashion image retrieval benchmark where the current open best is 65.7% Fine Recall@1.
 
 Phase 5 builds the search experience: data augmentation (LLM query paraphrasing, VLM catalog enrichment), faceted navigation, partitioned indexes by gender and category, auto-suggest from the query log, and query relaxation when searches return too few results.
 
@@ -259,9 +259,9 @@ Phase 5 builds the search experience: data augmentation (LLM query paraphrasing,
 
 ## A note on hardware and scalability
 
-Everything ran on a single MacBook with Apple Silicon. OpenSearch on one node, FAISS in memory, cross-encoder on MPS. Total cost: $0. We did this deliberately to show what's possible on community hardware without cloud GPU budgets.
+Everything ran on a single MacBook with Apple Silicon. OpenSearch on one node, FAISS in memory, cross-encoder on MPS. Total cost: $0. We did this deliberately to show what is possible on community hardware without cloud GPU budgets.
 
-The 62.5ms latency is from this single-machine setup. Every component scales horizontally. OpenSearch shards across nodes. FAISS indexes can be partitioned. Cross-encoder inference batches across GPUs. On production hardware, the latency would be significantly lower. We haven't optimized for speed because the benchmark is about measuring quality contributions, not chasing milliseconds. But nothing here is architecturally bound to a single machine.
+The 62.5ms latency is from this single-machine setup. Every component scales horizontally. OpenSearch shards across nodes. FAISS indexes can be partitioned. Cross-encoder inference batches across GPUs. On production hardware, the latency would be significantly lower. We have not optimized for speed because the benchmark is about measuring quality contributions, not chasing milliseconds. But nothing here is architecturally bound to a single machine.
 
 ---
 
@@ -269,9 +269,9 @@ The 62.5ms latency is from this single-machine setup. Every component scales hor
 
 The entire codebase is open source under MIT. Clone it, run it on your catalog, see what improves.
 
-This matters commercially. Somewhere between 60-70% of transactions on fashion e-commerce sites start with a search. If your search is returning navy parkas when someone wants a navy dress, that's revenue walking away. The gains we measured here (81% improvement in ranking quality from pipeline engineering alone) translate directly into fewer abandoned searches, more add-to-carts, and higher conversion rates. This isn't speculative. Every major fashion retailer that has invested in search quality (ASOS, Zalando, Farfetch) reports measurable revenue impact.
+This matters commercially. Somewhere between 60-70% of transactions on fashion e-commerce sites start with a search. If your search is returning navy parkas when someone wants a navy dress, that is revenue walking away. The gains we measured here (81% improvement in ranking quality from pipeline engineering alone) translate directly into fewer abandoned searches, more add-to-carts, and higher conversion rates. Every major fashion retailer that has invested in search quality (ASOS, Zalando, Farfetch) reports measurable revenue impact.
 
-MODA is designed so that small and mid-size fashion companies can pick up the same pipeline architecture that large retailers use. You don't need a search team of 20 to get a cross-encoder reranker running. The code, the eval harness, and the benchmark are all there. Our benchmark runs on 105K products. The architecture handles up to a million SKUs without any fundamental changes. OpenSearch shards the BM25 index, FAISS partitions the vector index, and the cross-encoder only ever scores 100 candidates per query regardless of catalog size. If you're running a fashion catalog on basic keyword search, the gap between where you are and where you could be is probably larger than you think.
+MODA is designed so that small and mid-size fashion companies can pick up the same pipeline architecture that large retailers use. You do not need a search team of 20 to get a cross-encoder reranker running. The code, the eval harness, and the benchmark are all there. Our benchmark runs on 105K products. The architecture handles up to a million SKUs without any fundamental changes. OpenSearch shards the BM25 index, FAISS partitions the vector index, and the cross-encoder only ever scores 100 candidates per query regardless of catalog size. If you are running a fashion catalog on basic keyword search, the gap between where you are and where you could be is probably larger than you think.
 
 If you need help scaling this to production, adapting it to your catalog, or want us to run the benchmark on your data, [book a call with us](https://calendly.com/hopit-ai/moda).
 
