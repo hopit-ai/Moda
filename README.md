@@ -1,7 +1,7 @@
 # MODA
 
 **The first open benchmark for end-to-end fashion search, with a full component-by-component breakdown.**
-253,685 purchase-grounded queries · 105,542 H&M products · 11 pipeline configs · +81% over best published baseline
+253,685 purchase-grounded queries · 105,542 H&M products · 11 pipeline configs · +81% over embedding-only retrieval
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
