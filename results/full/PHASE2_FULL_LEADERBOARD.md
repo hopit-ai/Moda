@@ -1,6 +1,6 @@
-# MODA Phase 2 — Full Benchmark Leaderboard (253K Real Queries)
+# MODA Phase 2 — Full Benchmark Leaderboard (253K Queries)
 
-**Benchmark:** H&M end-to-end search | **253,685 real user queries** (complete dataset) | 105,542 articles  
+**Benchmark:** H&M end-to-end search | **253,685 purchase-grounded queries** (synthetic, generated from real transactions) | 105,542 articles  
 **Ground truth:** Purchase-based relevance — 1 positive (bought) + ~9 hard negatives per query  
 **Source:** [microsoft/hnm-search-data](https://huggingface.co/datasets/microsoft/hnm-search-data/tree/main/data/search)  
 **Run date:** April 4, 2025 | Hardware: Apple M-series (MPS) | Cost: $0
@@ -56,7 +56,7 @@
 ## Key Findings
 
 ### 1. Dense > BM25 on Real User Fashion Queries (−38%)
-Real user queries are semantic ("warm earband", "casual summer outfit") while H&M product titles are brand-style identifiers ("Sofie knitted top"). Dense embeddings bridge vocabulary mismatch; BM25 relies on exact term overlap.
+The generated queries are semantic ("warm earband", "casual summer outfit") while H&M product titles are brand-style identifiers ("Sofie knitted top"). Dense embeddings bridge vocabulary mismatch; BM25 relies on exact term overlap.
 
 **This contradicts WANDS and most e-commerce benchmarks where BM25 wins** — the difference is real-user intent queries vs. curated search queries.
 

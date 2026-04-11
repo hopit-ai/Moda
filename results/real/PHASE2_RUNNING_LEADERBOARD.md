@@ -1,6 +1,6 @@
-# MODA — Running Leaderboard (Real H&M Queries)
+# MODA — Running Leaderboard (H&M Queries)
 
-**Benchmark:** H&M full-pipeline | 10,000 real user queries (sampled, seed=42) | 105,542 articles  
+**Benchmark:** H&M full-pipeline | 10,000 purchase-grounded queries (sampled, seed=42) | 105,542 articles  
 **Ground truth:** Purchase-based relevance — 1 positive (bought) + ~9 negatives per query  
 **Source:** [microsoft/hnm-search-data → data/search/](https://huggingface.co/datasets/microsoft/hnm-search-data/tree/main/data/search)
 
@@ -129,9 +129,9 @@ BM25 is precision-sensitive to IDF. When we expand "hoodie" → 12+ synonyms, we
 - These map to OpenSearch field boosts: `colour_group_name: "Dark Blue"^4`, `index_group_name: "Menswear"^2`
 - `bool.should` clauses boost without hard-excluding near-miss products
 
-### 3. Dense Retrieval > BM25 on Real User Queries (−38% vs P1 dense best)
+### 3. Dense Retrieval > BM25 on Fashion Queries (−38% vs P1 dense best)
 
-**Why:** Real user queries are semantic ("warm earband", "casual summer outfit") while H&M product names are brand/style identifiers. Dense embeddings capture intent; BM25 relies on term overlap.
+**Why:** The generated queries are semantic ("warm earband", "casual summer outfit") while H&M product names are brand/style identifiers. Dense embeddings capture intent; BM25 relies on term overlap.
 
 **Paper contribution:** Empirical evidence that semantic dense retrieval is superior to lexical BM25 for real user-intent queries in fashion e-commerce.
 

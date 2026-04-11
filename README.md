@@ -1,7 +1,7 @@
 # MODA
 
 **The first open benchmark for end-to-end fashion search, with a full component-by-component breakdown.**
-253,685 real user queries · 105,542 H&M products · 11 pipeline configs · +81% over best published baseline
+253,685 purchase-grounded queries · 105,542 H&M products · 11 pipeline configs · +81% over best published baseline
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -9,9 +9,11 @@
 
 ## What is this?
 
-Nobody has published open, full-pipeline fashion search benchmarks on real user queries. Marqo has great embeddings. Algolia and Bloomreach are proprietary. Nobody has put it all together and measured what each piece contributes.
+Nobody has published open, full-pipeline fashion search benchmarks on purchase-grounded queries at scale. Marqo has great embeddings. Algolia and Bloomreach are proprietary. Nobody has put it all together and measured what each piece contributes.
 
-MODA fills that gap. We built a complete retrieval pipeline (BM25 + dense + hybrid + NER + cross-encoder reranking), ran it against 253,685 real H&M purchase queries, isolated the contribution of every component, and published everything.
+MODA fills that gap. We built a complete retrieval pipeline (BM25 + dense + hybrid + NER + cross-encoder reranking), ran it against 253,685 queries derived from H&M purchase transactions, isolated the contribution of every component, and published everything.
+
+> **Note on query provenance:** The queries are synthetically generated from real H&M purchase data ([Microsoft's H&M Search Data](https://huggingface.co/datasets/microsoft/hnm-search-data)), not captured from actual search logs. The purchases are real; the queries are reconstructed. This is a known limitation. See the [blog post](blog_post.md) for details.
 
 Read the full write-up: [blog_post.md](blog_post.md)
 
@@ -46,7 +48,7 @@ Full pipeline vs dense baseline: +105% nDCG@10, +54% MRR, +55% Recall@10, +21% R
 
 ## Key findings
 
-1. **Dense > BM25 on real fashion queries (-30%)** — H&M product names are brand-style identifiers ("Ben zip hoodie"). Real users search semantically ("zip hoodie"). This contradicts general e-commerce benchmarks like WANDS where BM25 is competitive.
+1. **Dense > BM25 on fashion queries (-30%)** — H&M product names are brand-style identifiers ("Ben zip hoodie"). Real users search semantically ("zip hoodie"). This contradicts general e-commerce benchmarks like WANDS where BM25 is competitive.
 
 2. **Cross-encoder reranking is the dominant signal (+51% marginal)** — [ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2) at 50ms latency is the single most impactful component.
 
@@ -151,7 +153,7 @@ Each query in `qrels.csv` has:
 - `negative_ids` — articles shown but not bought (grade = 1)
 - Everything else — unlabeled (grade = 0)
 
-> Purchase is not perfect relevance. A user searching "black dress" sees 20 good options but buys one. The other 19 are scored as negatives. This suppresses all absolute metric values. The relative ordering between configs is what matters.
+> **Limitations:** (1) Purchase is not perfect relevance. A user searching "black dress" sees 20 good options but buys one. The other 19 are scored as negatives. This suppresses absolute metric values. (2) The queries are synthetically generated from purchase transactions, not captured from actual search logs. The relative ordering between configs is what matters; absolute values are not comparable to benchmarks with different relevance structures.
 
 ---
 
