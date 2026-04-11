@@ -139,7 +139,7 @@ ColBERT alone as a reranker couldn't match the cross-encoder. But using ColBERT 
 
 ### A note on mixture-of-encoders
 
-We also experimented with a [Superlinked-style](https://superlinked.com/vectorhub/articles/airbnb-search-benchmarking) mixture-of-encoders approach: encoding title, color, product type, and group as separate vectors instead of one combined text string. We're not including those numbers in the core results because a proper implementation requires trained field-specific encoders (a learned color embedding where "navy" is near "dark blue," a categorical product-type encoder where "jeans" is near "trousers"). Using the same general-purpose FashionCLIP model for all four fields fragmented context without adding signal, and the results reflected that. We plan to revisit this with trained per-field encoders in Phase 3.
+We also experimented with a [Superlinked-style](https://superlinked.com/vectorhub/articles/airbnb-search-benchmarking) mixture-of-encoders approach: encoding title, color, product type, and group as separate vectors instead of one combined text string. We are not including those numbers in the core results because a proper implementation requires trained field-specific encoders (a learned color embedding where "navy" is near "dark blue," a categorical product-type encoder where "jeans" is near "trousers"). Using the same general-purpose FashionCLIP model for all four fields fragmented context without adding signal, and the results reflected that. We plan to revisit this with trained per-field encoders in Phase 3.
 
 ---
 
