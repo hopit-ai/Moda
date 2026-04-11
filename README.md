@@ -91,11 +91,13 @@ Query
 
 ---
 
-## Reproducing the results
+## Quick start
 
 ### Prerequisites
 
 ```bash
+# Python 3.10+
+git clone https://github.com/hopit-ai/Moda.git && cd Moda
 pip install -r requirements.txt
 
 # OpenSearch (required for BM25)
@@ -104,38 +106,67 @@ docker run -d -p 9200:9200 -e "discovery.type=single-node" \
   opensearchproject/opensearch:2.11.0
 ```
 
-### Step 1: Download data
+### Run on the H&M benchmark (reproduce our results)
 
 ```bash
+# 1. Download H&M data (253K queries, 105K products, ~200MB)
 python scripts/build_hnm_benchmark.py
-```
 
-### Step 2: Index articles in OpenSearch
-
-```bash
+# 2. Index in OpenSearch for BM25 (~5 min)
 python benchmark/index_hnm_opensearch.py
-```
 
-### Step 3: Embed articles (FAISS index)
-
-```bash
+# 3. Build dense embeddings + FAISS index (~15 min on MPS, ~5 min on GPU)
 python benchmark/embed_hnm.py --model fashion-clip
-```
 
-### Step 4: Run full 253K evaluation
-
-```bash
-# All stages (~18 hrs total, checkpointed)
+# 4. Run the full evaluation pipeline (~18 hrs, checkpointed — safe to interrupt and resume)
 python benchmark/eval_full_253k.py --stages all
 
-# Or stage by stage:
+# Or run stages individually:
 python benchmark/eval_full_253k.py --stages 1    # BM25 + FAISS retrieval (~30 min)
 python benchmark/eval_full_253k.py --stages 2    # NER pre-compute (~3 hrs)
-python benchmark/eval_full_253k.py --stages 3    # CE reranking (~8.5 hrs)
-python benchmark/eval_full_253k.py --stages 4    # Metrics (~3 min)
+python benchmark/eval_full_253k.py --stages 3    # CE reranking (~8.5 hrs, run overnight)
+python benchmark/eval_full_253k.py --stages 4    # Aggregate metrics (~3 min)
 ```
 
-### Step 5: Reproduce Marqo 7-dataset benchmark
+Results land in `results/full/full_ablation.json`.
+
+### Run on a faster 10K sample (for iteration)
+
+```bash
+# BM25 + dense + hybrid breakdown (~15 min, no CE)
+python benchmark/eval_hybrid.py
+
+# Full pipeline including CE rerank (~2 hrs)
+python benchmark/eval_full_pipeline.py
+
+# Synonym vs NER comparison
+python benchmark/eval_query_understanding.py
+```
+
+### Run on your own catalog
+
+The pipeline expects a CSV with product data. At minimum you need an ID column and a text column (product title or description). Additional columns (color, category, brand) improve NER boosting and faceted search.
+
+```bash
+# 1. Prepare your catalog as CSV
+#    Required: article_id, prod_name
+#    Optional: product_type_name, colour_group_name, detail_desc, ...
+
+# 2. Index your catalog in OpenSearch
+python benchmark/index_hnm_opensearch.py --csv path/to/your_catalog.csv
+
+# 3. Embed your catalog
+python benchmark/embed_hnm.py --model fashion-clip --csv path/to/your_catalog.csv
+
+# 4. Search
+#    Use the scripts as a starting point — the retrieval, fusion,
+#    and reranking logic is in benchmark/eval_hybrid.py and
+#    benchmark/eval_full_pipeline.py
+```
+
+To evaluate, you'll need query-relevance pairs (qrels). If you have search logs with click or purchase data, those work. If not, you can generate relevance labels with an LLM (we show how in Phase 3).
+
+### Reproduce Marqo's 7-dataset embedding benchmark (Phase 1)
 
 ```bash
 python scripts/download_datasets.py
