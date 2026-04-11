@@ -1,0 +1,58 @@
+phase: 1
+
+datasets:
+  tier1:
+    - deepfashion_inshop
+    - deepfashion_multimodal
+    - fashion200k
+    - atlas
+    - polyvore
+  tier2:
+    name: hnm
+    articles_path: data/raw/hnm/articles.csv
+    queries_path: data/raw/hnm/queries.csv
+    qrels_path: data/raw/hnm/qrels.csv
+    sample_queries: 5000
+
+models:
+  - name: clip
+    hf_id: openai/clip-vit-base-patch32
+    type: clip
+  - name: fashion-clip
+    hf_id: Marqo/marqo-fashionCLIP
+    type: clip
+  - name: fashion-siglip
+    hf_id: Marqo/marqo-fashionSigLIP
+    type: clip
+
+eval:
+  ks: [5, 10, 20, 50]
+  top_k_retrieval: 50
+  batch_size: 64
+  device: cpu  # override to "cuda" or "mps" as available
+
+output:
+  results_dir: results/
+  embeddings_dir: data/processed/embeddings/
+  tier1_results_dir: results/tier1/
+  leaderboard_json: results/phase1_leaderboard.json
+  leaderboard_md: results/phase1_leaderboard.md
+
+retrieval:
+  dense:
+    index_type: IndexFlatIP   # cosine similarity after L2 normalisation
+  bm25:
+    opensearch_host: http://localhost:9200
+    index_name: hnm_articles
+    fields:
+      - prod_name^3
+      - detail_desc
+      - product_type_name
+      - colour_group_name
+  hybrid:
+    alpha: 0.5   # weight for dense score (1 - alpha for BM25)
+
+# Marqo eval harness config (Tier 1)
+marqo:
+  harness_dir: repos/marqo-FashionCLIP
+  data_dir: data/raw/marqo_datasets

@@ -1,0 +1,23 @@
+{
+  "bm25": {
+    "mean_ms": 11.5,
+    "p50_ms": 9.7,
+    "p95_ms": 18.2
+  },
+  "dense_lookup": {
+    "mean_ms": 0.0,
+    "p50_ms": 0.0,
+    "p95_ms": 0.0
+  },
+  "rrf_fusion": {
+    "mean_ms": 0.1,
+    "p50_ms": 0.1,
+    "p95_ms": 0.2
+  },
+  "ce_rerank_50": {
+    "mean_ms": 50.9,
+    "p50_ms": 47.7,
+    "p95_ms": 73.3
+  },
+  "pipeline_total_mean_ms": 62.5
+}

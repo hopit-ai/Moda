@@ -1,0 +1,33 @@
+# Data (large, downloaded at runtime)
+data/raw/
+data/processed/embeddings/
+data/processed/hnm_*/
+
+# Models
+models/
+
+# Cloned repos
+repos/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Keep these results (small, needed for reproducibility)
+!results/full/full_ablation.json
+!results/full/latency_results.json
+!results/full/PHASE2_FULL_LEADERBOARD.md
+!results/real/PHASE2_RUNNING_LEADERBOARD.md
+!results/real/gliner2_ablation.json
+!results/real/ner_cache_10k.json
