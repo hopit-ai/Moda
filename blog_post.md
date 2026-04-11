@@ -263,4 +263,16 @@ The 62.5ms latency is from this single-machine setup. Every component scales hor
 
 ---
 
+## Use this
+
+The entire codebase is open source under MIT. Clone it, run it on your catalog, see what improves.
+
+This matters commercially. Somewhere between 60-70% of transactions on fashion e-commerce sites start with a search. If your search is returning navy parkas when someone wants a navy dress, that's revenue walking away. The gains we measured here (81% improvement in ranking quality from pipeline engineering alone) translate directly into fewer abandoned searches, more add-to-carts, and higher conversion rates. This isn't speculative. Every major fashion retailer that has invested in search quality (ASOS, Zalando, Farfetch) reports measurable revenue impact.
+
+MODA is designed so that small and mid-size fashion companies can pick up the same pipeline architecture that large retailers use. You don't need a search team of 20 to get a cross-encoder reranker running. The code, the eval harness, and the benchmark are all there. If you're running a fashion catalog on basic keyword search, the gap between where you are and where you could be is probably larger than you think.
+
+If you need help scaling this to production, adapting it to your catalog, or want us to run the benchmark on your data, [book a call with us](https://calendly.com/hopit-ai/moda).
+
+---
+
 *MODA is built by [The FI Company](https://thefi.company) which is a project within [Hopit.ai](https://hopit.ai). Code and results: [github.com/hopit-ai/Moda](https://github.com/hopit-ai/Moda). MIT License.*
