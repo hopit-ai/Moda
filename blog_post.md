@@ -229,7 +229,9 @@ nDCG@10 of 0.054 looks concerning if you compare it to benchmarks like WANDS whe
 
 In [WANDS](https://github.com/wayfair/WANDS), each query has many products labeled as relevant. In H&M, each query has exactly 1 positive: the specific product the customer bought. Out of 105,542 products. A customer searches "black summer dress," browses 20 dresses, and buys one. The other 19 are scored as negatives in our benchmark even though they might have been perfectly fine.
 
-nDCG@10 in the 0.03-0.05 range is expected with this setup. The relative improvements between pipeline configurations (+81% from dense to full pipeline) are what matter. Absolute numbers are not comparable across benchmarks with different relevance structures.
+To put a number on it: each query has roughly 1 purchased product (grade 2) and about 9 shown-but-not-bought products (grade 1) out of 105,542 total. A system that places the purchased item in the top 10 for 10% of queries scores nDCG@10 of about 0.046. Our best (0.054) implies the system finds the purchased product in the top 10 roughly 12% of the time. A system that hits 50% would score around 0.53. Getting much higher than that would require predicting which exact product a specific customer will buy, which is closer to recommendation than search.
+
+Random retrieval, for reference, has a 0.0095% chance of placing the purchased item in the top 10. Our pipeline is roughly 1,200x better than random. The relative improvements between pipeline configurations (+81% from dense to full pipeline) are what matter. Absolute numbers are not comparable across benchmarks with different relevance structures.
 
 ---
 
