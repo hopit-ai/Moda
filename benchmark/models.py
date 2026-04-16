@@ -111,6 +111,27 @@ def load_clip_model(
     return model, preprocess, tokenizer
 
 
+def load_clip_model_from_checkpoint(
+    checkpoint_path: str,
+    base_model: str = "fashion-clip",
+    device: str = "cpu",
+) -> tuple[Any, Any, Any]:
+    """Load a CLIP model and overlay a local ``state_dict`` checkpoint.
+
+    Used for fine-tuned models (e.g. Phase 4F multimodal) that share the
+    same architecture as a base open_clip model but have updated weights.
+    """
+    import torch
+
+    model, preprocess, tokenizer = load_clip_model(base_model, device="cpu")
+    logger.info("Loading checkpoint weights from %s", checkpoint_path)
+    state = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
+    model.load_state_dict(state, strict=False)
+    model = model.to(device)
+    model.eval()
+    return model, preprocess, tokenizer
+
+
 def _split_openclip_name(hf_id: str) -> tuple[str, str]:
     """Attempt to split an HF model ID into (arch, pretrained) for open_clip."""
     # Marqo models use hf-hub prefix; plain clip uses "ViT-B-32" / "laion2b_s34b_b79k"

@@ -42,6 +42,7 @@ from tqdm import tqdm
 _REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 
+from benchmark.article_text import build_article_text
 from benchmark.metrics import compute_all_metrics, aggregate_metrics
 from benchmark.query_expansion import (
     FashionNER, SynonymExpander,
@@ -379,16 +380,6 @@ def rrf_fusion(
 
 # ─── Stage 3: CE reranking ────────────────────────────────────────────────────
 
-def build_article_text(row: dict) -> str:
-    parts = []
-    for field, limit in [("prod_name", None), ("product_type_name", None),
-                          ("colour_group_name", None), ("section_name", None),
-                          ("detail_desc", 200)]:
-        val = str(row.get(field, "")).strip()
-        if val and val.lower() not in ("nan", "none", ""):
-            parts.append(val[:limit] if limit else val)
-    return " | ".join(parts)
-
 
 DEFAULT_CE_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 
@@ -555,6 +546,7 @@ def stage4_evaluate(
     dense_results: dict[str, list[str]],
     bm25_ner_results: dict[str, list[str]] | None,
     ce_results: dict[str, list[str]] | None,
+    ce_ner_results: dict[str, list[str]] | None = None,
 ) -> dict:
     log.info("Stage 4: Evaluating all configs on %d queries...", len(queries))
     qids = [q[0] for q in queries]
@@ -566,7 +558,10 @@ def stage4_evaluate(
         if bm25_ner_results else None
     )
 
-    # All configs — all pre-computed, no live network calls
+    # 8_Full_Pipeline = NER-boosted BM25 + Dense hybrid, CE reranked
+    # Falls back to plain CE if NER CE cache is missing
+    full_pipeline_source = ce_ner_results if ce_ner_results else ce_results
+
     configs = {
         "1_BM25":          bm25_lists,
         "3_Dense":         dense_lists,
@@ -575,7 +570,7 @@ def stage4_evaluate(
         "7_Hybrid_NER":    rrf_fusion(ner_bm25_lists, dense_lists, bm25_w=0.4, dense_w=0.6)
                            if ner_bm25_lists else None,
         "6_Hybrid_CE":     [ce_results.get(qid, []) for qid in qids] if ce_results else None,
-        "8_Full_Pipeline": [ce_results.get(qid, []) for qid in qids] if ce_results else None,
+        "8_Full_Pipeline": [full_pipeline_source.get(qid, []) for qid in qids] if full_pipeline_source else None,
     }
 
     all_results = {}
@@ -725,9 +720,11 @@ def main():
         dense_results    = json.loads(DENSE_CACHE.read_text())
         bm25_ner_results = json.loads(BM25_NER_CACHE.read_text()) if BM25_NER_CACHE.exists() else None
         ce_results       = json.loads(CE_CACHE.read_text()) if CE_CACHE.exists() else None
+        ce_ner_results   = json.loads(CE_NER_CACHE.read_text()) if CE_NER_CACHE.exists() else None
 
         results = stage4_evaluate(
-            queries, qrels, bm25_results, dense_results, bm25_ner_results, ce_results,
+            queries, qrels, bm25_results, dense_results, bm25_ner_results,
+            ce_results, ce_ner_results,
         )
         print_final_table(results)
 

@@ -40,6 +40,7 @@ from tqdm import tqdm
 _REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 
+from benchmark.article_text import build_article_text as _build_article_text
 from benchmark.metrics import compute_all_metrics, aggregate_metrics
 from benchmark.query_expansion import (
     FashionNER, FashionNER2,
@@ -268,15 +269,6 @@ def rrf_fusion(
 
 
 # ─── CE reranking ─────────────────────────────────────────────────────────────
-
-def _build_article_text(row: dict) -> str:
-    parts = []
-    for field in ["prod_name", "product_type_name", "colour_group_name",
-                  "section_name", "detail_desc"]:
-        val = str(row.get(field, "")).strip()
-        if val:
-            parts.append(val[:150] if field == "detail_desc" else val)
-    return " | ".join(parts)
 
 
 def ce_rerank_batch(

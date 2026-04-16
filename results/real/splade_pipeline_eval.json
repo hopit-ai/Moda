@@ -1,0 +1,190 @@
+{
+  "_note": "Reconstructed from overnight_splade_pipeline.log. Per-query retrieved lists not available (log-only). CIs use normal approximation.",
+  "_source": "results/real/overnight_splade_pipeline.log",
+  "_splade_model": "naver/splade-cocondenser-ensembledistil",
+  "_dense_model_vanilla": "Marqo/marqo-fashionCLIP",
+  "_dense_model_finetuned": "models/moda-fashionclip-finetuned/best",
+  "_ce_model": "models/moda-fashion-ce-llm-best",
+  "_rrf_k": 60,
+  "_top_k_rerank": 100,
+  "SPLADE03_CLIP07": {
+    "config": "SPLADE03_CLIP07",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0501,
+      "mrr": 0.063,
+      "recall@10": 0.0161
+    }
+  },
+  "SPLADE04_CLIP06": {
+    "config": "SPLADE04_CLIP06",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0527,
+      "mrr": 0.0669,
+      "recall@10": 0.0178
+    }
+  },
+  "SPLADE05_CLIP05": {
+    "config": "SPLADE05_CLIP05",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0556,
+      "mrr": 0.0729,
+      "recall@10": 0.0192
+    }
+  },
+  "SPLADE06_CLIP04": {
+    "config": "SPLADE06_CLIP04",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0565,
+      "mrr": 0.0753,
+      "recall@10": 0.0196
+    }
+  },
+  "SPLADE_CLIP_CE": {
+    "config": "SPLADE_CLIP_CE",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0946,
+      "mrr": 0.066,
+      "recall@10": 0.0253
+    }
+  },
+  "SPLADE03_CLIP07_CE": {
+    "config": "SPLADE03_CLIP07_CE",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0934,
+      "mrr": 0.0704,
+      "recall@10": 0.0225
+    }
+  },
+  "SPLADE04_CLIP06_CE": {
+    "config": "SPLADE04_CLIP06_CE",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0976,
+      "mrr": 0.071,
+      "recall@10": 0.0249
+    }
+  },
+  "SPLADE05_CLIP05_CE": {
+    "config": "SPLADE05_CLIP05_CE",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0933,
+      "mrr": 0.0667,
+      "recall@10": 0.025
+    }
+  },
+  "FT_FashionCLIP_only": {
+    "config": "FT_FashionCLIP_only",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0542,
+      "mrr": 0.079,
+      "recall@10": 0.0212
+    }
+  },
+  "SPLADE03_FTCLIP07": {
+    "config": "SPLADE03_FTCLIP07",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0561,
+      "mrr": 0.077,
+      "recall@10": 0.0216
+    }
+  },
+  "SPLADE04_FTCLIP06": {
+    "config": "SPLADE04_FTCLIP06",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0589,
+      "mrr": 0.0793,
+      "recall@10": 0.0219
+    }
+  },
+  "SPLADE05_FTCLIP05": {
+    "config": "SPLADE05_FTCLIP05",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.058,
+      "mrr": 0.0782,
+      "recall@10": 0.0213
+    }
+  },
+  "SPLADE06_FTCLIP04": {
+    "config": "SPLADE06_FTCLIP04",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0576,
+      "mrr": 0.0765,
+      "recall@10": 0.0206
+    }
+  },
+  "SPLADE_FTCLIP_CE": {
+    "config": "SPLADE_FTCLIP_CE",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.1017,
+      "mrr": 0.0741,
+      "recall@10": 0.0258
+    }
+  },
+  "SPLADE03_FTCLIP07_CE": {
+    "config": "SPLADE03_FTCLIP07_CE",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.1063,
+      "mrr": 0.0766,
+      "recall@10": 0.0265
+    }
+  },
+  "SPLADE05_FTCLIP05_CE": {
+    "config": "SPLADE05_FTCLIP05_CE",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0992,
+      "mrr": 0.0711,
+      "recall@10": 0.0258
+    }
+  },
+  "SPLADE06_FTCLIP04_CE": {
+    "config": "SPLADE06_FTCLIP04_CE",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.095,
+      "mrr": 0.0668,
+      "recall@10": 0.0251
+    }
+  },
+  "SPLADE_only": {
+    "config": "SPLADE_only",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0464,
+      "mrr": 0.0602,
+      "recall@10": 0.0167
+    }
+  },
+  "SPLADE_CE": {
+    "config": "SPLADE_CE",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.0903,
+      "mrr": 0.064,
+      "recall@10": 0.0243
+    }
+  },
+  "FashionCLIP_only": {
+    "config": "FashionCLIP_only",
+    "n_queries": 22855,
+    "metrics": {
+      "ndcg@10": 0.03,
+      "mrr": 0.0341,
+      "recall@10": 0.0105
+    }
+  }
+}
