@@ -1,7 +1,7 @@
 # MODA
 
 **The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
-253,685 purchase-grounded queries · 105,542 H&M products · 49+ pipeline configs · nDCG@10 = 0.1063 (+301% over dense baseline)
+253,685 purchase-grounded queries · 105,542 H&M products · 20+ pipeline configs · nDCG@10 = 0.0748 (+183% over dense baseline)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -26,51 +26,54 @@ We are publishing this work as a series of technical blog posts, each covering o
 |------|-------|-------|------------|
 | [Blog 1](blog_post.md) | Building a zero-shot fashion search pipeline | BM25 + Dense + CE reranking | nDCG@10 = 0.0543 |
 | [Blog 2](blog_post_phase2b.md) | The one swap that beat weeks of tuning | Replacing BM25 with SPLADE | nDCG@10 = 0.0748 (+38%) |
-| Blog 3 | *Coming soon* | Training the cross-encoder with LLM labels | |
-| Blog 4 | *Coming soon* | Fine-tuning the retriever on its own mistakes | |
-| Blog 5 | *Coming soon* | Adding eyes to the search engine (multimodal) | |
+| Blog 3 | *Coming soon* | | |
+| Blog 4 | *Coming soon* | | |
+| Blog 5 | *Coming soon* | | |
 
 ---
 
-## Key results (253,685 queries, 105,542 products)
+## Key results
 
-| Config | nDCG@10 | 95% CI | MRR | AP | Recall@10 | Recall@50 | P@10 |
-|--------|---------|--------|-----|----|-----------|-----------|----|
-| BM25 only | 0.0186 | [.0183-.0190] | 0.0227 | 0.0040 | 0.0059 | 0.0251 | 0.0058 |
-| BM25 + NER boost | 0.0204 | [.0200-.0207] | 0.0260 | 0.0048 | 0.0069 | 0.0298 | 0.0068 |
-| Dense only (FashionCLIP) | 0.0265 | [.0261-.0269] | 0.0369 | 0.0071 | 0.0106 | 0.0462 | 0.0105 |
-| Hybrid (BM25x0.4 + Dense x0.6) | 0.0328 | [.0324-.0333] | 0.0429 | 0.0075 | 0.0121 | 0.0457 | 0.0121 |
-| Hybrid + NER boost | 0.0333 | [.0329-.0338] | 0.0438 | 0.0078 | 0.0124 | 0.0470 | 0.0124 |
-| **Full pipeline (Hybrid + CE rerank)** | **0.0543** | **[.0537-.0550]** | **0.0569** | **0.0091** | **0.0164** | **0.0559** | **0.0163** |
+### Phase 1: Zero-shot pipeline (253,685 queries, 105,542 products)
 
-Full pipeline vs dense baseline: +105% nDCG@10, +54% MRR, +55% Recall@10, +21% Recall@50.
+| Config | nDCG@10 | 95% CI | MRR | Recall@10 | Recall@50 |
+|--------|---------|--------|-----|-----------|-----------|
+| BM25 only | 0.0186 | [.0183-.0190] | 0.0227 | 0.0059 | 0.0251 |
+| Dense only (FashionCLIP) | 0.0265 | [.0261-.0269] | 0.0369 | 0.0106 | 0.0462 |
+| Hybrid (BM25x0.4 + Densex0.6) | 0.0328 | [.0324-.0333] | 0.0429 | 0.0121 | 0.0457 |
+| **Full pipeline (Hybrid + CE rerank)** | **0.0543** | **[.0537-.0550]** | **0.0569** | **0.0164** | **0.0559** |
+
+### Phase 2B: SPLADE swap (22,855 held-out test queries)
+
+| Config | nDCG@10 | MRR | Recall@10 |
+|--------|---------|-----|-----------|
+| SPLADE standalone | 0.0464 | 0.0695 | 0.0189 |
+| Dense standalone (FashionCLIP) | 0.0265 | 0.0369 | 0.0106 |
+| SPLADE + Dense (0.5/0.5) hybrid | 0.0556 | 0.0662 | 0.0201 |
+| **SPLADE + Dense + off-shelf CE** | **0.0748** | **0.0738** | **0.0215** |
+
+SPLADE standalone beats both BM25 (+149%) and dense retrieval (+75%) on fashion queries. The full pipeline with SPLADE reaches **nDCG@10 = 0.0748**, +38% over the Blog 1 best. Zero training. Same cross-encoder. One component swap.
+
+### SPLADE vs BM25 on 253K queries
+
+| Config | nDCG@10 | MRR | Recall@10 |
+|--------|---------|-----|-----------|
+| BM25 standalone | 0.0186 | 0.0227 | 0.0059 |
+| **SPLADE standalone** | **0.0412** | **0.0695** | **0.0189** |
+
++121% nDCG, +206% MRR, +220% Recall@10. SPLADE's learned expansion does what manual synonym lists and NER boosts attempted to do for BM25, but better and without manual rules.
 
 ### Latency (Apple M-series, per query)
 
 | Stage | Mean | p50 | p95 |
 |-------|------|-----|-----|
-| BM25 (OpenSearch) | 11.5ms | 9.7ms | 18.2ms |
+| SPLADE encode + retrieve | ~28ms | ~24ms | ~45ms |
 | Dense lookup (FAISS, pre-computed) | <1ms | <1ms | <1ms |
 | RRF fusion | 0.1ms | 0.1ms | 0.2ms |
 | CE rerank (100 candidates) | 50.9ms | 47.7ms | 73.3ms |
-| **Full pipeline end-to-end** | **62.5ms** | **~58ms** | **~92ms** |
-
-### SPLADE retrieval (22,855 held-out test queries)
-
-| Config | nDCG@10 | 95% CI | MRR | R@10 | Notes |
-|--------|---------|--------|-----|------|-------|
-| SPLADE standalone | 0.0464 | [0.0437, 0.0491] | 0.0602 | 0.0167 | Off-shelf `naver/splade-cocondenser-ensembledistil` |
-| SPLADE + LLM CE | 0.0903 | [0.0869, 0.0937] | 0.0640 | 0.0243 | Sparse-only with CE rerank |
-| SPLADE + FashionCLIP (0.5/0.5) + LLM CE | 0.0933 | [0.0899, 0.0967] | 0.0667 | 0.0250 | RRF hybrid |
-| SPLADE + FashionCLIP (0.4/0.6) + LLM CE | 0.0976 | [0.0941, 0.1011] | 0.0710 | 0.0249 | |
-| SPLADE + FT-CLIP (best) + LLM CE | 0.1017 | [0.0981, 0.1053] | 0.0741 | 0.0258 | FT-FashionCLIP dense channel |
-| **SPLADE + FT-CLIP (0.3/0.7) + LLM CE** | **0.1063** | **[0.1023, 0.1103]** | **0.0766** | **0.0265** | **Project best** |
-
-> **SPLADE replaces BM25** as the lexical backbone. Off-shelf SPLADE standalone (0.0464) already beats BM25 (0.0186) by 149%. Adding SPLADE to the hybrid fusion with FT-FashionCLIP and LLM CE reranking reaches **nDCG@10 = 0.1063**, +301% over the Phase 1 dense baseline (0.0265).
+| **Full pipeline end-to-end** | **~80ms** | **~73ms** | **~120ms** |
 
 > Absolute nDCG values are low because ground truth is purchase-based (1 bought item per query against 105K products). This is a benchmark and component breakdown. The relative gains between configs are the finding.
->
-> **Evaluation splits:** Phase 2 results use all **253,685 queries** (zero-shot components only, nothing was trained on this data). Phase 3+ results (LLM-trained CE, fine-tuned retrievers, SPLADE) use a held-out **22,855-query test split** to prevent data leakage, since these models were trained on a disjoint subset of the queries.
 
 ---
 
@@ -78,17 +81,17 @@ Full pipeline vs dense baseline: +105% nDCG@10, +54% MRR, +55% Recall@10, +21% R
 
 1. **Dense > BM25 on fashion queries (-30%)** -- H&M product names are brand-style identifiers ("Ben zip hoodie"). Real users search semantically ("zip hoodie"). This contradicts general e-commerce benchmarks like WANDS where BM25 is competitive.
 
-2. **Cross-encoder reranking is the dominant signal (+51% marginal)** -- [ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2) at 50ms latency is the single most impactful component.
+2. **SPLADE beats both BM25 and dense retrieval** -- Off-shelf SPLADE (`naver/splade-cocondenser-ensembledistil`) standalone (0.0464) beats BM25 (0.0186) by 149% and dense (0.0265) by 75%. Learned sparse retrieval is not obsolete even on a semantics-heavy task.
 
-3. **Synonym expansion hurts (-35%)** -- Confirms LESER (2025) and LEAPS (2026) query pollution failure mode. Aggressive expansion collapses IDF weights.
+3. **Cross-encoder reranking is the dominant signal** -- [ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2) at 50ms latency is the single most impactful component in both the BM25 and SPLADE eras.
 
-4. **NER attribute boosting helps (+14% on BM25)** -- [GLiNER2](https://github.com/fastino-ai/GLiNER2) zero-shot NER extracts fashion attributes and maps them to H&M field boosts. +16% improvement over GLiNER v1 at the NER stage.
+4. **NER helps BM25 (+14%) but does nothing on SPLADE** -- SPLADE's learned expansion already captures what NER attribute boosting was doing manually. When the retriever gets smarter, the tricks you built around the dumb one become dead weight.
 
-5. **SPLADE replaces BM25 as the lexical backbone** -- Off-shelf SPLADE (`naver/splade-cocondenser-ensembledistil`) standalone (0.0464) beats BM25 (0.0186) by 149%. SPLADE + FT-FashionCLIP + LLM CE reaches **nDCG@10 = 0.1063**, the project best.
+5. **Synonym expansion hurts (-35%)** -- Confirms LESER (2025) and LEAPS (2026) query pollution failure mode. Aggressive expansion collapses IDF weights.
 
 6. **FashionCLIP > FashionSigLIP on H&M** -- Short brand-style product titles match CLIP's training distribution better than SigLIP's caption-optimized encoder.
 
-7. **62.5ms full pipeline on $0 hardware** -- Everything runs on Apple Silicon with no cloud GPU cost.
+7. **~80ms full pipeline on $0 hardware** -- Everything runs on Apple Silicon with no cloud GPU cost.
 
 ---
 
@@ -96,13 +99,12 @@ Full pipeline vs dense baseline: +105% nDCG@10, +54% MRR, +55% Recall@10, +21% R
 
 | Component | Model / Library | Source | Role |
 |---|---|---|---|
-| Dense retrieval | [Marqo-FashionCLIP](https://huggingface.co/Marqo/marqo-fashionCLIP) (ViT-B/32, 512-dim) | `open_clip` | Bi-encoder embedding + FAISS index |
 | Sparse retrieval (SPLADE) | [naver/splade-cocondenser-ensembledistil](https://huggingface.co/naver/splade-cocondenser-ensembledistil) | `transformers` | Learned sparse retrieval via MLM head |
+| Dense retrieval | [Marqo-FashionCLIP](https://huggingface.co/Marqo/marqo-fashionCLIP) (ViT-B/32, 512-dim) | `open_clip` | Bi-encoder embedding + FAISS index |
 | Lexical retrieval | [OpenSearch 2.11](https://opensearch.org/) BM25 | Docker | Keyword matching with field boosts |
 | NER | [GLiNER2](https://github.com/fastino-ai/GLiNER2) `fastino/gliner2-base-v1` (EMNLP 2025) | `gliner>=0.1.0` | Zero-shot fashion attribute extraction |
-| Cross-encoder reranker | [ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2) (22M params) | `sentence-transformers` | L2 pair-wise reranking |
-| Hybrid fusion | Reciprocal Rank Fusion (RRF) | Custom | Combines SPLADE + dense (+ BM25) ranked lists |
-| LLM labeling (Phase 3+) | `openai/gpt-4o-mini` via [PaleblueDot AI](https://palebluedot.ai) | REST API | Graded relevance scores (0-3) |
+| Cross-encoder reranker | [ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2) (22M params) | `sentence-transformers` | Pair-wise reranking |
+| Hybrid fusion | Reciprocal Rank Fusion (RRF) | Custom | Combines SPLADE + dense ranked lists |
 
 ---
 
@@ -117,7 +119,7 @@ Query
   |                                           |         |
   +---> BM25 (OpenSearch)                   --+         v
   |     [optional: NER attribute boosts]    Cross-Encoder Reranker
-  |                                         (LLM-trained MiniLM-L6)
+  |                                         (ms-marco-MiniLM-L6-v2)
   |                                                     |
   +----------------------------------------------> Top-10 Results
 ```
@@ -166,7 +168,7 @@ python benchmark/embed_hnm.py --model fashion-clip
 # Takes ~15 min on Apple MPS / ~5 min on GPU
 ```
 
-### Step 4 -- Run full 253K evaluation pipeline
+### Step 4 -- Run full 253K evaluation pipeline (Blog 1)
 
 ```bash
 # All stages (overnight run, ~18 hrs total)
@@ -179,7 +181,7 @@ python benchmark/eval_full_253k.py --stages 3      # CE reranking (~8.5 hrs) run
 python benchmark/eval_full_253k.py --stages 4      # Metrics + final table (~3 min)
 ```
 
-### Step 4b -- Run SPLADE evaluation
+### Step 5 -- Run SPLADE evaluation (Blog 2)
 
 ```bash
 # SPLADE + FashionCLIP hybrid on test split (22,855 queries, ~4 hrs)
@@ -189,7 +191,7 @@ python -m benchmark.eval_splade_pipeline
 python -m benchmark.eval_full_253k_splade
 ```
 
-### Step 5 -- Reproduce 10K sample breakdown (faster, for iteration)
+### Step 6 -- Reproduce 10K sample breakdown (faster, for iteration)
 
 ```bash
 python benchmark/eval_hybrid.py           # BM25 + dense + hybrid (~15 min)
@@ -215,15 +217,6 @@ MODA/
 │   ├── index_hnm_opensearch.py    <- OpenSearch indexing
 │   ├── models.py                  <- FashionCLIP / FashionSigLIP loaders
 │   ├── metrics.py                 <- nDCG, MRR, Recall, AP
-│   ├── train_cross_encoder.py     <- CE fine-tuning
-│   ├── train_ce_llm_labels.py     <- CE training with LLM-graded labels
-│   ├── train_biencoder.py         <- Bi-encoder fine-tuning (hard negatives)
-│   ├── train_splade.py            <- SPLADE fine-tuning
-│   ├── train_three_tower.py       <- Three-tower multimodal training
-│   ├── eval_three_tower.py        <- Three-tower benchmark eval
-│   ├── generate_llm_labels.py     <- LLM label generation
-│   ├── generate_biencoder_labels.py <- Hard negative mining for bi-encoder
-│   ├── generate_splade_labels.py  <- Hard negative mining for SPLADE
 │   ├── compute_confidence_intervals.py <- Bootstrap CIs
 │   ├── leakage_guard.py           <- Train/test leakage validation
 │   └── _faiss_flat_worker.py      <- FAISS subprocess
@@ -236,7 +229,6 @@ MODA/
 ├── results/
 │   ├── full/full_ablation.json         <- 253K final results
 │   └── real/
-│       ├── splade_pipeline_eval.json   <- SPLADE pipeline results (project best)
 │       ├── phase1_2_splade_eval.json   <- SPLADE Phase 1-2 results
 │       ├── all_experiments_with_ci.json <- All configs with bootstrap CIs
 │       └── gliner2_ablation.json       <- GLiNER v1 vs GLiNER2 results
@@ -266,13 +258,12 @@ Each query in `qrels.csv` has:
 
 ## Phase roadmap
 
-| Phase | Focus | What | Status |
-|---|---|---|---|
-| **1** | Benchmark validation | Reproduce Marqo's 7-dataset embedding benchmark (<1% delta). Build eval harness. | Done |
-| **2** | Zero-shot pipeline | BM25 + dense + hybrid + NER + CE rerank. 253K queries, 11 configs, component-by-component breakdown. | Done |
-| **2B** | SPLADE retrieval | Replace BM25 with SPLADE learned sparse retrieval. 20+ fusion configs. Best: SPLADE + FT-CLIP + LLM CE = **0.1063**. | Done |
-| **3** | Trained models | LLM-judged labels for CE. Fine-tuned bi-encoder on retriever-mined hard negatives. Fine-tuned SPLADE. | Done |
-| **4** | Multimodal retrieval | Image embeddings, text-to-image retrieval, joint fine-tuning. Three-Tower architecture. | Done |
+| Phase | Focus | Status |
+|---|---|---|
+| **1** | Zero-shot pipeline: BM25 + dense + hybrid + NER + CE rerank (253K queries) | Done |
+| **2B** | SPLADE swap: replace BM25 with learned sparse retrieval (+38%) | Done |
+| **3** | Training the cross-encoder and retriever | Coming soon |
+| **4** | Multimodal retrieval: images as a search signal | Coming soon |
 
 ---
 
