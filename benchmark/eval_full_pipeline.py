@@ -50,6 +50,7 @@ from tqdm import tqdm
 _REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(_REPO_ROOT))
 
+from benchmark.article_text import build_article_text as _build_article_text
 from benchmark.metrics import compute_all_metrics, aggregate_metrics
 from benchmark.query_expansion import (
     SynonymExpander, FashionNER, FashionNER2,
@@ -314,15 +315,6 @@ def rrf_fusion(
 
 # ─── CE reranking ─────────────────────────────────────────────────────────────
 
-def _build_article_text(row: dict) -> str:
-    parts = []
-    for field in ["prod_name", "product_type_name", "colour_group_name",
-                  "section_name", "detail_desc"]:
-        val = str(row.get(field, "")).strip()
-        if val:
-            parts.append(val[:150] if field == "detail_desc" else val)
-    return " | ".join(parts)
-
 
 def ce_rerank_batch(
     queries: list[str],
@@ -363,6 +355,7 @@ def evaluate(
     qrels: dict[str, dict[str, int]],
     ks: list[int] = None,
     label: str = "config",
+    save_retrieved: bool = False,
 ) -> dict:
     ks = ks or [5, 10, 20, 50]
     per_query = []
@@ -377,7 +370,10 @@ def evaluate(
         label, agg.get("ndcg@10", 0), agg.get("mrr", 0),
         agg.get("recall@10", 0), len(per_query),
     )
-    return {"config": label, "n_queries": len(per_query), "metrics": agg}
+    result = {"config": label, "n_queries": len(per_query), "metrics": agg}
+    if save_retrieved:
+        result["retrieved"] = {qid: lst for qid, lst in retrieved_dict.items()}
+    return result
 
 
 # ─── Main ─────────────────────────────────────────────────────────────────────

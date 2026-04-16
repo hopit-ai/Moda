@@ -61,23 +61,14 @@ class ArticleTextCache:
                "garment_group_name", "detail_desc"]
 
     def __init__(self, client: OpenSearch, max_cached: int = 200_000):
+        from benchmark.article_text import build_article_text
+        self._build_fn = build_article_text
         self.client = client
         self._cache: dict[str, str] = {}
         self._max_cached = max_cached
 
     def _build_text(self, src: dict) -> str:
-        parts = []
-        if src.get("prod_name"):
-            parts.append(src["prod_name"])
-        if src.get("product_type_name"):
-            parts.append(src["product_type_name"])
-        if src.get("colour_group_name"):
-            parts.append(src["colour_group_name"])
-        if src.get("section_name"):
-            parts.append(src["section_name"])
-        if src.get("detail_desc"):
-            parts.append(src["detail_desc"][:200])
-        return " | ".join(p for p in parts if p)
+        return self._build_fn(src)
 
     def prefetch(self, article_ids: list[str]) -> None:
         """Batch-fetch article texts not yet in cache."""

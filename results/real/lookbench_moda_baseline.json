@@ -1,0 +1,298 @@
+{
+  "settings": {
+    "datasets_root": "./data/raw/lookbench/datasets",
+    "include_noise": true,
+    "device": "mps",
+    "batch_size": 32
+  },
+  "runs": [
+    {
+      "subset": "aigen_studio",
+      "model": "fashion-clip",
+      "rows": {
+        "query": 193,
+        "gallery": 59254,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 56.99,
+        "instance_recall@5": 82.38,
+        "instance_recall@10": 89.64,
+        "instance_recall@20": 92.23,
+        "coarse@1": 78.24,
+        "fine@1": 24.87,
+        "ndcg@5": 55.67
+      }
+    },
+    {
+      "subset": "real_studio_flat",
+      "model": "fashion-clip",
+      "rows": {
+        "query": 1011,
+        "gallery": 62226,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 53.91,
+        "instance_recall@5": 77.45,
+        "instance_recall@10": 83.88,
+        "instance_recall@20": 89.02,
+        "coarse@1": 87.14,
+        "fine@1": 32.74,
+        "ndcg@5": 56.03
+      }
+    },
+    {
+      "subset": "real_streetlook",
+      "model": "fashion-clip",
+      "rows": {
+        "query": 981,
+        "gallery": 61553,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 39.35,
+        "instance_recall@5": 60.55,
+        "instance_recall@10": 66.36,
+        "instance_recall@20": 70.23,
+        "coarse@1": 68.6,
+        "fine@1": 20.18,
+        "ndcg@5": 40.73
+      }
+    },
+    {
+      "subset": "aigen_streetlook",
+      "model": "fashion-clip",
+      "rows": {
+        "query": 160,
+        "gallery": 58846,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 55.62,
+        "instance_recall@5": 80.62,
+        "instance_recall@10": 83.75,
+        "instance_recall@20": 85.0,
+        "coarse@1": 80.0,
+        "fine@1": 26.88,
+        "ndcg@5": 55.89
+      }
+    },
+    {
+      "subset": "real_studio_flat",
+      "model": "fashion-siglip",
+      "rows": {
+        "query": 1011,
+        "gallery": 62226,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 55.49,
+        "instance_recall@5": 80.02,
+        "instance_recall@10": 86.35,
+        "instance_recall@20": 89.81,
+        "coarse@1": 88.92,
+        "fine@1": 33.43,
+        "ndcg@5": 59.19
+      }
+    },
+    {
+      "subset": "real_studio_flat",
+      "model": "clip",
+      "rows": {
+        "query": 1011,
+        "gallery": 62226,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 33.33,
+        "instance_recall@5": 52.03,
+        "instance_recall@10": 58.56,
+        "instance_recall@20": 65.18,
+        "coarse@1": 63.11,
+        "fine@1": 22.35,
+        "ndcg@5": 33.21
+      }
+    },
+    {
+      "subset": "aigen_studio",
+      "model": "fashion-siglip",
+      "rows": {
+        "query": 193,
+        "gallery": 59254,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 69.43,
+        "instance_recall@5": 92.23,
+        "instance_recall@10": 95.34,
+        "instance_recall@20": 98.45,
+        "coarse@1": 94.3,
+        "fine@1": 28.5,
+        "ndcg@5": 66.58
+      }
+    },
+    {
+      "subset": "aigen_studio",
+      "model": "clip",
+      "rows": {
+        "query": 193,
+        "gallery": 59254,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 8.81,
+        "instance_recall@5": 16.58,
+        "instance_recall@10": 19.69,
+        "instance_recall@20": 25.91,
+        "coarse@1": 15.54,
+        "fine@1": 6.22,
+        "ndcg@5": 7.01
+      }
+    },
+    {
+      "subset": "real_streetlook",
+      "model": "fashion-siglip",
+      "rows": {
+        "query": 981,
+        "gallery": 61553,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 41.79,
+        "instance_recall@5": 62.69,
+        "instance_recall@10": 67.48,
+        "instance_recall@20": 72.07,
+        "coarse@1": 74.82,
+        "fine@1": 22.53,
+        "ndcg@5": 44.41
+      }
+    },
+    {
+      "subset": "real_streetlook",
+      "model": "clip",
+      "rows": {
+        "query": 981,
+        "gallery": 61553,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 12.13,
+        "instance_recall@5": 22.83,
+        "instance_recall@10": 27.01,
+        "instance_recall@20": 29.97,
+        "coarse@1": 23.55,
+        "fine@1": 7.24,
+        "ndcg@5": 13.27
+      }
+    },
+    {
+      "subset": "aigen_streetlook",
+      "model": "fashion-siglip",
+      "rows": {
+        "query": 160,
+        "gallery": 58846,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 65.0,
+        "instance_recall@5": 88.12,
+        "instance_recall@10": 92.5,
+        "instance_recall@20": 95.0,
+        "coarse@1": 90.62,
+        "fine@1": 26.25,
+        "ndcg@5": 66.88
+      }
+    },
+    {
+      "subset": "aigen_streetlook",
+      "model": "clip",
+      "rows": {
+        "query": 160,
+        "gallery": 58846,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 13.75,
+        "instance_recall@5": 26.25,
+        "instance_recall@10": 30.0,
+        "instance_recall@20": 31.87,
+        "coarse@1": 26.88,
+        "fine@1": 10.62,
+        "ndcg@5": 11.75
+      }
+    },
+    {
+      "subset": "real_studio_flat",
+      "model": "fashion-clip-4f",
+      "rows": {
+        "query": 1011,
+        "gallery": 62226,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 49.26,
+        "instance_recall@5": 72.01,
+        "instance_recall@10": 81.6,
+        "instance_recall@20": 85.76,
+        "coarse@1": 82.89,
+        "fine@1": 30.66,
+        "ndcg@5": 50.75
+      }
+    },
+    {
+      "subset": "aigen_studio",
+      "model": "fashion-clip-4f",
+      "rows": {
+        "query": 193,
+        "gallery": 59254,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 54.4,
+        "instance_recall@5": 78.24,
+        "instance_recall@10": 82.38,
+        "instance_recall@20": 88.08,
+        "coarse@1": 78.24,
+        "fine@1": 25.39,
+        "ndcg@5": 48.14
+      }
+    },
+    {
+      "subset": "real_streetlook",
+      "model": "fashion-clip-4f",
+      "rows": {
+        "query": 981,
+        "gallery": 61553,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 35.78,
+        "instance_recall@5": 56.98,
+        "instance_recall@10": 61.57,
+        "instance_recall@20": 66.56,
+        "coarse@1": 62.79,
+        "fine@1": 19.78,
+        "ndcg@5": 36.81
+      }
+    },
+    {
+      "subset": "aigen_streetlook",
+      "model": "fashion-clip-4f",
+      "rows": {
+        "query": 160,
+        "gallery": 58846,
+        "noise_merged": 58275
+      },
+      "metrics": {
+        "instance_recall@1": 49.38,
+        "instance_recall@5": 70.0,
+        "instance_recall@10": 76.88,
+        "instance_recall@20": 78.75,
+        "coarse@1": 76.25,
+        "fine@1": 23.75,
+        "ndcg@5": 47.59
+      }
+    }
+  ]
+}
