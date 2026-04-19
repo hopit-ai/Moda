@@ -1,7 +1,7 @@
 # MODA
 
 **The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
-253,685 purchase-grounded queries · 105,542 H&M products · 20+ pipeline configs · nDCG@10 = 0.0748 (+183% over dense baseline)
+253,685 purchase-grounded queries · 105,542 H&M products · 30+ pipeline configs · nDCG@10 = 0.0976 (+268% over dense baseline)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -26,7 +26,7 @@ We are publishing this work as a series of technical blog posts, each covering o
 |------|-------|-------|------------|
 | [Blog 1](blog_post.md) | Building a zero-shot fashion search pipeline | BM25 + Dense + CE reranking | nDCG@10 = 0.0543 |
 | [Blog 2](blog_post_phase2b.md) | The one swap that beat weeks of tuning | Replacing BM25 with SPLADE | nDCG@10 = 0.0748 (+38%) |
-| Blog 3 | *Coming soon* | | |
+| [Blog 3](blog_post_phase3a_3b.md) | $25 beat everything we had built | Training the cross-encoder with LLM-graded labels | nDCG@10 = 0.0976 (+31%) |
 | Blog 4 | *Coming soon* | | |
 | Blog 5 | *Coming soon* | | |
 
@@ -63,6 +63,18 @@ SPLADE standalone beats both BM25 (+149%) and dense retrieval (+75%) on fashion 
 
 +121% nDCG, +206% MRR, +220% Recall@10. SPLADE's learned expansion does what manual synonym lists and NER boosts attempted to do for BM25, but better and without manual rules.
 
+### Phase 3: Training the cross-encoder with LLM labels (22,855 held-out test queries)
+
+| Config | nDCG@10 | MRR | Recall@10 | Cost |
+|--------|---------|-----|-----------|------|
+| Off-shelf CE (ms-marco-MiniLM-L6) | 0.0639 | 0.0648 | 0.0172 | $0 |
+| FT on 1.5M purchase labels | 0.0664 | 0.0678 | 0.0180 | $0 (flat) |
+| FT on 9.8K GPT-4o-mini labels | 0.0689 | 0.0701 | 0.0190 | ~$2 |
+| **FT-CE-L12 on 194K Sonnet labels** | **0.0735** | **0.0751** | **0.0217** | **~$25** |
+| **Best hybrid + LLM CE (SPLADE 0.4 + Dense 0.6)** | **0.0976** | **0.0931** | **0.0268** | **~$25** |
+
+LLM-graded labels crushed purchase labels. 9.8K GPT-4o-mini labels (cost: $2) beat 1.5M purchase labels. Scaling to 194K Sonnet-graded labels (cost: $25) lifted the full pipeline to nDCG@10 = 0.0976, a +31% gain over the Blog 2 headline at essentially zero cost.
+
 ### Latency (Apple M-series, per query)
 
 | Stage | Mean | p50 | p95 |
@@ -91,7 +103,11 @@ SPLADE standalone beats both BM25 (+149%) and dense retrieval (+75%) on fashion 
 
 6. **FashionCLIP > FashionSigLIP on H&M** -- Short brand-style product titles match CLIP's training distribution better than SigLIP's caption-optimized encoder.
 
-7. **~80ms full pipeline on $0 hardware** -- Everything runs on Apple Silicon with no cloud GPU cost.
+7. **LLM-graded labels >> purchase labels (+15.7%)** -- Fine-tuning on 1.5M purchase labels barely moved the number. A $2 pilot on 9.8K GPT-4o-mini graded labels beat it. Scaling to 194K Sonnet labels (total cost: $25) lifted the trained cross-encoder to nDCG@10 = 0.0735 standalone and 0.0976 in the full pipeline. Data quality is the bottleneck, not model capacity.
+
+8. **The pool size trap** -- Bigger candidate pools for the reranker make things worse. 100 candidates beats 200 beats 500. Cross-encoders have a signal-to-noise floor, and false positives leak in faster than true positives at larger pool sizes.
+
+9. **~80ms full pipeline on $0 hardware** -- Everything runs on Apple Silicon with no cloud GPU cost.
 
 ---
 
@@ -103,8 +119,10 @@ SPLADE standalone beats both BM25 (+149%) and dense retrieval (+75%) on fashion 
 | Dense retrieval | [Marqo-FashionCLIP](https://huggingface.co/Marqo/marqo-fashionCLIP) (ViT-B/32, 512-dim) | `open_clip` | Bi-encoder embedding + FAISS index |
 | Lexical retrieval | [OpenSearch 2.11](https://opensearch.org/) BM25 | Docker | Keyword matching with field boosts |
 | NER | [GLiNER2](https://github.com/fastino-ai/GLiNER2) `fastino/gliner2-base-v1` (EMNLP 2025) | `gliner>=0.1.0` | Zero-shot fashion attribute extraction |
-| Cross-encoder reranker | [ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2) (22M params) | `sentence-transformers` | Pair-wise reranking |
+| Cross-encoder reranker (off-shelf) | [ms-marco-MiniLM-L-6-v2](https://huggingface.co/cross-encoder/ms-marco-MiniLM-L-6-v2) (22M params) | `sentence-transformers` | Pair-wise reranking baseline |
+| Cross-encoder reranker (trained) | MiniLM-L-12 (33M params), trained on 194K Sonnet-graded labels | `sentence-transformers` | +15.7% over off-shelf CE |
 | Hybrid fusion | Reciprocal Rank Fusion (RRF) | Custom | Combines SPLADE + dense ranked lists |
+| LLM labeling | `openai/gpt-4o-mini` and `claude-sonnet-4.6` via [PaleblueDot AI](https://palebluedot.ai) | REST API | Graded relevance scores (0-3) |
 
 ---
 
@@ -191,6 +209,16 @@ python -m benchmark.eval_splade_pipeline
 python -m benchmark.eval_full_253k_splade
 ```
 
+### Step 6 -- Train the cross-encoder on LLM labels (Blog 3)
+
+```bash
+# Generate LLM-graded labels via PaleblueDot (requires API key)
+python benchmark/generate_llm_labels.py --n_pairs 194000 --model claude-sonnet-4.6
+
+# Train CE on LLM-graded labels (~2h17m on Apple MPS)
+python benchmark/train_ce_llm_labels.py --labels data/processed/ce_labels.jsonl --base MiniLM-L12
+```
+
 ### Step 6 -- Reproduce 10K sample breakdown (faster, for iteration)
 
 ```bash
@@ -262,7 +290,8 @@ Each query in `qrels.csv` has:
 |---|---|---|
 | **1** | Zero-shot pipeline: BM25 + dense + hybrid + NER + CE rerank (253K queries) | Done |
 | **2B** | SPLADE swap: replace BM25 with learned sparse retrieval (+38%) | Done |
-| **3** | Training the cross-encoder and retriever | Coming soon |
+| **3A/3B** | Training the cross-encoder with LLM-graded labels (+31%) | Done |
+| **3C** | Fine-tuning the retriever on its own mistakes | Coming soon |
 | **4** | Multimodal retrieval: images as a search signal | Coming soon |
 
 ---
