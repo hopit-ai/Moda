@@ -73,7 +73,7 @@ Every triplet is specifically the model's own confusion. "You ranked Black Slim 
 
 ## Fine-tuning FashionCLIP
 
-We fine-tuned the text encoder of FashionCLIP with an [InfoNCE contrastive loss](https://arxiv.org/abs/1807.03748). The vision encoder stayed frozen (images come in Blog 5 when we get to multimodal). Only the text side moved.
+We fine-tuned the text encoder of FashionCLIP with an [InfoNCE contrastive loss](https://arxiv.org/abs/2407.00143). The vision encoder stayed frozen (images come in Blog 5 when we get to multimodal). Only the text side moved.
 
 Standard contrastive setup: for each (query, positive) pair in a batch, use the other positives as in-batch negatives, plus one mined hard negative. Temperature 0.05. Learning rate 1e-6 (small, since FashionCLIP is already pretrained and we did not want to catastrophically forget what it knew). Cosine schedule. Five epochs. About 45 minutes on an M4 Max.
 
