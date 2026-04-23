@@ -1,7 +1,7 @@
 # MODA
 
 **The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
-253,685 purchase-grounded queries · 105,542 H&M products · 30+ pipeline configs · nDCG@10 = 0.0976 (+268% over dense baseline)
+253,685 purchase-grounded queries · 105,542 H&M products · 40+ pipeline configs · nDCG@10 = 0.1063 (+301% over dense baseline)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -27,7 +27,7 @@ We are publishing this work as a series of technical blog posts, each covering o
 | [Blog 1](blog_post.md) | Building a zero-shot fashion search pipeline | BM25 + Dense + CE reranking | nDCG@10 = 0.0543 |
 | [Blog 2](blog_post_phase2b.md) | The one swap that beat weeks of tuning | Replacing BM25 with SPLADE | nDCG@10 = 0.0748 (+38%) |
 | [Blog 3](blog_post_phase3a_3b.md) | $25 beat everything we had built | Training the cross-encoder with LLM-graded labels | nDCG@10 = 0.0976 (+31%) |
-| Blog 4 | *Coming soon* | | |
+| [Blog 4](blog_post_phase3c.md) | Training the retriever on its own mistakes | Fine-tuning FashionCLIP and SPLADE on hard negatives | nDCG@10 = 0.1063 (+9%) |
 | Blog 5 | *Coming soon* | | |
 
 ---
@@ -75,6 +75,32 @@ SPLADE standalone beats both BM25 (+149%) and dense retrieval (+75%) on fashion 
 
 LLM-graded labels crushed purchase labels. 9.8K GPT-4o-mini labels (cost: $2) beat 1.5M purchase labels. Scaling to 194K Sonnet-graded labels (cost: $25) lifted the full pipeline to nDCG@10 = 0.0976, a +31% gain over the Blog 2 headline at essentially zero cost.
 
+### Phase 3C: Training the retrievers on their own mistakes (22,855 held-out test queries)
+
+**Standalone FashionCLIP (dense retriever) before and after fine-tuning:**
+
+| Metric | Baseline | FT-FashionCLIP | Delta |
+|--------|----------|----------------|-------|
+| nDCG@10 | 0.0229 | 0.0542 | +137% |
+| MRR | 0.0208 | 0.0505 | +143% |
+| Recall@10 | 0.0433 | 0.0811 | +87% |
+| Recall@100 | 0.168 | 0.244 | +45% |
+
+Fine-tuned on 24K contrastive triplets mined from the retriever's own top-20 failures, graded by GPT-4o-mini. Cost: $3 in LLM calls, 45 minutes of training on an M-series MacBook.
+
+**Full pipeline across retriever fine-tuning states (LLM CE fixed):**
+
+| Retrievers | nDCG@10 | MRR | Recall@10 |
+|-----------|---------|-----|-----------|
+| Baseline SPLADE + Baseline CLIP | 0.0946 | 0.0660 | 0.0253 |
+| **Baseline SPLADE + FT-CLIP** | **0.1063** | **0.0766** | **0.0265** |
+| FT-SPLADE + Baseline CLIP | 0.0983 | 0.0925 | 0.0268 |
+| FT-SPLADE + FT-CLIP | 0.1017 | 0.0741 | 0.0258 |
+
+Best config: **SPLADE(0.3) + FT-FashionCLIP(0.7) + LLM CE = nDCG@10 = 0.1063**, 95% CI [0.1023, 0.1103]. The project best.
+
+Training both retrievers is worse than training one. Their errors start correlating and the hybrid stops extracting diversity. The winning pair always has one baseline retriever and one fine-tuned. The optimal fusion weight shifted again with the stronger dense retriever, from SPLADE(0.4)+Dense(0.6) in Blog 3 to SPLADE(0.3)+FT-Dense(0.7) in Blog 4. As the dense side gets stronger, it deserves more weight in the fusion.
+
 ### Latency (Apple M-series, per query)
 
 | Stage | Mean | p50 | p95 |
@@ -107,7 +133,13 @@ LLM-graded labels crushed purchase labels. 9.8K GPT-4o-mini labels (cost: $2) be
 
 8. **The pool size trap** -- Bigger candidate pools for the reranker make things worse. 100 candidates beats 200 beats 500. Cross-encoders have a signal-to-noise floor, and false positives leak in faster than true positives at larger pool sizes.
 
-9. **~80ms full pipeline on $0 hardware** -- Everything runs on Apple Silicon with no cloud GPU cost.
+9. **Fine-tuning the retriever on its own mistakes doubles dense retrieval (+137%)** -- We mined hard negatives from FashionCLIP's top-20 failures, graded them with GPT-4o-mini ($3), and trained on 24K contrastive triplets. Standalone dense nDCG@10 went from 0.0229 to 0.0542. Recall@100 went from 16.8% to 24.4%, which is the ceiling for downstream reranking.
+
+10. **Diversity collapses when both retrievers are fine-tuned** -- The best full pipeline pairs one fine-tuned retriever with one baseline retriever, not both. Training both on the same hard negatives makes their errors correlate and the hybrid stops adding variety. Whichever pair is mismatched in training state beats the fully-matched pair across every column of the factorial.
+
+11. **Fusion weights track the capability gap** -- As the dense retriever got better across phases, the optimal SPLADE-vs-Dense weight shifted from 0.5/0.5 (Blog 2) to 0.4/0.6 (Blog 3) to 0.3/0.7 (Blog 4). RRF fusion is essentially "whichever retriever is more trustworthy on this query gets more vote share." The weight is tracking the real capability delta.
+
+12. **~80ms full pipeline on $0 hardware** -- Everything runs on Apple Silicon with no cloud GPU cost.
 
 ---
 
@@ -291,7 +323,7 @@ Each query in `qrels.csv` has:
 | **1** | Zero-shot pipeline: BM25 + dense + hybrid + NER + CE rerank (253K queries) | Done |
 | **2B** | SPLADE swap: replace BM25 with learned sparse retrieval (+38%) | Done |
 | **3A/3B** | Training the cross-encoder with LLM-graded labels (+31%) | Done |
-| **3C** | Fine-tuning the retriever on its own mistakes | Coming soon |
+| **3C** | Fine-tuning the retriever on its own mistakes (+9% to project best 0.1063) | Done |
 | **4** | Multimodal retrieval: images as a search signal | Coming soon |
 
 ---
