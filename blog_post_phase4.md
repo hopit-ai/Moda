@@ -171,4 +171,8 @@ The honest summary: we built a multimodal retriever, ran 15 configurations, and 
 
 ---
 
-*Next: what we would do differently, and where the ceiling actually is.*
+Blog 5 is a lateral experiment, not a successor. Blog 6 is about what happened when we took the same vision encoders to a benchmark designed for image-to-image retrieval, where the question of what images do for fashion search gets a different answer.
+
+---
+
+*MODA is built by [The FI Company](https://thefi.company), a project within [Hopit AI](https://hopit.ai). Code, trained models, and the label sets referenced in this post are at [github.com/hopit-ai/Moda](https://github.com/hopit-ai/Moda). MIT License.*
