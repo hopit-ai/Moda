@@ -46,15 +46,19 @@ Only the query tower is trained. The text and image towers are frozen FashionCLI
 
 Training took about 5 hours on an M4 Max. The product embedding cache (105K text vectors + 105K image vectors at 512-d float32) is ~400 MB on disk.
 
-A clarification worth surfacing here. The text and image towers are frozen FashionCLIP encoders. CLIP-style contrastive pretraining aligns text and image embeddings for cross-modal cosine similarity, which is what makes retrieval work across modalities. This alignment is the shared embedding space the architecture relies on. Within that space, text and image embeddings still occupy different distributional regions (the "modality gap", documented by Liang et al. 2022). They are aligned for cross-modal retrieval, not co-located in the strict geometric sense.
+A clarification worth surfacing here. The text and image towers are frozen FashionCLIP encoders. CLIP-style contrastive pretraining aligns text and image embeddings for cross-modal cosine similarity, which is what makes retrieval work across modalities. Within that aligned space, text and image embeddings still occupy different distributional regions (the "modality gap", documented by Liang et al. 2022 on CLIP and inherited by FashionCLIP). They are aligned for cross-modal retrieval, not co-located in the strict geometric sense.
 
-The query tower is trained to produce embeddings that score well against both modalities via the linear blend p_emb = α·t_emb + (1−α)·i_emb. Operationally, this works because the score distributes:
+The accurate framing for the architecture is **query-side adaptation to two frozen target manifolds**, not "learning a new shared embedding space." The query tower trains with dual InfoNCE against both manifolds, learning a single query representation with meaningful cosine similarity to both text and image vectors of the same product. The trained query representation is the value of the architecture; what gets called "Three-Tower" is really a single trained query encoder paired with two frozen target encoders.
+
+The scoring step is approximately equivalent to late fusion of two separate retrievers. The dot product distributes:
 
 ```
 q · (α·t + (1−α)·i)  =  α·(q·t) + (1−α)·(q·i)
 ```
 
-The Three-Tower formulation is therefore numerically equivalent to running text and image retrieval separately and combining their cosine scores with the same α. The architecture would have learned a fundamentally different representation only if we had unfrozen the text or image tower and trained jointly with the query tower. We did not do that in this phase.
+The identity is exact on unnormalized embeddings. We renormalize after blending, which introduces a per-item scaling factor and breaks strict equivalence. The empirical impact is minimal: dense nDCG@10 moves by only 0.001 across the α range from 0.3 to 0.8. If the renormalization produced a meaningfully new representation, the optimal α would matter. It does not.
+
+A truly shared-space architecture would require unfreezing one or both target towers and training jointly with the query tower. We attempted this. Joint training of unfrozen image or text towers either ran out of memory at workable batch sizes or caused retrieval regressions across datasets. Frozen-tower architectures with query-side adaptation are a reasonable engineering choice when joint training is not feasible on the available hardware budget.
 
 ---
 
