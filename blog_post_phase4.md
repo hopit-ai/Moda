@@ -46,15 +46,15 @@ Only the query tower is trained. The text and image towers are frozen FashionCLI
 
 Training took about 5 hours on an M4 Max. The product embedding cache (105K text vectors + 105K image vectors at 512-d float32) is ~400 MB on disk.
 
-A clarification worth surfacing here. The text and image towers are frozen FashionCLIP encoders. CLIP-style contrastive pretraining aligns text and image embeddings for cross-modal similarity, but the two modalities still occupy different regions of the embedding space (the "modality gap", documented by Liang et al. 2022 on CLIP and inherited by FashionCLIP). t_emb and i_emb are not actually in a shared geometric space, only aligned for cosine retrieval.
+A clarification worth surfacing here. The text and image towers are frozen FashionCLIP encoders. CLIP-style contrastive pretraining aligns text and image embeddings for cross-modal cosine similarity, which is what makes retrieval work across modalities. This alignment is the shared embedding space the architecture relies on. Within that space, text and image embeddings still occupy different distributional regions (the "modality gap", documented by Liang et al. 2022). They are aligned for cross-modal retrieval, not co-located in the strict geometric sense.
 
-Linear combination of vectors from different distributional regions, p_emb = α·t_emb + (1−α)·i_emb, produces a third vector that is not on either modality's manifold. The score it yields is numerically identical to late fusion of two separate retrievers via dot-product distributivity:
+The query tower is trained to produce embeddings that score well against both modalities via the linear blend p_emb = α·t_emb + (1−α)·i_emb. Operationally, this works because the score distributes:
 
 ```
 q · (α·t + (1−α)·i)  =  α·(q·t) + (1−α)·(q·i)
 ```
 
-So Three-Tower as built is a late-fusion combiner. Neither formulation produces the shared embedding space the architecture's name implies. A principled shared-space architecture would have required joint training of the towers, at minimum unfreezing one of them. We did not do that in this phase.
+The Three-Tower formulation is therefore numerically equivalent to running text and image retrieval separately and combining their cosine scores with the same α. The architecture would have learned a fundamentally different representation only if we had unfrozen the text or image tower and trained jointly with the query tower. We did not do that in this phase.
 
 ---
 
