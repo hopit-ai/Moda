@@ -28,7 +28,7 @@ We are publishing this work as a series of technical blog posts, each covering o
 | [Blog 2](blog_post_phase2b.md) | The one swap that beat weeks of tuning | Replacing BM25 with SPLADE | nDCG@10 = 0.0748 (+38%) |
 | [Blog 3](blog_post_phase3a_3b.md) | $25 beat everything we had built | Training the cross-encoder with LLM-graded labels | nDCG@10 = 0.0976 (+31%) |
 | [Blog 4](blog_post_phase3c.md) | Training the retriever on its own mistakes | Fine-tuning FashionCLIP and SPLADE on hard negatives | nDCG@10 = 0.1063 (+9%) |
-| Blog 5 | *Coming soon* | | |
+| [Blog 5](blog_post_phase4.md) | Adding eyes to the search engine | Three-Tower multimodal retriever (text + image) | nDCG@10 = 0.0833 (lateral) |
 
 ---
 
@@ -101,6 +101,24 @@ Best config: **SPLADE(0.3) + FT-FashionCLIP(0.7) + LLM CE = nDCG@10 = 0.1063**, 
 
 Training both retrievers is worse than training one. Their errors start correlating and the hybrid stops extracting diversity. The winning pair always has one baseline retriever and one fine-tuned. The optimal fusion weight shifted again with the stronger dense retriever, from SPLADE(0.4)+Dense(0.6) in Blog 3 to SPLADE(0.3)+FT-Dense(0.7) in Blog 4. As the dense side gets stronger, it deserves more weight in the fusion.
 
+### Phase 4: Three-Tower multimodal retriever (22,855 held-out test queries)
+
+A separate experiment that did not extend the project best, but is included for honest reporting.
+
+| Config | nDCG@10 | MRR | Recall@10 |
+|--------|---------|-----|-----------|
+| Text tower only (FashionCLIP) | 0.0355 | 0.0657 | 0.0196 |
+| Image tower only (FashionCLIP vision) | 0.0305 | 0.0560 | 0.0148 |
+| Combined towers (alpha=0.3) | 0.0350 | 0.0656 | 0.0185 |
+| 3T + SPLADE + LLM CE (3T best) | **0.0833** | 0.0899 | 0.0272 |
+| Blog 4 best (text-only, SPLADE+FT-CLIP+LLM CE) | **0.1063** | 0.0766 | 0.0265 |
+
+The Three-Tower model (separate query / text / image encoders, frozen FashionCLIP towers, contrastive learning on the query tower) does not beat the text-only Blog 4 pipeline on aggregate nDCG@10. It wins on MRR and ties on Recall@10, suggesting the image channel helps at position 1 but hurts the top-10 ordering.
+
+The image channel adds qualitative value on visually-specific queries ("red dress", "floral pattern", "striped shirt") where titles underspecify appearance. On H&M's merchandising-written attribute-rich titles, text retrieval done well beats multimodal retrieval done adequately. On catalogs with noisier text (user-uploaded photos, resale listings, streetwear with visual motifs), the trade-off likely flips.
+
+This is a lateral experiment, not a successor to Blog 4. We report it because the failure mode is itself a finding.
+
 ### Latency (Apple M-series, per query)
 
 | Stage | Mean | p50 | p95 |
@@ -139,7 +157,9 @@ Training both retrievers is worse than training one. Their errors start correlat
 
 11. **Fusion weights track the capability gap** -- As the dense retriever got better across phases, the optimal SPLADE-vs-Dense weight shifted from 0.5/0.5 (Blog 2) to 0.4/0.6 (Blog 3) to 0.3/0.7 (Blog 4). RRF fusion is essentially "whichever retriever is more trustworthy on this query gets more vote share." The weight is tracking the real capability delta.
 
-12. **~80ms full pipeline on $0 hardware** -- Everything runs on Apple Silicon with no cloud GPU cost.
+12. **Multimodal retrieval is not free on text-rich catalogs** -- Adding an image channel to the H&M pipeline did not improve aggregate nDCG@10. The text-only pipeline (0.1063) beats the three-tower multimodal pipeline (0.0833). Image features help on visually-specific queries ("floral midi dress") but hurt on text-dominated queries where the title already carries the answer. On H&M's clean merchandising-written titles, text-only retrieval done well beats multimodal retrieval done adequately. On catalogs with noisier text, the trade-off likely flips.
+
+13. **~80ms full pipeline on $0 hardware** -- Everything runs on Apple Silicon with no cloud GPU cost.
 
 ---
 
@@ -324,7 +344,7 @@ Each query in `qrels.csv` has:
 | **2B** | SPLADE swap: replace BM25 with learned sparse retrieval (+38%) | Done |
 | **3A/3B** | Training the cross-encoder with LLM-graded labels (+31%) | Done |
 | **3C** | Fine-tuning the retriever on its own mistakes (+9% to project best 0.1063) | Done |
-| **4** | Multimodal retrieval: images as a search signal | Coming soon |
+| **4** | Three-Tower multimodal retriever on H&M (lateral experiment, 0.0833 aggregate) | Done |
 
 ---
 
