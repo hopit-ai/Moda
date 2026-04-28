@@ -46,6 +46,16 @@ Only the query tower is trained. The text and image towers are frozen FashionCLI
 
 Training took about 5 hours on an M4 Max. The product embedding cache (105K text vectors + 105K image vectors at 512-d float32) is ~400 MB on disk.
 
+A clarification worth surfacing here. The text and image towers are frozen FashionCLIP encoders, which already produce embeddings in a shared 512-dim space from CLIP-style pretraining. The Three-Tower model does not learn a new shared embedding space. It uses FashionCLIP's existing one and trains the query tower to project queries into that space.
+
+The architecture is also mathematically equivalent to a simpler late-fusion setup. Because the towers are frozen and combined linearly, the dot product distributes:
+
+```
+q · (α·t + (1−α)·i)  =  α·(q·t) + (1−α)·(q·i)
+```
+
+Running text and image retrieval separately and combining their cosine scores with the same α gives the same result as the Three-Tower formulation. Three-Tower is the embedding-side framing; late fusion of two retrievers is the score-side framing of the same operation. The architectures would actually diverge if we unfroze the text or image tower and let it train jointly with the query tower, learning a new shared space. We did not do that in this phase.
+
 ---
 
 ## Baselines: how good is three-tower on its own?
