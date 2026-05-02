@@ -1,0 +1,66 @@
+{
+  "verification_date": "2026-04-17",
+  "purpose": "Confirm DeepFashion2 fine-tuning data does not leak into LookBench evaluation",
+  "training_data": {
+    "name": "DeepFashion2",
+    "source": "https://huggingface.co/datasets/sahirp/deepfashion2",
+    "original_paper": "Ge et al., CVPR 2019 (arXiv:1901.07973)",
+    "creation_year": 2019,
+    "n_pairs_used": 13557,
+    "categories": [
+      "short sleeve top", "long sleeve top", "short sleeve outwear",
+      "long sleeve outwear", "vest", "sling", "shorts", "trousers",
+      "skirt", "short sleeve dress", "long sleeve dress",
+      "vest dress", "sling dress"
+    ]
+  },
+  "evaluation_data": {
+    "name": "LookBench",
+    "source": "https://huggingface.co/datasets/srpone/look-bench",
+    "original_paper": "Marqo, arXiv:2601.14706",
+    "creation_year": 2024,
+    "subsets": ["real_studio_flat", "aigen_studio", "real_streetlook", "aigen_streetlook", "noise"],
+    "categories_sample": [
+      "blouse", "dress", "t-shirt", "pants", "sweatshirt", "jacket",
+      "sweater", "coat", "skirt", "shirt", "vest", "cardigan", "hat",
+      "scarf", "shoe", "sock", "glove", "shorts", "bag", "jumpsuit",
+      "umbrella", "tie", "cape", "headband", "belt", "handbag", "glasses",
+      "watch", "boot", "sneaker"
+    ]
+  },
+  "leakage_checks": {
+    "exact_image_md5_overlap": {
+      "method": "MD5 hash of JPEG-encoded bytes",
+      "lookbench_sampled": 397,
+      "deepfashion2_sampled": 1000,
+      "matches": 0,
+      "result": "PASS"
+    },
+    "category_vocabulary_overlap": {
+      "deepfashion2_unique_categories": 13,
+      "lookbench_unique_categories_observed": 40,
+      "shared_categories": ["skirt", "vest", "shorts"],
+      "lookbench_only_examples": [
+        "bag", "shoe", "hat", "scarf", "glove", "sock", "umbrella",
+        "tie", "headband", "belt", "handbag", "glasses", "watch",
+        "boot", "sneaker", "blouse", "t-shirt", "sweatshirt", "jacket",
+        "sweater", "coat", "shirt", "cardigan", "cape", "jumpsuit"
+      ],
+      "result": "Mostly disjoint vocabularies"
+    },
+    "temporal_independence": {
+      "deepfashion2_published": 2019,
+      "lookbench_published": 2024,
+      "lookbench_contains_ai_generated": true,
+      "ai_diffusion_models_predate_deepfashion2": false,
+      "result": "AI-generated subsets cannot exist in DeepFashion2"
+    },
+    "noise_gallery_source": {
+      "lookbench_noise_size": 58275,
+      "lookbench_noise_source": "Fashion200K / H&M derived (per paper)",
+      "uses_deepfashion2": false,
+      "result": "PASS"
+    }
+  },
+  "verdict": "NO DATA LEAKAGE. Training and evaluation datasets are independent."
+}

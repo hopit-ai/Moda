@@ -1,0 +1,129 @@
+{
+  "siglip-deepfashion2": {
+    "model": "MODA-SigLIP-DeepFashion2",
+    "hf_hub": "hf-hub:Marqo/marqo-fashionSigLIP",
+    "emb_dim": 768,
+    "device": "mps",
+    "subsets": {
+      "real_studio_flat": {
+        "subset": "real_studio_flat",
+        "n_queries": 1011,
+        "n_gallery_subset": 3951,
+        "n_gallery_noise": 58275,
+        "n_gallery_total": 62226,
+        "fine_recall": {
+          "recall@1": 69.63,
+          "recall@5": 89.12,
+          "recall@10": 93.08,
+          "recall@20": 95.15
+        },
+        "coarse_recall": {
+          "recall@1": 91.69,
+          "recall@5": 96.93,
+          "recall@10": 97.63,
+          "recall@20": 98.32
+        },
+        "id_recall": {
+          "recall@1": 59.94,
+          "recall@5": 85.76,
+          "recall@10": 90.5,
+          "recall@20": 94.16
+        },
+        "ndcg@5": 55.54,
+        "mrr": 71.17,
+        "elapsed_sec": 105.1
+      },
+      "aigen_studio": {
+        "subset": "aigen_studio",
+        "n_queries": 193,
+        "n_gallery_subset": 979,
+        "n_gallery_noise": 58275,
+        "n_gallery_total": 59254,
+        "fine_recall": {
+          "recall@1": 77.2,
+          "recall@5": 95.85,
+          "recall@10": 97.93,
+          "recall@20": 98.45
+        },
+        "coarse_recall": {
+          "recall@1": 94.3,
+          "recall@5": 99.48,
+          "recall@10": 99.48,
+          "recall@20": 100.0
+        },
+        "id_recall": {
+          "recall@1": 76.17,
+          "recall@5": 94.82,
+          "recall@10": 97.41,
+          "recall@20": 98.45
+        },
+        "ndcg@5": 65.84,
+        "mrr": 83.78,
+        "elapsed_sec": 21.5
+      },
+      "real_streetlook": {
+        "subset": "real_streetlook",
+        "n_queries": 981,
+        "n_gallery_subset": 3278,
+        "n_gallery_noise": 58275,
+        "n_gallery_total": 61553,
+        "fine_recall": {
+          "recall@1": 58.41,
+          "recall@5": 74.21,
+          "recall@10": 80.02,
+          "recall@20": 83.49
+        },
+        "coarse_recall": {
+          "recall@1": 76.55,
+          "recall@5": 86.54,
+          "recall@10": 90.32,
+          "recall@20": 92.56
+        },
+        "id_recall": {
+          "recall@1": 44.65,
+          "recall@5": 65.65,
+          "recall@10": 72.17,
+          "recall@20": 75.74
+        },
+        "ndcg@5": 45.2,
+        "mrr": 54.31,
+        "elapsed_sec": 98.3
+      },
+      "aigen_streetlook": {
+        "subset": "aigen_streetlook",
+        "n_queries": 160,
+        "n_gallery_subset": 571,
+        "n_gallery_noise": 58275,
+        "n_gallery_total": 58846,
+        "fine_recall": {
+          "recall@1": 83.75,
+          "recall@5": 93.75,
+          "recall@10": 95.62,
+          "recall@20": 96.88
+        },
+        "coarse_recall": {
+          "recall@1": 93.12,
+          "recall@5": 95.0,
+          "recall@10": 95.62,
+          "recall@20": 96.88
+        },
+        "id_recall": {
+          "recall@1": 70.62,
+          "recall@5": 90.0,
+          "recall@10": 93.12,
+          "recall@20": 93.75
+        },
+        "ndcg@5": 61.33,
+        "mrr": 79.23,
+        "elapsed_sec": 13.0
+      },
+      "overall": {
+        "fine_recall@1": 66.52,
+        "coarse_recall@1": 85.67,
+        "id_recall@1": 55.61,
+        "ndcg@5": 52.46,
+        "total_queries": 2345
+      }
+    }
+  }
+}

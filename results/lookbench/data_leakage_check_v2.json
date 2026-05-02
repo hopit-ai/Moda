@@ -1,0 +1,52 @@
+{
+  "verification_date": "2026-04-18",
+  "purpose": "Confirm that DeepFashion-InShop and DeepFashion-MultiModal (planned for attribute linear-probing in Recipe X) do not leak any image into LookBench (queries, subset galleries, or noise gallery).",
+  "method": {
+    "hash": "MD5 of JPEG-q95-encoded 224x224 RGB normalized image",
+    "scope": "ALL images in both datasets compared against ALL LookBench images"
+  },
+  "evaluation_data": {
+    "name": "LookBench",
+    "subsets": [
+      "real_studio_flat",
+      "aigen_studio",
+      "real_streetlook",
+      "aigen_streetlook",
+      "noise"
+    ]
+  },
+  "training_data_audited": [
+    {
+      "name": "DeepFashion-InShop (Marqo)",
+      "hf_id": "Marqo/deepfashion-inshop",
+      "n_images_audited": 52591,
+      "n_unique_hashes": 52591
+    },
+    {
+      "name": "DeepFashion-MultiModal (Marqo)",
+      "hf_id": "Marqo/deepfashion-multimodal",
+      "n_images_audited": 42537,
+      "n_unique_hashes": 42490
+    }
+  ],
+  "leakage_checks": {
+    "df_inshop_vs_lookbench": {
+      "n_lookbench_hashes": 67341,
+      "n_df_inshop_hashes": 52591,
+      "n_overlapping_hashes": 0,
+      "overlap_pct_of_other": 0.0,
+      "sample_overlaps": [],
+      "verdict": "PASS"
+    },
+    "df_multimodal_vs_lookbench": {
+      "n_lookbench_hashes": 67341,
+      "n_df_multimodal_hashes": 42490,
+      "n_overlapping_hashes": 0,
+      "overlap_pct_of_other": 0.0,
+      "sample_overlaps": [],
+      "verdict": "PASS"
+    }
+  },
+  "overall_verdict": "PASS",
+  "elapsed_seconds": 206.8
+}

@@ -1,0 +1,100 @@
+{
+  "ensemble_df2": {
+    "real_studio_flat": {
+      "subset": "real_studio_flat",
+      "n_queries": 1011,
+      "fine_recall": {
+        "recall@1": 71.22,
+        "recall@5": 88.03,
+        "recall@10": 92.38,
+        "recall@20": 95.45
+      },
+      "coarse_recall": {
+        "recall@1": 92.09,
+        "recall@5": 96.34,
+        "recall@10": 97.82,
+        "recall@20": 98.52
+      },
+      "id_recall": {
+        "recall@1": 60.63,
+        "recall@5": 84.87,
+        "recall@10": 89.91,
+        "recall@20": 93.87
+      },
+      "ndcg@5": 55.88,
+      "mrr": 71.22
+    },
+    "aigen_studio": {
+      "subset": "aigen_studio",
+      "n_queries": 193,
+      "fine_recall": {
+        "recall@1": 80.83,
+        "recall@5": 95.34,
+        "recall@10": 97.93,
+        "recall@20": 98.45
+      },
+      "coarse_recall": {
+        "recall@1": 93.78,
+        "recall@5": 98.96,
+        "recall@10": 99.48,
+        "recall@20": 100.0
+      },
+      "id_recall": {
+        "recall@1": 77.72,
+        "recall@5": 93.78,
+        "recall@10": 97.41,
+        "recall@20": 98.45
+      },
+      "ndcg@5": 66.71,
+      "mrr": 84.77
+    },
+    "real_streetlook": {
+      "subset": "real_streetlook",
+      "n_queries": 981,
+      "fine_recall": {
+        "recall@1": 59.23,
+        "recall@5": 74.21,
+        "recall@10": 79.41,
+        "recall@20": 84.1
+      },
+      "coarse_recall": {
+        "recall@1": 76.96,
+        "recall@5": 87.77,
+        "recall@10": 90.11,
+        "recall@20": 93.17
+      },
+      "id_recall": {
+        "recall@1": 45.77,
+        "recall@5": 66.46,
+        "recall@10": 71.36,
+        "recall@20": 75.74
+      },
+      "ndcg@5": 46.22,
+      "mrr": 55.65
+    },
+    "aigen_streetlook": {
+      "subset": "aigen_streetlook",
+      "n_queries": 160,
+      "fine_recall": {
+        "recall@1": 81.25,
+        "recall@5": 92.5,
+        "recall@10": 96.25,
+        "recall@20": 96.88
+      },
+      "coarse_recall": {
+        "recall@1": 92.5,
+        "recall@5": 95.0,
+        "recall@10": 96.88,
+        "recall@20": 97.5
+      },
+      "id_recall": {
+        "recall@1": 71.25,
+        "recall@5": 90.0,
+        "recall@10": 93.12,
+        "recall@20": 93.75
+      },
+      "ndcg@5": 61.58,
+      "mrr": 79.32
+    }
+  }
+}

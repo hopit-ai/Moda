@@ -1,0 +1,438 @@
+{
+  "verification_date": "2026-04-19",
+  "purpose": "Confirm that the 4 Marqo benchmark datasets we plan to use for a fair MoDA vs FashionSigLIP comparison (Atlas, KAGL, Fashion200k, Polyvore) do NOT overlap with our distillation training pool (DeepFashion-InShop, DeepFashion-MultiModal, H&M).",
+  "method": {
+    "hash": "MD5 of JPEG-q95-encoded 224x224 RGB normalized image",
+    "scope": "ALL images in both clean and training datasets",
+    "training_pools": [
+      "df_inshop",
+      "df_multimodal",
+      "hnm"
+    ],
+    "other_eval_sets": [
+      "lookbench"
+    ],
+    "verdict_logic": "PASS iff zero overlap between any clean dataset and any TRAINING_POOL dataset. Overlaps with OTHER_EVAL_SETS (LookBench) are reported as INFO and do not affect the verdict."
+  },
+  "clean_datasets": {
+    "atlas": {
+      "hf_id": "Marqo/atlas",
+      "n_images_audited": 78370,
+      "n_unique_hashes": 77069
+    },
+    "KAGL": {
+      "hf_id": "Marqo/KAGL",
+      "n_images_audited": 44434,
+      "n_unique_hashes": 43655
+    },
+    "fashion200k": {
+      "hf_id": "Marqo/fashion200k",
+      "n_images_audited": 201624,
+      "n_unique_hashes": 199631
+    },
+    "polyvore": {
+      "hf_id": "Marqo/polyvore",
+      "n_images_audited": 94096,
+      "n_unique_hashes": 94068
+    }
+  },
+  "training_pools": {
+    "df_inshop": {
+      "n_images_audited": 52591,
+      "n_unique_hashes": 52591
+    },
+    "df_multimodal": {
+      "n_images_audited": 42537,
+      "n_unique_hashes": 42490
+    },
+    "hnm": {
+      "n_images_audited": 105092,
+      "n_unique_hashes": 104886
+    }
+  },
+  "other_eval_sets": {
+    "lookbench": {
+      "n_images_audited": 69399,
+      "n_unique_hashes": 67341
+    }
+  },
+  "leakage_pairs_training": {
+    "atlas": {
+      "df_inshop": {
+        "n_hashes_atlas": 77069,
+        "n_hashes_df_inshop": 52591,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      },
+      "df_multimodal": {
+        "n_hashes_atlas": 77069,
+        "n_hashes_df_multimodal": 42490,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      },
+      "hnm": {
+        "n_hashes_atlas": 77069,
+        "n_hashes_hnm": 104886,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      }
+    },
+    "KAGL": {
+      "df_inshop": {
+        "n_hashes_KAGL": 43655,
+        "n_hashes_df_inshop": 52591,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      },
+      "df_multimodal": {
+        "n_hashes_KAGL": 43655,
+        "n_hashes_df_multimodal": 42490,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      },
+      "hnm": {
+        "n_hashes_KAGL": 43655,
+        "n_hashes_hnm": 104886,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      }
+    },
+    "fashion200k": {
+      "df_inshop": {
+        "n_hashes_fashion200k": 199631,
+        "n_hashes_df_inshop": 52591,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      },
+      "df_multimodal": {
+        "n_hashes_fashion200k": 199631,
+        "n_hashes_df_multimodal": 42490,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      },
+      "hnm": {
+        "n_hashes_fashion200k": 199631,
+        "n_hashes_hnm": 104886,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      }
+    },
+    "polyvore": {
+      "df_inshop": {
+        "n_hashes_polyvore": 94068,
+        "n_hashes_df_inshop": 52591,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      },
+      "df_multimodal": {
+        "n_hashes_polyvore": 94068,
+        "n_hashes_df_multimodal": 42490,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      },
+      "hnm": {
+        "n_hashes_polyvore": 94068,
+        "n_hashes_hnm": 104886,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "PASS"
+      }
+    }
+  },
+  "leakage_pairs_other_eval": {
+    "atlas": {
+      "lookbench": {
+        "n_hashes_atlas": 77069,
+        "n_hashes_lookbench": 67341,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "INFO"
+      }
+    },
+    "KAGL": {
+      "lookbench": {
+        "n_hashes_KAGL": 43655,
+        "n_hashes_lookbench": 67341,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "INFO"
+      }
+    },
+    "fashion200k": {
+      "lookbench": {
+        "n_hashes_fashion200k": 199631,
+        "n_hashes_lookbench": 67341,
+        "n_overlap_hashes": 57832,
+        "overlap_pct_of_clean": 28.9694,
+        "sample_overlaps": [
+          {
+            "hash": "e4ddae74756654b8395cc05b59bf4d12",
+            "fashion200k_ids": [
+              "88805239_0"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:649"
+            ]
+          },
+          {
+            "hash": "9944033a077b44bb772a424ffbe51bbb",
+            "fashion200k_ids": [
+              "91031032_2"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:51756"
+            ]
+          },
+          {
+            "hash": "360c1b83d29823fb0dd114effbeb6c66",
+            "fashion200k_ids": [
+              "88416326_23"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:30735"
+            ]
+          },
+          {
+            "hash": "23d62ebdce4aa232dfe8faa61fab81bb",
+            "fashion200k_ids": [
+              "91225963_0"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:41567"
+            ]
+          },
+          {
+            "hash": "0df1ebc42bee39e341167f0eb8430beb",
+            "fashion200k_ids": [
+              "90770702_4"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:56678"
+            ]
+          },
+          {
+            "hash": "0053fd8867cebd7c2411ae865837a790",
+            "fashion200k_ids": [
+              "90416284_2"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:12074"
+            ]
+          },
+          {
+            "hash": "d884397ee10bdbdf9ff11032f0340512",
+            "fashion200k_ids": [
+              "91177685_4"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:52451"
+            ]
+          },
+          {
+            "hash": "55efef5966ec25a189cc357266b45fd3",
+            "fashion200k_ids": [
+              "91335699_2"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:2371"
+            ]
+          },
+          {
+            "hash": "972d94648a2b23f600a1c9b46396ff5a",
+            "fashion200k_ids": [
+              "89973917_0"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:36695"
+            ]
+          },
+          {
+            "hash": "d5dee321e51b66334532f25b4f9f2444",
+            "fashion200k_ids": [
+              "89976509_5"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:4460"
+            ]
+          },
+          {
+            "hash": "7c2eb57e3c439cea222f137745615b77",
+            "fashion200k_ids": [
+              "91175005_0"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:57282"
+            ]
+          },
+          {
+            "hash": "9f36a03ce5143e742ebfe5b256421031",
+            "fashion200k_ids": [
+              "89369269_1"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:22130"
+            ]
+          },
+          {
+            "hash": "ad7c6c5b6bf6ebcb2893fe3e25ab46b3",
+            "fashion200k_ids": [
+              "90698094_2"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:23533"
+            ]
+          },
+          {
+            "hash": "9cc5ba48fcbc0a70fbfa540133213be7",
+            "fashion200k_ids": [
+              "91425030_3"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:44467"
+            ]
+          },
+          {
+            "hash": "703fa6942ce910fb1563344017ec86ae",
+            "fashion200k_ids": [
+              "90650739_5"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:31482"
+            ]
+          },
+          {
+            "hash": "96cec50049f72dbb497d925a0c690591",
+            "fashion200k_ids": [
+              "90586224_0"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:23481"
+            ]
+          },
+          {
+            "hash": "dd587b649e1d8b45068b933901f9b781",
+            "fashion200k_ids": [
+              "58669937_4"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:35486"
+            ]
+          },
+          {
+            "hash": "e6708c82f989f75b94719e84e1082ba5",
+            "fashion200k_ids": [
+              "91362449_0"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:41883"
+            ]
+          },
+          {
+            "hash": "c8b0c1d5529b8aac5c80a342ea12770a",
+            "fashion200k_ids": [
+              "88818456_1"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:11198"
+            ]
+          },
+          {
+            "hash": "d89682031950cd012a7a463be433ddd3",
+            "fashion200k_ids": [
+              "91022385_0"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:48226"
+            ]
+          },
+          {
+            "hash": "4296c89c427908a1706e1486dbb1c528",
+            "fashion200k_ids": [
+              "91074164_1"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:32230"
+            ]
+          },
+          {
+            "hash": "063d5fa9660d016a7bee7777af2663c6",
+            "fashion200k_ids": [
+              "90780504_1"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:37789"
+            ]
+          },
+          {
+            "hash": "78aac715457d07d7acfc2906c00b5710",
+            "fashion200k_ids": [
+              "89377508_3"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:36329"
+            ]
+          },
+          {
+            "hash": "76dcfcc725cb7d465a5cd4d01f246728",
+            "fashion200k_ids": [
+              "91323116_0"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:55389"
+            ]
+          },
+          {
+            "hash": "1c6a27ba90059f850476aa4ac35ee603",
+            "fashion200k_ids": [
+              "87795326_5"
+            ],
+            "lookbench_ids": [
+              "lb_noise_gallery:393"
+            ]
+          }
+        ],
+        "verdict": "INFO"
+      }
+    },
+    "polyvore": {
+      "lookbench": {
+        "n_hashes_polyvore": 94068,
+        "n_hashes_lookbench": 67341,
+        "n_overlap_hashes": 0,
+        "overlap_pct_of_clean": 0.0,
+        "sample_overlaps": [],
+        "verdict": "INFO"
+      }
+    }
+  },
+  "overall_verdict": "PASS",
+  "notes": [
+    "LookBench's noise gallery overlaps heavily with Fashion200k. This is by Marqo's LookBench design (Fashion200k is used as distractor pool) and is NOT a training-time leakage. Our distillation NEVER trained on LookBench OR Fashion200k."
+  ],
+  "elapsed_seconds": 0.3
+}

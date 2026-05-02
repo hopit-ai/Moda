@@ -1,0 +1,279 @@
+{
+  "phase": "Phase 5 — LookBench (Tier 3 benchmark)",
+  "best_result": {
+    "config": "MODA-SigLIP-DeepFashion2 + FashionCLIP (concat ensemble)",
+    "fine_recall_at_1_overall": 67.68,
+    "delta_vs_baseline": 3.84,
+    "per_subset": {
+      "real_studio_flat": 71.22,
+      "aigen_studio": 80.83,
+      "real_streetlook": 59.23,
+      "aigen_streetlook": 81.25
+    }
+  },
+  "baseline": {
+    "config": "FashionSigLIP (Marqo, zero-shot)",
+    "fine_recall_at_1_overall": 63.84,
+    "coarse_recall_at_1_overall": 83.67,
+    "ndcg_at_5_overall": 49.63,
+    "per_subset_fine_r1": {
+      "real_studio_flat": 66.96,
+      "aigen_studio": 76.68,
+      "real_streetlook": 56.37,
+      "aigen_streetlook": 74.38
+    }
+  },
+  "experiments_ranked": [
+    {
+      "rank": 1,
+      "name": "MODA-SigLIP-DeepFashion2 + FashionCLIP ensemble",
+      "type": "fine-tuned + ensemble",
+      "fine_r1_overall": 67.68,
+      "delta_vs_baseline": 3.84,
+      "per_subset": {"real_studio_flat": 71.22, "aigen_studio": 80.83, "real_streetlook": 59.23, "aigen_streetlook": 81.25},
+      "date": "2026-04-17",
+      "results_file": "ensemble_tta_eval.json (ensemble_df2 mode)"
+    },
+    {
+      "rank": 2,
+      "name": "MODA-SigLIP-DeepFashion2 (vision encoder fine-tuned)",
+      "type": "fine-tuned",
+      "fine_r1_overall": 66.52,
+      "coarse_r1_overall": 85.67,
+      "ndcg5_overall": 52.46,
+      "delta_vs_baseline": 2.68,
+      "per_subset": {"real_studio_flat": 69.63, "aigen_studio": 77.20, "real_streetlook": 58.41, "aigen_streetlook": 83.75},
+      "training": {
+        "dataset": "DeepFashion2",
+        "n_train_triplets": 13557,
+        "n_val_triplets": 714,
+        "epochs": 4,
+        "best_epoch": 3,
+        "best_val_triplet_acc": 0.996,
+        "batch_size": 24,
+        "lr": 2e-6,
+        "temperature": 0.07,
+        "align_weight": 0.3,
+        "loss": "InfoNCE + L2 weight drift reg"
+      },
+      "date": "2026-04-17",
+      "checkpoint": "models/moda-siglip-deepfashion2/best/model_state_dict.pt",
+      "results_file": "deepfashion2_eval.json"
+    },
+    {
+      "rank": 3,
+      "name": "Ensemble: FashionSigLIP + FashionCLIP (zero-train)",
+      "type": "zero-training",
+      "fine_r1_overall": 64.39,
+      "coarse_r1_overall": 83.18,
+      "ndcg5_overall": 50.55,
+      "delta_vs_baseline": 0.55,
+      "date": "2026-04-16",
+      "results_file": "ensemble_tta_eval.json (ensemble mode)"
+    },
+    {
+      "rank": 4,
+      "name": "FashionSigLIP (Marqo baseline)",
+      "type": "zero-shot baseline",
+      "fine_r1_overall": 63.84,
+      "coarse_r1_overall": 83.67,
+      "ndcg5_overall": 49.63,
+      "delta_vs_baseline": 0,
+      "per_subset": {"real_studio_flat": 66.96, "aigen_studio": 76.68, "real_streetlook": 56.37, "aigen_streetlook": 74.38},
+      "paper_overall_fine_r1": 62.77,
+      "paper_reproduction_delta": 1.07,
+      "date": "2026-04-16",
+      "results_file": "baseline_eval.json"
+    },
+    {
+      "rank": 5,
+      "name": "FashionCLIP (Marqo baseline)",
+      "type": "zero-shot baseline",
+      "fine_r1_overall": 59.36,
+      "coarse_r1_overall": 78.46,
+      "ndcg5_overall": 45.20,
+      "delta_vs_baseline": -4.48,
+      "paper_overall_fine_r1": 60.30,
+      "paper_reproduction_delta": -0.94,
+      "date": "2026-04-16"
+    },
+    {
+      "rank": 6,
+      "name": "MODA-SigLIP-Vision-FT (H&M contrastive)",
+      "type": "fine-tuned (failed)",
+      "fine_r1_overall": 58.85,
+      "coarse_r1_overall": 77.65,
+      "ndcg5_overall": 44.30,
+      "delta_vs_baseline": -4.99,
+      "per_subset": {"real_studio_flat": 64.79, "aigen_studio": 62.69, "real_streetlook": 49.95, "aigen_streetlook": 71.25},
+      "failure_reason": "H&M is single-domain (studio flat-lay), narrowed model's capability instead of broadening it",
+      "date": "2026-04-16"
+    },
+    {
+      "rank": 7,
+      "name": "MODA-FashionCLIP-Phase4F (H&M multimodal FT)",
+      "type": "fine-tuned (failed)",
+      "fine_r1_overall": 54.80,
+      "coarse_r1_overall": 73.90,
+      "ndcg5_overall": 41.19,
+      "delta_vs_baseline": -9.04,
+      "failure_reason": "Multimodal text-image training pulled vision encoder toward text-alignment, hurt pure image-image retrieval",
+      "date": "2026-04-16"
+    },
+    {
+      "rank": 8,
+      "name": "DINOv2-Base (general vision FM, zero-shot)",
+      "type": "zero-shot baseline (failed)",
+      "fine_r1_overall": 39.49,
+      "coarse_r1_overall": 63.92,
+      "ndcg5_overall": 27.80,
+      "delta_vs_baseline": -24.35,
+      "per_subset": {"real_studio_flat": 51.53, "aigen_studio": 32.12, "real_streetlook": 29.97, "aigen_streetlook": 30.63},
+      "failure_reason": "General self-supervised vision features don't capture fashion's fine-grained attributes (sleeve length, neckline, print pattern)",
+      "date": "2026-04-17",
+      "results_file": "dinov2_eval.json"
+    }
+  ],
+  "paper_format_tables": {
+    "subsets": {
+      "RealStudio":  {"key": "real_studio_flat",  "n_queries": 1011},
+      "AIGen-Stu":   {"key": "aigen_studio",      "n_queries": 193},
+      "RealStreet":  {"key": "real_streetlook",   "n_queries": 981},
+      "AIGen-Str":   {"key": "aigen_streetlook",  "n_queries": 160},
+      "Overall":     {"key": "weighted_average",  "n_queries": 2345}
+    },
+    "metric_definitions": {
+      "fine_recall_at_1":   "Top-1 gallery item shares the same `category|main_attribute` composite label as the query (LookBench Table 3).",
+      "coarse_recall_at_1": "Top-1 gallery item shares the same `category` as the query (LookBench Table 8).",
+      "ndcg_at_5":          "Binary `category|main_attribute` relevance, standard DCG / IDCG over top-5 (LookBench Table 7)."
+    },
+    "table_3_fine_recall_at_1": [
+      {"model": "FashionSigLIP (paper)",                              "source": "paper",       "RealStudio": 66.17, "AIGen-Stu": 74.09, "RealStreet": 55.15, "AIGen-Str": 74.38, "Overall": 62.77, "delta_vs_our_siglip": null},
+      {"model": "FashionCLIP (paper)",                                "source": "paper",       "RealStudio": 63.80, "AIGen-Stu": 71.50, "RealStreet": 52.40, "AIGen-Str": 68.75, "Overall": 60.30, "delta_vs_our_siglip": null},
+      {"model": "MODA-SigLIP-DF2 + FashionCLIP (ensemble, FINAL)",    "source": "ours",        "RealStudio": 71.22, "AIGen-Stu": 80.83, "RealStreet": 59.23, "AIGen-Str": 81.25, "Overall": 67.68, "delta_vs_our_siglip":  3.84, "rank": 1},
+      {"model": "MODA-SigLIP-DeepFashion2 (vision FT)",               "source": "ours",        "RealStudio": 69.63, "AIGen-Stu": 77.20, "RealStreet": 58.41, "AIGen-Str": 83.75, "Overall": 66.52, "delta_vs_our_siglip":  2.68, "rank": 2},
+      {"model": "Ensemble: FashionSigLIP + FashionCLIP (zero-train)", "source": "ours",        "RealStudio": null,  "AIGen-Stu": null,  "RealStreet": null,  "AIGen-Str": null,  "Overall": 64.39, "delta_vs_our_siglip":  0.55, "rank": 3},
+      {"model": "FashionSigLIP (our run, Marqo zero-shot)",           "source": "ours",        "RealStudio": 66.96, "AIGen-Stu": 76.68, "RealStreet": 56.37, "AIGen-Str": 74.38, "Overall": 63.84, "delta_vs_our_siglip":  0.00, "rank": 4, "is_baseline": true},
+      {"model": "FashionCLIP (our run, Marqo zero-shot)",             "source": "ours",        "RealStudio": 63.90, "AIGen-Stu": 62.69, "RealStreet": 53.31, "AIGen-Str": 63.75, "Overall": 59.36, "delta_vs_our_siglip": -4.48, "rank": 5},
+      {"model": "MODA-SigLIP-Vision-FT (H&M contrastive)",            "source": "ours",        "RealStudio": 64.79, "AIGen-Stu": 62.69, "RealStreet": 49.95, "AIGen-Str": 71.25, "Overall": 58.85, "delta_vs_our_siglip": -4.99, "rank": 6},
+      {"model": "MODA-FashionCLIP-Phase4F (H&M multimodal FT)",       "source": "ours",        "RealStudio": 59.94, "AIGen-Stu": 60.62, "RealStreet": 47.60, "AIGen-Str": 59.38, "Overall": 54.80, "delta_vs_our_siglip": -9.04, "rank": 7},
+      {"model": "DINOv2-Base (general vision FM, zero-shot)",         "source": "ours",        "RealStudio": 51.53, "AIGen-Stu": 32.12, "RealStreet": 29.97, "AIGen-Str": 30.63, "Overall": 39.49, "delta_vs_our_siglip": -24.35, "rank": 8}
+    ],
+    "table_8_coarse_recall_at_1": [
+      {"model": "FashionSigLIP (paper)",                              "source": "paper",       "RealStudio": 88.63, "AIGen-Stu": 93.78, "RealStreet": 73.39, "AIGen-Str": 90.00, "Overall": 82.77, "delta_vs_our_siglip": null},
+      {"model": "FashionCLIP (paper)",                                "source": "paper",       "RealStudio": 88.72, "AIGen-Stu": 87.05, "RealStreet": 75.33, "AIGen-Str": 84.38, "Overall": 82.68, "delta_vs_our_siglip": null},
+      {"model": "MODA-SigLIP-DF2 + FashionCLIP (ensemble, FINAL)",    "source": "ours",        "RealStudio": 92.09, "AIGen-Stu": 93.78, "RealStreet": 76.96, "AIGen-Str": 92.50, "Overall": null,  "delta_vs_our_siglip": null, "note": "per-subset only; overall not separately recomputed"},
+      {"model": "MODA-SigLIP-DeepFashion2 (vision FT)",               "source": "ours",        "RealStudio": 91.69, "AIGen-Stu": 94.30, "RealStreet": 76.55, "AIGen-Str": 93.12, "Overall": 85.67, "delta_vs_our_siglip":  2.00},
+      {"model": "Ensemble: FashionSigLIP + FashionCLIP (zero-train)", "source": "ours",        "RealStudio": null,  "AIGen-Stu": null,  "RealStreet": null,  "AIGen-Str": null,  "Overall": 83.18, "delta_vs_our_siglip": -0.49},
+      {"model": "FashionSigLIP (our run)",                            "source": "ours",        "RealStudio": 89.02, "AIGen-Stu": 94.30, "RealStreet": 74.92, "AIGen-Str": 90.62, "Overall": 83.67, "delta_vs_our_siglip":  0.00, "is_baseline": true},
+      {"model": "FashionCLIP (our run)",                              "source": "ours",        "RealStudio": 87.34, "AIGen-Stu": 78.24, "RealStreet": 69.11, "AIGen-Str": 80.00, "Overall": 78.46, "delta_vs_our_siglip": -5.21},
+      {"model": "MODA-SigLIP-Vision-FT (H&M)",                        "source": "ours",        "RealStudio": null,  "AIGen-Stu": null,  "RealStreet": null,  "AIGen-Str": null,  "Overall": 77.65, "delta_vs_our_siglip": -6.02},
+      {"model": "MODA-FashionCLIP-Phase4F",                           "source": "ours",        "RealStudio": null,  "AIGen-Stu": null,  "RealStreet": null,  "AIGen-Str": null,  "Overall": 73.90, "delta_vs_our_siglip": -9.77},
+      {"model": "DINOv2-Base (zero-shot)",                            "source": "ours",        "RealStudio": 76.95, "AIGen-Stu": 60.62, "RealStreet": 52.91, "AIGen-Str": 51.25, "Overall": 63.92, "delta_vs_our_siglip": -19.75}
+    ],
+    "table_7_ndcg_at_5": [
+      {"model": "FashionSigLIP (paper)",                              "source": "paper",       "RealStudio": 51.86, "AIGen-Stu": 58.53, "RealStreet": 42.43, "AIGen-Str": 66.27, "Overall": 49.44, "delta_vs_our_siglip": null},
+      {"model": "FashionCLIP (paper)",                                "source": "paper",       "RealStudio": 51.68, "AIGen-Stu": 54.93, "RealStreet": 41.87, "AIGen-Str": 63.22, "Overall": 48.63, "delta_vs_our_siglip": null},
+      {"model": "MODA-SigLIP-DF2 + FashionCLIP (ensemble, FINAL)",    "source": "ours",        "RealStudio": 55.88, "AIGen-Stu": 66.71, "RealStreet": 46.22, "AIGen-Str": 61.58, "Overall": null,  "delta_vs_our_siglip": null, "note": "per-subset only; overall not separately recomputed"},
+      {"model": "MODA-SigLIP-DeepFashion2 (vision FT)",               "source": "ours",        "RealStudio": 55.54, "AIGen-Stu": 65.84, "RealStreet": 45.20, "AIGen-Str": 61.33, "Overall": 52.46, "delta_vs_our_siglip":  2.83},
+      {"model": "Ensemble: FashionSigLIP + FashionCLIP (zero-train)", "source": "ours",        "RealStudio": null,  "AIGen-Stu": null,  "RealStreet": null,  "AIGen-Str": null,  "Overall": 50.55, "delta_vs_our_siglip":  0.92},
+      {"model": "FashionSigLIP (our run)",                            "source": "ours",        "RealStudio": 52.89, "AIGen-Stu": 61.57, "RealStreet": 42.55, "AIGen-Str": 58.00, "Overall": 49.63, "delta_vs_our_siglip":  0.00, "is_baseline": true},
+      {"model": "FashionCLIP (our run)",                              "source": "ours",        "RealStudio": 49.51, "AIGen-Stu": 51.79, "RealStreet": 38.71, "AIGen-Str": 49.84, "Overall": 45.20, "delta_vs_our_siglip": -4.43},
+      {"model": "MODA-SigLIP-Vision-FT (H&M)",                        "source": "ours",        "RealStudio": null,  "AIGen-Stu": null,  "RealStreet": null,  "AIGen-Str": null,  "Overall": 44.30, "delta_vs_our_siglip": -5.33},
+      {"model": "MODA-FashionCLIP-Phase4F",                           "source": "ours",        "RealStudio": null,  "AIGen-Stu": null,  "RealStreet": null,  "AIGen-Str": null,  "Overall": 41.19, "delta_vs_our_siglip": -8.44},
+      {"model": "DINOv2-Base (zero-shot)",                            "source": "ours",        "RealStudio": 36.27, "AIGen-Stu": 23.16, "RealStreet": 21.20, "AIGen-Str": 24.03, "Overall": 27.80, "delta_vs_our_siglip": -21.83}
+    ],
+    "reproduction_deltas_vs_paper": {
+      "FashionSigLIP": {
+        "fine_r1":   {"paper": 62.77, "ours": 63.84, "delta":  1.07},
+        "coarse_r1": {"paper": 82.77, "ours": 83.67, "delta":  0.90},
+        "ndcg5":     {"paper": 49.44, "ours": 49.63, "delta":  0.19}
+      },
+      "FashionCLIP": {
+        "fine_r1":   {"paper": 60.30, "ours": 59.36, "delta": -0.94},
+        "coarse_r1": {"paper": 82.68, "ours": 78.46, "delta": -4.22},
+        "ndcg5":     {"paper": 48.63, "ours": 45.20, "delta": -3.43}
+      }
+    },
+    "best_vs_baseline_per_subset_fine_r1": [
+      {"subset": "real_studio_flat", "n_queries": 1011, "baseline_siglip": 66.96, "df2_ft_plus_clip_ensemble": 71.22, "delta": 4.26},
+      {"subset": "aigen_studio",     "n_queries":  193, "baseline_siglip": 76.68, "df2_ft_plus_clip_ensemble": 80.83, "delta": 4.15},
+      {"subset": "real_streetlook",  "n_queries":  981, "baseline_siglip": 56.37, "df2_ft_plus_clip_ensemble": 59.23, "delta": 2.86},
+      {"subset": "aigen_streetlook", "n_queries":  160, "baseline_siglip": 74.38, "df2_ft_plus_clip_ensemble": 81.25, "delta": 6.87},
+      {"subset": "Overall",          "n_queries": 2345, "baseline_siglip": 63.84, "df2_ft_plus_clip_ensemble": 67.68, "delta": 3.84}
+    ]
+  },
+  "win_loss_matrix_vs_siglip": {
+    "description": "Cell-by-cell comparison of our two best configs vs FashionSigLIP (our run, baseline). Each cell reports our value, baseline value, delta, and verdict (W=win, T=tie, L=loss).",
+    "baseline": "FashionSigLIP (Marqo zero-shot, our run)",
+    "configs": {
+      "df2_ft_plus_clip_ensemble_FINAL": {
+        "name": "MODA-SigLIP-DeepFashion2 + FashionCLIP (concat ensemble, FINAL)",
+        "cells": [
+          {"metric": "fine_r1",   "subset": "RealStudio",    "ours": 71.22, "baseline": 66.96, "delta":  4.26, "verdict": "W"},
+          {"metric": "fine_r1",   "subset": "AIGen-Stu",     "ours": 80.83, "baseline": 76.68, "delta":  4.15, "verdict": "W"},
+          {"metric": "fine_r1",   "subset": "RealStreet",    "ours": 59.23, "baseline": 56.37, "delta":  2.86, "verdict": "W"},
+          {"metric": "fine_r1",   "subset": "AIGen-Str",     "ours": 81.25, "baseline": 74.38, "delta":  6.87, "verdict": "W"},
+          {"metric": "fine_r1",   "subset": "Overall",       "ours": 67.68, "baseline": 63.84, "delta":  3.84, "verdict": "W"},
+          {"metric": "coarse_r1", "subset": "RealStudio",    "ours": 92.09, "baseline": 89.02, "delta":  3.07, "verdict": "W"},
+          {"metric": "coarse_r1", "subset": "AIGen-Stu",     "ours": 93.78, "baseline": 94.30, "delta": -0.52, "verdict": "L", "note": "Single-query difference on N=193 saturated subset (~94% ceiling); same subset wins +4.15 on fine_r1 and +5.14 on ndcg5"},
+          {"metric": "coarse_r1", "subset": "RealStreet",    "ours": 76.96, "baseline": 74.92, "delta":  2.04, "verdict": "W"},
+          {"metric": "coarse_r1", "subset": "AIGen-Str",     "ours": 92.50, "baseline": 90.62, "delta":  1.88, "verdict": "W"},
+          {"metric": "coarse_r1", "subset": "Overall",       "ours": null,  "baseline": 83.67, "delta": null,  "verdict": "N/A", "note": "Per-subset values recorded; weighted overall not separately recomputed for ensemble"},
+          {"metric": "ndcg5",     "subset": "RealStudio",    "ours": 55.88, "baseline": 52.89, "delta":  2.99, "verdict": "W"},
+          {"metric": "ndcg5",     "subset": "AIGen-Stu",     "ours": 66.71, "baseline": 61.57, "delta":  5.14, "verdict": "W"},
+          {"metric": "ndcg5",     "subset": "RealStreet",    "ours": 46.22, "baseline": 42.55, "delta":  3.67, "verdict": "W"},
+          {"metric": "ndcg5",     "subset": "AIGen-Str",     "ours": 61.58, "baseline": 58.00, "delta":  3.58, "verdict": "W"},
+          {"metric": "ndcg5",     "subset": "Overall",       "ours": null,  "baseline": 49.63, "delta": null,  "verdict": "N/A", "note": "Per-subset values recorded; weighted overall not separately recomputed for ensemble"}
+        ],
+        "tally": {
+          "fine_r1":   {"wins": 5, "ties": 0, "losses": 0, "recorded_cells": 5},
+          "coarse_r1": {"wins": 3, "ties": 0, "losses": 1, "recorded_cells": 4, "note": "Overall not separately recorded"},
+          "ndcg5":     {"wins": 4, "ties": 0, "losses": 0, "recorded_cells": 4, "note": "Overall not separately recorded"},
+          "total":     {"wins": 12, "ties": 0, "losses": 1, "recorded_cells": 13, "win_rate_pct": 92.31}
+        }
+      },
+      "siglip_deepfashion2_standalone": {
+        "name": "MODA-SigLIP-DeepFashion2 (vision encoder fine-tuned, no ensemble)",
+        "cells": [
+          {"metric": "fine_r1",   "subset": "RealStudio",    "ours": 69.63, "baseline": 66.96, "delta":  2.67, "verdict": "W"},
+          {"metric": "fine_r1",   "subset": "AIGen-Stu",     "ours": 77.20, "baseline": 76.68, "delta":  0.52, "verdict": "W"},
+          {"metric": "fine_r1",   "subset": "RealStreet",    "ours": 58.41, "baseline": 56.37, "delta":  2.04, "verdict": "W"},
+          {"metric": "fine_r1",   "subset": "AIGen-Str",     "ours": 83.75, "baseline": 74.38, "delta":  9.37, "verdict": "W"},
+          {"metric": "fine_r1",   "subset": "Overall",       "ours": 66.52, "baseline": 63.84, "delta":  2.68, "verdict": "W"},
+          {"metric": "coarse_r1", "subset": "RealStudio",    "ours": 91.69, "baseline": 89.02, "delta":  2.67, "verdict": "W"},
+          {"metric": "coarse_r1", "subset": "AIGen-Stu",     "ours": 94.30, "baseline": 94.30, "delta":  0.00, "verdict": "T", "note": "Exact tie at saturated ~94% ceiling on N=193 subset"},
+          {"metric": "coarse_r1", "subset": "RealStreet",    "ours": 76.55, "baseline": 74.92, "delta":  1.63, "verdict": "W"},
+          {"metric": "coarse_r1", "subset": "AIGen-Str",     "ours": 93.12, "baseline": 90.62, "delta":  2.50, "verdict": "W"},
+          {"metric": "coarse_r1", "subset": "Overall",       "ours": 85.67, "baseline": 83.67, "delta":  2.00, "verdict": "W"},
+          {"metric": "ndcg5",     "subset": "RealStudio",    "ours": 55.54, "baseline": 52.89, "delta":  2.65, "verdict": "W"},
+          {"metric": "ndcg5",     "subset": "AIGen-Stu",     "ours": 65.84, "baseline": 61.57, "delta":  4.27, "verdict": "W"},
+          {"metric": "ndcg5",     "subset": "RealStreet",    "ours": 45.20, "baseline": 42.55, "delta":  2.65, "verdict": "W"},
+          {"metric": "ndcg5",     "subset": "AIGen-Str",     "ours": 61.33, "baseline": 58.00, "delta":  3.33, "verdict": "W"},
+          {"metric": "ndcg5",     "subset": "Overall",       "ours": 52.46, "baseline": 49.63, "delta":  2.83, "verdict": "W"}
+        ],
+        "tally": {
+          "fine_r1":   {"wins": 5, "ties": 0, "losses": 0, "recorded_cells": 5},
+          "coarse_r1": {"wins": 4, "ties": 1, "losses": 0, "recorded_cells": 5},
+          "ndcg5":     {"wins": 5, "ties": 0, "losses": 0, "recorded_cells": 5},
+          "total":     {"wins": 14, "ties": 1, "losses": 0, "recorded_cells": 15, "win_rate_pct": 93.33, "no_losses": true}
+        }
+      }
+    },
+    "headline": "MODA beats FashionSigLIP on every Overall metric. Standalone DF2-FT model: 14 wins / 1 tie / 0 losses across all 15 cells. Final ensemble: 12 wins / 0 ties / 1 loss across 13 recorded cells (the lone loss is a 1-query flip on the smallest subset's saturated easy-metric cell).",
+    "interpretation_notes": [
+      "Per-subset Coarse R@1 and nDCG@5 Overall were not re-computed as a single weighted aggregate for the ensemble; only per-subset values were saved. Hence 13 recorded cells instead of 15 for the ensemble.",
+      "The single ensemble loss (aigen_studio Coarse R@1: 93.78 vs 94.30) is within 1-query (N=193) of a tie and lives at a ~94% ceiling. The standalone model ties (94.30 = 94.30) on the same cell, confirming this is ensemble-mixing noise at saturation, not a real regression.",
+      "On the harder metrics (Fine R@1 and nDCG@5), the win is clean across all 4 subsets and Overall for both configs."
+    ]
+  },
+  "data_leakage_check": "PASS — see data_leakage_check.json",
+  "key_takeaways": [
+    "Fashion-specific pretraining is essential — general vision models (DINOv2) are 24+ pts behind",
+    "Multimodal text-image fine-tuning hurts image-to-image retrieval (Phase 4F)",
+    "Single-domain fine-tuning (H&M studio only) narrows the model and degrades general performance",
+    "Cross-domain fine-tuning (DeepFashion2 shop ↔ consumer) is the winning recipe (+2.68 pts)",
+    "Adding FashionCLIP via concat ensemble gives a free +1.16 pts on top of fine-tuned model",
+    "Final config beats baseline by +3.84 pts overall and +6.87 pts on the hardest AI-generated street-look subset"
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "dinov2-large": {
+    "model": "DINOv2-Large (300M)",
+    "hf_id": "facebook/dinov2-large",
+    "emb_dim": 1024,
+    "device": "mps",
+    "subsets": {
+      "real_studio_flat": {
+        "subset": "real_studio_flat",
+        "n_queries": 1011,
+        "fine_recall": {
+          "recall@1": 52.72,
+          "recall@5": 70.03,
+          "recall@10": 76.06,
+          "recall@20": 82.0
+        },
+        "coarse_recall": {
+          "recall@1": 76.95,
+          "recall@5": 86.45,
+          "recall@10": 89.71,
+          "recall@20": 91.69
+        },
+        "id_recall": {
+          "recall@1": 40.55,
+          "recall@5": 61.33,
+          "recall@10": 68.25,
+          "recall@20": 74.09
+        },
+        "ndcg@5": 36.27,
+        "mrr": 50.46,
+        "elapsed_sec": 9.2
+      },
+      "aigen_studio": {
+        "subset": "aigen_studio",
+        "n_queries": 193,
+        "fine_recall": {
+          "recall@1": 33.68,
+          "recall@5": 54.92,
+          "recall@10": 65.28,
+          "recall@20": 68.39
+        },
+        "coarse_recall": {
+          "recall@1": 60.62,
+          "recall@5": 72.02,
+          "recall@10": 78.76,
+          "recall@20": 83.42
+        },
+        "id_recall": {
+          "recall@1": 29.02,
+          "recall@5": 47.15,
+          "recall@10": 56.99,
+          "recall@20": 61.14
+        },
+        "ndcg@5": 23.16,
+        "mrr": 37.89,
+        "elapsed_sec": 1.2
+      },
+      "real_streetlook": {
+        "subset": "real_streetlook",
+        "n_queries": 981,
+        "fine_recall": {
+          "recall@1": 31.4,
+          "recall@5": 47.2,
+          "recall@10": 53.72,
+          "recall@20": 58.82
+        },
+        "coarse_recall": {
+          "recall@1": 52.91,
+          "recall@5": 71.05,
+          "recall@10": 76.66,
+          "recall@20": 79.82
+        },
+        "id_recall": {
+          "recall@1": 21.41,
+          "recall@5": 35.98,
+          "recall@10": 41.49,
+          "recall@20": 46.18
+        },
+        "ndcg@5": 21.2,
+        "mrr": 28.31,
+        "elapsed_sec": 11.5
+      },
+      "aigen_streetlook": {
+        "subset": "aigen_streetlook",
+        "n_queries": 160,
+        "fine_recall": {
+          "recall@1": 31.87,
+          "recall@5": 54.37,
+          "recall@10": 57.5,
+          "recall@20": 63.75
+        },
+        "coarse_recall": {
+          "recall@1": 51.25,
+          "recall@5": 70.62,
+          "recall@10": 74.38,
+          "recall@20": 82.5
+        },
+        "id_recall": {
+          "recall@1": 24.38,
+          "recall@5": 48.75,
+          "recall@10": 53.75,
+          "recall@20": 61.25
+        },
+        "ndcg@5": 24.03,
+        "mrr": 35.0,
+        "elapsed_sec": 1.9
+      },
+      "overall": {
+        "fine_recall@1": 40.81,
+        "coarse_recall@1": 63.8,
+        "id_recall@1": 30.49,
+        "ndcg@5": 28.05,
+        "total_queries": 2345
+      }
+    }
+  }
+}
