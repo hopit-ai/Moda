@@ -161,16 +161,6 @@ Per-query retrieval (scoring against a 1M-item index, single CPU): the math dist
 
 End-to-end p95 visual search latency for a typical retail-scale deployment: about 110ms with FashionSigLIP today, about 25-35ms with the MODA stack (vision-fp16 + 256d binary + Hamming rerank). 3-5x p95 reduction.
 
-### Cost in dollars (1M-product retailer)
-
-| Cost bucket | FashionSigLIP fp32 768d | MODA-Matryoshka 256d binary+rerank |
-|---|---|---|
-| Vector index hosting (Pinecone-style managed) | ~$1,000/year (1 pod) | ~$1,000/year (still 1 pod, much more headroom) |
-| Inference compute (10M queries/day, vision-fp16 alternative) | ~$3-4K/year | ~$1-2K/year (50% fewer GPU-hours) |
-| Storage (S3 standard tier) | ~$1/year | ~$0.01/year |
-
-At 1M products, infrastructure savings are modest because both stacks fit comfortably in a single hosting tier. The vector-index savings scale linearly with catalog size: at 10M products the difference is ~$10K/year; at 100M products it is ~$80K/year. For the typical fashion retailer in the 100K to 1M product range, the bigger commercial driver is not infrastructure cost but latency, and what latency does for conversion.
-
 ### Conversion lift
 
 Faster latency drives e-commerce conversion. The well-cited industry finding: each 100ms of latency reduction lifts conversion by roughly 1%. Going from 110ms to 30ms (-80ms) on visual search latency is approximately a 0.8% conversion lift on traffic that uses visual search.
@@ -179,15 +169,7 @@ For a $1B GMV retailer where visual search drives 5-15% of product discovery tra
 
 ### Total annual impact
 
-For a hypothetical 1M-product fashion retailer at $1B GMV running visual search:
-
-- Vector index hosting savings: minimal (~$0 to $200/year at this catalog size)
-- Inference compute savings: ~$2K/year
-- Conversion lift on visual-search-driven traffic: $400K-$1.2M/year
-
-At this scale, infrastructure savings are not the story. The conversion lift driven by 3-5x faster end-to-end latency is. Both together: roughly $0.4M-$1.2M/year for a mid-size retailer; $4-12M/year for $10B GMV retailers (Zara, H&M scale). For larger catalogs (10M+ products), infrastructure savings start to matter as much as latency-driven revenue lift.
-
-This is the millions-saved claim, defensible at the scales most fashion retailers actually operate.
+For a 1M-product fashion retailer at $1B GMV running visual search, the 0.8% conversion lift on visual-search-driven traffic translates to roughly $400K-$1.2M/year in incremental revenue. For $10B GMV retailers (Zara, H&M scale), $4-12M/year. The driver is the latency reduction, not infrastructure cost. Infrastructure savings are real but kick in meaningfully at 10M+ products, where index-hosting cost differences scale linearly with catalog size.
 
 ---
 
