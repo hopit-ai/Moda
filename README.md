@@ -1,7 +1,7 @@
 # MODA
 
 **The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
-253,685 purchase-grounded queries · 105,542 H&M products · 40+ pipeline configs · nDCG@10 = 0.1063 on H&M text retrieval (+301% over dense baseline) · Fine R@1 = 67.68 on LookBench image-to-image retrieval (+3.84 over FashionSigLIP) · 5 model checkpoints on HuggingFace (Apache 2.0, vision-only fp16 at 186 MB, Matryoshka with 64-768 dim slices)
+253,685 purchase-grounded queries · 105,542 H&M products · 40+ pipeline configs · nDCG@10 = 0.1063 on H&M text retrieval (+301% over dense baseline) · Fine R@1 = 67.68 on LookBench image-to-image retrieval (+3.84 over FashionSigLIP) · 5 model checkpoints on HuggingFace (MIT, vision-only fp16 at 186 MB, Matryoshka with 64-768 dim slices)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -36,7 +36,7 @@ We are publishing this work as a series of technical blog posts, each covering o
 
 ## Released models
 
-All Apache 2.0 licensed. Built on ViT-B/16-SigLIP. Every model beats the FashionSigLIP baseline on LookBench.
+All MIT licensed. Built on ViT-B/16-SigLIP. Every model beats the FashionSigLIP baseline on LookBench.
 
 | Model | Dim | Size | Fine R@1 | nDCG@5 | Δ vs FashionSigLIP | Use when |
 |---|---|---|---|---|---|---|
