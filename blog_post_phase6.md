@@ -26,7 +26,7 @@ The result upfront:
 | MODA-SigLIP-Matryoshka @ 128d | 128 | 66.23 | +2.39 |
 | MODA-SigLIP-Matryoshka @ 64d | 64 | 64.05 | +0.21 |
 
-A 256-dimensional MODA embedding beats the 768-dimensional FashionSigLIP baseline by +3.58. That is three times smaller with higher quality. The 128-dim slice still wins by +2.39. At 64 dimensions you are essentially at parity with SigLIP at one-twelfth the storage.
+A 256-dimensional MODA embedding beats the 768-dimensional FashionSigLIP baseline by +3.58. That is three times smaller with higher quality. The 128-dim slice still wins by +2.39 at 6x compression versus FashionSigLIP fp32, which makes it a genuine deployment option for tight memory budgets, not just a fallback. At 64 dimensions you are essentially at parity with SigLIP at one-twelfth the storage.
 
 This is the commercial payoff of the LookBench work. Fine-tuning gave us a better number. Distillation gave us a better number in a single model. Matryoshka distillation gave us a better number in a single model at any dimension we want.
 
@@ -102,7 +102,7 @@ Coarse Recall@1 also saturates around 256. That is expected. Coarse R@1 only ask
 The practical recommendation we are shipping in the model card:
 
 - **64d**: parity with FashionSigLIP. Use when storage is the constraint.
-- **128d**: +2.4 over SigLIP. Reasonable default for mobile or edge.
+- **128d**: +2.4 over SigLIP at 6x compression. Reasonable default for mobile, edge, and any tight-memory deployment where 256d index size is still too big.
 - **256d**: +3.6 over SigLIP, saturates Fine R@1. Recommended for most retrieval systems.
 - **512d**: +3.6 on Fine R@1, slight nDCG@5 improvement. Use if you need ranking quality in the top-5.
 - **768d**: +3.4 on Fine R@1, best nDCG@5 (58.13). Use if you have no storage constraint and rank quality matters.
