@@ -146,12 +146,10 @@ Applying the full stack (256d slice + binary + Hamming rerank) against FashionSi
 | Catalog size | FashionSigLIP (768d fp32) | MODA (256d binary) | Compression |
 |---|---|---|---|
 | 1M products | 3.07 GB | 32 MB | 96x |
-| 10M products | 30.7 GB | 320 MB | 96x |
-| 100M products | 307 GB | 3.2 GB | 96x |
 
 The retrieval quality ordering across precision variants is: binary+rerank ≥ fp32 > int8 ≈ fp16 > binary. All four high-quality variants are within noise of each other on every metric we measured, so picking between them is a pure deployment decision, not a quality one.
 
-At 100M products, FashionSigLIP's default deployment is a 307 GB index. You need a dedicated vector database cluster to hold that in memory. The same catalog at 256d binary is 3.2 GB. That fits in RAM on one box, with room to spare. This is the kind of compression that changes which systems you need, not just how much they cost to run.
+At 1M products, FashionSigLIP's default deployment is a 3.07 GB index. The same catalog at 256d binary is 32 MB. The compression is less about whether the index fits (both fit easily at this scale) and more about how fast retrieval scans through them, how many products fit per pod on managed vector databases, and how much GPU memory the encoder needs at query time.
 
 ### Latency
 
@@ -159,19 +157,19 @@ Storage compression is the easy story. Latency is the harder one but matters as 
 
 Per-query encoding (T4 GPU): FashionSigLIP fp32 takes about 25ms. MODA-Fashion-Vision-FP16 takes about 12ms. Roughly 2x faster from the smaller, fp16 vision-only encoder.
 
-Per-query retrieval (scoring against a 100M-item index, single CPU): the math distributes. Going from 768d fp32 cosine to 256d fp32 cosine is a 3x reduction in multiply-add operations. Going to 256d binary with Hamming distance is another order of magnitude on top, because Hamming is XOR + popcount and runs at SIMD bit-level rates. Combined with binary-plus-rerank, you get full quality at 5-10ms end-to-end retrieval against 100M items, where FashionSigLIP fp32 full scan runs into the seconds.
+Per-query retrieval (scoring against a 1M-item index, single CPU): the math distributes. Going from 768d fp32 cosine to 256d fp32 cosine is a 3x reduction in multiply-add operations. Going to 256d binary with Hamming distance is another order of magnitude on top, because Hamming is XOR + popcount and runs at SIMD bit-level rates. Combined with binary-plus-rerank, you get full quality at sub-millisecond retrieval against 1M items, where FashionSigLIP fp32 full scan is in the tens of milliseconds. The gap widens at larger catalogs.
 
 End-to-end p95 visual search latency for a typical retail-scale deployment: about 110ms with FashionSigLIP today, about 25-35ms with the MODA stack (vision-fp16 + 256d binary + Hamming rerank). 3-5x p95 reduction.
 
-### Cost in dollars (100M-product retailer)
+### Cost in dollars (1M-product retailer)
 
 | Cost bucket | FashionSigLIP fp32 768d | MODA-Matryoshka 256d binary+rerank |
 |---|---|---|
-| Vector index hosting (Pinecone-style managed) | $80-100K/year | $2-5K/year |
-| Inference compute (100M queries/day, vision-fp16 alternative) | ~$3-4K/year | ~$1-2K/year (50% fewer GPU-hours) |
-| Storage (S3 standard tier) | ~$85/year | ~$1/year |
+| Vector index hosting (Pinecone-style managed) | ~$1,000/year (1 pod) | ~$1,000/year (still 1 pod, much more headroom) |
+| Inference compute (10M queries/day, vision-fp16 alternative) | ~$3-4K/year | ~$1-2K/year (50% fewer GPU-hours) |
+| Storage (S3 standard tier) | ~$1/year | ~$0.01/year |
 
-The vector index line is the one that scales. At 100M products on managed hosting, the difference is roughly $80K/year. At 1B products, multiply by 10.
+At 1M products, infrastructure savings are modest because both stacks fit comfortably in a single hosting tier. The vector-index savings scale linearly with catalog size: at 10M products the difference is ~$10K/year; at 100M products it is ~$80K/year. For the typical fashion retailer in the 100K to 1M product range, the bigger commercial driver is not infrastructure cost but latency, and what latency does for conversion.
 
 ### Conversion lift
 
@@ -181,15 +179,15 @@ For a $1B GMV retailer where visual search drives 5-15% of product discovery tra
 
 ### Total annual impact
 
-Combining infrastructure savings and conversion lift for a hypothetical $1B GMV retailer running visual search:
+For a hypothetical 1M-product fashion retailer at $1B GMV running visual search:
 
-- Vector index hosting savings: $75-95K/year
+- Vector index hosting savings: minimal (~$0 to $200/year at this catalog size)
 - Inference compute savings: ~$2K/year
 - Conversion lift on visual-search-driven traffic: $400K-$1.2M/year
 
-The infrastructure savings alone are significant. The conversion lift, where attributable to latency improvement, is the larger commercial story. Both together: roughly $0.5M-$1.3M/year for a mid-size retailer; $4-12M/year for the top of the market.
+At this scale, infrastructure savings are not the story. The conversion lift driven by 3-5x faster end-to-end latency is. Both together: roughly $0.4M-$1.2M/year for a mid-size retailer; $4-12M/year for $10B GMV retailers (Zara, H&M scale). For larger catalogs (10M+ products), infrastructure savings start to matter as much as latency-driven revenue lift.
 
-This is the millions-saved claim, defensible.
+This is the millions-saved claim, defensible at the scales most fashion retailers actually operate.
 
 ---
 
