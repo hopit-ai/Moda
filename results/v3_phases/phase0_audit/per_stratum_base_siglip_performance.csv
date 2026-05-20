@@ -1,0 +1,703 @@
+model,dataset,query,l1_category,has_color,has_material,has_style,n_positives,ap10
+BaseSigLIP,fashion200k,blue tank dress,dresses,True,False,False,5,0.09444444444444444
+BaseSigLIP,fashion200k,floral strapless dress,dresses,False,False,False,3,0.6388888888888888
+BaseSigLIP,fashion200k,white lace dress,dresses,True,True,False,6,0.061111111111111116
+BaseSigLIP,fashion200k,black mesh midi dress,dresses,True,True,True,3,1.0
+BaseSigLIP,fashion200k,white lace up dress,dresses,True,True,False,5,0.7333333333333333
+BaseSigLIP,fashion200k,red asymmetrical ruffle shift dress,dresses,True,False,True,2,0.625
+BaseSigLIP,fashion200k,blue boutique sia beaded high neck midi dress,dresses,True,False,True,3,0.6666666666666666
+BaseSigLIP,fashion200k,multicolor silk jersey wrap dress,dresses,True,True,True,2,0.29166666666666663
+BaseSigLIP,fashion200k,white all over baroque sequin mesh mini dress plunge back,dresses,True,True,True,3,0.9166666666666666
+BaseSigLIP,fashion200k,white v-neck floral dress,dresses,True,False,False,2,0.08333333333333333
+BaseSigLIP,fashion200k,white wild midi dress,dresses,True,False,True,2,0.0
+BaseSigLIP,fashion200k,gray henley tank dress,dresses,True,False,False,7,0.8444444444444443
+BaseSigLIP,fashion200k,red terry dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,white lace a-line dress,dresses,True,True,True,3,0.0
+BaseSigLIP,fashion200k,black petite elle strappy ribbed peplum dress,dresses,True,False,True,2,1.0
+BaseSigLIP,fashion200k,gray lace high neck split midi dress,dresses,True,True,True,3,1.0
+BaseSigLIP,fashion200k,yellow viola cotton-blend dress,dresses,True,True,False,12,0.0
+BaseSigLIP,fashion200k,white off-shoulder silk dress,dresses,True,True,False,4,0.30833333333333335
+BaseSigLIP,fashion200k,blue dot-print crepe dress,dresses,True,False,False,9,0.018518518518518517
+BaseSigLIP,fashion200k,black asymmetric hem dress,dresses,True,False,True,4,0.05
+BaseSigLIP,fashion200k,beige petite printed sleeveless scuba dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,blue maxi chambray dress,dresses,True,False,True,4,0.0
+BaseSigLIP,fashion200k,structured floral dress,dresses,False,False,True,10,0.1775
+BaseSigLIP,fashion200k,multicolor striped dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,multicolor empire retro hi-low v-back dress,dresses,True,False,True,2,0.07142857142857142
+BaseSigLIP,fashion200k,blue sleeveless dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,black petite printed handkerchief-hem dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,blue block floral dress pleat,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,gold paillette sleeveless dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,black cut dress compare,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,gray guipure cape draped dress,outerwear,True,False,True,3,0.05555555555555555
+BaseSigLIP,fashion200k,blue one-shoulder hi-lo tie dye dress,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,black delia embroidered tape detail midi dress,dresses,True,True,True,3,0.41111111111111115
+BaseSigLIP,fashion200k,black star print flared dress,dresses,True,False,False,6,1.0
+BaseSigLIP,fashion200k,blue short dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,white day dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,multicolor panel dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,white short sleeve vee dress,dresses,True,False,False,4,0.4083333333333333
+BaseSigLIP,fashion200k,gray tie-waist dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,beige scalloped lace neck fit-and-flare dress,dresses,True,True,False,2,0.26666666666666666
+BaseSigLIP,fashion200k,black plus handkerchief linen dress,dresses,True,True,False,2,1.0
+BaseSigLIP,fashion200k,pink daisy textured dress,dresses,True,False,False,4,0.225
+BaseSigLIP,fashion200k,orange lace cut out fit-and-flare dress,dresses,True,True,False,2,1.0
+BaseSigLIP,fashion200k,gray lace a-line jacket dress,outerwear,True,True,True,3,0.7666666666666666
+BaseSigLIP,fashion200k,white embellished mini dress,dresses,True,False,True,4,0.0
+BaseSigLIP,fashion200k,black strappy tank dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,blue printed asymmetrical cap-sleeve dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,black ponte fit-&-flare dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,blue fit-and-flare dress,dresses,True,False,False,3,0.047619047619047616
+BaseSigLIP,fashion200k,red off-the-shoulder popover dress,dresses,True,False,False,3,1.0
+BaseSigLIP,fashion200k,yellow sunny daisy organza shirtdress,dresses,True,True,False,2,1.0
+BaseSigLIP,fashion200k,orange sheath dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,green linen high-low dress,dresses,True,True,False,2,0.325
+BaseSigLIP,fashion200k,white sleeveless popover dress,dresses,True,False,False,2,0.125
+BaseSigLIP,fashion200k,white spaghetti strap trapeze dress,dresses,True,False,False,4,0.65
+BaseSigLIP,fashion200k,red ottoman detailed dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,gray heathered sheath cutout dress,dresses,True,False,False,3,0.6805555555555555
+BaseSigLIP,fashion200k,red aline dress pleated yoke front,dresses,True,False,True,2,0.6428571428571428
+BaseSigLIP,fashion200k,black dotted fit flare dress,dresses,True,False,False,6,0.17037037037037037
+BaseSigLIP,fashion200k,black 1 shoulder tank dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,pink pleated fit-and-flare dress,dresses,True,False,True,2,0.0
+BaseSigLIP,fashion200k,pink mia 3/4 surplice dress,dresses,True,False,False,5,0.29333333333333333
+BaseSigLIP,fashion200k,orange embellished star moon sundress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,blue foil dress,dresses,True,False,False,4,0.041666666666666664
+BaseSigLIP,fashion200k,blue floral jacquard fit-and-flare dress,dresses,True,False,False,2,0.30952380952380953
+BaseSigLIP,fashion200k,black mirage dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,black rib tank dress,dresses,True,False,False,5,0.04
+BaseSigLIP,fashion200k,white eyelet shift dress bell sleeves,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,multicolor bell mini,other,True,False,True,2,0.0
+BaseSigLIP,fashion200k,blue samantha long dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,orange fringe hem slip dress,dresses,True,False,True,2,0.8333333333333333
+BaseSigLIP,fashion200k,red chiffon self-tie wrap dress,dresses,True,True,True,4,0.8928571428571428
+BaseSigLIP,fashion200k,white striped dress,dresses,True,False,False,6,0.0
+BaseSigLIP,fashion200k,blue rib tank dress,dresses,True,False,False,4,0.75
+BaseSigLIP,fashion200k,white trendy plus size trim sleeveless a-line dress,dresses,True,False,True,2,0.5
+BaseSigLIP,fashion200k,white bella cut-out floral silk dress,dresses,True,True,False,5,0.8142857142857143
+BaseSigLIP,fashion200k,red multi striped sheath dress,dresses,True,False,False,2,0.325
+BaseSigLIP,fashion200k,multicolor pleated print dress,dresses,True,False,True,6,0.0
+BaseSigLIP,fashion200k,pink high/low knit dress,dresses,True,True,False,5,0.0
+BaseSigLIP,fashion200k,red contemporary metallic floral print cami dress,dresses,True,False,False,3,0.10833333333333334
+BaseSigLIP,fashion200k,white frayed woven dress,dresses,True,True,False,5,1.0
+BaseSigLIP,fashion200k,gray taylor dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,beige sophie dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,white lace drop waist dress,dresses,True,True,False,2,0.0
+BaseSigLIP,fashion200k,multicolor daisy floral dress,dresses,True,False,False,6,0.023809523809523808
+BaseSigLIP,fashion200k,black picnic smocked off-the-shoulder jersey midi dress,dresses,True,True,True,5,0.22380952380952382
+BaseSigLIP,fashion200k,multicolor tie back midi dress,dresses,True,False,True,2,0.75
+BaseSigLIP,fashion200k,blue lace fit flare dress,dresses,True,True,False,3,0.15079365079365079
+BaseSigLIP,fashion200k,green knee-length dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,green lace shift dress,dresses,True,True,False,2,0.0
+BaseSigLIP,fashion200k,white abstract print chiffon one-shoulder dress,dresses,True,True,False,2,0.5
+BaseSigLIP,fashion200k,black colorblocked sheath dress,dresses,True,False,False,2,0.75
+BaseSigLIP,fashion200k,green petite silk georgette v-neck dress,dresses,True,True,False,3,0.6984126984126983
+BaseSigLIP,fashion200k,red ponte bow dress,dresses,True,False,False,3,0.5555555555555555
+BaseSigLIP,fashion200k,gray bodycon dress,dresses,True,False,False,2,0.26785714285714285
+BaseSigLIP,fashion200k,red stripe dress,dresses,True,False,False,8,0.0
+BaseSigLIP,fashion200k,black ruffle hem dress,dresses,True,False,True,4,1.0
+BaseSigLIP,fashion200k,teal petite printed jacquard fit-and-flare dress,dresses,True,False,False,3,0.05555555555555555
+BaseSigLIP,fashion200k,green point collar shirtdress,dresses,True,False,False,2,0.26666666666666666
+BaseSigLIP,fashion200k,blue tilda dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,black silk pleated tunic dress,dresses,True,True,True,3,0.0
+BaseSigLIP,fashion200k,blue petite handkerchief-hem wrap dress,dresses,True,False,True,4,0.03571428571428571
+BaseSigLIP,fashion200k,black floral-print faux-wrap sleeveless chiffon dress,dresses,True,True,True,2,0.8333333333333333
+BaseSigLIP,fashion200k,white henley rayon twill double layer dress,dresses,True,False,False,4,0.8611111111111112
+BaseSigLIP,fashion200k,beige grace cut out swing dress,dresses,True,False,False,7,0.0
+BaseSigLIP,fashion200k,multicolor aldridge tube dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,multicolor v-neck dot fit-and-flare midi dress,dresses,True,False,True,2,1.0
+BaseSigLIP,fashion200k,black print sweatshirt dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,beige romy dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,white sweetheart contrast neck mid dress,dresses,True,False,False,3,0.6666666666666666
+BaseSigLIP,fashion200k,beige jersey v-back dress,dresses,True,True,False,4,0.03571428571428571
+BaseSigLIP,fashion200k,beige silk pleated double layer dress,dresses,True,True,True,3,0.24444444444444446
+BaseSigLIP,fashion200k,white ella dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,white pleated dress,dresses,True,False,True,4,0.75
+BaseSigLIP,fashion200k,black tunic dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,multicolor ruby paisley mini wrap dress,dresses,True,False,True,12,0.6
+BaseSigLIP,fashion200k,beige v-neck scalloped tier sheath dress,dresses,True,False,False,2,0.6
+BaseSigLIP,fashion200k,beige scarlett dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,black curve dress hem kimono sleeve,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,gray midi tank dress,dresses,True,False,True,5,0.5433333333333333
+BaseSigLIP,fashion200k,floral button front dress,dresses,False,False,False,8,0.3625
+BaseSigLIP,fashion200k,white my dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,blue abstract floral-print sheath dress,dresses,True,False,False,2,0.25
+BaseSigLIP,fashion200k,pink watercolor pineapple tank dress,dresses,True,False,False,5,0.7333333333333333
+BaseSigLIP,fashion200k,pink tulum dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,blue abstract print seamed fit-and-flare dress,dresses,True,False,False,2,0.6111111111111112
+BaseSigLIP,fashion200k,brown sweatshirt dress,dresses,True,False,False,3,0.1619047619047619
+BaseSigLIP,fashion200k,gray ribbed cami slip dress,dresses,True,False,True,6,0.5
+BaseSigLIP,fashion200k,white a-line lace dress,dresses,True,True,True,5,0.0
+BaseSigLIP,fashion200k,black petite grid print dress,dresses,True,False,False,3,1.0
+BaseSigLIP,fashion200k,orange cady selena slit dress,dresses,True,False,False,4,0.25
+BaseSigLIP,fashion200k,black cotton strap dress,dresses,True,True,False,3,0.8095238095238094
+BaseSigLIP,fashion200k,blue tilda v back dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,white wave hem shift dress,dresses,True,False,False,4,0.025
+BaseSigLIP,fashion200k,red high-neck draped dress,dresses,True,False,True,6,0.0
+BaseSigLIP,fashion200k,blue alice denim dungaree pinafore dress,dresses,True,True,False,8,0.346875
+BaseSigLIP,fashion200k,blue geometric printed crepe wrap shift dress,dresses,True,False,True,17,0.7068253968253967
+BaseSigLIP,fashion200k,black spot dress,dresses,True,False,False,7,0.5083333333333333
+BaseSigLIP,fashion200k,green jersey t-shirt dress,dresses,True,True,False,4,0.09821428571428571
+BaseSigLIP,fashion200k,black tie front midi dress,dresses,True,False,True,3,0.0
+BaseSigLIP,fashion200k,blue tiered dress,dresses,True,False,True,3,0.7916666666666666
+BaseSigLIP,fashion200k,blue oriental ikat dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,yellow printed silk t-shirt dress black,dresses,True,True,False,22,0.016666666666666666
+BaseSigLIP,fashion200k,silver large sequin strappy midi dress,dresses,True,True,True,4,0.95
+BaseSigLIP,fashion200k,blue lace fit-and-flare dress,dresses,True,True,False,2,0.0
+BaseSigLIP,fashion200k,black overlay lace mini dress,dresses,True,True,True,27,0.0
+BaseSigLIP,fashion200k,blue embroidered dress,dresses,True,True,False,4,0.025
+BaseSigLIP,fashion200k,white shirt dress hem,dresses,True,False,False,4,0.95
+BaseSigLIP,fashion200k,pink x revolve like it hot dress,dresses,True,False,False,4,0.4833333333333333
+BaseSigLIP,fashion200k,blue denim shift dress,dresses,True,True,False,7,0.09501133786848072
+BaseSigLIP,fashion200k,blue petite ikat linen sheath dress,dresses,True,True,False,4,0.6071428571428571
+BaseSigLIP,fashion200k,white waist tie midi dress,dresses,True,False,True,2,0.0
+BaseSigLIP,fashion200k,black tea-length midi lace dress,dresses,True,True,True,2,0.0625
+BaseSigLIP,fashion200k,beige stretch cotton linen dress,dresses,True,True,False,4,0.49652777777777773
+BaseSigLIP,fashion200k,white crochet dress,dresses,True,True,False,4,1.0
+BaseSigLIP,fashion200k,black draped tie dye dress,dresses,True,False,True,3,0.0
+BaseSigLIP,fashion200k,blue floral-print silk dress,dresses,True,True,False,8,0.0
+BaseSigLIP,fashion200k,gray layered dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,gray pink satin floral nightgown,dresses,True,True,False,2,0.0
+BaseSigLIP,fashion200k,brown cutout slip dress,dresses,True,False,False,5,0.7683333333333333
+BaseSigLIP,fashion200k,teal cotton gingham shirt dress,dresses,True,True,False,3,1.0
+BaseSigLIP,fashion200k,blue embroidered shirtdress,dresses,True,True,False,5,0.0
+BaseSigLIP,fashion200k,black megan animal print caftan dress,dresses,True,False,False,8,0.975
+BaseSigLIP,fashion200k,blue lace up beach dress,dresses,True,True,False,3,0.0
+BaseSigLIP,fashion200k,red lola tunic,tops,True,False,False,4,0.0
+BaseSigLIP,fashion200k,black embroidered applique grid lace dress,dresses,True,True,False,3,0.047619047619047616
+BaseSigLIP,fashion200k,multicolor intarsia ribbed knit dress,dresses,True,True,True,4,0.47916666666666663
+BaseSigLIP,fashion200k,blue knit shift dress,dresses,True,True,False,2,0.0
+BaseSigLIP,fashion200k,blue chambray dress scalloped detail,dresses,True,False,False,3,0.4444444444444444
+BaseSigLIP,fashion200k,blue chiffon drape overlay,other,True,True,False,4,1.0
+BaseSigLIP,fashion200k,white usa cotton polo dress,dresses,True,True,False,3,1.0
+BaseSigLIP,fashion200k,floral fit-and-flare scuba dress,dresses,False,False,False,2,0.18253968253968253
+BaseSigLIP,fashion200k,blue denim shirt dress,dresses,True,True,False,7,0.1445578231292517
+BaseSigLIP,fashion200k,blue floral-print three-quarter sleeve shift dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,red aldridge dress,dresses,True,False,False,4,0.14583333333333331
+BaseSigLIP,fashion200k,black scuba sleeveless shirtdress,dresses,True,False,False,4,0.6220238095238095
+BaseSigLIP,fashion200k,black knee-length dress,dresses,True,False,False,6,0.0
+BaseSigLIP,fashion200k,gray wrap dress,dresses,True,False,True,3,1.0
+BaseSigLIP,fashion200k,black sleeveless mock-neck polka-dot shift dress,dresses,True,False,False,7,1.0
+BaseSigLIP,fashion200k,blue trendy plus size crocheted dress,dresses,True,False,True,2,1.0
+BaseSigLIP,fashion200k,multicolor gigi mixed print t-back frock dress,dresses,True,False,False,6,0.0
+BaseSigLIP,fashion200k,orange zip pocket shift dress,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,black western embroidered plaid dress,dresses,True,True,False,4,1.0
+BaseSigLIP,fashion200k,pink salon cutwork scallop back aline mini dress,dresses,True,False,True,3,0.3
+BaseSigLIP,fashion200k,white toni sleeveless dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,blue gingham cotton shirtdress,dresses,True,True,False,2,0.5833333333333333
+BaseSigLIP,fashion200k,black shirt dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,pink bandeau dress duster co-ord set,dresses,True,False,False,3,0.9166666666666666
+BaseSigLIP,fashion200k,red broderie anglaise shirt dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,multicolor multi cape stripe shirtdress,outerwear,True,False,False,2,0.41666666666666663
+BaseSigLIP,fashion200k,black 3/4 length dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,green my dress,dresses,True,False,False,8,0.7956845238095237
+BaseSigLIP,fashion200k,gray tie collar dress,dresses,True,False,False,4,0.3875
+BaseSigLIP,fashion200k,blue gingham dress,dresses,True,False,False,3,0.06666666666666667
+BaseSigLIP,fashion200k,blue overall dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,red scarf print dress,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,black palm print ruched sheath dress,dresses,True,False,False,3,1.0
+BaseSigLIP,fashion200k,black naya dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,black high boat neck dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,red petite print belted sheath dress,dresses,True,False,False,3,1.0
+BaseSigLIP,fashion200k,blue button down tie waist denim effect dress,dresses,True,True,False,4,0.05
+BaseSigLIP,fashion200k,blue bodycon dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,red striped ponte sheath dress,dresses,True,False,False,2,0.8333333333333333
+BaseSigLIP,fashion200k,blue mock neck halter dress,dresses,True,False,False,5,0.76
+BaseSigLIP,fashion200k,beige petite asymmetric mini dress kimono sleeves,dresses,True,False,True,3,0.05555555555555555
+BaseSigLIP,fashion200k,black embroidered dress,dresses,True,True,False,4,0.0
+BaseSigLIP,fashion200k,black buttoned dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,floral print chain halter dress,dresses,False,False,False,3,1.0
+BaseSigLIP,fashion200k,black amy ruffle cold shoulder swing dress,dresses,True,False,True,4,0.14583333333333331
+BaseSigLIP,fashion200k,black open shoulder dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,red kelly strappy swing dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,black crystal dress,dresses,True,False,False,2,0.1736111111111111
+BaseSigLIP,fashion200k,white lace fit-&-flare dress,dresses,True,True,False,2,0.25
+BaseSigLIP,fashion200k,black shift dress,dresses,True,False,False,2,0.29166666666666663
+BaseSigLIP,fashion200k,white scarlett dress,dresses,True,False,False,4,0.09821428571428571
+BaseSigLIP,fashion200k,black embellished neckline cape sheath dress,outerwear,True,False,False,2,1.0
+BaseSigLIP,fashion200k,black gold ruffle cap sleeve shift dress,dresses,True,False,True,2,1.0
+BaseSigLIP,fashion200k,black panel dress,dresses,True,False,False,3,0.06666666666666667
+BaseSigLIP,fashion200k,green transparent dress,dresses,True,False,False,16,0.36476190476190473
+BaseSigLIP,fashion200k,floral lace midi dress pink,dresses,True,True,True,4,0.7333333333333333
+BaseSigLIP,fashion200k,white esme spaghetti strap tie-dye dress,dresses,True,False,False,4,0.6220238095238095
+BaseSigLIP,fashion200k,black cotton embroidered dress,dresses,True,True,False,3,0.0
+BaseSigLIP,fashion200k,white maternity shirred tee dress,dresses,True,False,False,5,1.0
+BaseSigLIP,fashion200k,black sleeveless peasant dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,black dress textured tailored dress,dresses,True,False,True,6,0.016666666666666666
+BaseSigLIP,fashion200k,blue indigo chambray dress,dresses,True,False,False,4,0.0625
+BaseSigLIP,fashion200k,black paris print sweatshirt dress,dresses,True,False,False,4,0.20833333333333331
+BaseSigLIP,fashion200k,black a-line sleeveless dress,dresses,True,False,True,5,0.0
+BaseSigLIP,fashion200k,blue off-the-shoulder poplin dress,dresses,True,False,False,15,0.6308730158730158
+BaseSigLIP,fashion200k,gray diana midi belted shirt dress,dresses,True,False,True,3,0.16666666666666666
+BaseSigLIP,fashion200k,pink button-front pleat dress,dresses,True,False,False,2,0.5
+BaseSigLIP,fashion200k,blue boutique jessica open front denim dress,dresses,True,True,False,3,0.6388888888888888
+BaseSigLIP,fashion200k,blue chambray shift dress,dresses,True,False,False,2,0.25
+BaseSigLIP,fashion200k,gray metallic floral lace sheath dress,dresses,True,True,False,2,1.0
+BaseSigLIP,fashion200k,blue jodie dress,dresses,True,False,False,4,0.08333333333333333
+BaseSigLIP,fashion200k,black zip dress,dresses,True,False,False,6,0.0
+BaseSigLIP,fashion200k,white embroidered sleeveless sheath dress,dresses,True,True,False,4,0.75
+BaseSigLIP,fashion200k,black a-line dress,dresses,True,False,True,4,0.0
+BaseSigLIP,fashion200k,red tilda paisley-print midi dress,dresses,True,False,True,5,0.9666666666666666
+BaseSigLIP,fashion200k,blue cap-sleeve metallic silk organza fit-and-flare dress,dresses,True,True,False,5,0.11666666666666665
+BaseSigLIP,fashion200k,multicolor abstract print a-line dress,dresses,True,False,True,2,0.0
+BaseSigLIP,fashion200k,floral knee-length dress,dresses,False,False,False,2,0.0
+BaseSigLIP,fashion200k,black striped fit-and-flare dress,dresses,True,False,False,5,0.42000000000000004
+BaseSigLIP,fashion200k,gray knee-length dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,black boutique ari sequin open back midi dress,dresses,True,True,True,4,0.95
+BaseSigLIP,fashion200k,black petite printed seamed matte jersey dress,dresses,True,True,False,4,0.0625
+BaseSigLIP,fashion200k,purple toni sleeveless dress,dresses,True,False,False,8,0.35277777777777775
+BaseSigLIP,fashion200k,beige lily wrap dress,dresses,True,False,True,2,0.25
+BaseSigLIP,fashion200k,blue floral sateen shirtdress,dresses,True,False,False,8,0.4245535714285715
+BaseSigLIP,fashion200k,blue eve lace scallop open back midi dress,dresses,True,True,True,2,0.1
+BaseSigLIP,fashion200k,gray empire dress,dresses,True,False,False,12,0.0
+BaseSigLIP,fashion200k,white embroidered dress,dresses,True,True,False,4,0.0
+BaseSigLIP,fashion200k,pink 3/4 sleeve cut out fitted dress,dresses,True,False,True,4,0.125
+BaseSigLIP,fashion200k,blue short-sleeved silk dress,dresses,True,True,False,4,0.125
+BaseSigLIP,fashion200k,purple empire flute dress,dresses,True,False,False,11,0.0
+BaseSigLIP,fashion200k,blue slow down dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,white drape neck lace dress,dresses,True,True,False,2,0.0
+BaseSigLIP,fashion200k,black sleeveless shift dress,dresses,True,False,False,6,0.0
+BaseSigLIP,fashion200k,white embellished sheath dress,dresses,True,False,False,2,0.19444444444444442
+BaseSigLIP,fashion200k,blue chiffon dress,dresses,True,True,False,3,0.0
+BaseSigLIP,fashion200k,red night slip dress,dresses,True,False,False,2,0.25
+BaseSigLIP,fashion200k,red twisted poplin wrap dress,dresses,True,False,True,5,0.8
+BaseSigLIP,fashion200k,black lace trim buttoned dress,dresses,True,True,False,4,0.31875
+BaseSigLIP,fashion200k,blue lace paisley sheath dress,dresses,True,True,False,6,0.3333333333333333
+BaseSigLIP,fashion200k,pink chevron jacquard sheath dress,dresses,True,False,False,3,1.0
+BaseSigLIP,fashion200k,black striped shift dress,dresses,True,False,False,7,0.16581632653061223
+BaseSigLIP,fashion200k,blue seamed a-line dress,dresses,True,False,True,2,0.0625
+BaseSigLIP,fashion200k,red strappy-back skater dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,yellow printed crepe dress,dresses,True,False,False,4,0.25
+BaseSigLIP,fashion200k,blue embellished crepe shift dress,dresses,True,False,False,3,0.38690476190476186
+BaseSigLIP,fashion200k,white stripe skater dress,dresses,True,False,False,4,0.8303571428571428
+BaseSigLIP,fashion200k,black midi tank dress,dresses,True,False,True,5,0.14444444444444443
+BaseSigLIP,fashion200k,white clara embroidered chiffon trapeze dress slip,dresses,True,True,False,5,0.0
+BaseSigLIP,fashion200k,gray viscose dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,blue bell-sleeve wrap-front denim dress,dresses,True,True,True,2,1.0
+BaseSigLIP,fashion200k,green double layer tank dress,dresses,True,False,False,4,0.6
+BaseSigLIP,fashion200k,red gingham midi shirt dress,dresses,True,False,True,2,0.16666666666666666
+BaseSigLIP,fashion200k,black two-toned jersey dress,dresses,True,True,False,4,0.08125
+BaseSigLIP,fashion200k,pink new jeanne geo-print wrap dress,dresses,True,False,True,5,0.7295238095238095
+BaseSigLIP,fashion200k,red cotton sweatshirt dress chiffon hem,dresses,True,True,False,5,1.0
+BaseSigLIP,fashion200k,black olivia off-the-shoulder gingham dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,blue double knit jersey sleeveless dress,dresses,True,True,False,2,0.25
+BaseSigLIP,fashion200k,black logo print sweatshirt dress,dresses,True,False,False,7,0.42585034013605444
+BaseSigLIP,fashion200k,black double knit jersey dress,dresses,True,True,False,3,0.0
+BaseSigLIP,fashion200k,black sleeveless mock neck swing dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,beige into you slip dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,blue chiffon mock neck trapeze dress,dresses,True,True,False,3,0.4444444444444444
+BaseSigLIP,fashion200k,multicolor floral print shirt dress,dresses,True,False,False,5,0.6
+BaseSigLIP,fashion200k,blue gigi shirtdress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,black silk dress,dresses,True,True,False,2,0.0
+BaseSigLIP,fashion200k,silver metallic floral poplin shirt dress,dresses,True,False,False,3,0.40740740740740744
+BaseSigLIP,fashion200k,beige day dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,green floral cotton jersey dress,dresses,True,True,False,5,0.8
+BaseSigLIP,fashion200k,gray maria dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,red eyelet cutout dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,black cutout crepe mini dress,dresses,True,False,True,7,0.2857142857142857
+BaseSigLIP,fashion200k,black french terry dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,multicolor autumn strappy dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,blue harlie cutout pleated fit-and-flare dress,dresses,True,False,True,2,1.0
+BaseSigLIP,fashion200k,blue gingham pinafore dress,dresses,True,False,False,5,0.9266666666666665
+BaseSigLIP,fashion200k,blue scalloped surplice v-neck fit-and-flare dress,dresses,True,False,False,2,0.125
+BaseSigLIP,fashion200k,black embroidered cotton poplin dress,dresses,True,True,False,4,1.0
+BaseSigLIP,fashion200k,white eyelet fit-and-flare dress,dresses,True,False,False,2,0.8333333333333333
+BaseSigLIP,fashion200k,blue lace up hi-low hem shirt dress,dresses,True,True,False,2,0.5
+BaseSigLIP,fashion200k,blue tegan silk dress,dresses,True,True,False,3,0.0
+BaseSigLIP,fashion200k,red plus short-sleeve eyelet shift dress,dresses,True,False,False,2,0.325
+BaseSigLIP,fashion200k,pink large grommet lace up eyelet shift dress,dresses,True,True,False,2,0.6666666666666666
+BaseSigLIP,fashion200k,black overall dress,dresses,True,False,False,5,0.02
+BaseSigLIP,fashion200k,white wrap-front silk dress,dresses,True,True,True,3,0.8055555555555555
+BaseSigLIP,fashion200k,multicolor striped polo shirt dress,dresses,True,False,False,5,0.9666666666666666
+BaseSigLIP,fashion200k,white floral print tie neck dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,black oversized shirt dress,dresses,True,False,True,7,0.45952380952380956
+BaseSigLIP,fashion200k,red cami ruffle dress,dresses,True,False,True,4,1.0
+BaseSigLIP,fashion200k,yellow lace frock dress,dresses,True,True,False,12,0.5857142857142856
+BaseSigLIP,fashion200k,white striped lace belted dress,dresses,True,True,False,4,0.15476190476190477
+BaseSigLIP,fashion200k,black halter neck back gown,dresses,True,False,False,10,0.19166666666666665
+BaseSigLIP,fashion200k,green watercolor print crepe fit flare dress,dresses,True,False,False,2,0.125
+BaseSigLIP,fashion200k,multicolor sheath dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,beige fit-&-flare dress,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,white cotton eyelet midi dress,dresses,True,True,True,2,1.0
+BaseSigLIP,fashion200k,white off shoulder shirtdress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,multicolor scarf halter midi dress,dresses,True,False,True,2,1.0
+BaseSigLIP,fashion200k,blue cap sleeve shift dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,blue crepe chiffon dress,dresses,True,True,False,2,0.8333333333333333
+BaseSigLIP,fashion200k,embroidered lace detail dress,dresses,False,True,False,2,0.0
+BaseSigLIP,fashion200k,blue v-neck tassel dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,red midi dress,dresses,True,False,True,6,0.027777777777777776
+BaseSigLIP,fashion200k,black wool mini dress,dresses,True,True,True,5,0.04
+BaseSigLIP,fashion200k,blue layered fringed shift dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,pink lace inset dress,dresses,True,True,False,3,0.20634920634920637
+BaseSigLIP,fashion200k,white crepe a-line dress,dresses,True,False,True,2,0.41666666666666663
+BaseSigLIP,fashion200k,blue heart print jersey t-shirt dress,dresses,True,True,False,9,0.8888888888888888
+BaseSigLIP,fashion200k,black stripe t-shirt dress,dresses,True,False,False,4,0.1388888888888889
+BaseSigLIP,fashion200k,gray short sleeve midi dress embellished sleeves wrap front detail,dresses,True,False,True,4,0.9166666666666666
+BaseSigLIP,fashion200k,blue x revolve fit flare dress,dresses,True,False,False,4,0.3055555555555556
+BaseSigLIP,fashion200k,yellow sunny daisy dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,red so social dress,dresses,True,False,False,4,0.13392857142857142
+BaseSigLIP,fashion200k,blue mini mandarin v-neck dress,dresses,True,False,True,3,0.0
+BaseSigLIP,fashion200k,belted midi dress split cap sleeve occasion floral,dresses,False,False,True,4,0.95
+BaseSigLIP,fashion200k,sophie embroidered silk dress black,dresses,True,True,False,5,0.29333333333333333
+BaseSigLIP,fashion200k,blue printed fringe hem dress,dresses,True,False,True,2,0.5
+BaseSigLIP,fashion200k,gray tilda paisley-print midi dress,dresses,True,False,True,9,0.018518518518518517
+BaseSigLIP,fashion200k,green floral print dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,red print silk-chiffon dress,dresses,True,True,False,3,0.0
+BaseSigLIP,fashion200k,blue half-sleeve fitted dress,dresses,True,False,True,3,0.5333333333333333
+BaseSigLIP,fashion200k,pink sweatshirt dress,dresses,True,False,False,3,0.6805555555555555
+BaseSigLIP,fashion200k,black metallic melange long sleeve dress,dresses,True,False,False,6,0.0
+BaseSigLIP,fashion200k,multicolor striped off-the-shoulder shirtdress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,multicolor printed chiffon easy waist dress,dresses,True,True,False,9,0.0
+BaseSigLIP,fashion200k,black abstract dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,hervé léger novelty essentials bandage dress blue,dresses,True,False,False,3,0.5396825396825397
+BaseSigLIP,fashion200k,blue leopard-print silk dress,dresses,True,True,False,2,0.19444444444444442
+BaseSigLIP,fashion200k,multicolor sundown floral slip dress,dresses,True,False,False,3,0.03333333333333333
+BaseSigLIP,fashion200k,brown petite esme key hole detail knitted midi dress,dresses,True,False,True,4,0.8541666666666666
+BaseSigLIP,fashion200k,pink plunge neck strappy peplum midi dress,dresses,True,False,True,4,1.0
+BaseSigLIP,fashion200k,blue ponte bow dress,dresses,True,False,False,3,0.8095238095238094
+BaseSigLIP,fashion200k,purple textured wrap waist sheath dress,dresses,True,False,True,3,0.0
+BaseSigLIP,fashion200k,floral suzie dress,dresses,False,False,False,2,0.0
+BaseSigLIP,fashion200k,blue high-low sleeveless shirtdress,dresses,True,False,False,2,0.6666666666666666
+BaseSigLIP,fashion200k,blue stripe dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,blue b dress,dresses,True,False,False,11,0.0
+BaseSigLIP,fashion200k,pink structured jersey off-shoulder dress,dresses,True,True,True,4,0.7708333333333333
+BaseSigLIP,fashion200k,black sequin lace dress,dresses,True,True,False,9,0.9888888888888889
+BaseSigLIP,fashion200k,purple flared dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,red mini asymmetric pocket dress kimono sleeves,dresses,True,False,True,4,1.0
+BaseSigLIP,fashion200k,white fitted dress,dresses,True,False,True,5,0.0
+BaseSigLIP,fashion200k,black long sleeve midi tube dress,dresses,True,False,True,2,0.5833333333333333
+BaseSigLIP,fashion200k,red strapless dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,multicolor floral print ruched dress,dresses,True,False,False,6,0.6666666666666666
+BaseSigLIP,fashion200k,black mona maxi dress,dresses,True,False,True,14,0.0
+BaseSigLIP,fashion200k,black flutter sleeve short nightgown,dresses,True,False,False,2,0.24285714285714285
+BaseSigLIP,fashion200k,natural split oversized double layer midi dress,dresses,False,False,True,5,0.55
+BaseSigLIP,fashion200k,green geometric cotton poplin dress,dresses,True,True,False,5,0.28238095238095234
+BaseSigLIP,fashion200k,white ruffle collar dress,dresses,True,False,True,4,0.125
+BaseSigLIP,fashion200k,yellow pleated a-line dress,dresses,True,False,True,9,0.41997354497354494
+BaseSigLIP,fashion200k,pink toni sleeveless dress,dresses,True,False,False,5,0.02222222222222222
+BaseSigLIP,fashion200k,black beaded crepe cocktail dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,black halter band dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,blue short-sleeve slim signature button-front shirtdress,dresses,True,False,True,6,0.0
+BaseSigLIP,fashion200k,silver square-neck lamé cami dress,dresses,True,False,False,11,1.0
+BaseSigLIP,fashion200k,yellow floral-print silk-crepe wrap dress,dresses,True,True,True,8,1.0
+BaseSigLIP,fashion200k,green muscle tee camo dress,dresses,True,False,False,3,1.0
+BaseSigLIP,fashion200k,blue 3/4-sleeve lace midi dress,dresses,True,True,True,2,0.29166666666666663
+BaseSigLIP,fashion200k,blue printed stretch-cotton dress,dresses,True,True,False,3,0.0
+BaseSigLIP,fashion200k,blue long sleeve ruffle tee dress,dresses,True,False,True,2,0.6
+BaseSigLIP,fashion200k,orange high-neck tank dress,dresses,True,False,False,3,0.7777777777777778
+BaseSigLIP,fashion200k,pink delia lattice side textured bodycon dress,dresses,True,False,False,2,0.75
+BaseSigLIP,fashion200k,white printed mikado midi dress,dresses,True,False,True,2,0.07142857142857142
+BaseSigLIP,fashion200k,white ruffled floral-print dress,dresses,True,False,False,11,0.22174603174603175
+BaseSigLIP,fashion200k,amy black pinafore style denim midi dress,dresses,True,True,True,4,1.0
+BaseSigLIP,fashion200k,pink resort texture sleeveless dress,dresses,True,False,False,3,0.7916666666666666
+BaseSigLIP,fashion200k,beige louise pencil dress,dresses,True,False,True,3,0.11428571428571428
+BaseSigLIP,fashion200k,white ottoman cutout dress,dresses,True,False,False,5,0.5433333333333333
+BaseSigLIP,fashion200k,black contrast collar shortsleeved dress,dresses,True,False,False,3,0.6666666666666666
+BaseSigLIP,fashion200k,green delia wrap d-ring midi dress,dresses,True,False,True,3,0.0
+BaseSigLIP,fashion200k,blue floral dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,teal metallic asymmetrical jacquard skirt dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,multicolor floral-print chiffon sheath dress,dresses,True,True,False,2,0.0
+BaseSigLIP,fashion200k,red juliet silk-blend maxi dress,dresses,True,True,True,20,0.0
+BaseSigLIP,fashion200k,white knit dress,dresses,True,True,False,4,0.025
+BaseSigLIP,fashion200k,black floral kimono dress,dresses,True,False,False,5,0.24444444444444446
+BaseSigLIP,fashion200k,black colorblocked shift dress,dresses,True,False,False,2,0.22619047619047616
+BaseSigLIP,fashion200k,blue lara lace detail halterneck dress,dresses,True,True,False,7,0.0642857142857143
+BaseSigLIP,fashion200k,red linen pocket dress,dresses,True,True,False,4,0.7470238095238095
+BaseSigLIP,fashion200k,pink printed pleated dress,dresses,True,False,True,4,0.75
+BaseSigLIP,fashion200k,black print cora mock-neck dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,multicolor draped floral-print dress,dresses,True,False,True,5,0.10666666666666666
+BaseSigLIP,fashion200k,gray neck jumper dress,dresses,True,False,False,5,0.4333333333333333
+BaseSigLIP,fashion200k,green petite sequined lace jacket dress,outerwear,True,True,False,3,0.4666666666666666
+BaseSigLIP,fashion200k,blue beaded flounce dress,dresses,True,False,False,6,1.0
+BaseSigLIP,fashion200k,gray plus short-sleeve beaded sheath dress,dresses,True,False,False,2,0.8333333333333333
+BaseSigLIP,fashion200k,black freya tapestry print tunic dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,white knee-length dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,black esme flock front detail high neck bodycon dress,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,pink spaghetti strap ribbed dress,dresses,True,False,True,4,0.9166666666666666
+BaseSigLIP,fashion200k,white belted shirt dress,dresses,True,False,False,5,0.8711111111111111
+BaseSigLIP,fashion200k,blue printed jersey midi dress,dresses,True,True,True,3,0.0
+BaseSigLIP,fashion200k,gray effortless tank dress,dresses,True,False,False,4,1.0
+BaseSigLIP,fashion200k,black off shoulder dress,dresses,True,False,False,23,0.4
+BaseSigLIP,fashion200k,white women's fringed jacquard dress,dresses,True,False,False,2,0.625
+BaseSigLIP,fashion200k,maria dress red,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,blue nights illusion sleeve beaded dress,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,red asymmetric slip dress,dresses,True,False,True,4,0.0
+BaseSigLIP,fashion200k,multicolor patterned drop-waist dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,multicolor knit dress,dresses,True,True,False,4,0.0
+BaseSigLIP,fashion200k,green bell-sleeve dress,dresses,True,False,False,5,0.19238095238095237
+BaseSigLIP,fashion200k,purple maison dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,white belted shirtdress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,multicolor floral midi skirt,bottoms,True,False,True,5,0.8766666666666666
+BaseSigLIP,fashion200k,multicolor mixed print midi dress,dresses,True,False,True,2,0.0
+BaseSigLIP,fashion200k,blue shirt dress,dresses,True,False,False,8,0.0
+BaseSigLIP,fashion200k,purple v dress,dresses,True,False,False,4,0.8875
+BaseSigLIP,fashion200k,silver square neck midi dress,dresses,True,False,True,3,0.5888888888888889
+BaseSigLIP,fashion200k,blue handkerchief hem floral print knit jersey dress,dresses,True,True,False,4,0.5
+BaseSigLIP,fashion200k,multicolor floral scuba midi sheath dress,dresses,True,False,True,2,0.45
+BaseSigLIP,fashion200k,black stitch flounce dress,dresses,True,False,False,5,0.11111111111111112
+BaseSigLIP,fashion200k,black halter top sleeveless a-line dress,dresses,True,False,True,2,0.0
+BaseSigLIP,fashion200k,black pleated shirt dress,dresses,True,False,True,4,0.4083333333333333
+BaseSigLIP,fashion200k,gray arianna low back shirt dress,dresses,True,False,False,4,0.6875
+BaseSigLIP,fashion200k,blue signature slim short-sleeve shirtdress,dresses,True,False,True,13,0.19999999999999998
+BaseSigLIP,fashion200k,white gigi mixed print t-back frock dress,dresses,True,False,False,6,0.018518518518518517
+BaseSigLIP,fashion200k,orange smocked waist dress,dresses,True,False,False,3,0.8095238095238094
+BaseSigLIP,fashion200k,multicolor sateen printed fit-and-flare dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,black striped belted fit flare dress,dresses,True,False,False,2,0.8333333333333333
+BaseSigLIP,fashion200k,black satin dress,dresses,True,True,False,5,0.0
+BaseSigLIP,fashion200k,blue clean obi wrap dress v front,dresses,True,False,True,3,0.7222222222222222
+BaseSigLIP,fashion200k,white glitter lace fit-and-flare dress,dresses,True,True,False,3,0.0
+BaseSigLIP,fashion200k,black bella tie front dress,dresses,True,False,False,3,0.4666666666666666
+BaseSigLIP,fashion200k,gray valencia seamed dress,dresses,True,False,False,2,0.0
+BaseSigLIP,fashion200k,green crepe sleeve off-shoulder dress,dresses,True,False,False,5,0.6644444444444444
+BaseSigLIP,fashion200k,black ruched jersey dress,dresses,True,True,False,3,0.0
+BaseSigLIP,fashion200k,green camo tee dress 100% bloomingdale's exclusive,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,black sleeveless split neck dress,dresses,True,False,False,4,0.31547619047619047
+BaseSigLIP,fashion200k,black crochet lace flounce dress,dresses,True,True,False,3,0.6666666666666666
+BaseSigLIP,fashion200k,black cap sleeve curved hem bodycon dress,dresses,True,False,False,4,0.5833333333333334
+BaseSigLIP,fashion200k,yellow cotton-poplin dress,dresses,True,True,False,4,0.65
+BaseSigLIP,fashion200k,floral camo dress,dresses,False,False,False,3,0.6666666666666666
+BaseSigLIP,fashion200k,black flock dress,dresses,True,False,False,4,0.35714285714285715
+BaseSigLIP,fashion200k,multicolor shirt dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,pink double layer tank dress,dresses,True,False,False,4,0.3333333333333333
+BaseSigLIP,fashion200k,blue off-the-shoulder lace sheath dress,dresses,True,True,False,2,1.0
+BaseSigLIP,fashion200k,black curvy trendy plus size colorblocked handkerchief-hem dress,dresses,True,False,True,2,1.0
+BaseSigLIP,fashion200k,multicolor off-the-shoulder paisley sheath dress,dresses,True,False,False,2,0.5833333333333333
+BaseSigLIP,fashion200k,black stripe t-shirt midi dress,dresses,True,False,True,3,0.5
+BaseSigLIP,fashion200k,red sleeveless midi taffeta dress,dresses,True,False,True,2,1.0
+BaseSigLIP,fashion200k,blue tencel dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,belted floral-print fit flare dress,dresses,False,False,False,3,0.9166666666666666
+BaseSigLIP,fashion200k,purple high-low dress,dresses,True,False,False,5,0.5333333333333333
+BaseSigLIP,fashion200k,black kaftan dress,dresses,True,False,False,18,0.78
+BaseSigLIP,fashion200k,white crepe ruched illusion dress,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,white salon embellished floral bodice midi skater dress green,dresses,True,False,True,3,0.8095238095238094
+BaseSigLIP,fashion200k,multicolor short dress,dresses,True,False,False,7,0.0
+BaseSigLIP,fashion200k,white up away dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,blue dobby tank dress,dresses,True,False,False,3,0.8055555555555555
+BaseSigLIP,fashion200k,floral fit-&-flare dress,dresses,False,False,False,2,0.5
+BaseSigLIP,fashion200k,black sleeveless ruffled dress,dresses,True,False,False,6,0.0
+BaseSigLIP,fashion200k,gray petite esme key hole detail knitted midi dress,dresses,True,False,True,4,0.65
+BaseSigLIP,fashion200k,red high neck cut out peplum dress,dresses,True,False,False,3,0.7777777777777778
+BaseSigLIP,fashion200k,black it now tank,tops,True,False,False,7,0.0
+BaseSigLIP,fashion200k,pink backless maxi dress,dresses,True,False,True,11,0.8788888888888889
+BaseSigLIP,fashion200k,black patch short sleeve tee dress,dresses,True,False,False,4,0.0
+BaseSigLIP,fashion200k,silver angel kimono sleeve belted midi dress,dresses,True,False,True,5,1.0
+BaseSigLIP,fashion200k,blue belted shirt dress,dresses,True,False,False,5,0.06857142857142857
+BaseSigLIP,fashion200k,gray strappy dress,dresses,True,False,False,2,0.2777777777777778
+BaseSigLIP,fashion200k,blue nic+zoe keyhole chambray dress,dresses,True,False,False,3,0.8095238095238094
+BaseSigLIP,fashion200k,white bias silk dress,dresses,True,True,False,3,0.0
+BaseSigLIP,fashion200k,blue belted dress,dresses,True,False,False,3,0.0
+BaseSigLIP,fashion200k,black lace panel t-shirt dress,dresses,True,True,False,3,0.5317460317460317
+BaseSigLIP,fashion200k,red a-line dress,dresses,True,False,True,4,0.0
+BaseSigLIP,fashion200k,pink asymmetrical fit-and-flare dress,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,blue a-line slip dress,dresses,True,False,True,3,0.0
+BaseSigLIP,fashion200k,gray sadie dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,black striped jersey dress,dresses,True,True,False,4,0.0
+BaseSigLIP,fashion200k,orange check cotton shirt dress,dresses,True,True,False,5,0.9
+BaseSigLIP,fashion200k,beige cape stripe dress,outerwear,True,False,False,2,0.39285714285714285
+BaseSigLIP,fashion200k,multicolor dip-dye jersey dress,dresses,True,True,False,6,0.0
+BaseSigLIP,fashion200k,black silk slip dress,dresses,True,True,False,5,0.6433333333333333
+BaseSigLIP,fashion200k,gray floral border print shift dress,dresses,True,False,False,2,1.0
+BaseSigLIP,fashion200k,sand blue dress,dresses,True,False,False,5,0.0
+BaseSigLIP,fashion200k,white eve ribbed bodycon dress,dresses,True,False,True,2,0.29166666666666663
+BaseSigLIP,atlas,Boxers,intimates,False,False,False,228,1.0
+BaseSigLIP,atlas,Sherwani,outerwear,False,False,False,5,0.06666666666666667
+BaseSigLIP,atlas,Dhoti Kurta,dresses,False,False,False,13,0.05
+BaseSigLIP,atlas,Pyjama,intimates,False,False,False,109,1.0
+BaseSigLIP,atlas,Jackets,outerwear,False,False,False,38,0.33214285714285713
+BaseSigLIP,atlas,Kurta,dresses,False,False,False,617,1.0
+BaseSigLIP,atlas,Dhoti Pants,dresses,False,False,False,58,0.8354365079365079
+BaseSigLIP,atlas,Blazers&Suits,outerwear,False,False,False,1896,1.0
+BaseSigLIP,atlas,Galabiyyas,dresses,False,False,False,36,1.0
+BaseSigLIP,polyvore,Lip Makeup,beauty,False,False,False,6,0.35000000000000003
+BaseSigLIP,polyvore,Wallets,bags,False,False,False,11,0.3730952380952381
+BaseSigLIP,polyvore,Electronics,other,False,False,False,7,0.673469387755102
+BaseSigLIP,polyvore,Stationery,other,False,False,False,7,0.6448979591836734
+BaseSigLIP,polyvore,Tech Accessories,other,False,False,False,37,0.22666666666666666
+BaseSigLIP,polyvore,Mascara,beauty,False,False,False,24,0.8
+BaseSigLIP,polyvore,Face Powder,other,False,False,False,7,0.41666666666666663
+BaseSigLIP,polyvore,Hair Accessories,other,False,False,False,29,1.0
+BaseSigLIP,polyvore,Accent Tables,home,False,False,False,21,1.0
+BaseSigLIP,polyvore,Lipstick,beauty,False,False,False,39,0.691547619047619
+BaseSigLIP,polyvore,Frames,home,False,False,False,3,0.8055555555555555
+BaseSigLIP,polyvore,Jewelry,accessories,False,False,False,8,0.0
+BaseSigLIP,polyvore,Skinny Jeans,bottoms,False,False,False,71,0.4329761904761904
+BaseSigLIP,polyvore,Toys,other,False,False,False,5,0.2
+BaseSigLIP,polyvore,Sweatshirts,tops,False,False,False,20,0.3055555555555556
+BaseSigLIP,polyvore,Ceiling Lights,other,False,False,False,9,0.8261022927689594
+BaseSigLIP,polyvore,Curtains,home,False,False,False,2,0.8333333333333333
+BaseSigLIP,polyvore,Lip Gloss,other,False,False,False,21,0.8
+BaseSigLIP,polyvore,Men's Watches & Jewelry,accessories,False,False,False,2,0.0
+BaseSigLIP,polyvore,Sneakers,shoes,False,False,False,31,0.89
+BaseSigLIP,polyvore,Nail Care,beauty,False,False,False,2,0.0
+BaseSigLIP,polyvore,Gloves,accessories,False,False,False,10,1.0
+BaseSigLIP,polyvore,Watches,accessories,False,False,False,38,0.7904365079365079
+BaseSigLIP,polyvore,Flip Flops,shoes,False,False,False,3,1.0
+BaseSigLIP,polyvore,Baby,other,False,False,False,3,0.0
+BaseSigLIP,polyvore,Mirrors,home,False,False,False,5,0.7100000000000001
+BaseSigLIP,polyvore,Tank Tops,tops,False,False,False,49,0.4829761904761905
+BaseSigLIP,polyvore,Blush,beauty,False,False,False,13,0.6484920634920635
+BaseSigLIP,polyvore,Kids,other,False,False,False,4,0.0
+BaseSigLIP,polyvore,Body Art,other,False,False,False,6,0.075
+BaseSigLIP,polyvore,Bikinis,swimwear,False,False,False,6,0.9305555555555555
+BaseSigLIP,polyvore,Clocks,home,False,False,False,4,1.0
+BaseSigLIP,polyvore,Fragrance,beauty,False,False,False,33,0.9
+BaseSigLIP,polyvore,Makeup Brushes,beauty,False,False,False,4,0.5428571428571429
+BaseSigLIP,polyvore,Media,other,False,False,False,3,0.0
+BaseSigLIP,polyvore,Makeup,beauty,False,False,False,8,0.05
+BaseSigLIP,polyvore,Kitchen & Dining,home,False,False,False,4,0.0
+BaseSigLIP,polyvore,Slippers,shoes,False,False,False,3,0.8095238095238094
+BaseSigLIP,polyvore,Body Cleansers,other,False,False,False,2,0.0
+BaseSigLIP,polyvore,Jumpsuits,dresses,False,False,False,2,0.6666666666666666
+BaseSigLIP,polyvore,Straight Leg Jeans,bottoms,False,False,False,5,0.3833333333333333
+BaseSigLIP,polyvore,Bags,bags,False,False,False,10,0.0
+BaseSigLIP,polyvore,Bookcases,other,False,False,False,2,1.0
+BaseSigLIP,polyvore,Cocktail Dresses,dresses,False,False,False,43,0.7068253968253967
+BaseSigLIP,polyvore,Blazers,outerwear,False,False,False,26,0.6842063492063492
+BaseSigLIP,polyvore,Floor Lamps,home,False,False,False,3,1.0
+BaseSigLIP,polyvore,Hoodies,tops,False,False,False,2,0.325
+BaseSigLIP,polyvore,Outdoor Lighting,home,False,False,False,2,0.6666666666666666
+BaseSigLIP,polyvore,Food & Drink,other,False,False,False,6,0.3796296296296296
+BaseSigLIP,polyvore,Body Moisturizers,other,False,False,False,2,0.3333333333333333
+BaseSigLIP,polyvore,Wall Lights,other,False,False,False,2,1.0
+BaseSigLIP,polyvore,Panties & Thongs,intimates,False,False,False,2,1.0
+BaseSigLIP,polyvore,Foundation,beauty,False,False,False,5,0.55
+BaseSigLIP,polyvore,Boots,shoes,False,False,False,24,0.0125
+BaseSigLIP,polyvore,Activewear Pants,bottoms,False,False,False,5,0.3046031746031746
+BaseSigLIP,polyvore,Bracelets & Bangles,accessories,False,False,False,102,1.0
+BaseSigLIP,polyvore,Backpacks,bags,False,False,False,19,1.0
+BaseSigLIP,polyvore,Tote Bags,bags,False,False,False,34,0.37666666666666665
+BaseSigLIP,polyvore,Dresses,dresses,False,False,False,9,0.07222222222222223
+BaseSigLIP,polyvore,Socks,accessories,False,False,False,8,0.5844246031746032
+BaseSigLIP,polyvore,Eyeliner,beauty,False,False,False,22,0.3613095238095238
+BaseSigLIP,polyvore,Skirts,bottoms,False,False,False,11,0.042222222222222223
+BaseSigLIP,polyvore,Shorts,bottoms,False,False,False,55,1.0
+BaseSigLIP,polyvore,Rugs,home,False,False,False,9,0.9765432098765433
+BaseSigLIP,polyvore,Home Decor,home,False,False,False,19,0.19285714285714287
+BaseSigLIP,polyvore,Vases,home,False,False,False,2,0.8333333333333333
+BaseSigLIP,polyvore,Sandals,shoes,False,False,False,38,1.0
+BaseSigLIP,polyvore,Outerwear,outerwear,False,False,False,14,0.0
+BaseSigLIP,polyvore,Shapewear,intimates,False,False,False,2,0.26666666666666666
+BaseSigLIP,polyvore,Long Skirts,bottoms,False,False,False,10,0.8154365079365078
+BaseSigLIP,polyvore,Belts,accessories,False,False,False,23,1.0
+BaseSigLIP,polyvore,Blankets,other,False,False,False,7,0.8129251700680271
+BaseSigLIP,polyvore,Pumps,shoes,False,False,False,84,0.7071031746031746
+BaseSigLIP,polyvore,Hats,accessories,False,False,False,42,0.9
+BaseSigLIP,polyvore,Beauty Products,beauty,False,False,False,14,0.0125
+BaseSigLIP,polyvore,Messenger Bags,bags,False,False,False,6,0.041666666666666664
+BaseSigLIP,polyvore,Books,other,False,False,False,2,0.16666666666666666
+BaseSigLIP,polyvore,Scarves,accessories,False,False,False,34,1.0
+BaseSigLIP,polyvore,Luggage,bags,False,False,False,5,0.4
+BaseSigLIP,polyvore,Holiday Decorations,other,False,False,False,4,0.3333333333333333
+BaseSigLIP,polyvore,Loafers & Moccasins,shoes,False,False,False,4,0.35714285714285715
+BaseSigLIP,polyvore,Candles & Candleholders,home,False,False,False,6,0.6079365079365079
+BaseSigLIP,polyvore,Men's Hats,accessories,False,False,False,2,0.0
+BaseSigLIP,polyvore,Bootcut Jeans,bottoms,False,False,False,2,0.3333333333333333
+BaseSigLIP,polyvore,Cardigans,tops,False,False,False,23,0.691547619047619
+BaseSigLIP,polyvore,Office Accessories,other,False,False,False,2,0.07142857142857142
+BaseSigLIP,polyvore,Hair Styling Tools,other,False,False,False,7,0.0
+BaseSigLIP,polyvore,Coats,outerwear,False,False,False,64,0.89
+BaseSigLIP,polyvore,Bikini Tops,tops,False,False,False,5,0.8
+BaseSigLIP,polyvore,Small Storage,home,False,False,False,3,0.27777777777777773
+BaseSigLIP,polyvore,Over-The-Knee Boots,shoes,False,False,False,2,0.25
+BaseSigLIP,polyvore,Charms & Pendants,accessories,False,False,False,3,0.3333333333333333
+BaseSigLIP,polyvore,Earrings,accessories,False,False,False,112,1.0
+BaseSigLIP,polyvore,Floral Decor,home,False,False,False,24,0.49071428571428566
+BaseSigLIP,polyvore,Gowns,dresses,False,False,False,11,0.8154365079365078
+BaseSigLIP,polyvore,Sofas,home,False,False,False,8,1.0
+BaseSigLIP,polyvore,Eyeglasses,accessories,False,False,False,4,0.4571428571428572
+BaseSigLIP,polyvore,Jeans,bottoms,False,False,False,12,0.3463095238095238
+BaseSigLIP,polyvore,Tables,home,False,False,False,2,0.45
+BaseSigLIP,polyvore,Clutches,bags,False,False,False,68,1.0
+BaseSigLIP,polyvore,Drinkware,home,False,False,False,7,0.961734693877551
+BaseSigLIP,polyvore,Face Makeup,beauty,False,False,False,3,0.0
+BaseSigLIP,polyvore,Flats,shoes,False,False,False,27,0.8354365079365079
+BaseSigLIP,polyvore,Tops,tops,False,False,False,80,0.24285714285714283
+BaseSigLIP,polyvore,Haircare,beauty,False,False,False,3,0.06666666666666667
+BaseSigLIP,polyvore,Jackets,outerwear,False,False,False,57,0.2261904761904762
+BaseSigLIP,polyvore,Oxfords,shoes,False,False,False,5,0.6295238095238095
+BaseSigLIP,polyvore,Rings,accessories,False,False,False,76,1.0
+BaseSigLIP,polyvore,Eye Makeup,beauty,False,False,False,11,0.11666666666666665
+BaseSigLIP,polyvore,Handbags,bags,False,False,False,76,0.19285714285714287
+BaseSigLIP,polyvore,Bikini Bottoms,swimwear,False,False,False,2,0.41666666666666663
+BaseSigLIP,polyvore,Knee High Boots,shoes,False,False,False,4,0.25297619047619047
+BaseSigLIP,polyvore,Accent Chairs,home,False,False,False,11,0.7434920634920634
+BaseSigLIP,polyvore,Tights,bottoms,False,False,False,12,0.611547619047619
+BaseSigLIP,polyvore,Necklaces,accessories,False,False,False,128,1.0
+BaseSigLIP,polyvore,Eyeshadow,beauty,False,False,False,31,0.7254365079365078
+BaseSigLIP,polyvore,Font,other,False,False,False,8,0.4375
+BaseSigLIP,polyvore,Sideboards,other,False,False,False,2,0.8333333333333333
+BaseSigLIP,polyvore,Throw Pillows,home,False,False,False,8,1.0
+BaseSigLIP,polyvore,Day Dresses,dresses,False,False,False,47,0.2963095238095238
+BaseSigLIP,polyvore,Nail Treatments,beauty,False,False,False,4,0.10555555555555556
+BaseSigLIP,polyvore,Vests,outerwear,False,False,False,13,0.5142063492063491
+BaseSigLIP,polyvore,Hosiery,bottoms,False,False,False,2,0.0625
+BaseSigLIP,polyvore,Table Lamps,home,False,False,False,6,0.8819444444444445
+BaseSigLIP,polyvore,Knee Length Skirts,bottoms,False,False,False,37,0.08607142857142858
+BaseSigLIP,polyvore,Girls,other,False,False,False,4,0.0
+BaseSigLIP,polyvore,Accessories,other,False,False,False,9,0.0
+BaseSigLIP,polyvore,Pants,bottoms,False,False,False,38,0.3484126984126984
+BaseSigLIP,polyvore,Lip Treatments,other,False,False,False,6,0.03333333333333333
+BaseSigLIP,polyvore,Bath Accessories,other,False,False,False,2,0.45
+BaseSigLIP,polyvore,Nail Polish,beauty,False,False,False,22,0.7071031746031746
+BaseSigLIP,polyvore,Gift Sets & Kits,other,False,False,False,2,0.39285714285714285
+BaseSigLIP,polyvore,Blouses,tops,False,False,False,62,0.5025
+BaseSigLIP,polyvore,One Piece Swimsuits,swimwear,False,False,False,2,1.0
+BaseSigLIP,polyvore,False Eyelashes,other,False,False,False,4,0.6458333333333333
+BaseSigLIP,polyvore,Shoes,shoes,False,False,False,19,0.0
+BaseSigLIP,polyvore,Clothing,other,False,False,False,39,0.02
+BaseSigLIP,polyvore,Sweaters,tops,False,False,False,80,0.8788888888888889
+BaseSigLIP,polyvore,Leggings,bottoms,False,False,False,21,0.6732142857142857
+BaseSigLIP,polyvore,Bras,intimates,False,False,False,5,0.8261904761904761
+BaseSigLIP,polyvore,Mid Calf Boots,shoes,False,False,False,7,0.06746031746031746
+BaseSigLIP,polyvore,Mini Skirts,bottoms,False,False,True,28,0.3708333333333333
+BaseSigLIP,polyvore,Eyewear,accessories,False,False,False,2,0.125
+BaseSigLIP,polyvore,Ankle Booties,shoes,False,False,False,111,1.0
+BaseSigLIP,polyvore,Shoulder Bags,bags,False,False,False,75,0.49309523809523814
+BaseSigLIP,polyvore,Boyfriend Jeans,bottoms,False,False,False,11,0.5563095238095238
+BaseSigLIP,polyvore,Sunglasses,accessories,False,False,False,44,0.8154365079365078
+BaseSigLIP,polyvore,Serveware,home,False,False,False,5,0.7333333333333333
+BaseSigLIP,polyvore,Bags & Cases,bags,False,False,False,2,0.0
+BaseSigLIP,polyvore,T-Shirts,tops,False,False,False,50,0.7004365079365078
+BaseSigLIP,KAGL,Jeans,bottoms,False,False,False,104,1.0
+BaseSigLIP,KAGL,Sports Shoes,shoes,False,False,False,139,0.23194444444444445
+BaseSigLIP,KAGL,Shoe Accessories,shoes,False,False,False,7,0.7142857142857143
+BaseSigLIP,KAGL,Dupatta,accessories,False,False,False,6,1.0
+BaseSigLIP,KAGL,Hat,accessories,False,False,False,2,0.0
+BaseSigLIP,KAGL,Free Gifts,other,False,False,False,2,0.0
+BaseSigLIP,KAGL,Messenger Bag,bags,False,False,False,2,0.5
+BaseSigLIP,KAGL,Skirts,bottoms,False,False,False,17,0.691547619047619
+BaseSigLIP,KAGL,Tops,tops,False,False,False,142,0.4796428571428571
+BaseSigLIP,KAGL,Capris,bottoms,False,False,False,8,0.0875
+BaseSigLIP,KAGL,Handbags,bags,False,False,False,67,1.0
+BaseSigLIP,KAGL,Socks,accessories,False,False,False,27,1.0
+BaseSigLIP,KAGL,Caps,accessories,False,False,False,16,1.0
+BaseSigLIP,KAGL,Shorts,bottoms,False,False,False,44,1.0
+BaseSigLIP,KAGL,Sweatshirts,tops,False,False,False,30,0.6366666666666667
+BaseSigLIP,KAGL,Laptop Bag,bags,False,False,False,3,0.2222222222222222
+BaseSigLIP,KAGL,Churidar,bottoms,False,False,False,2,0.0
+BaseSigLIP,KAGL,Tunics,tops,False,False,False,7,0.0
+BaseSigLIP,KAGL,Kurta Sets,dresses,False,False,False,2,0.2111111111111111
+BaseSigLIP,KAGL,Track Pants,bottoms,False,False,False,18,1.0
+BaseSigLIP,KAGL,Dresses,dresses,False,False,False,14,0.2750793650793651
+BaseSigLIP,KAGL,Flip Flops,shoes,False,False,False,63,0.7904365079365079
+BaseSigLIP,KAGL,Wallets,bags,False,False,False,15,1.0
+BaseSigLIP,KAGL,Belts,accessories,False,False,False,9,1.0
+BaseSigLIP,KAGL,Flats,shoes,False,False,False,33,0.034722222222222224
+BaseSigLIP,KAGL,Kurtis,dresses,False,False,False,34,0.0
+BaseSigLIP,KAGL,Formal Shoes,shoes,False,False,True,108,1.0
+BaseSigLIP,KAGL,Scarves,accessories,False,False,False,6,0.20555555555555557
+BaseSigLIP,KAGL,Tracksuits,bottoms,False,False,False,2,1.0
+BaseSigLIP,KAGL,Ties,accessories,False,False,False,16,1.0
+BaseSigLIP,KAGL,Casual Shoes,shoes,False,False,True,259,1.0
+BaseSigLIP,KAGL,Shirts,tops,False,False,False,513,1.0
+BaseSigLIP,KAGL,Backpacks,bags,False,False,False,7,0.740702947845805
+BaseSigLIP,KAGL,Tshirts,tops,False,False,False,627,0.8521031746031745
+BaseSigLIP,KAGL,Jackets,outerwear,False,False,False,15,0.6377777777777778
+BaseSigLIP,KAGL,Kurtas,dresses,False,False,False,200,1.0
+BaseSigLIP,KAGL,Trousers,bottoms,False,False,False,57,1.0
+BaseSigLIP,KAGL,Heels,shoes,False,False,False,63,0.8354365079365079
+BaseSigLIP,KAGL,Sandals,shoes,False,False,False,76,0.14666666666666667
+BaseSigLIP,KAGL,Leggings,bottoms,False,False,False,12,0.7071031746031746
+BaseSigLIP,KAGL,Sweaters,tops,False,False,False,33,0.6842063492063492
+BaseSigLIP,KAGL,Watches,accessories,False,False,False,184,1.0
+BaseSigLIP,KAGL,Stoles,accessories,False,False,False,3,0.26666666666666666

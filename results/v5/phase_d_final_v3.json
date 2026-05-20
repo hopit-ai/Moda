@@ -1,0 +1,84 @@
+{
+  "total_steps": 2331,
+  "elapsed_s": 3324.6880280971527,
+  "halt_reason": null,
+  "initial_metrics": {
+    "fashion200k": {
+      "recall@1": 0.23,
+      "recall@10": 0.81,
+      "mrr": 0.414545634920635,
+      "precision@1": 0.23,
+      "precision@10": 0.08649999999999991,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "atlas": {
+      "recall@1": 0.365,
+      "recall@10": 0.79,
+      "mrr": 0.4910436507936508,
+      "precision@1": 0.365,
+      "precision@10": 0.10449999999999998,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "polyvore": {
+      "recall@1": 0.68,
+      "recall@10": 0.935,
+      "mrr": 0.7745039682539684,
+      "precision@1": 0.68,
+      "precision@10": 0.09349999999999997,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "KAGL": {
+      "recall@1": 0.41,
+      "recall@10": 0.845,
+      "mrr": 0.5569623015873014,
+      "precision@1": 0.41,
+      "precision@10": 0.08899999999999991,
+      "n_queries": 200,
+      "n_docs": 1200
+    }
+  },
+  "initial_mean_mrr": 0.5592638888888889,
+  "best_step": 500,
+  "best_mean_mrr": 0.5613159722222222,
+  "best_metrics": {
+    "fashion200k": {
+      "recall@1": 0.235,
+      "recall@10": 0.815,
+      "mrr": 0.4157103174603175,
+      "precision@1": 0.235,
+      "precision@10": 0.08699999999999992,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "atlas": {
+      "recall@1": 0.365,
+      "recall@10": 0.79,
+      "mrr": 0.48973015873015874,
+      "precision@1": 0.365,
+      "precision@10": 0.10449999999999998,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "polyvore": {
+      "recall@1": 0.685,
+      "recall@10": 0.94,
+      "mrr": 0.7778670634920636,
+      "precision@1": 0.685,
+      "precision@10": 0.09399999999999999,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "KAGL": {
+      "recall@1": 0.42,
+      "recall@10": 0.845,
+      "mrr": 0.561956349206349,
+      "precision@1": 0.42,
+      "precision@10": 0.08899999999999991,
+      "n_queries": 200,
+      "n_docs": 1200
+    }
+  }
+}

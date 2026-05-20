@@ -1,0 +1,58 @@
+[
+  {
+    "model": "fashion-siglip",
+    "dataset": "KAGL",
+    "run_name": "Marqo-FashionSigLIP_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.33074,
+        "MAP@10": 0.46382,
+        "NDCG@1": 0.3645,
+        "NDCG@10": 0.53421,
+        "P@1": 0.3645,
+        "P@10": 0.0911,
+        "Recall@1": 0.33074,
+        "Recall@10": 0.72693,
+        "MRR": 0.484
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  },
+  {
+    "model": "fashion-siglip",
+    "dataset": "fashion200k",
+    "run_name": "Marqo-FashionSigLIP_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.40892,
+        "MAP@10": 0.53693,
+        "NDCG@1": 0.416,
+        "NDCG@10": 0.59855,
+        "P@1": 0.416,
+        "P@10": 0.08195,
+        "Recall@1": 0.40892,
+        "Recall@10": 0.78889,
+        "MRR": 0.53895
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  }
+]

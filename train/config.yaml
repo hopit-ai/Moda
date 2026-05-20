@@ -1,0 +1,71 @@
+# Fashion SigLIP training config — M4 Max, 24h budget
+
+model:
+  backbone: "ViT-B-16-SigLIP"
+  pretrained: "webli"
+  cache_dir: ".cache"
+  dim: 768
+
+data:
+  train_jsonl:
+    - "data/train_v1/pairs_combined.jsonl"
+  max_pairs: null                  # null = use all
+
+training:
+  device: "mps"
+  precision: "fp32"                # Stage 1; switches to bf16 in Stage 2
+
+  # Stage 1: head warmup
+  stage1_steps: 500
+  stage1_batch: 128
+  stage1_lr_heads: 1.0e-3
+  stage1_precision: "fp32"
+
+  # Stage 2: full fine-tune
+  stage2_steps: 8000
+  stage2_batch: 128
+  stage2_grad_accum: 2             # effective batch 256
+  stage2_lr_backbone: 3.0e-5
+  stage2_lr_heads: 3.0e-4
+  stage2_precision: "bf16"
+  stage2_no_wd_steps: 1500        # no weight decay first 1500 steps
+  stage2_weight_decay: 0.1
+  stage2_beta2: 0.95
+
+  # Stage 3: ranking refinement
+  stage3_steps: 1500
+  stage3_batch: 128
+  stage3_lr_backbone: 1.0e-5
+  stage3_lr_heads: 1.0e-4
+  stage3_gcl_piecewise: true
+
+  # Shared
+  grad_clip: 1.0
+  warmup_steps: 100
+
+loss:
+  bank_size: 32768
+  bank_weight: 0.5
+  multi_positive_start_step: 1000
+  hard_negative_start_step: 3000
+  img_sim_thresh: 0.85
+  txt_sim_thresh: 0.90
+  use_multifield: true
+
+augmentation:
+  title_render_prob: 0.5
+
+eval:
+  proxy_every: 500                 # proxy eval steps (fast)
+  full_every: 2000                 # full 6-dataset eval steps
+  batch_size: 256
+  cache_dir: ".cache"
+
+  # Auto-decision hooks
+  hook_step4000_min_avg: 0.16     # stop if below at step 4000
+  hook_step8000_min_avg: 0.20     # stop if below at step 8000
+
+checkpointing:
+  ckpt_every: 500
+  keep_top_k: 3
+  output_dir: "runs/v1"

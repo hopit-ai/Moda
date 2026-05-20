@@ -1,0 +1,4917 @@
+{
+  "name": "deepfashion_inshop",
+  "hf_id": "Marqo/deepfashion-inshop",
+  "total_rows": 52591,
+  "tasks": [
+    "text-to-image",
+    "category-to-product",
+    "sub-category-to-product",
+    "color-to-product"
+  ],
+  "n_tasks": 4,
+  "columns": [
+    "category1",
+    "category2",
+    "category3",
+    "color",
+    "description",
+    "text",
+    "item_ID"
+  ],
+  "text_analysis": {
+    "text": {
+      "field": "text",
+      "total_rows": 52591,
+      "non_null_count": 52591,
+      "null_rate": 0.0,
+      "unique_count": 7959,
+      "uniqueness_ratio": 0.1513,
+      "duplication_ratio": 0.8487,
+      "top_repeated_values": [
+        [
+          "A V-neck tee featuring ribbed trim. Short sleeves. Knit. Lightweight.  ||  27\" approx. length from high point shoulder to hem, 40\" chest, 40\" waist, 9\" sleeve length from high point shoulder  || Measured from Medium  || 100% cotton || Machine wash cold, tumble dry low ",
+          168
+        ],
+        [
+          "A knit tee featuring a V-neckline. Short sleeves. Finished trim. Lightweight.  || 25.5\" approx. length from high point shoulder to hem, 34\" chest, 31\" waist, 6\" sleeve length from high point shoulder || Measured from Small || 60% cotton, 40% modal || Machine wash cold, dry flat",
+          162
+        ],
+        [
+          "A knit cami featuring a V-neckline. Stretch-fit. Finished trim. Lightweight.  || 24\" approx. length from high point shoulder to hem, 26\" chest, 26\" waist || Measured from Small || 95% cotton. 5% spandex || Machine wash cold, dry flat",
+          131
+        ],
+        [
+          "A basic cami featuring a V-neckline. Finished trim. Knit. Lightweight.  || 24.5\" approx. length from high point shoulder to hem, 26\" chest, 25\" waist || Measured from Small || 95% cotton, 5% spandex || Machine wash cold, dry flat",
+          128
+        ],
+        [
+          "Does your search for the perfect cami know no end? Your search will come to a close with this one. Its lightweight feel, stretch-knit fabric, and classic round neckline make it a timeless essential - perfect for lounging in, layering up, or wearing as is to show some skin.  || 95% cotton, 5% spandex || 20.25\" bust to hem, 27.5\" chest, 26\" waist || Measured from Small || Machine wash cold",
+          121
+        ],
+        [
+          "A basic mini skirt. Banded waist. Stretch knit. Lightweight.  || 16\" approx. length from waist to hem, 26\" waist || Measured from Small || 95% cotton, 5% spandex || Machine wash cold, tumble dry low",
+          111
+        ],
+        [
+          "A lightweight tank featuring a round neckline. Knit.  || 29\" approx. length from high point shoulder to hem, 42\" chest, 40\" waist || Measured from Medium || 100% cotton || Machine wash cold, tumble dry low",
+          102
+        ],
+        [
+          "Fall is quickly approaching, which means we can stop daydreaming about this classic button-front V-neck cardigan and finally start wearing it! Perfect for layering over dresses or tee shirts, this piece features ribbed trim and a slightly slouchy silhouette.  || Knit || Lightweight || 60% cotton, 40% acrylic || 25.5\" full length, 35\" chest, 34\" waist, 25.5\" sleeve length || Measured from Small || Hand wash cold",
+          89
+        ],
+        [
+          "A layering bandeau featuring a ruched front. Elasticized trim. Knit. Lightweight.  || 4\" approx. length from bust to hem, 25\" chest || Measured from Small || 95% cotton, 5% spandex || Machine wash cold, dry flat",
+          89
+        ],
+        [
+          "Like your favorite knit cami, only made better by a slightly longer silhouette for added coverage. With its soft-to-the-touch, lightweight feel, this is the perfect everyday layer for all your essentials. Dress up this casual number by tucking it into tailored, high-waisted shorts and topping it off with a blazer.  || Round neckline || 95% cotton, 5% spandex || 23.5\" bust to hem, 28.5\" chest, 27\" waist || Measured from Small || Machine wash cold",
+          79
+        ],
+        [
+          "Instantly classic and versatile in its simplicity, this tank dress will be your new anytime, anywhere piece. With a flattering bodycon fit, it's one piece you'll want to show off on a night out, but you can just as easily keep it casual with a chunky cardigan and booties.  || Scoop neckline, unlined || Lightweight stretch-knit || 95% cotton, 5% spandex || 31.5\" full length, 31\" chest, 28\" waist || Measured from Small || Machine wash cold",
+          77
+        ],
+        [
+          "Style Deals - A cami featuring spaghetti straps. Round neckline. Knit. Lightweight.  || 20\" approx. length from high point shoulder to hem, 30\" chest, 28\" waist || Measured from Small || 95% cotton, 5% spandex || Machine wash cold, dry flat",
+          76
+        ],
+        [
+          "A knit cami featuring a scoop neckline. Stretch-fit. Finished trim. Lightweight.  || 23.5\" approx. length from high point shoulder to hem, 25\" chest, 25\" waist || Measured from Small || 95% cotton, 5% spandex || Machine wash cold, dry flat",
+          75
+        ],
+        [
+          "A basic tank top featuring a scoop neck and back. Sleeveless. Stretch knit. Lightweight.  || 25\" approx. length from high point shoulder to hem, 26\" chest, 24\" waist || Measured from Small || 95% rayon, 5% spandex || Machine wash cold, tumble dry low",
+          74
+        ],
+        [
+          "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+          73
+        ],
+        [
+          "A basic cami featuring a V-neckline. Spaghetti straps. Knit. Lightweight.  || 20\" approx. length from high point shoulder to hem, 30\" chest, 24\" waist || Measured from Small || 95% cotton, 5% spandex || Machine wash cold, dry flat",
+          73
+        ],
+        [
+          "A must-have basic that can be dressed up or down, this knit bodycon skirt is sleek and effortless. Wear yours to class with tights underneath and a chambray top, or dress it up with a bustier and caged heels.  || Lightweight, unlined || Elasticized waistband || 95% cotton, 5% spandex || 15\" full length, 26\" waist || Measured from Small || Machine wash cold",
+          72
+        ],
+        [
+          "Smart-looking shorts: it's not an oxymoron. In classic chino, these definitely are with front slant pockets, buttoned back welt pockets, and tailored cuffs with chambray trim. How the grown-up guy wears them? With a belt (that's what the loops are for) and a tucked-in collared shirt.  || Unlined, zip fly || Lightweight, woven || 100% cotton || 19\" full length, 9.25\" inseam, 11.5\" rise, 34\" waist || Measured from Size 32 || Machine wash cold",
+          62
+        ],
+        [
+          "A must-have in any guy wardrobe, this short-sleeved tee is complete with a crew neck and ribbed trim. Youl want to wear this so often, we recommend stocking up in multiple colors.  || Lightweight knit || 100% cotton ||  28\" full length, 42\" chest, 42\" waist, 9\" sleeve length  || Measured from Medium || 100% cotton || Machine wash cold, tumble dry low ",
+          61
+        ],
+        [
+          "A basic cami featuring a scoop neckline. Spaghetti straps. Knit. Lightweight.  || 24.5\" approx. length from high point shoulder to hem, 26\" chest, 25\" waist || Measured from Small || 95% cotton, 5% spandex || Machine wash cold, dry flat",
+          56
+        ],
+        [
+          "No longer designed solely as workout attire (although you can still wear it for that too), this pair of stretch-knit shorts is a fail-proof solution to dresses and skirts on those dreaded windy days.  || Elasticized waist || Lightweight || 95% cotton, 5% spandex || 11.5\" full length, 3\" inseam, 10\" rise, 25\" waist || Measured from Small || Machine wash cold",
+          55
+        ],
+        [
+          "From its basic T-shirt silhouette, V-neckline, and heathered fabrication, this top is a classic favorite. It's one of those casual pieces that you can lounge in, lunch in, and everything in between. We love it best for its supreme softness and supple feel.  || Short sleeves || Lightweight knit || 60% cotton, 40% modal || 24\" full length, 36\" chest, 33.5\" waist, 6.25\" sleeve length || Measured from Small || Machine wash cold",
+          55
+        ],
+        [
+          "A basic V-neck tank top featuring spaghetti straps. Knit. Lightweight. ||  20\" approx. length from bust to hem, 28\" chest, 26\" waist  || Measured from Small  || 95% cotton, 5% spandex || Machine wash cold, dry flat ",
+          55
+        ],
+        [
+          "Sleek and crisp, this stretch-knit top features a V-neckline and long sleeves.  || Ribbed trim || Lightweight || 95% cotton, 5% spandex || 23.5\" full length, 30\" chest, 26\" waist, 24.5\" sleeve length || Measured from Small || Machine wash cold",
+          51
+        ],
+        [
+          "Crafted from lightweight cotton with a scoop neckline, this tank is as essential as they come. Its simple design means it matches virtually everything, so we'd suggest grabbing every color (why not keep laundry day at bay?).  || Lightweight knit || 100% cotton || 28\" full length, 41\" chest, 39.5\" waist || Measured from Medium || Machine wash cold",
+          50
+        ],
+        [
+          "Perfect with jeans or tucked into a skirt, this stretch-knit top features a crew neck and long sleeves.  || Ribbed trim || Lightweight || 100% cotton || 24.5\" full length, 30\" chest, 26\" waist, 25.5\" sleeve length || Measured from Small || Machine wash cold",
+          49
+        ],
+        [
+          "Because even the most fashion-forward ladies need a good basic tank, and this is the one you'll want to wear every day. A sumptuously soft, stretch-knit fabric makes this comfy piece a necessity for laid-back (and feel-good) looks.  || Lightweight || 95% rayon, 5% spandex || 24.25\" full length, 28\" chest, 26\" waist || Measured from Small || Hand wash cold",
+          49
+        ],
+        [
+          "You can never have too many basics, especially one as soft as this classic crew neck tee. It's an essential for every guy's closet - stock your drawer with one in every shade for any day of the week.  || Lightweight knit || 60% cotton, 40% modal || 29\" full length, 41\" chest, 41\" waist, 8\" sleeve length || Measured from Medium || Hand wash cold",
+          48
+        ],
+        [
+          "Instantly classic and versatile in its simplicity, this stretch-knit tank dress will be your new anytime, anywhere piece. With a flattering bodycon fit, it's one piece you'll want to show off on a night out (but you can just as easily keep it casual with a chunky cardigan and booties).  || Scoop neckline and back || Unlined, lightweight || 95% cotton, 5% spandex || 32.5\" full length, 31\" chest, 29\" waist || Measured from Small || Machine wash cold",
+          47
+        ],
+        [
+          "Calling a classic cami versatile would be a vast understatement. This closet staple is truly the perfect light layer - it can be worn on its own for off-duty looks, or underneath an open-knit sweater for extra coverage. Even better, this one features a V-neckline for added visual appeal that sets it apart from simpler styles.  || Lightweight stretch-knit || 95% cotton, 5% spandex || 20.5\" bust to hem, 28.5\" chest, 28\" waist || Measured from Small || Machine wash cold",
+          47
+        ]
+      ],
+      "char_length": {
+        "min": 154,
+        "max": 997,
+        "mean": 427.2,
+        "median": 425,
+        "p10": 289,
+        "p90": 563
+      },
+      "word_length": {
+        "min": 24,
+        "max": 162,
+        "mean": 69.8,
+        "median": 69,
+        "p10": 46,
+        "p90": 93
+      },
+      "length_distribution": {
+        "very_long (21+ words)": 52591
+      },
+      "vocabulary": {
+        "total_tokens": 3670700,
+        "unique_tokens": 8172,
+        "top_50_tokens": [
+          [
+            "a",
+            127391
+          ],
+          [
+            "and",
+            91000
+          ],
+          [
+            "from",
+            72506
+          ],
+          [
+            "length",
+            71149
+          ],
+          [
+            "this",
+            64941
+          ],
+          [
+            "waist",
+            64109
+          ],
+          [
+            "the",
+            60397
+          ],
+          [
+            "with",
+            59420
+          ],
+          [
+            "measured",
+            52516
+          ],
+          [
+            "wash",
+            50792
+          ],
+          [
+            "to",
+            50312
+          ],
+          [
+            "cold",
+            49092
+          ],
+          [
+            "chest",
+            44920
+          ],
+          [
+            "small",
+            42851
+          ],
+          [
+            "full",
+            42021
+          ],
+          [
+            "for",
+            36483
+          ],
+          [
+            "lightweight",
+            35774
+          ],
+          [
+            "100",
+            33054
+          ],
+          [
+            "5",
+            32795
+          ],
+          [
+            "of",
+            31199
+          ],
+          [
+            "knit",
+            30974
+          ],
+          [
+            "it",
+            30136
+          ],
+          [
+            "cotton",
+            29284
+          ],
+          [
+            "hand",
+            28344
+          ],
+          [
+            "is",
+            28305
+          ],
+          [
+            "polyester",
+            26487
+          ],
+          [
+            "sleeve",
+            25390
+          ],
+          [
+            "in",
+            24937
+          ],
+          [
+            "woven",
+            23455
+          ],
+          [
+            "your",
+            22378
+          ],
+          [
+            "machine",
+            21561
+          ],
+          [
+            "an",
+            20187
+          ],
+          [
+            "its",
+            20033
+          ],
+          [
+            "front",
+            18236
+          ],
+          [
+            "back",
+            17773
+          ],
+          [
+            "unlined",
+            17410
+          ],
+          [
+            "you",
+            16847
+          ],
+          [
+            "neckline",
+            16696
+          ],
+          [
+            "on",
+            16472
+          ],
+          [
+            "rayon",
+            16296
+          ],
+          [
+            "sleeves",
+            16243
+          ],
+          [
+            "spandex",
+            15768
+          ],
+          [
+            "25",
+            14629
+          ],
+          [
+            "hem",
+            14446
+          ],
+          [
+            "piece",
+            13550
+          ],
+          [
+            "that",
+            13226
+          ],
+          [
+            "long",
+            12932
+          ],
+          [
+            "features",
+            12817
+          ],
+          [
+            "style",
+            12802
+          ],
+          [
+            "shell",
+            12558
+          ]
+        ],
+        "top_30_bigrams": [
+          [
+            "measured from",
+            52516
+          ],
+          [
+            "wash cold",
+            48550
+          ],
+          [
+            "from small",
+            42581
+          ],
+          [
+            "full length",
+            41301
+          ],
+          [
+            "hand wash",
+            27922
+          ],
+          [
+            "sleeve length",
+            24780
+          ],
+          [
+            "small hand",
+            24584
+          ],
+          [
+            "length measured",
+            23096
+          ],
+          [
+            "waist measured",
+            21792
+          ],
+          [
+            "machine wash",
+            21557
+          ],
+          [
+            "with a",
+            20364
+          ],
+          [
+            "and a",
+            14981
+          ],
+          [
+            "small machine",
+            11860
+          ],
+          [
+            "100 polyester",
+            11366
+          ],
+          [
+            "for a",
+            10026
+          ],
+          [
+            "100 cotton",
+            9267
+          ],
+          [
+            "lightweight knit",
+            9237
+          ],
+          [
+            "lightweight woven",
+            8999
+          ],
+          [
+            "to hem",
+            8839
+          ],
+          [
+            "5 full",
+            8607
+          ],
+          [
+            "100 rayon",
+            7604
+          ],
+          [
+            "woven 100",
+            7580
+          ],
+          [
+            "round neckline",
+            7537
+          ],
+          [
+            "features a",
+            7032
+          ],
+          [
+            "from medium",
+            6739
+          ],
+          [
+            "unlined lightweight",
+            6728
+          ],
+          [
+            "this piece",
+            6700
+          ],
+          [
+            "style deals",
+            6542
+          ],
+          [
+            "long sleeves",
+            6196
+          ],
+          [
+            "5 spandex",
+            5965
+          ]
+        ]
+      },
+      "text_style": {
+        "has_comma_pct": 100.0,
+        "has_period_pct": 100.0,
+        "has_numbers_pct": 100.0,
+        "starts_uppercase_pct": 98.8,
+        "all_lowercase_pct": 0.0,
+        "all_uppercase_pct": 0.0
+      },
+      "sample_values": [
+        "Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation.  || Woven || Zip fly || 79% cotton, 20% polyester, 1% spandex || 31.5\" inseam, 34\" waist, 10\" rise || Measured from Size 32 || Machine wash cold",
+        "Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation.  || Woven || Zip fly || 79% cotton, 20% polyester, 1% spandex || 31.5\" inseam, 34\" waist, 10\" rise || Measured from Size 32 || Machine wash cold",
+        "Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation.  || Woven || Zip fly || 79% cotton, 20% polyester, 1% spandex || 31.5\" inseam, 34\" waist, 10\" rise || Measured from Size 32 || Machine wash cold",
+        "Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation.  || Woven || Zip fly || 79% cotton, 20% polyester, 1% spandex || 31.5\" inseam, 34\" waist, 10\" rise || Measured from Size 32 || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold",
+        "Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper).  || Zip fly || Lightweight, woven || 32\" inseam, 32\" waist, 10\" rise || Measured from Size 32 || 100% cotton || Machine wash cold"
+      ]
+    },
+    "description": {
+      "field": "description",
+      "total_rows": 52591,
+      "non_null_count": 52591,
+      "null_rate": 0.0,
+      "unique_count": 7959,
+      "uniqueness_ratio": 0.1513,
+      "duplication_ratio": 0.8487,
+      "top_repeated_values": [
+        [
+          "['A V-neck tee featuring ribbed trim. Short sleeves. Knit. Lightweight. ', ' 27\" approx. length from high point shoulder to hem, 40\" chest, 40\" waist, 9\" sleeve length from high point shoulder ', 'Measured from Medium ', '100% cotton', 'Machine wash cold, tumble dry low ', ' Imported ']",
+          168
+        ],
+        [
+          "['A knit tee featuring a V-neckline. Short sleeves. Finished trim. Lightweight. ', '25.5\" approx. length from high point shoulder to hem, 34\" chest, 31\" waist, 6\" sleeve length from high point shoulder', 'Measured from Small', '60% cotton, 40% modal', 'Machine wash cold, dry flat', 'Imported']",
+          162
+        ],
+        [
+          "['A knit cami featuring a V-neckline. Stretch-fit. Finished trim. Lightweight. ', '24\" approx. length from high point shoulder to hem, 26\" chest, 26\" waist', 'Measured from Small', '95% cotton. 5% spandex', 'Machine wash cold, dry flat', 'Imported']",
+          131
+        ],
+        [
+          "['A basic cami featuring a V-neckline. Finished trim. Knit. Lightweight. ', '24.5\" approx. length from high point shoulder to hem, 26\" chest, 25\" waist', 'Measured from Small', '95% cotton, 5% spandex', 'Machine wash cold, dry flat', 'Imported']",
+          128
+        ],
+        [
+          "['Does your search for the perfect cami know no end? Your search will come to a close with this one. Its lightweight feel, stretch-knit fabric, and classic round neckline make it a timeless essential - perfect for lounging in, layering up, or wearing as is to show some skin. ', '95% cotton, 5% spandex', '20.25\" bust to hem, 27.5\" chest, 26\" waist', 'Measured from Small', 'Machine wash cold', 'Imported']",
+          121
+        ],
+        [
+          "['A basic mini skirt. Banded waist. Stretch knit. Lightweight. ', '16\" approx. length from waist to hem, 26\" waist', 'Measured from Small', '95% cotton, 5% spandex', 'Machine wash cold, tumble dry low', 'Imported']",
+          111
+        ],
+        [
+          "['A lightweight tank featuring a round neckline. Knit. ', '29\" approx. length from high point shoulder to hem, 42\" chest, 40\" waist', 'Measured from Medium', '100% cotton', 'Machine wash cold, tumble dry low', 'Imported']",
+          102
+        ],
+        [
+          "['Fall is quickly approaching, which means we can stop daydreaming about this classic button-front V-neck cardigan and finally start wearing it! Perfect for layering over dresses or tee shirts, this piece features ribbed trim and a slightly slouchy silhouette. ', 'Knit', 'Lightweight', '60% cotton, 40% acrylic', '25.5\" full length, 35\" chest, 34\" waist, 25.5\" sleeve length', 'Measured from Small', 'Hand wash cold', 'Imported']",
+          89
+        ],
+        [
+          "['A layering bandeau featuring a ruched front. Elasticized trim. Knit. Lightweight. ', '4\" approx. length from bust to hem, 25\" chest', 'Measured from Small', '95% cotton, 5% spandex', 'Machine wash cold, dry flat', 'Imported']",
+          89
+        ],
+        [
+          "['Like your favorite knit cami, only made better by a slightly longer silhouette for added coverage. With its soft-to-the-touch, lightweight feel, this is the perfect everyday layer for all your essentials. Dress up this casual number by tucking it into tailored, high-waisted shorts and topping it off with a blazer. ', 'Round neckline', '95% cotton, 5% spandex', '23.5\" bust to hem, 28.5\" chest, 27\" waist', 'Measured from Small', 'Machine wash cold', 'Imported']",
+          79
+        ],
+        [
+          "[\"Instantly classic and versatile in its simplicity, this tank dress will be your new anytime, anywhere piece. With a flattering bodycon fit, it's one piece you'll want to show off on a night out, but you can just as easily keep it casual with a chunky cardigan and booties. \", 'Scoop neckline, unlined', 'Lightweight stretch-knit', '95% cotton, 5% spandex', '31.5\" full length, 31\" chest, 28\" waist', 'Measured from Small', 'Machine wash cold', 'Imported']",
+          77
+        ],
+        [
+          "['Style Deals - A cami featuring spaghetti straps. Round neckline. Knit. Lightweight. ', '20\" approx. length from high point shoulder to hem, 30\" chest, 28\" waist', 'Measured from Small', '95% cotton, 5% spandex', 'Machine wash cold, dry flat', 'Imported']",
+          76
+        ],
+        [
+          "['A knit cami featuring a scoop neckline. Stretch-fit. Finished trim. Lightweight. ', '23.5\" approx. length from high point shoulder to hem, 25\" chest, 25\" waist', 'Measured from Small', '95% cotton, 5% spandex', 'Machine wash cold, dry flat', 'Imported']",
+          75
+        ],
+        [
+          "['A basic tank top featuring a scoop neck and back. Sleeveless. Stretch knit. Lightweight. ', '25\" approx. length from high point shoulder to hem, 26\" chest, 24\" waist', 'Measured from Small', '95% rayon, 5% spandex', 'Machine wash cold, tumble dry low', 'Imported']",
+          74
+        ],
+        [
+          "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+          73
+        ],
+        [
+          "['A basic cami featuring a V-neckline. Spaghetti straps. Knit. Lightweight. ', '20\" approx. length from high point shoulder to hem, 30\" chest, 24\" waist', 'Measured from Small', '95% cotton, 5% spandex', 'Machine wash cold, dry flat', 'Imported']",
+          73
+        ],
+        [
+          "['A must-have basic that can be dressed up or down, this knit bodycon skirt is sleek and effortless. Wear yours to class with tights underneath and a chambray top, or dress it up with a bustier and caged heels. ', 'Lightweight, unlined', 'Elasticized waistband', '95% cotton, 5% spandex', '15\" full length, 26\" waist', 'Measured from Small', 'Machine wash cold', 'Imported']",
+          72
+        ],
+        [
+          "[\"Smart-looking shorts: it's not an oxymoron. In classic chino, these definitely are with front slant pockets, buttoned back welt pockets, and tailored cuffs with chambray trim. How the grown-up guy wears them? With a belt (that's what the loops are for) and a tucked-in collared shirt. \", 'Unlined, zip fly', 'Lightweight, woven', '100% cotton', '19\" full length, 9.25\" inseam, 11.5\" rise, 34\" waist', 'Measured from Size 32', 'Machine wash cold', 'Imported']",
+          62
+        ],
+        [
+          "['A must-have in any guy wardrobe, this short-sleeved tee is complete with a crew neck and ribbed trim. Youl want to wear this so often, we recommend stocking up in multiple colors. ', 'Lightweight knit', '100% cotton', ' 28\" full length, 42\" chest, 42\" waist, 9\" sleeve length ', 'Measured from Medium', '100% cotton', 'Machine wash cold, tumble dry low ', ' Imported ']",
+          61
+        ],
+        [
+          "['A basic cami featuring a scoop neckline. Spaghetti straps. Knit. Lightweight. ', '24.5\" approx. length from high point shoulder to hem, 26\" chest, 25\" waist', 'Measured from Small', '95% cotton, 5% spandex', 'Machine wash cold, dry flat', 'Imported']",
+          56
+        ],
+        [
+          "['No longer designed solely as workout attire (although you can still wear it for that too), this pair of stretch-knit shorts is a fail-proof solution to dresses and skirts on those dreaded windy days. ', 'Elasticized waist', 'Lightweight', '95% cotton, 5% spandex', '11.5\" full length, 3\" inseam, 10\" rise, 25\" waist', 'Measured from Small', 'Machine wash cold', 'Imported']",
+          55
+        ],
+        [
+          "[\"From its basic T-shirt silhouette, V-neckline, and heathered fabrication, this top is a classic favorite. It's one of those casual pieces that you can lounge in, lunch in, and everything in between. We love it best for its supreme softness and supple feel. \", 'Short sleeves', 'Lightweight knit', '60% cotton, 40% modal', '24\" full length, 36\" chest, 33.5\" waist, 6.25\" sleeve length', 'Measured from Small', 'Machine wash cold', 'Imported']",
+          55
+        ],
+        [
+          "['A basic V-neck tank top featuring spaghetti straps. Knit. Lightweight.', ' 20\" approx. length from bust to hem, 28\" chest, 26\" waist ', 'Measured from Small ', '95% cotton, 5% spandex', 'Machine wash cold, dry flat ', ' Imported ']",
+          55
+        ],
+        [
+          "['Sleek and crisp, this stretch-knit top features a V-neckline and long sleeves. ', 'Ribbed trim', 'Lightweight', '95% cotton, 5% spandex', '23.5\" full length, 30\" chest, 26\" waist, 24.5\" sleeve length', 'Measured from Small', 'Machine wash cold', 'Imported']",
+          51
+        ],
+        [
+          "[\"Crafted from lightweight cotton with a scoop neckline, this tank is as essential as they come. Its simple design means it matches virtually everything, so we'd suggest grabbing every color (why not keep laundry day at bay?). \", 'Lightweight knit', '100% cotton', '28\" full length, 41\" chest, 39.5\" waist', 'Measured from Medium', 'Machine wash cold', 'Made in Bangladesh']",
+          50
+        ],
+        [
+          "['Perfect with jeans or tucked into a skirt, this stretch-knit top features a crew neck and long sleeves. ', 'Ribbed trim', 'Lightweight', '100% cotton', '24.5\" full length, 30\" chest, 26\" waist, 25.5\" sleeve length', 'Measured from Small', 'Machine wash cold', 'Imported']",
+          49
+        ],
+        [
+          "[\"Because even the most fashion-forward ladies need a good basic tank, and this is the one you'll want to wear every day. A sumptuously soft, stretch-knit fabric makes this comfy piece a necessity for laid-back (and feel-good) looks. \", 'Lightweight', '95% rayon, 5% spandex', '24.25\" full length, 28\" chest, 26\" waist', 'Measured from Small', 'Hand wash cold', 'Imported']",
+          49
+        ],
+        [
+          "[\"You can never have too many basics, especially one as soft as this classic crew neck tee. It's an essential for every guy's closet - stock your drawer with one in every shade for any day of the week. \", 'Lightweight knit', '60% cotton, 40% modal', '29\" full length, 41\" chest, 41\" waist, 8\" sleeve length', 'Measured from Medium', 'Hand wash cold', 'Imported']",
+          48
+        ],
+        [
+          "[\"Instantly classic and versatile in its simplicity, this stretch-knit tank dress will be your new anytime, anywhere piece. With a flattering bodycon fit, it's one piece you'll want to show off on a night out (but you can just as easily keep it casual with a chunky cardigan and booties). \", 'Scoop neckline and back', 'Unlined, lightweight', '95% cotton, 5% spandex', '32.5\" full length, 31\" chest, 29\" waist', 'Measured from Small', 'Machine wash cold', 'Imported']",
+          47
+        ],
+        [
+          "['Calling a classic cami versatile would be a vast understatement. This closet staple is truly the perfect light layer - it can be worn on its own for off-duty looks, or underneath an open-knit sweater for extra coverage. Even better, this one features a V-neckline for added visual appeal that sets it apart from simpler styles. ', 'Lightweight stretch-knit', '95% cotton, 5% spandex', '20.5\" bust to hem, 28.5\" chest, 28\" waist', 'Measured from Small', 'Machine wash cold', 'Imported']",
+          47
+        ]
+      ],
+      "char_length": {
+        "min": 170,
+        "max": 1013,
+        "mean": 445.2,
+        "median": 442,
+        "p10": 307,
+        "p90": 581
+      },
+      "word_length": {
+        "min": 25,
+        "max": 163,
+        "mean": 71.5,
+        "median": 71,
+        "p10": 47,
+        "p90": 95
+      },
+      "length_distribution": {
+        "very_long (21+ words)": 52591
+      },
+      "vocabulary": {
+        "total_tokens": 3760691,
+        "unique_tokens": 8177,
+        "top_50_tokens": [
+          [
+            "a",
+            127391
+          ],
+          [
+            "and",
+            91000
+          ],
+          [
+            "from",
+            72506
+          ],
+          [
+            "length",
+            71149
+          ],
+          [
+            "this",
+            64941
+          ],
+          [
+            "waist",
+            64109
+          ],
+          [
+            "the",
+            60416
+          ],
+          [
+            "with",
+            59441
+          ],
+          [
+            "measured",
+            52516
+          ],
+          [
+            "wash",
+            50812
+          ],
+          [
+            "to",
+            50317
+          ],
+          [
+            "cold",
+            49104
+          ],
+          [
+            "chest",
+            44920
+          ],
+          [
+            "small",
+            42851
+          ],
+          [
+            "in",
+            42484
+          ],
+          [
+            "full",
+            42021
+          ],
+          [
+            "for",
+            36483
+          ],
+          [
+            "lightweight",
+            35774
+          ],
+          [
+            "imported",
+            34104
+          ],
+          [
+            "100",
+            33054
+          ],
+          [
+            "5",
+            32795
+          ],
+          [
+            "of",
+            31199
+          ],
+          [
+            "knit",
+            30974
+          ],
+          [
+            "it",
+            30631
+          ],
+          [
+            "cotton",
+            29284
+          ],
+          [
+            "hand",
+            28356
+          ],
+          [
+            "is",
+            28305
+          ],
+          [
+            "polyester",
+            26487
+          ],
+          [
+            "sleeve",
+            25390
+          ],
+          [
+            "woven",
+            23447
+          ],
+          [
+            "your",
+            22378
+          ],
+          [
+            "machine",
+            21569
+          ],
+          [
+            "an",
+            20187
+          ],
+          [
+            "its",
+            20033
+          ],
+          [
+            "made",
+            20005
+          ],
+          [
+            "front",
+            18236
+          ],
+          [
+            "back",
+            17773
+          ],
+          [
+            "unlined",
+            17410
+          ],
+          [
+            "you",
+            17315
+          ],
+          [
+            "neckline",
+            16696
+          ],
+          [
+            "on",
+            16472
+          ],
+          [
+            "rayon",
+            16296
+          ],
+          [
+            "sleeves",
+            16243
+          ],
+          [
+            "spandex",
+            15768
+          ],
+          [
+            "25",
+            14629
+          ],
+          [
+            "hem",
+            14446
+          ],
+          [
+            "piece",
+            13564
+          ],
+          [
+            "that",
+            13362
+          ],
+          [
+            "long",
+            12932
+          ],
+          [
+            "features",
+            12817
+          ]
+        ],
+        "top_30_bigrams": [
+          [
+            "measured from",
+            52516
+          ],
+          [
+            "wash cold",
+            48562
+          ],
+          [
+            "from small",
+            42581
+          ],
+          [
+            "full length",
+            41301
+          ],
+          [
+            "hand wash",
+            27934
+          ],
+          [
+            "cold imported",
+            27520
+          ],
+          [
+            "sleeve length",
+            24780
+          ],
+          [
+            "small hand",
+            24596
+          ],
+          [
+            "length measured",
+            23096
+          ],
+          [
+            "waist measured",
+            21792
+          ],
+          [
+            "machine wash",
+            21565
+          ],
+          [
+            "with a",
+            20364
+          ],
+          [
+            "made in",
+            17798
+          ],
+          [
+            "cold made",
+            16413
+          ],
+          [
+            "and a",
+            14981
+          ],
+          [
+            "small machine",
+            11860
+          ],
+          [
+            "100 polyester",
+            11366
+          ],
+          [
+            "for a",
+            10026
+          ],
+          [
+            "100 cotton",
+            9267
+          ],
+          [
+            "lightweight knit",
+            9237
+          ],
+          [
+            "lightweight woven",
+            8999
+          ],
+          [
+            "to hem",
+            8839
+          ],
+          [
+            "in china",
+            8683
+          ],
+          [
+            "5 full",
+            8607
+          ],
+          [
+            "100 rayon",
+            7604
+          ],
+          [
+            "woven 100",
+            7580
+          ],
+          [
+            "round neckline",
+            7537
+          ],
+          [
+            "features a",
+            7032
+          ],
+          [
+            "from medium",
+            6739
+          ],
+          [
+            "unlined lightweight",
+            6728
+          ]
+        ]
+      },
+      "text_style": {
+        "has_comma_pct": 100.0,
+        "has_period_pct": 100.0,
+        "has_numbers_pct": 100.0,
+        "starts_uppercase_pct": 0.0,
+        "all_lowercase_pct": 0.0,
+        "all_uppercase_pct": 0.0
+      },
+      "sample_values": [
+        "['Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation. ', 'Woven', 'Zip fly', '79% cotton, 20% polyester, 1% spandex', '31.5\" inseam, 34\" waist, 10\" rise', 'Measured from Size 32', 'Machine wash cold', 'Made in China']",
+        "['Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation. ', 'Woven', 'Zip fly', '79% cotton, 20% polyester, 1% spandex', '31.5\" inseam, 34\" waist, 10\" rise', 'Measured from Size 32', 'Machine wash cold', 'Made in China']",
+        "['Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation. ', 'Woven', 'Zip fly', '79% cotton, 20% polyester, 1% spandex', '31.5\" inseam, 34\" waist, 10\" rise', 'Measured from Size 32', 'Machine wash cold', 'Made in China']",
+        "['Give your trusty blues the day off. In a clean wash, these skinny jeans are a slick, sharp option. Also, their classic five-pocket construction and slight stretch will keep them on heavy rotation. ', 'Woven', 'Zip fly', '79% cotton, 20% polyester, 1% spandex', '31.5\" inseam, 34\" waist, 10\" rise', 'Measured from Size 32', 'Machine wash cold', 'Made in China']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']",
+        "['Classic in their clean wash and slim fit, these jeans are ideal for work and off-duty weekend looks alike. Complete with a five-pocket construction to easily keep things like your cash and keys organized, this will become your go-to pair for dressing and dashing (while still looking dapper). ', 'Zip fly', 'Lightweight, woven', '32\" inseam, 32\" waist, 10\" rise', 'Measured from Size 32', '100% cotton', 'Machine wash cold', 'Imported']"
+      ]
+    }
+  },
+  "category_analysis": {
+    "category1": {
+      "field": "category1",
+      "total_rows": 52591,
+      "non_null_count": 52591,
+      "null_rate": 0.0,
+      "n_unique_values": 2,
+      "value_distribution": [
+        [
+          "women",
+          44753
+        ],
+        [
+          "men",
+          7838
+        ]
+      ],
+      "top_5_concentration": 100.0,
+      "top_10_concentration": 100.0,
+      "sample_values": [
+        "men",
+        "women"
+      ]
+    },
+    "category2": {
+      "field": "category2",
+      "total_rows": 52591,
+      "non_null_count": 52591,
+      "null_rate": 0.0,
+      "n_unique_values": 16,
+      "value_distribution": [
+        [
+          "tees",
+          14375
+        ],
+        [
+          "blouses",
+          7964
+        ],
+        [
+          "dresses",
+          6990
+        ],
+        [
+          "shorts",
+          4476
+        ],
+        [
+          "sweaters",
+          3641
+        ],
+        [
+          "pants",
+          2821
+        ],
+        [
+          "jackets",
+          2319
+        ],
+        [
+          "skirts",
+          2045
+        ],
+        [
+          "rompers",
+          1696
+        ],
+        [
+          "sweatshirts",
+          1631
+        ],
+        [
+          "cardigans",
+          1436
+        ],
+        [
+          "graphic",
+          1297
+        ],
+        [
+          "denim",
+          804
+        ],
+        [
+          "shirts",
+          722
+        ],
+        [
+          "leggings",
+          335
+        ],
+        [
+          "suiting",
+          39
+        ]
+      ],
+      "top_5_concentration": 71.2,
+      "top_10_concentration": 91.2,
+      "sample_values": [
+        "denim",
+        "jackets",
+        "pants",
+        "shirts",
+        "shorts",
+        "suiting",
+        "sweaters",
+        "sweatshirts",
+        "tees",
+        "blouses",
+        "cardigans",
+        "dresses",
+        "graphic",
+        "leggings",
+        "rompers",
+        "skirts"
+      ]
+    },
+    "category3": {
+      "field": "category3",
+      "total_rows": 52591,
+      "non_null_count": 30004,
+      "null_rate": 0.4295,
+      "n_unique_values": 8,
+      "value_distribution": [
+        [
+          "tanks",
+          14375
+        ],
+        [
+          "shirts",
+          7964
+        ],
+        [
+          "coats",
+          1895
+        ],
+        [
+          "jumpsuits",
+          1696
+        ],
+        [
+          "hoodies",
+          1631
+        ],
+        [
+          "tees",
+          1297
+        ],
+        [
+          "polos",
+          722
+        ],
+        [
+          "vests",
+          424
+        ]
+      ],
+      "top_5_concentration": 91.9,
+      "top_10_concentration": 100.0,
+      "sample_values": [
+        "vests",
+        "polos",
+        "hoodies",
+        "tanks",
+        "shirts",
+        "tees",
+        "coats",
+        "jumpsuits"
+      ]
+    }
+  },
+  "attribute_analysis": {
+    "color": {
+      "field": "color",
+      "total_rows": 52591,
+      "non_null_count": 52591,
+      "null_rate": 0.0,
+      "n_unique_values": 804,
+      "value_distribution": [
+        [
+          "Black",
+          3409
+        ],
+        [
+          "Cream",
+          3112
+        ],
+        [
+          "Burgundy",
+          2492
+        ],
+        [
+          "Cream-black",
+          1721
+        ],
+        [
+          "Black-cream",
+          1637
+        ],
+        [
+          "Heather grey",
+          1576
+        ],
+        [
+          "Olive",
+          1195
+        ],
+        [
+          "White-black",
+          1118
+        ],
+        [
+          "Rust",
+          1006
+        ],
+        [
+          "Black-white",
+          945
+        ],
+        [
+          "Blush",
+          898
+        ],
+        [
+          "Navy",
+          875
+        ],
+        [
+          "Mustard",
+          814
+        ],
+        [
+          "Taupe",
+          691
+        ],
+        [
+          "Teal",
+          685
+        ],
+        [
+          "Wine",
+          661
+        ],
+        [
+          "Amber",
+          654
+        ],
+        [
+          "White",
+          634
+        ],
+        [
+          "Light denim",
+          610
+        ],
+        [
+          "Oatmeal",
+          583
+        ],
+        [
+          "Denim",
+          581
+        ],
+        [
+          "Indigo",
+          529
+        ],
+        [
+          "Grey",
+          491
+        ],
+        [
+          "Denim washed",
+          460
+        ],
+        [
+          "Coral",
+          451
+        ],
+        [
+          "Mauve",
+          432
+        ],
+        [
+          "Blue-cream",
+          392
+        ],
+        [
+          "Navy-cream",
+          361
+        ],
+        [
+          "Navy-white",
+          353
+        ],
+        [
+          "Heather grey-black",
+          353
+        ],
+        [
+          "Pink",
+          348
+        ],
+        [
+          "Light blue",
+          339
+        ],
+        [
+          "Khaki",
+          335
+        ],
+        [
+          "Aqua",
+          316
+        ],
+        [
+          "Rose",
+          314
+        ],
+        [
+          "Tomato",
+          303
+        ],
+        [
+          "Black-multi",
+          286
+        ],
+        [
+          "Black-grey",
+          280
+        ],
+        [
+          "Peacock",
+          270
+        ],
+        [
+          "Blue-white",
+          269
+        ],
+        [
+          "Black-red",
+          263
+        ],
+        [
+          "Cream-multi",
+          261
+        ],
+        [
+          "Periwinkle",
+          261
+        ],
+        [
+          "Red-cream",
+          238
+        ],
+        [
+          "Royal",
+          234
+        ],
+        [
+          "Peach",
+          228
+        ],
+        [
+          "Blue",
+          226
+        ],
+        [
+          "Red",
+          226
+        ],
+        [
+          "Georgia peach",
+          220
+        ],
+        [
+          "Brown",
+          217
+        ],
+        [
+          "Beige",
+          217
+        ],
+        [
+          "Black-pink",
+          215
+        ],
+        [
+          "Ivory",
+          208
+        ],
+        [
+          "Lime",
+          204
+        ],
+        [
+          "Black-blue",
+          198
+        ],
+        [
+          "Navy-red",
+          196
+        ],
+        [
+          "Medium denim",
+          193
+        ],
+        [
+          "Cream-navy",
+          189
+        ],
+        [
+          "Black-black",
+          185
+        ],
+        [
+          "Lavender",
+          185
+        ],
+        [
+          "Black-taupe",
+          178
+        ],
+        [
+          "Ivory-black",
+          178
+        ],
+        [
+          "Black-gold",
+          171
+        ],
+        [
+          "Seafoam",
+          171
+        ],
+        [
+          "Charcoal",
+          164
+        ],
+        [
+          "Oatmeal-black",
+          160
+        ],
+        [
+          "Bubble gum",
+          159
+        ],
+        [
+          "White-blue",
+          157
+        ],
+        [
+          "Cream-blue",
+          157
+        ],
+        [
+          "Heather grey-white",
+          156
+        ],
+        [
+          "Dark denim",
+          155
+        ],
+        [
+          "Navy-multi",
+          155
+        ],
+        [
+          "White-multi",
+          153
+        ],
+        [
+          "Red-black",
+          149
+        ],
+        [
+          "Purple",
+          148
+        ],
+        [
+          "Cream-grey",
+          142
+        ],
+        [
+          "Light grey",
+          139
+        ],
+        [
+          "Black-ivory",
+          138
+        ],
+        [
+          "Yellow",
+          137
+        ],
+        [
+          "Taupe-black",
+          134
+        ],
+        [
+          "Teal-black",
+          133
+        ],
+        [
+          "Blue-multi",
+          133
+        ],
+        [
+          "Silver",
+          132
+        ],
+        [
+          "Dusty pink",
+          129
+        ],
+        [
+          "Cream-red",
+          128
+        ],
+        [
+          "Grey-black",
+          126
+        ],
+        [
+          "Hot pink",
+          118
+        ],
+        [
+          "Taupe-cream",
+          118
+        ],
+        [
+          "Orange",
+          117
+        ],
+        [
+          "White-navy",
+          116
+        ],
+        [
+          "Blue-navy",
+          116
+        ],
+        [
+          "Blue-black",
+          116
+        ],
+        [
+          "Dark navy",
+          116
+        ],
+        [
+          "Eggplant",
+          115
+        ],
+        [
+          "Dark grey",
+          114
+        ],
+        [
+          "Red-white",
+          111
+        ],
+        [
+          "Sunset gold",
+          109
+        ],
+        [
+          "Black-burgundy",
+          100
+        ],
+        [
+          "Cayenne",
+          99
+        ],
+        [
+          "Black-rust",
+          97
+        ],
+        [
+          "Jade",
+          97
+        ],
+        [
+          "Navy-black",
+          85
+        ],
+        [
+          "Dusty blue",
+          84
+        ],
+        [
+          "White-grey",
+          81
+        ],
+        [
+          "Black-silver",
+          80
+        ],
+        [
+          "Ivory-blue",
+          77
+        ],
+        [
+          "Pink-grey",
+          75
+        ],
+        [
+          "Burgundy-black",
+          74
+        ],
+        [
+          "Blue-red",
+          74
+        ],
+        [
+          "Charcoal-black",
+          74
+        ],
+        [
+          "Red-blue",
+          72
+        ],
+        [
+          "Nude",
+          72
+        ],
+        [
+          "Sage",
+          71
+        ],
+        [
+          "Sky blue",
+          70
+        ],
+        [
+          "Green-black",
+          68
+        ],
+        [
+          "Black-purple",
+          68
+        ],
+        [
+          "Grey-white",
+          67
+        ],
+        [
+          "Black-nude",
+          67
+        ],
+        [
+          "Heather navy",
+          66
+        ],
+        [
+          "Heather grey-cream",
+          66
+        ],
+        [
+          "Charcoal heather",
+          65
+        ],
+        [
+          "Magenta",
+          65
+        ],
+        [
+          "Grey-cream",
+          63
+        ],
+        [
+          "Black-green",
+          62
+        ],
+        [
+          "White-yellow",
+          61
+        ],
+        [
+          "White-red",
+          61
+        ],
+        [
+          "Neon pink",
+          58
+        ],
+        [
+          "Pistachio",
+          55
+        ],
+        [
+          "Black-yellow",
+          54
+        ],
+        [
+          "Ivory-navy",
+          54
+        ],
+        [
+          "Navy-ivory",
+          53
+        ],
+        [
+          "Grey-navy",
+          52
+        ],
+        [
+          "Olive-cream",
+          51
+        ],
+        [
+          "Navy-pink",
+          51
+        ],
+        [
+          "Black-coral",
+          51
+        ],
+        [
+          "Faded rose",
+          50
+        ],
+        [
+          "Rust-taupe",
+          50
+        ],
+        [
+          "Burgundy-navy",
+          49
+        ],
+        [
+          "Beige-black",
+          48
+        ],
+        [
+          "Coral-cream",
+          48
+        ],
+        [
+          "Black-blush",
+          47
+        ],
+        [
+          "Teal-navy",
+          47
+        ],
+        [
+          "Green",
+          46
+        ],
+        [
+          "Pink-black",
+          45
+        ],
+        [
+          "Mint",
+          44
+        ],
+        [
+          "Cream-coral",
+          43
+        ],
+        [
+          "Cream-pink",
+          43
+        ],
+        [
+          "Rust-cream",
+          43
+        ],
+        [
+          "Navy-green",
+          42
+        ],
+        [
+          "White-green",
+          42
+        ],
+        [
+          "Heather grey-red",
+          42
+        ],
+        [
+          "Blush-sage",
+          42
+        ],
+        [
+          "Peach bud",
+          40
+        ],
+        [
+          "Cream-rust",
+          40
+        ],
+        [
+          "Royal-black",
+          40
+        ],
+        [
+          "Olive-white",
+          39
+        ],
+        [
+          "Black-brown",
+          39
+        ],
+        [
+          "Navy-grey",
+          39
+        ],
+        [
+          "Charcoal-cream",
+          39
+        ],
+        [
+          "Blush-black",
+          39
+        ],
+        [
+          "Midnight",
+          39
+        ],
+        [
+          "Heather grey-navy",
+          38
+        ],
+        [
+          "Plum",
+          38
+        ],
+        [
+          "Charcoal-multi",
+          38
+        ],
+        [
+          "Red-navy",
+          37
+        ],
+        [
+          "Neon coral",
+          37
+        ],
+        [
+          "Dark olive",
+          37
+        ],
+        [
+          "Black-mustard",
+          37
+        ],
+        [
+          "Navy-blue",
+          36
+        ],
+        [
+          "Navy-orange",
+          36
+        ],
+        [
+          "Ivory-grey",
+          36
+        ],
+        [
+          "Blue-ivory",
+          35
+        ],
+        [
+          "Denim-cream",
+          35
+        ],
+        [
+          "Cocoa",
+          35
+        ],
+        [
+          "Light heather grey",
+          35
+        ],
+        [
+          "Cream-purple",
+          34
+        ],
+        [
+          "Light pink",
+          34
+        ],
+        [
+          "Navy-burgundy",
+          34
+        ],
+        [
+          "Nude-black",
+          34
+        ],
+        [
+          "Brick",
+          34
+        ],
+        [
+          "Olive-black",
+          34
+        ],
+        [
+          "Cream-rose",
+          33
+        ],
+        [
+          "Black-heather grey",
+          33
+        ],
+        [
+          "Blue-pink",
+          32
+        ],
+        [
+          "Cream-burgundy",
+          32
+        ],
+        [
+          "Heather grey-burgundy",
+          32
+        ],
+        [
+          "Burgundy-white",
+          32
+        ],
+        [
+          "Blue-coral",
+          32
+        ],
+        [
+          "Dark purple",
+          32
+        ],
+        [
+          "Cream-olive",
+          32
+        ],
+        [
+          "Black-orange",
+          31
+        ],
+        [
+          "Light green",
+          31
+        ],
+        [
+          "Denim black",
+          31
+        ],
+        [
+          "Pink-multi",
+          31
+        ],
+        [
+          "Rust-black",
+          30
+        ],
+        [
+          "Black-beige",
+          30
+        ],
+        [
+          "Aqua-coral",
+          29
+        ],
+        [
+          "Coral-blue",
+          29
+        ],
+        [
+          "Mustard-black",
+          29
+        ],
+        [
+          "White-white",
+          28
+        ],
+        [
+          "Light blue-white",
+          28
+        ],
+        [
+          "Wine-black",
+          28
+        ],
+        [
+          "Light pink-black",
+          28
+        ],
+        [
+          "Navy-taupe",
+          27
+        ],
+        [
+          "Cream-peach",
+          27
+        ],
+        [
+          "Cream-cream",
+          27
+        ],
+        [
+          "Mustard-blue",
+          27
+        ],
+        [
+          "Peach-black",
+          26
+        ],
+        [
+          "Salmon",
+          26
+        ],
+        [
+          "Ivory-multi",
+          26
+        ],
+        [
+          "Heather grey-multi",
+          26
+        ],
+        [
+          "Grey-red",
+          25
+        ],
+        [
+          "Grey-blue",
+          25
+        ],
+        [
+          "Charcoal-grey",
+          25
+        ],
+        [
+          "Cream-wine",
+          25
+        ],
+        [
+          "Navy-rust",
+          25
+        ],
+        [
+          "Teal-cream",
+          25
+        ],
+        [
+          "Bright cobalt",
+          25
+        ],
+        [
+          "Black-teal",
+          24
+        ],
+        [
+          "Green-navy",
+          24
+        ],
+        [
+          "Fuchsia",
+          24
+        ],
+        [
+          "Yellow-white",
+          23
+        ],
+        [
+          "Black-peach",
+          23
+        ],
+        [
+          "Blue-purple",
+          23
+        ],
+        [
+          "Aqua-pink",
+          22
+        ],
+        [
+          "Pink-cream",
+          22
+        ],
+        [
+          "Ginger",
+          22
+        ],
+        [
+          "Citron",
+          22
+        ],
+        [
+          "Beige-multi",
+          22
+        ],
+        [
+          "Gold",
+          22
+        ],
+        [
+          "Denim washed-cream",
+          22
+        ],
+        [
+          "Charcoal-white",
+          22
+        ],
+        [
+          "Olive-heather grey",
+          21
+        ],
+        [
+          "Chestnut",
+          21
+        ],
+        [
+          "Dark navy-cream",
+          21
+        ],
+        [
+          "Ivory-red",
+          21
+        ],
+        [
+          "Black-aqua",
+          20
+        ],
+        [
+          "Heather grey-mint",
+          20
+        ],
+        [
+          "Blue-orange",
+          20
+        ],
+        [
+          "Baby blue",
+          20
+        ],
+        [
+          "Hunter green",
+          20
+        ],
+        [
+          "Ivory-silver",
+          20
+        ],
+        [
+          "Black-tan",
+          20
+        ],
+        [
+          "Cream-dark navy",
+          20
+        ],
+        [
+          "Burgundy-multi",
+          20
+        ],
+        [
+          "Navy-navy",
+          20
+        ],
+        [
+          "Deep taupe",
+          20
+        ],
+        [
+          "Peacock-black",
+          20
+        ],
+        [
+          "Aspen gold",
+          20
+        ],
+        [
+          "Heather grey-blue",
+          19
+        ],
+        [
+          "Olive-coral",
+          19
+        ],
+        [
+          "Black-charcoal",
+          19
+        ],
+        [
+          "Wine-cream",
+          19
+        ],
+        [
+          "Teal-multi",
+          19
+        ],
+        [
+          "Light blue-multi",
+          19
+        ],
+        [
+          "Blue-yellow",
+          18
+        ],
+        [
+          "Burgundy-pink",
+          18
+        ],
+        [
+          "Berry",
+          18
+        ],
+        [
+          "Olive-mustard",
+          18
+        ],
+        [
+          "Camel",
+          18
+        ],
+        [
+          "Black-gunmetal",
+          18
+        ],
+        [
+          "Orange-black",
+          18
+        ],
+        [
+          "Cream-charcoal",
+          18
+        ],
+        [
+          "Ivory-pink",
+          18
+        ],
+        [
+          "Rust-mustard",
+          18
+        ],
+        [
+          "Orchid",
+          18
+        ],
+        [
+          "Grey-yellow",
+          18
+        ],
+        [
+          "Black-rose",
+          17
+        ],
+        [
+          "Heather grey-charcoal",
+          17
+        ],
+        [
+          "White-pink",
+          17
+        ],
+        [
+          "Light blue-pink",
+          17
+        ],
+        [
+          "Light denim-cream",
+          17
+        ],
+        [
+          "Tan",
+          17
+        ],
+        [
+          "Taupe-multi",
+          17
+        ],
+        [
+          "Fuchsia-black",
+          17
+        ],
+        [
+          "Cream-green",
+          17
+        ],
+        [
+          "Grey-multi",
+          17
+        ],
+        [
+          "Green-taupe",
+          16
+        ],
+        [
+          "Denim washed-white",
+          16
+        ],
+        [
+          "Brown-cream",
+          16
+        ],
+        [
+          "Coral-pink",
+          16
+        ],
+        [
+          "Light blue-black",
+          16
+        ],
+        [
+          "Seashell pink",
+          16
+        ],
+        [
+          "Lavender-blue",
+          16
+        ],
+        [
+          "Rust-blue",
+          16
+        ],
+        [
+          "Grape",
+          16
+        ],
+        [
+          "Neon yellow",
+          16
+        ],
+        [
+          "Eggplant-black",
+          16
+        ],
+        [
+          "Turquoise-multi",
+          16
+        ],
+        [
+          "Mint-cream",
+          16
+        ],
+        [
+          "Burgundy-blue",
+          15
+        ],
+        [
+          "Charcoal heather-heather grey",
+          15
+        ],
+        [
+          "Royal-aqua",
+          15
+        ],
+        [
+          "Blush-green",
+          15
+        ],
+        [
+          "Ivory-green",
+          15
+        ],
+        [
+          "Pink-blue",
+          15
+        ],
+        [
+          "Red-multi",
+          15
+        ],
+        [
+          "Coral-oatmeal",
+          15
+        ],
+        [
+          "Light denim-grey",
+          15
+        ],
+        [
+          "Medium denim-cream",
+          15
+        ],
+        [
+          "Brown-black",
+          14
+        ],
+        [
+          "Heather grey-green",
+          14
+        ],
+        [
+          "Blue-aqua",
+          14
+        ],
+        [
+          "Oatmeal-navy",
+          14
+        ],
+        [
+          "Grey-charcoal",
+          14
+        ],
+        [
+          "Peach-multi",
+          14
+        ],
+        [
+          "Cream-mustard",
+          14
+        ],
+        [
+          "Cream-gold",
+          14
+        ],
+        [
+          "Light blue-cream",
+          14
+        ],
+        [
+          "Black-olive",
+          14
+        ],
+        [
+          "Clematis blue",
+          14
+        ],
+        [
+          "Brown-green",
+          13
+        ],
+        [
+          "White-coral",
+          13
+        ],
+        [
+          "White-mint",
+          13
+        ],
+        [
+          "Apricot",
+          13
+        ],
+        [
+          "Cherry-cream",
+          13
+        ],
+        [
+          "Blush-silver",
+          13
+        ],
+        [
+          "Mint-white",
+          13
+        ],
+        [
+          "Pink-aqua",
+          13
+        ],
+        [
+          "Celadon",
+          13
+        ],
+        [
+          "Charcoal-burgundy",
+          13
+        ],
+        [
+          "Denim-burgundy",
+          12
+        ],
+        [
+          "Olive-brown",
+          12
+        ],
+        [
+          "Black-turquoise",
+          12
+        ],
+        [
+          "Navy-yellow",
+          12
+        ],
+        [
+          "Tan-black",
+          12
+        ],
+        [
+          "White-burgundy",
+          12
+        ],
+        [
+          "Brick-white",
+          12
+        ],
+        [
+          "Burgundy-charcoal",
+          12
+        ],
+        [
+          "Navy-coral",
+          12
+        ],
+        [
+          "Cream-magenta",
+          12
+        ],
+        [
+          "Tan-cream",
+          12
+        ],
+        [
+          "Silver-black",
+          12
+        ],
+        [
+          "Green-multi",
+          12
+        ],
+        [
+          "Wine-multi",
+          12
+        ],
+        [
+          "Orange-multi",
+          12
+        ],
+        [
+          "Rust-rust",
+          12
+        ],
+        [
+          "Blue-teal",
+          12
+        ],
+        [
+          "Pale banana",
+          12
+        ],
+        [
+          "Turquoise",
+          12
+        ],
+        [
+          "Khaki-cream",
+          12
+        ],
+        [
+          "Dark navy-grey",
+          12
+        ],
+        [
+          "Black-fuchsia",
+          12
+        ],
+        [
+          "Grey-ivory",
+          12
+        ],
+        [
+          "Royal-ivory",
+          12
+        ],
+        [
+          "Beige-orange",
+          12
+        ],
+        [
+          "Taupe-rust",
+          12
+        ],
+        [
+          "Coral-white",
+          12
+        ],
+        [
+          "Rust-teal",
+          12
+        ],
+        [
+          "Dark green",
+          12
+        ],
+        [
+          "Emerald-black",
+          12
+        ],
+        [
+          "Mustard-navy",
+          12
+        ],
+        [
+          "Hot pink-black",
+          12
+        ],
+        [
+          "Peach-beige",
+          12
+        ],
+        [
+          "Pink-white",
+          11
+        ],
+        [
+          "Pink-yellow",
+          11
+        ],
+        [
+          "Heather grey-brown",
+          11
+        ],
+        [
+          "Black-camel",
+          11
+        ],
+        [
+          "Black-navy",
+          11
+        ],
+        [
+          "Tomato-cream",
+          11
+        ],
+        [
+          "White-natural",
+          11
+        ],
+        [
+          "Navy-turquoise",
+          11
+        ],
+        [
+          "Burgundy-rust",
+          11
+        ],
+        [
+          "White-charcoal",
+          11
+        ],
+        [
+          "Charcoal-taupe",
+          11
+        ],
+        [
+          "Cream-heather grey",
+          11
+        ],
+        [
+          "Light blue-oatmeal",
+          11
+        ],
+        [
+          "Light aqua",
+          11
+        ],
+        [
+          "Peach-heather grey",
+          11
+        ],
+        [
+          "Heather grey-ivory",
+          11
+        ],
+        [
+          "Denim washed-black",
+          10
+        ],
+        [
+          "Olive-navy",
+          10
+        ],
+        [
+          "Olive-orange",
+          10
+        ],
+        [
+          "Grey-green",
+          10
+        ],
+        [
+          "Mauve-taupe",
+          10
+        ],
+        [
+          "Cream-orange",
+          10
+        ],
+        [
+          "Ivory-mint",
+          10
+        ],
+        [
+          "Rust-ivory",
+          10
+        ],
+        [
+          "Champagne-gunmetal",
+          10
+        ],
+        [
+          "Red-beige",
+          10
+        ],
+        [
+          "Indigo-white",
+          10
+        ],
+        [
+          "Burgundy-grey",
+          10
+        ],
+        [
+          "Eggplant-navy",
+          10
+        ],
+        [
+          "Gold-black",
+          10
+        ],
+        [
+          "Yellow-black",
+          10
+        ],
+        [
+          "Navy-gold",
+          10
+        ],
+        [
+          "Burgundy-mauve",
+          10
+        ],
+        [
+          "Pink-sage",
+          10
+        ],
+        [
+          "Cream-nude",
+          10
+        ],
+        [
+          "Burgundy-mustard",
+          10
+        ],
+        [
+          "Charcoal-charcoal",
+          10
+        ],
+        [
+          "Imperial blue",
+          10
+        ],
+        [
+          "White-cream",
+          10
+        ],
+        [
+          "Cloud",
+          10
+        ],
+        [
+          "Red-grey",
+          9
+        ],
+        [
+          "Coral-teal",
+          9
+        ],
+        [
+          "Black-royal",
+          9
+        ],
+        [
+          "Navy-mustard",
+          9
+        ],
+        [
+          "Heather grey-orange",
+          9
+        ],
+        [
+          "Cream-aqua",
+          9
+        ],
+        [
+          "Red-purple",
+          9
+        ],
+        [
+          "Taupe-green",
+          9
+        ],
+        [
+          "Blue-taupe",
+          9
+        ],
+        [
+          "Pink-silver",
+          9
+        ],
+        [
+          "Blue-blue",
+          9
+        ],
+        [
+          "Cream-teal",
+          9
+        ],
+        [
+          "Royal-cream",
+          9
+        ],
+        [
+          "Dark navy-red",
+          9
+        ],
+        [
+          "Denim-ivory",
+          9
+        ],
+        [
+          "Orange-white",
+          9
+        ],
+        [
+          "Seashell-multi",
+          9
+        ],
+        [
+          "Champagne",
+          9
+        ],
+        [
+          "Olive-light green",
+          9
+        ],
+        [
+          "Navy-light blue",
+          9
+        ],
+        [
+          "Taupe-grey",
+          9
+        ],
+        [
+          "Green-brick",
+          9
+        ],
+        [
+          "Royal-royal",
+          9
+        ],
+        [
+          "Orange-taupe",
+          9
+        ],
+        [
+          "Heather grey-rust",
+          9
+        ],
+        [
+          "Royal-white",
+          9
+        ],
+        [
+          "Denim-light denim",
+          9
+        ],
+        [
+          "Burgundy-cream",
+          9
+        ],
+        [
+          "Light olive",
+          9
+        ],
+        [
+          "Vanilla",
+          9
+        ],
+        [
+          "Coral-ivory",
+          9
+        ],
+        [
+          "Periwinkle-cream",
+          9
+        ],
+        [
+          "Burgundy-yellow",
+          9
+        ],
+        [
+          "White-aqua",
+          8
+        ],
+        [
+          "Pink-green",
+          8
+        ],
+        [
+          "White-heather grey",
+          8
+        ],
+        [
+          "Navy-chestnut",
+          8
+        ],
+        [
+          "Dark navy-grape",
+          8
+        ],
+        [
+          "Peach-cream",
+          8
+        ],
+        [
+          "Indigo-cream",
+          8
+        ],
+        [
+          "Orange-cream",
+          8
+        ],
+        [
+          "Light blue-ivory",
+          8
+        ],
+        [
+          "Apricot-navy",
+          8
+        ],
+        [
+          "Beige-green",
+          8
+        ],
+        [
+          "Red-gold",
+          8
+        ],
+        [
+          "Cream-beige",
+          8
+        ],
+        [
+          "Aqua-cream",
+          8
+        ],
+        [
+          "Navy-periwinkle",
+          8
+        ],
+        [
+          "Olive-multi",
+          8
+        ],
+        [
+          "Red-pink",
+          8
+        ],
+        [
+          "Calypso coral",
+          8
+        ],
+        [
+          "Rose gold",
+          8
+        ],
+        [
+          "Baby blue-pink",
+          8
+        ],
+        [
+          "Rust-charcoal",
+          8
+        ],
+        [
+          "Navy-jade",
+          8
+        ],
+        [
+          "Black-oatmeal",
+          8
+        ],
+        [
+          "Pink-navy",
+          8
+        ],
+        [
+          "Wine-tan",
+          8
+        ],
+        [
+          "Desert sand",
+          8
+        ],
+        [
+          "Magenta-yellow",
+          8
+        ],
+        [
+          "Lavender-multi",
+          8
+        ],
+        [
+          "Mustard-cream",
+          8
+        ],
+        [
+          "Wine-mustard",
+          8
+        ],
+        [
+          "Black-cocoa",
+          8
+        ],
+        [
+          "Orange-blue",
+          8
+        ],
+        [
+          "Beige-teal",
+          8
+        ],
+        [
+          "Denim-black",
+          8
+        ],
+        [
+          "Black-magenta",
+          8
+        ],
+        [
+          "Black-mauve",
+          8
+        ],
+        [
+          "Heather grey-purple",
+          8
+        ],
+        [
+          "Dark grey-cream",
+          8
+        ],
+        [
+          "Blue-heather grey",
+          8
+        ],
+        [
+          "Beige-navy",
+          8
+        ],
+        [
+          "Natural",
+          8
+        ],
+        [
+          "Navy-aqua",
+          8
+        ],
+        [
+          "Turquoise-green",
+          8
+        ],
+        [
+          "Grey-dark navy",
+          8
+        ],
+        [
+          "Grey-heather grey",
+          8
+        ],
+        [
+          "Cream-dusty blue",
+          8
+        ],
+        [
+          "Peach-peach",
+          8
+        ],
+        [
+          "Grey-olive",
+          8
+        ],
+        [
+          "Aqua-purple",
+          8
+        ],
+        [
+          "Yellow-coral",
+          8
+        ],
+        [
+          "Oatmeal-indigo",
+          8
+        ],
+        [
+          "Teal-purple",
+          8
+        ],
+        [
+          "Oatmeal-peach",
+          8
+        ],
+        [
+          "Blue-mustard",
+          7
+        ],
+        [
+          "Blue-burgundy",
+          7
+        ],
+        [
+          "Ivory-gold",
+          7
+        ],
+        [
+          "Pink-ivory",
+          7
+        ],
+        [
+          "Orange-green",
+          7
+        ],
+        [
+          "Ivory-heather grey",
+          7
+        ],
+        [
+          "Ivory-royal",
+          7
+        ],
+        [
+          "Black-tomato",
+          7
+        ],
+        [
+          "Navy-peach",
+          7
+        ],
+        [
+          "Turquoise-cream",
+          7
+        ],
+        [
+          "Ivory-rust",
+          7
+        ],
+        [
+          "Sage-sage",
+          7
+        ],
+        [
+          "Black-wine",
+          7
+        ],
+        [
+          "Mustard-mustard",
+          7
+        ],
+        [
+          "Blue-citron",
+          7
+        ],
+        [
+          "Blush-coral",
+          7
+        ],
+        [
+          "Fiery red",
+          7
+        ],
+        [
+          "Blue-charcoal",
+          7
+        ],
+        [
+          "Dark navy-black",
+          7
+        ],
+        [
+          "Olive-olive",
+          7
+        ],
+        [
+          "Light blue-royal",
+          7
+        ],
+        [
+          "Periwinkle-ivory",
+          7
+        ],
+        [
+          "Midnight-cream",
+          7
+        ],
+        [
+          "Navy-heather grey",
+          6
+        ],
+        [
+          "Charcoal-heather grey",
+          6
+        ],
+        [
+          "Oatmeal-orange",
+          6
+        ],
+        [
+          "Tomato-purple",
+          6
+        ],
+        [
+          "Cream-gunmetal",
+          6
+        ],
+        [
+          "Oyster gray",
+          6
+        ],
+        [
+          "Taupe-burgundy",
+          6
+        ],
+        [
+          "Black-jade",
+          6
+        ],
+        [
+          "Black-mint",
+          6
+        ],
+        [
+          "Rust-yellow",
+          6
+        ],
+        [
+          "Navy-silver",
+          6
+        ],
+        [
+          "Coral-jade",
+          6
+        ],
+        [
+          "Coral-magenta",
+          6
+        ],
+        [
+          "Rose-blue",
+          6
+        ],
+        [
+          "Heather grey-blush",
+          6
+        ],
+        [
+          "Wine-teal",
+          6
+        ],
+        [
+          "Cream-fuchsia",
+          6
+        ],
+        [
+          "Cream-dusty pink",
+          6
+        ],
+        [
+          "Brown-white",
+          6
+        ],
+        [
+          "White-oatmeal",
+          6
+        ],
+        [
+          "Heather grey-yellow",
+          5
+        ],
+        [
+          "Gold-brown",
+          5
+        ],
+        [
+          "Brown-tan",
+          5
+        ],
+        [
+          "Light blue-red",
+          5
+        ],
+        [
+          "Green-orange",
+          5
+        ],
+        [
+          "White-purple",
+          5
+        ],
+        [
+          "Blue-light blue",
+          5
+        ],
+        [
+          "Burgundy-red",
+          5
+        ],
+        [
+          "Grey-pink",
+          5
+        ],
+        [
+          "Charcoal heather-black",
+          5
+        ],
+        [
+          "White-brown",
+          5
+        ],
+        [
+          "Gold-blue",
+          5
+        ],
+        [
+          "Charcoal heather-white",
+          5
+        ],
+        [
+          "White-orange",
+          5
+        ],
+        [
+          "Grey-turquoise",
+          5
+        ],
+        [
+          "Cream-brown",
+          5
+        ],
+        [
+          "Yellow-heather grey",
+          5
+        ],
+        [
+          "Sage-coral",
+          5
+        ],
+        [
+          "Taupe-white",
+          5
+        ],
+        [
+          "Black-light pink",
+          5
+        ],
+        [
+          "Indigo-red",
+          5
+        ],
+        [
+          "Black-neon green",
+          5
+        ],
+        [
+          "Peach-ivory",
+          5
+        ],
+        [
+          "Peach-silver",
+          5
+        ],
+        [
+          "Bright cobalt-ivory",
+          5
+        ],
+        [
+          "Green-royal",
+          5
+        ],
+        [
+          "Blue-grey",
+          5
+        ],
+        [
+          "Navy-light grey",
+          5
+        ],
+        [
+          "Aqua-white",
+          5
+        ],
+        [
+          "Blush-rose gold",
+          5
+        ],
+        [
+          "Peach-clear",
+          5
+        ],
+        [
+          "Yellow-pink",
+          5
+        ],
+        [
+          "Heather grey-teal",
+          5
+        ],
+        [
+          "Blue-lavender",
+          5
+        ],
+        [
+          "Pepper green",
+          5
+        ],
+        [
+          "Teal-hunter green",
+          5
+        ],
+        [
+          "Beige-blush",
+          5
+        ],
+        [
+          "Oatmeal-red",
+          5
+        ],
+        [
+          "Indigo-black",
+          5
+        ],
+        [
+          "Taupe-navy",
+          5
+        ],
+        [
+          "Purple-pink",
+          5
+        ],
+        [
+          "Brick-teal",
+          5
+        ],
+        [
+          "Navy-beige",
+          5
+        ],
+        [
+          "Dusty pink-multi",
+          5
+        ],
+        [
+          "Ivory-mustard",
+          5
+        ],
+        [
+          "Taupe-yellow",
+          5
+        ],
+        [
+          "Light denim-white",
+          5
+        ],
+        [
+          "Denim washed-olive",
+          5
+        ],
+        [
+          "Light blue-blue",
+          5
+        ],
+        [
+          "Purple-black",
+          5
+        ],
+        [
+          "Magenta-multi",
+          5
+        ],
+        [
+          "Neon green-taupe",
+          5
+        ],
+        [
+          "Stone blue-ivory",
+          5
+        ],
+        [
+          "Teal-pink",
+          5
+        ],
+        [
+          "Baby pink-black",
+          5
+        ],
+        [
+          "Navy-mauve",
+          5
+        ],
+        [
+          "Cream-tomato",
+          5
+        ],
+        [
+          "Silver-cocoa",
+          5
+        ],
+        [
+          "Tangerine-green",
+          5
+        ],
+        [
+          "Taupe-brown",
+          5
+        ],
+        [
+          "Cocoa-beige",
+          5
+        ],
+        [
+          "Pink-orange",
+          5
+        ],
+        [
+          "Mint-black",
+          5
+        ],
+        [
+          "Oatmeal-white",
+          5
+        ],
+        [
+          "Silver-multi",
+          5
+        ],
+        [
+          "Light grey-white",
+          5
+        ],
+        [
+          "Peach-cocoa",
+          5
+        ],
+        [
+          "Heather grey-clear",
+          5
+        ],
+        [
+          "Khaki-ivory",
+          5
+        ],
+        [
+          "Grey-burgundy",
+          4
+        ],
+        [
+          "Teal-grey",
+          4
+        ],
+        [
+          "Burgundy-teal",
+          4
+        ],
+        [
+          "Olive-green",
+          4
+        ],
+        [
+          "Grey-grey",
+          4
+        ],
+        [
+          "Green-blue",
+          4
+        ],
+        [
+          "Red-green",
+          4
+        ],
+        [
+          "Grey-purple",
+          4
+        ],
+        [
+          "Teal-white",
+          4
+        ],
+        [
+          "Light blue-burgundy",
+          4
+        ],
+        [
+          "Red-yellow",
+          4
+        ],
+        [
+          "Peach-navy",
+          4
+        ],
+        [
+          "Pink-heather grey",
+          4
+        ],
+        [
+          "Rust-gold",
+          4
+        ],
+        [
+          "Wine-red",
+          4
+        ],
+        [
+          "Blush-rust",
+          4
+        ],
+        [
+          "White-royal",
+          4
+        ],
+        [
+          "White-midnight",
+          4
+        ],
+        [
+          "Cream-bronze",
+          4
+        ],
+        [
+          "Blush-pink",
+          4
+        ],
+        [
+          "Ivory-peach",
+          4
+        ],
+        [
+          "Tan-orange",
+          4
+        ],
+        [
+          "Sandshell",
+          4
+        ],
+        [
+          "Black-vanilla",
+          4
+        ],
+        [
+          "Royal-wine",
+          4
+        ],
+        [
+          "Coral-aqua",
+          4
+        ],
+        [
+          "Red-teal",
+          4
+        ],
+        [
+          "Cream-dark grey",
+          4
+        ],
+        [
+          "Cream-blush",
+          4
+        ],
+        [
+          "Navy-brown",
+          4
+        ],
+        [
+          "Blush-gold",
+          4
+        ],
+        [
+          "Rust-tan",
+          4
+        ],
+        [
+          "Peach-tan",
+          4
+        ],
+        [
+          "Beige-rust",
+          4
+        ],
+        [
+          "Ivory-taupe",
+          4
+        ],
+        [
+          "Mint-mint",
+          4
+        ],
+        [
+          "Ivory-light blue",
+          4
+        ],
+        [
+          "Royal-khaki",
+          4
+        ],
+        [
+          "Taupe-cocoa",
+          4
+        ],
+        [
+          "White-beige",
+          4
+        ],
+        [
+          "Sage-ivory",
+          4
+        ],
+        [
+          "Ivory-cream",
+          4
+        ],
+        [
+          "Yellow-green",
+          4
+        ],
+        [
+          "Taupe-bronze",
+          4
+        ],
+        [
+          "Cream-silver",
+          4
+        ],
+        [
+          "Sage-tan",
+          4
+        ],
+        [
+          "Charcoal-ivory",
+          4
+        ],
+        [
+          "Cream-camel",
+          4
+        ],
+        [
+          "Charcoal-oatmeal",
+          4
+        ],
+        [
+          "Denim-green",
+          4
+        ],
+        [
+          "Mauve-pink",
+          4
+        ],
+        [
+          "Pink-teal",
+          4
+        ],
+        [
+          "Ivory-rose",
+          4
+        ],
+        [
+          "Pink-neon yellow",
+          4
+        ],
+        [
+          "Bright cobalt-red",
+          4
+        ],
+        [
+          "Bright cobalt-multi",
+          4
+        ],
+        [
+          "Azalea",
+          4
+        ],
+        [
+          "Royal-coral",
+          4
+        ],
+        [
+          "Blue-khaki",
+          4
+        ],
+        [
+          "Coral-multi",
+          4
+        ],
+        [
+          "Teal-ivory",
+          4
+        ],
+        [
+          "Pink-mauve",
+          4
+        ],
+        [
+          "Peach-pink",
+          4
+        ],
+        [
+          "Midnight-green",
+          4
+        ],
+        [
+          "Turquoise-nude",
+          4
+        ],
+        [
+          "Purple-blue",
+          4
+        ],
+        [
+          "Light grey-taupe",
+          4
+        ],
+        [
+          "Purple-green",
+          4
+        ],
+        [
+          "Citron-clear",
+          4
+        ],
+        [
+          "Mauve-purple",
+          4
+        ],
+        [
+          "Neon orange",
+          4
+        ],
+        [
+          "Wine-cocoa",
+          4
+        ],
+        [
+          "Gunmetal",
+          4
+        ],
+        [
+          "Blue-green",
+          4
+        ],
+        [
+          "Grey-teal",
+          4
+        ],
+        [
+          "Lobster bisque",
+          4
+        ],
+        [
+          "Yellow-grey",
+          4
+        ],
+        [
+          "Navy-magenta",
+          4
+        ],
+        [
+          "Ivory-blush",
+          4
+        ],
+        [
+          "Cream-tan",
+          4
+        ],
+        [
+          "Nude-silver",
+          4
+        ],
+        [
+          "Ivory-mauve",
+          4
+        ],
+        [
+          "Dark blue",
+          4
+        ],
+        [
+          "Chocolate-teal",
+          4
+        ],
+        [
+          "Purple-blush",
+          4
+        ],
+        [
+          "Cream-periwinkle",
+          4
+        ],
+        [
+          "Peach-dark grey",
+          4
+        ],
+        [
+          "Orange-peach",
+          4
+        ],
+        [
+          "Brown-grey",
+          4
+        ],
+        [
+          "Grey-rust",
+          4
+        ],
+        [
+          "Green-cream",
+          4
+        ],
+        [
+          "Navy-tomato",
+          4
+        ],
+        [
+          "Baby pink-grey",
+          4
+        ],
+        [
+          "Fuchsia-multi",
+          4
+        ],
+        [
+          "Sage-teal",
+          4
+        ],
+        [
+          "Peach bud-black",
+          4
+        ],
+        [
+          "Yellow-multi",
+          4
+        ],
+        [
+          "White-wine",
+          4
+        ],
+        [
+          "Light yellow-black",
+          4
+        ],
+        [
+          "Ravishing red",
+          4
+        ],
+        [
+          "Black-natural",
+          4
+        ],
+        [
+          "Denim washed-grey",
+          4
+        ],
+        [
+          "Blush-blue",
+          4
+        ],
+        [
+          "Light denim-denim",
+          4
+        ],
+        [
+          "Rust-multi",
+          4
+        ],
+        [
+          "Cocoa-black",
+          4
+        ],
+        [
+          "Purple-wine",
+          4
+        ],
+        [
+          "Blue-tan",
+          4
+        ],
+        [
+          "Indigo-mustard",
+          4
+        ],
+        [
+          "Indigo-mauve",
+          4
+        ],
+        [
+          "Brown-multi",
+          4
+        ],
+        [
+          "Beige-wine",
+          4
+        ],
+        [
+          "Light denim-ivory",
+          4
+        ],
+        [
+          "Burgundy-taupe",
+          4
+        ],
+        [
+          "Brown-rust",
+          4
+        ],
+        [
+          "Lavender-purple",
+          4
+        ],
+        [
+          "Brown-orange",
+          4
+        ],
+        [
+          "Purple-red",
+          4
+        ],
+        [
+          "Ivory-berry",
+          4
+        ],
+        [
+          "Grey-wine",
+          4
+        ],
+        [
+          "Taupe-pink",
+          4
+        ],
+        [
+          "Wine-berry",
+          4
+        ],
+        [
+          "Mint-peach",
+          4
+        ],
+        [
+          "Indigo-light blue",
+          4
+        ],
+        [
+          "Navy-purple",
+          4
+        ],
+        [
+          "Teal-blue",
+          4
+        ],
+        [
+          "Coral-fuchsia",
+          4
+        ],
+        [
+          "Teal-rust",
+          4
+        ],
+        [
+          "Teal blue",
+          4
+        ],
+        [
+          "Silver-teal",
+          4
+        ],
+        [
+          "Blue-brown",
+          4
+        ],
+        [
+          "Grey-silver",
+          4
+        ],
+        [
+          "Beige-red",
+          4
+        ],
+        [
+          "Navy-oatmeal",
+          4
+        ],
+        [
+          "Purple-cream",
+          4
+        ],
+        [
+          "Charcoal-red",
+          4
+        ],
+        [
+          "Dark grey-taupe",
+          4
+        ],
+        [
+          "Taupe-coral",
+          4
+        ],
+        [
+          "Brown-ivory",
+          4
+        ],
+        [
+          "Gold-multi",
+          4
+        ],
+        [
+          "Charcoal-pink",
+          4
+        ],
+        [
+          "Oatmeal-multi",
+          4
+        ],
+        [
+          "Cream-yellow",
+          4
+        ],
+        [
+          "Blush-heather grey",
+          4
+        ],
+        [
+          "Coral-black",
+          4
+        ],
+        [
+          "Black-azalea",
+          4
+        ],
+        [
+          "Purple-multi",
+          4
+        ],
+        [
+          "White-silver",
+          4
+        ],
+        [
+          "Brick-brown",
+          4
+        ],
+        [
+          "Royal-multi",
+          4
+        ],
+        [
+          "Light yellow-multi",
+          4
+        ],
+        [
+          "Pink-purple",
+          4
+        ],
+        [
+          "Taupe-charcoal",
+          4
+        ],
+        [
+          "Neon yellow-white",
+          4
+        ],
+        [
+          "Cream-plum",
+          4
+        ],
+        [
+          "Aqua-peach",
+          4
+        ],
+        [
+          "Rose-gunmetal",
+          4
+        ],
+        [
+          "Heather grey-gold",
+          4
+        ],
+        [
+          "Aqua-ivory",
+          4
+        ],
+        [
+          "Teal-red",
+          4
+        ],
+        [
+          "Brown-blue",
+          4
+        ],
+        [
+          "Peach-grey",
+          4
+        ],
+        [
+          "Baby blue-black",
+          4
+        ],
+        [
+          "Charcoal-yellow",
+          4
+        ],
+        [
+          "Cream-neon yellow",
+          4
+        ],
+        [
+          "Grey-taupe",
+          4
+        ],
+        [
+          "Light grey-black",
+          3
+        ],
+        [
+          "Tan-multi",
+          3
+        ],
+        [
+          "Brick-black",
+          3
+        ],
+        [
+          "Denim-grey",
+          3
+        ],
+        [
+          "Purple-cocoa",
+          3
+        ],
+        [
+          "Denim-white",
+          3
+        ],
+        [
+          "Grey-amber",
+          3
+        ],
+        [
+          "Plum-black",
+          3
+        ],
+        [
+          "Cream-indigo",
+          3
+        ],
+        [
+          "Aqua-black",
+          3
+        ],
+        [
+          "Celery",
+          3
+        ],
+        [
+          "Mint-blue",
+          3
+        ],
+        [
+          "Peach-white",
+          3
+        ],
+        [
+          "Ivory-orange",
+          3
+        ],
+        [
+          "Beige-rose",
+          3
+        ],
+        [
+          "Black-khaki",
+          3
+        ],
+        [
+          "Neon coral-mint",
+          3
+        ],
+        [
+          "Tan-red",
+          3
+        ],
+        [
+          "Purple-navy",
+          3
+        ],
+        [
+          "Dark grey-black",
+          3
+        ],
+        [
+          "Coral-hot pink",
+          3
+        ],
+        [
+          "Wine-blue",
+          3
+        ],
+        [
+          "Navy-lavender",
+          3
+        ],
+        [
+          "Green-magenta",
+          3
+        ],
+        [
+          "Cream-brick",
+          3
+        ],
+        [
+          "Mint-aqua",
+          3
+        ],
+        [
+          "Red-taupe",
+          3
+        ],
+        [
+          "Brown-taupe",
+          3
+        ],
+        [
+          "Blush-ginger",
+          3
+        ],
+        [
+          "Rust-light blue",
+          3
+        ],
+        [
+          "Orange-purple",
+          3
+        ],
+        [
+          "Green-red",
+          3
+        ],
+        [
+          "Rust-coral",
+          3
+        ],
+        [
+          "Winter white",
+          3
+        ],
+        [
+          "Indigo-beige",
+          3
+        ],
+        [
+          "Indigo-bronze",
+          3
+        ],
+        [
+          "Magenta-coral",
+          3
+        ],
+        [
+          "Grey-mint",
+          3
+        ],
+        [
+          "Grey-coral",
+          3
+        ],
+        [
+          "Black-brick",
+          3
+        ],
+        [
+          "Cream-ivory",
+          3
+        ],
+        [
+          "Mint-teal",
+          3
+        ],
+        [
+          "Midnight-tomato",
+          3
+        ],
+        [
+          "Wine-taupe",
+          3
+        ],
+        [
+          "Medium denim-white",
+          2
+        ],
+        [
+          "Mint-green",
+          1
+        ]
+      ],
+      "top_5_concentration": 23.5,
+      "top_10_concentration": 34.6,
+      "sample_values": [
+        "Black",
+        "Brown",
+        "Dark denim",
+        "Denim washed",
+        "Denim washed-black",
+        "Indigo",
+        "Medium denim",
+        "Grey",
+        "Burgundy",
+        "Light denim",
+        "White",
+        "Cream",
+        "Blue",
+        "Black-blue",
+        "Denim",
+        "Black-grey",
+        "Navy-green",
+        "Navy",
+        "Taupe",
+        "Denim-burgundy",
+        "Olive",
+        "Black-black",
+        "Cream-black",
+        "Khaki",
+        "Red-white",
+        "Beige-black",
+        "Black-cream",
+        "Navy-black",
+        "Heather grey",
+        "Green-taupe"
+      ]
+    }
+  },
+  "text_category_overlap": {
+    "category1": {
+      "text_contains_exact_category_pct": 11.1,
+      "text_shares_words_with_category_pct": 0.0,
+      "total_overlap_pct": 11.1
+    },
+    "category2": {
+      "text_contains_exact_category_pct": 32.7,
+      "text_shares_words_with_category_pct": 0.0,
+      "total_overlap_pct": 32.7
+    },
+    "category3": {
+      "text_contains_exact_category_pct": 3.7,
+      "text_shares_words_with_category_pct": 0.0,
+      "total_overlap_pct": 3.7
+    },
+    "color": {
+      "text_contains_exact_category_pct": 83.0,
+      "text_shares_words_with_category_pct": 16.9,
+      "total_overlap_pct": 99.9
+    }
+  },
+  "cross_field_correlations": {
+    "category1 \u00d7 category2": {
+      "n_combinations": 23,
+      "top_20_combinations": [
+        [
+          "women | tees",
+          11530
+        ],
+        [
+          "women | blouses",
+          7964
+        ],
+        [
+          "women | dresses",
+          6990
+        ],
+        [
+          "women | shorts",
+          3476
+        ],
+        [
+          "women | sweaters",
+          3036
+        ],
+        [
+          "men | tees",
+          2845
+        ],
+        [
+          "women | skirts",
+          2045
+        ],
+        [
+          "women | jackets",
+          1895
+        ],
+        [
+          "women | pants",
+          1804
+        ],
+        [
+          "women | rompers",
+          1696
+        ],
+        [
+          "women | cardigans",
+          1436
+        ],
+        [
+          "women | graphic",
+          1297
+        ],
+        [
+          "men | pants",
+          1017
+        ],
+        [
+          "men | shorts",
+          1000
+        ],
+        [
+          "women | sweatshirts",
+          856
+        ],
+        [
+          "men | sweatshirts",
+          775
+        ],
+        [
+          "men | shirts",
+          722
+        ],
+        [
+          "men | sweaters",
+          605
+        ],
+        [
+          "men | jackets",
+          424
+        ],
+        [
+          "men | denim",
+          411
+        ]
+      ]
+    },
+    "category1 \u00d7 category3": {
+      "n_combinations": 10,
+      "top_20_combinations": [
+        [
+          "women | tanks",
+          11530
+        ],
+        [
+          "women | shirts",
+          7964
+        ],
+        [
+          "men | tanks",
+          2845
+        ],
+        [
+          "women | coats",
+          1895
+        ],
+        [
+          "women | jumpsuits",
+          1696
+        ],
+        [
+          "women | tees",
+          1297
+        ],
+        [
+          "women | hoodies",
+          856
+        ],
+        [
+          "men | hoodies",
+          775
+        ],
+        [
+          "men | polos",
+          722
+        ],
+        [
+          "men | vests",
+          424
+        ]
+      ]
+    },
+    "category1 \u00d7 color": {
+      "n_combinations": 951,
+      "top_20_combinations": [
+        [
+          "women | Cream",
+          3079
+        ],
+        [
+          "women | Black",
+          2861
+        ],
+        [
+          "women | Cream-black",
+          1604
+        ],
+        [
+          "women | Black-cream",
+          1591
+        ],
+        [
+          "women | Burgundy",
+          1553
+        ],
+        [
+          "women | Heather grey",
+          1256
+        ],
+        [
+          "women | Rust",
+          989
+        ],
+        [
+          "women | Olive",
+          951
+        ],
+        [
+          "men | Burgundy",
+          939
+        ],
+        [
+          "women | Blush",
+          898
+        ],
+        [
+          "women | White-black",
+          879
+        ],
+        [
+          "women | Mustard",
+          770
+        ],
+        [
+          "women | Black-white",
+          706
+        ],
+        [
+          "women | Navy",
+          697
+        ],
+        [
+          "women | Taupe",
+          677
+        ],
+        [
+          "women | Amber",
+          654
+        ],
+        [
+          "women | Wine",
+          641
+        ],
+        [
+          "women | Teal",
+          597
+        ],
+        [
+          "women | White",
+          580
+        ],
+        [
+          "women | Denim",
+          572
+        ]
+      ]
+    },
+    "category2 \u00d7 category3": {
+      "n_combinations": 8,
+      "top_20_combinations": [
+        [
+          "tees | tanks",
+          14375
+        ],
+        [
+          "blouses | shirts",
+          7964
+        ],
+        [
+          "jackets | coats",
+          1895
+        ],
+        [
+          "rompers | jumpsuits",
+          1696
+        ],
+        [
+          "sweatshirts | hoodies",
+          1631
+        ],
+        [
+          "graphic | tees",
+          1297
+        ],
+        [
+          "shirts | polos",
+          722
+        ],
+        [
+          "jackets | vests",
+          424
+        ]
+      ]
+    },
+    "category2 \u00d7 color": {
+      "n_combinations": 2228,
+      "top_20_combinations": [
+        [
+          "blouses | Cream",
+          931
+        ],
+        [
+          "tees | Burgundy",
+          921
+        ],
+        [
+          "tees | Heather grey",
+          766
+        ],
+        [
+          "tees | Cream",
+          764
+        ],
+        [
+          "tees | Black",
+          677
+        ],
+        [
+          "dresses | Cream",
+          502
+        ],
+        [
+          "tees | Cream-black",
+          491
+        ],
+        [
+          "dresses | Black",
+          478
+        ],
+        [
+          "blouses | Black",
+          464
+        ],
+        [
+          "tees | White-black",
+          435
+        ],
+        [
+          "graphic | White-black",
+          421
+        ],
+        [
+          "blouses | Cream-black",
+          404
+        ],
+        [
+          "tees | Amber",
+          388
+        ],
+        [
+          "tees | Oatmeal",
+          386
+        ],
+        [
+          "tees | Olive",
+          377
+        ],
+        [
+          "blouses | Blush",
+          368
+        ],
+        [
+          "tees | Rust",
+          345
+        ],
+        [
+          "jackets | Black",
+          343
+        ],
+        [
+          "shorts | Black",
+          321
+        ],
+        [
+          "tees | Black-cream",
+          313
+        ]
+      ]
+    },
+    "category3 \u00d7 color": {
+      "n_combinations": 1129,
+      "top_20_combinations": [
+        [
+          "shirts | Cream",
+          931
+        ],
+        [
+          "tanks | Burgundy",
+          921
+        ],
+        [
+          "tanks | Heather grey",
+          766
+        ],
+        [
+          "tanks | Cream",
+          764
+        ],
+        [
+          "tanks | Black",
+          677
+        ],
+        [
+          "tanks | Cream-black",
+          491
+        ],
+        [
+          "shirts | Black",
+          464
+        ],
+        [
+          "tanks | White-black",
+          435
+        ],
+        [
+          "tees | White-black",
+          421
+        ],
+        [
+          "shirts | Cream-black",
+          404
+        ],
+        [
+          "tanks | Amber",
+          388
+        ],
+        [
+          "tanks | Oatmeal",
+          386
+        ],
+        [
+          "tanks | Olive",
+          377
+        ],
+        [
+          "shirts | Blush",
+          368
+        ],
+        [
+          "tanks | Rust",
+          345
+        ],
+        [
+          "tanks | Black-cream",
+          313
+        ],
+        [
+          "coats | Black",
+          279
+        ],
+        [
+          "shirts | Black-cream",
+          271
+        ],
+        [
+          "tanks | Mustard",
+          256
+        ],
+        [
+          "hoodies | Burgundy",
+          254
+        ]
+      ]
+    }
+  }
+}

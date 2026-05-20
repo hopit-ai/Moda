@@ -1,0 +1,75 @@
+{
+  "teacher": "ViT-SO400M-14-SigLIP2-378",
+  "student": "hf-hub:Marqo/marqo-fashionSigLIP",
+  "init_map10": 0.38288306720836485,
+  "best_map10": 0.38405044669102206,
+  "final_map10": 0.38405044669102206,
+  "fsl_baseline": 0.4902,
+  "beats_fsl": false,
+  "total_steps": 300,
+  "config": {
+    "teacher": "ViT-SO400M-14-SigLIP2-378",
+    "student": "hf-hub:Marqo/marqo-fashionSigLIP",
+    "n_train": 14994,
+    "trainable_params": 14767874,
+    "lr": 5e-06,
+    "temperature": 2.0,
+    "anchor_lambda": 0.1,
+    "batch_size": 64,
+    "max_epochs": 3,
+    "max_drift": 0.05,
+    "loss": "symmetric_kl_divergence + anchor_mse",
+    "scope": "text blocks 10-11 + ln_final + text_projection + logit_scale/bias"
+  },
+  "eval_log": [
+    {
+      "step": 50,
+      "epoch": 1,
+      "map10": 0.38405044669102206,
+      "drift": 0.0029492664616554976,
+      "kl_loss": 0.4067186617851257,
+      "anchor_loss": 0.001720620607957244
+    },
+    {
+      "step": 100,
+      "epoch": 1,
+      "map10": 0.3807104555093644,
+      "drift": 0.00962099153548479,
+      "kl_loss": 0.3722840684652329,
+      "anchor_loss": 0.001690699850441888
+    },
+    {
+      "step": 150,
+      "epoch": 1,
+      "map10": 0.3791341894473839,
+      "drift": 0.014166400767862797,
+      "kl_loss": 0.3530215541521708,
+      "anchor_loss": 0.0016706314388041695
+    },
+    {
+      "step": 200,
+      "epoch": 1,
+      "map10": 0.3803037882128162,
+      "drift": 0.016137652099132538,
+      "kl_loss": 0.3388334449380636,
+      "anchor_loss": 0.0016610338480677455
+    },
+    {
+      "step": 250,
+      "epoch": 2,
+      "map10": 0.3799172508818343,
+      "drift": 0.01739128865301609,
+      "kl_loss": 0.2744975835084915,
+      "anchor_loss": 0.001670518220635131
+    },
+    {
+      "step": 300,
+      "epoch": 2,
+      "map10": 0.379856999559083,
+      "drift": 0.01939399167895317,
+      "kl_loss": 0.2821716061144164,
+      "anchor_loss": 0.0016404541375143735
+    }
+  ],
+  "aborted": true
+}

@@ -1,0 +1,871 @@
+{
+  "fashion200k": {
+    "benchmark": "fashion200k",
+    "total_queries": 500,
+    "bucket_counts": {
+      "both_win": 325,
+      "both_fail": 139,
+      "fsl_wins": 22,
+      "base_wins": 14
+    },
+    "bucket_pcts": {
+      "both_win": 65.0,
+      "both_fail": 27.800000000000004,
+      "fsl_wins": 4.3999999999999995,
+      "base_wins": 2.8000000000000003
+    },
+    "fsl_wins_analysis": {
+      "l1_distribution": {
+        "dresses": 20,
+        "tops": 2
+      },
+      "base_gold_sim_mean": 0.09155117957429453,
+      "base_gold_sim_median": 0.0932576134800911,
+      "near_miss_count": 0,
+      "total_miss_count": 16,
+      "same_cat_but_wrong_item": 0,
+      "wrong_category_entirely": 22,
+      "fsl_median_rank": 5.5,
+      "base_median_rank": 20.0,
+      "top_failure_words": {
+        "dress": 19,
+        "black": 7,
+        "blue": 6,
+        "fit": 4,
+        "flare": 4,
+        "and": 3,
+        "tank": 2,
+        "sleeve": 2,
+        "pleated": 2,
+        "silk": 2,
+        "tunic": 2,
+        "white": 2,
+        "lace": 2,
+        "red": 2,
+        "purple": 2,
+        "wrap": 2,
+        "strappy": 1,
+        "printed": 1,
+        "asymmetrical": 1,
+        "cap": 1
+      }
+    },
+    "base_wins_analysis": {
+      "l1_distribution": {
+        "dresses": 13,
+        "outerwear": 1
+      }
+    },
+    "ap_diff_fsl_wins_mean": 0.10896215556929843,
+    "fsl_wins_sample": [
+      {
+        "query": "black strappy tank dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.16666666666666666,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 3,
+        "base_first_rank": 103,
+        "fsl_max_gold_sim": 0.10793568938970566,
+        "base_max_gold_sim": 0.08231517672538757,
+        "base_top5_cats": [
+          "black crepe drop waist short dress front",
+          "black midi tank dress",
+          "black crepe drop waist short dress front",
+          "black effortless tank dress",
+          "black crepe drop waist short dress front"
+        ],
+        "fsl_top5_cats": [
+          "black crepe drop waist short dress front",
+          "black midi tank dress",
+          "black strappy tank dress",
+          "black crepe drop waist short dress front",
+          "black midi tank dress"
+        ]
+      },
+      {
+        "query": "blue printed asymmetrical cap-sleeve dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.08333333333333333,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 6,
+        "base_first_rank": 28,
+        "fsl_max_gold_sim": 0.12496747076511383,
+        "base_max_gold_sim": 0.10205455124378204,
+        "base_top5_cats": [
+          "blue geometric printed crepe wrap shift dress",
+          "blue geometric printed crepe wrap shift dress",
+          "blue handkerchief hem floral print knit jersey dress",
+          "blue handkerchief hem floral print knit jersey dress",
+          "blue geometric printed crepe wrap shift dress"
+        ],
+        "fsl_top5_cats": [
+          "blue geometric printed crepe wrap shift dress",
+          "blue geometric printed crepe wrap shift dress",
+          "white v-neck floral dress",
+          "blue handkerchief hem floral print knit jersey dress",
+          "blue geometric printed crepe wrap shift dress"
+        ]
+      },
+      {
+        "query": "black ponte fit-&-flare dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.07142857142857142,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 7,
+        "base_first_rank": 26,
+        "fsl_max_gold_sim": 0.11102323979139328,
+        "base_max_gold_sim": 0.10086648911237717,
+        "base_top5_cats": [
+          "black ponte bow dress",
+          "black crepe a-line dress",
+          "gray valencia seamed dress",
+          "black women's flared midi-dress",
+          "black arrow crepe drop waist ruffle dress"
+        ],
+        "fsl_top5_cats": [
+          "black ponte bow dress",
+          "black crepe a-line dress",
+          "black women's flared midi-dress",
+          "black arrow crepe drop waist ruffle dress",
+          "black dress textured tailored dress"
+        ]
+      },
+      {
+        "query": "pink pleated fit-and-flare dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.08333333333333333,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 6,
+        "base_first_rank": 22,
+        "fsl_max_gold_sim": 0.09999876469373703,
+        "base_max_gold_sim": 0.09431097656488419,
+        "base_top5_cats": [
+          "red ottoman detailed dress",
+          "red ottoman detailed dress",
+          "pink spaghetti strap ribbed dress",
+          "red ottoman detailed dress",
+          "purple eyelet striped fit-and-flare dress"
+        ],
+        "fsl_top5_cats": [
+          "purple eyelet striped fit-and-flare dress",
+          "pink printed pleated dress",
+          "red ottoman detailed dress",
+          "red sleeveless midi taffeta dress",
+          "pink printed pleated dress"
+        ]
+      },
+      {
+        "query": "black mirage dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.02,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 10,
+        "base_first_rank": 21,
+        "fsl_max_gold_sim": 0.08894560486078262,
+        "base_max_gold_sim": 0.092204250395298,
+        "base_top5_cats": [
+          "black sleeveless peasant dress",
+          "black stretch dress",
+          "black stretch dress",
+          "black guipure lace pencil dress",
+          "blue ophelia lace dress"
+        ],
+        "fsl_top5_cats": [
+          "blue ophelia lace dress",
+          "black sleeveless peasant dress",
+          "black striped shift dress",
+          "black sleeveless peasant dress",
+          "black flock dress"
+        ]
+      },
+      {
+        "query": "blue samantha long dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.22666666666666666,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 3,
+        "base_first_rank": 15,
+        "fsl_max_gold_sim": 0.07570445537567139,
+        "base_max_gold_sim": 0.08135659247636795,
+        "base_top5_cats": [
+          "blue women's embroidered midi-dress",
+          "black open shoulder dress",
+          "blue tiered dress",
+          "blue b dress",
+          "black satin dress"
+        ],
+        "fsl_top5_cats": [
+          "blue tiered dress",
+          "blue women's embroidered midi-dress",
+          "blue samantha long dress",
+          "blue samantha long dress",
+          "blue belted shirt dress"
+        ]
+      },
+      {
+        "query": "black silk pleated tunic dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.047619047619047616,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 7,
+        "base_first_rank": 12,
+        "fsl_max_gold_sim": 0.11449316143989563,
+        "base_max_gold_sim": 0.10443045198917389,
+        "base_top5_cats": [
+          "gray guipure cape draped dress",
+          "black short dress",
+          "black sleeveless peasant dress",
+          "black short dress",
+          "black sleeveless peasant dress"
+        ],
+        "fsl_top5_cats": [
+          "black short dress",
+          "gray guipure cape draped dress",
+          "multicolor pleated print dress",
+          "black sleeveless peasant dress",
+          "multicolor pleated print dress"
+        ]
+      },
+      {
+        "query": "white my dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.4333333333333333,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 2,
+        "base_first_rank": 24,
+        "fsl_max_gold_sim": 0.10042526572942734,
+        "base_max_gold_sim": 0.08641241490840912,
+        "base_top5_cats": [
+          "white scarlett dress",
+          "black petite high neck midi dress",
+          "white sweetheart contrast neck mid dress",
+          "white strappy tank dress",
+          "multicolor ribbon organza fit flare dress"
+        ],
+        "fsl_top5_cats": [
+          "white a-line lace dress",
+          "white my dress",
+          "white my dress",
+          "white pleated dress",
+          "orange sheath dress"
+        ]
+      },
+      {
+        "query": "blue tilda v back dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.29166666666666663,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 3,
+        "base_first_rank": 147,
+        "fsl_max_gold_sim": 0.10932224243879318,
+        "base_max_gold_sim": 0.08700823038816452,
+        "base_top5_cats": [
+          "blue a-line floral dress",
+          "floral button front dress",
+          "blue jodie dress",
+          "blue overall dress",
+          "blue overall dress"
+        ],
+        "fsl_top5_cats": [
+          "blue a-line floral dress",
+          "blue overall dress",
+          "blue tilda v back dress",
+          "blue petite denim seamed fit flare dress",
+          "blue overall dress"
+        ]
+      },
+      {
+        "query": "blue lace fit-and-flare dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.225,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 4,
+        "base_first_rank": 45,
+        "fsl_max_gold_sim": 0.11581042408943176,
+        "base_max_gold_sim": 0.10159122943878174,
+        "base_top5_cats": [
+          "white lace skater dress contrast trim",
+          "blue x revolve fit flare dress",
+          "black overlay lace mini dress",
+          "blue lace midi dress",
+          "blue x revolve fit flare dress"
+        ],
+        "fsl_top5_cats": [
+          "white lace skater dress contrast trim",
+          "blue scalloped surplice v-neck fit-and-flare dress",
+          "blue x revolve fit flare dress",
+          "blue lace fit-and-flare dress",
+          "white lace skater dress contrast trim"
+        ]
+      },
+      {
+        "query": "gray layered dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.03125,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 8,
+        "base_first_rank": 27,
+        "fsl_max_gold_sim": 0.09094391763210297,
+        "base_max_gold_sim": 0.08548073470592499,
+        "base_top5_cats": [
+          "gray empire dress",
+          "black asymmetric hem dress",
+          "black asymmetric hem dress",
+          "blue empire silk-chiffon dress",
+          "gray empire dress"
+        ],
+        "fsl_top5_cats": [
+          "gray knee-length dress",
+          "black asymmetric hem dress",
+          "black asymmetric hem dress",
+          "black asymmetric hem dress",
+          "gray empire dress"
+        ]
+      },
+      {
+        "query": "red lola tunic",
+        "l1_category": "tops",
+        "fsl_ap10": 0.10555555555555556,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 5,
+        "base_first_rank": 22,
+        "fsl_max_gold_sim": 0.10419870167970657,
+        "base_max_gold_sim": 0.0960182175040245,
+        "base_top5_cats": [
+          "celine embroidered lace up shift dress",
+          "red cotton sweatshirt dress chiffon hem",
+          "red cotton sweatshirt dress chiffon hem",
+          "red keyhole knit swing dress",
+          "red jolie bell sleeve woven shift dress"
+        ],
+        "fsl_top5_cats": [
+          "celine embroidered lace up shift dress",
+          "red twisted poplin wrap dress",
+          "red short dress",
+          "red cotton sweatshirt dress chiffon hem",
+          "red lola tunic"
+        ]
+      },
+      {
+        "query": "black a-line sleeveless dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.025,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 8,
+        "base_first_rank": 16,
+        "fsl_max_gold_sim": 0.09985184669494629,
+        "base_max_gold_sim": 0.10948832333087921,
+        "base_top5_cats": [
+          "black sleeveless mock neck swing dress",
+          "black halter neck back gown",
+          "black french terry dress",
+          "black crepe a-line dress",
+          "black ponte bow dress"
+        ],
+        "fsl_top5_cats": [
+          "black crepe a-line dress",
+          "black ponte bow dress",
+          "black dress textured tailored dress",
+          "black knit midi dress",
+          "black shift dress"
+        ]
+      },
+      {
+        "query": "purple textured wrap waist sheath dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.047619047619047616,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 7,
+        "base_first_rank": 11,
+        "fsl_max_gold_sim": 0.09674688428640366,
+        "base_max_gold_sim": 0.10330464690923691,
+        "base_top5_cats": [
+          "purple crepe dress",
+          "blue tilda dress",
+          "brown petite grid print dress",
+          "blue tegan silk dress",
+          "brown petite grid print dress"
+        ],
+        "fsl_top5_cats": [
+          "purple crepe dress",
+          "blue tilda dress",
+          "brown petite grid print dress",
+          "black satin dress",
+          "brown petite grid print dress"
+        ]
+      },
+      {
+        "query": "purple flared dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.03125,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 8,
+        "base_first_rank": 16,
+        "fsl_max_gold_sim": 0.07936231046915054,
+        "base_max_gold_sim": 0.08260457217693329,
+        "base_top5_cats": [
+          "purple toni sleeveless dress",
+          "purple toni sleeveless dress",
+          "purple toni sleeveless dress",
+          "purple toni sleeveless dress",
+          "purple toni sleeveless dress"
+        ],
+        "fsl_top5_cats": [
+          "purple toni sleeveless dress",
+          "purple toni sleeveless dress",
+          "purple toni sleeveless dress",
+          "purple toni sleeveless dress",
+          "blue tilda dress"
+        ]
+      },
+      {
+        "query": "blue short-sleeve slim signature button-front shirtdress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.11666666666666665,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 2,
+        "base_first_rank": 11,
+        "fsl_max_gold_sim": 0.10668284446001053,
+        "base_max_gold_sim": 0.09833312034606934,
+        "base_top5_cats": [
+          "blue signature slim short-sleeve shirtdress",
+          "blue floral sateen shirtdress",
+          "blue signature slim short-sleeve shirtdress",
+          "blue jodie dress",
+          "blue shirt dress"
+        ],
+        "fsl_top5_cats": [
+          "blue signature slim short-sleeve shirtdress",
+          "blue short-sleeve slim signature button-front shirtdress",
+          "blue signature slim short-sleeve shirtdress",
+          "blue signature slim short-sleeve shirtdress",
+          "blue swallow structured shirtdress"
+        ]
+      },
+      {
+        "query": "green delia wrap d-ring midi dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.08333333333333333,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 4,
+        "base_first_rank": 13,
+        "fsl_max_gold_sim": 0.07155150175094604,
+        "base_max_gold_sim": 0.06743094325065613,
+        "base_top5_cats": [
+          "floral button front dress",
+          "yellow floral-print silk-crepe wrap dress",
+          "brown printed linen wrap dress",
+          "green candy dress",
+          "green geometric cotton poplin dress"
+        ],
+        "fsl_top5_cats": [
+          "floral button front dress",
+          "gray tie-waist dress",
+          "brown printed linen wrap dress",
+          "green delia wrap d-ring midi dress",
+          "yellow floral-print silk-crepe wrap dress"
+        ]
+      },
+      {
+        "query": "red juliet silk-blend maxi dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.08333333333333333,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 5,
+        "base_first_rank": 12,
+        "fsl_max_gold_sim": 0.08561230450868607,
+        "base_max_gold_sim": 0.07939794659614563,
+        "base_top5_cats": [
+          "red so social dress",
+          "red tilda paisley-print midi dress",
+          "red so social dress",
+          "red cotton sweatshirt dress chiffon hem",
+          "blue floral-print silk dress"
+        ],
+        "fsl_top5_cats": [
+          "red cotton sweatshirt dress chiffon hem",
+          "red strappy-back skater dress",
+          "red midi dress",
+          "red so social dress",
+          "red juliet silk-blend maxi dress"
+        ]
+      },
+      {
+        "query": "black print cora mock-neck dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.1,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 5,
+        "base_first_rank": 12,
+        "fsl_max_gold_sim": 0.10732145607471466,
+        "base_max_gold_sim": 0.09927694499492645,
+        "base_top5_cats": [
+          "orange midi dress",
+          "orange midi dress",
+          "black stitch dress",
+          "black stitch dress",
+          "black sleeveless mock-neck polka-dot shift dress"
+        ],
+        "fsl_top5_cats": [
+          "black stitch dress",
+          "black sleeveless mock-neck polka-dot shift dress",
+          "black stitch dress",
+          "black stitch dress",
+          "black print cora mock-neck dress"
+        ]
+      },
+      {
+        "query": "white glitter lace fit-and-flare dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.037037037037037035,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 9,
+        "base_first_rank": 19,
+        "fsl_max_gold_sim": 0.10684831440448761,
+        "base_max_gold_sim": 0.09490825235843658,
+        "base_top5_cats": [
+          "white all over baroque sequin mesh mini dress plunge back",
+          "white all over baroque sequin mesh mini dress plunge back",
+          "white sleeveless novelty woven trapeze dress",
+          "white all over baroque sequin mesh mini dress plunge back",
+          "white sleeveless novelty woven trapeze dress"
+        ],
+        "fsl_top5_cats": [
+          "white all over baroque sequin mesh mini dress plunge back",
+          "white all over baroque sequin mesh mini dress plunge back",
+          "white sleeveless novelty woven trapeze dress",
+          "white all over baroque sequin mesh mini dress plunge back",
+          "white lace drop waist dress"
+        ]
+      },
+      {
+        "query": "black it now tank",
+        "l1_category": "tops",
+        "fsl_ap10": 0.02040816326530612,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 7,
+        "base_first_rank": 11,
+        "fsl_max_gold_sim": 0.07751955837011337,
+        "base_max_gold_sim": 0.08306289464235306,
+        "base_top5_cats": [
+          "black 1 shoulder tank dress",
+          "black cotton tank midi dress",
+          "black french terry dress",
+          "black french terry dress",
+          "black effortless cotton modal tank dress"
+        ],
+        "fsl_top5_cats": [
+          "black knit midi dress",
+          "black cotton tank midi dress",
+          "black 1 shoulder tank dress",
+          "black effortless cotton modal tank dress",
+          "black short dress"
+        ]
+      },
+      {
+        "query": "sand blue dress",
+        "l1_category": "dresses",
+        "fsl_ap10": 0.06666666666666667,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 3,
+        "base_first_rank": 30,
+        "fsl_max_gold_sim": 0.09323500096797943,
+        "base_max_gold_sim": 0.08226899057626724,
+        "base_top5_cats": [
+          "blue muscle tee dress",
+          "blue tank dress",
+          "blue tank dress",
+          "black petite printed handkerchief-hem dress",
+          "white bias silk dress"
+        ],
+        "fsl_top5_cats": [
+          "blue muscle tee dress",
+          "blue midi slip dress",
+          "sand blue dress",
+          "blue muscle tee dress",
+          "black petite printed handkerchief-hem dress"
+        ]
+      }
+    ]
+  },
+  "atlas": {
+    "benchmark": "atlas",
+    "total_queries": 9,
+    "bucket_counts": {
+      "both_win": 9,
+      "both_fail": 0,
+      "fsl_wins": 0,
+      "base_wins": 0
+    },
+    "bucket_pcts": {
+      "both_win": 100.0,
+      "both_fail": 0.0,
+      "fsl_wins": 0.0,
+      "base_wins": 0.0
+    },
+    "fsl_wins_analysis": {},
+    "base_wins_analysis": {},
+    "ap_diff_fsl_wins_mean": 0.0,
+    "fsl_wins_sample": []
+  },
+  "polyvore": {
+    "benchmark": "polyvore",
+    "total_queries": 150,
+    "bucket_counts": {
+      "both_win": 131,
+      "both_fail": 13,
+      "fsl_wins": 4,
+      "base_wins": 2
+    },
+    "bucket_pcts": {
+      "both_win": 87.33333333333333,
+      "both_fail": 8.666666666666668,
+      "fsl_wins": 2.666666666666667,
+      "base_wins": 1.3333333333333335
+    },
+    "fsl_wins_analysis": {
+      "l1_distribution": {
+        "accessories": 1,
+        "other": 1,
+        "outerwear": 1,
+        "shoes": 1
+      },
+      "base_gold_sim_mean": 0.058499828446656466,
+      "base_gold_sim_median": 0.06959652155637741,
+      "near_miss_count": 0,
+      "total_miss_count": 4,
+      "same_cat_but_wrong_item": 0,
+      "wrong_category_entirely": 4,
+      "fsl_median_rank": 7.0,
+      "base_median_rank": 19.0,
+      "top_failure_words": {
+        "jewelry": 1,
+        "body": 1,
+        "cleansers": 1,
+        "outerwear": 1,
+        "shoes": 1
+      }
+    },
+    "base_wins_analysis": {
+      "l1_distribution": {
+        "dresses": 1,
+        "other": 1
+      }
+    },
+    "ap_diff_fsl_wins_mean": 0.03107142857142857,
+    "fsl_wins_sample": [
+      {
+        "query": "Jewelry",
+        "l1_category": "accessories",
+        "fsl_ap10": 0.017857142857142856,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 7,
+        "base_first_rank": 24,
+        "fsl_max_gold_sim": 0.06980619579553604,
+        "base_max_gold_sim": 0.07041514664888382,
+        "base_top5_cats": [
+          "Rings",
+          "Bracelets & Bangles",
+          "Bracelets & Bangles",
+          "Necklaces",
+          "Bracelets & Bangles"
+        ],
+        "fsl_top5_cats": [
+          "Rings",
+          "Necklaces",
+          "Necklaces",
+          "Bracelets & Bangles",
+          "Bracelets & Bangles"
+        ]
+      },
+      {
+        "query": "Body Cleansers",
+        "l1_category": "other",
+        "fsl_ap10": 0.07142857142857142,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 7,
+        "base_first_rank": 20,
+        "fsl_max_gold_sim": 0.05381324514746666,
+        "base_max_gold_sim": 0.02360035665333271,
+        "base_top5_cats": [
+          "Beauty Products",
+          "Body Moisturizers",
+          "Beauty Products",
+          "Beauty Products",
+          "Home Decor"
+        ],
+        "fsl_top5_cats": [
+          "Beauty Products",
+          "Body Moisturizers",
+          "Beauty Products",
+          "Face Powder",
+          "Beauty Products"
+        ]
+      },
+      {
+        "query": "Outerwear",
+        "l1_category": "outerwear",
+        "fsl_ap10": 0.01,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 10,
+        "base_first_rank": 11,
+        "fsl_max_gold_sim": 0.07573111355304718,
+        "base_max_gold_sim": 0.07120591402053833,
+        "base_top5_cats": [
+          "Coats",
+          "Coats",
+          "Coats",
+          "Coats",
+          "Coats"
+        ],
+        "fsl_top5_cats": [
+          "Jackets",
+          "Coats",
+          "Jackets",
+          "Coats",
+          "Jackets"
+        ]
+      },
+      {
+        "query": "Shoes",
+        "l1_category": "shoes",
+        "fsl_ap10": 0.025,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 4,
+        "base_first_rank": 18,
+        "fsl_max_gold_sim": 0.07848642021417618,
+        "base_max_gold_sim": 0.068777896463871,
+        "base_top5_cats": [
+          "Pumps",
+          "Flats",
+          "Sandals",
+          "Pumps",
+          "Pumps"
+        ],
+        "fsl_top5_cats": [
+          "Oxfords",
+          "Men's Dress Shoes",
+          "Flats",
+          "Shoes",
+          "Boots"
+        ]
+      }
+    ]
+  },
+  "KAGL": {
+    "benchmark": "KAGL",
+    "total_queries": 43,
+    "bucket_counts": {
+      "both_win": 38,
+      "both_fail": 3,
+      "fsl_wins": 2,
+      "base_wins": 0
+    },
+    "bucket_pcts": {
+      "both_win": 88.37209302325581,
+      "both_fail": 6.976744186046512,
+      "fsl_wins": 4.651162790697675,
+      "base_wins": 0.0
+    },
+    "fsl_wins_analysis": {
+      "l1_distribution": {
+        "accessories": 1,
+        "tops": 1
+      },
+      "base_gold_sim_mean": 0.08162331953644753,
+      "base_gold_sim_median": 0.08162331953644753,
+      "near_miss_count": 0,
+      "total_miss_count": 1,
+      "same_cat_but_wrong_item": 0,
+      "wrong_category_entirely": 2,
+      "fsl_median_rank": 5.5,
+      "base_median_rank": 14.0,
+      "top_failure_words": {
+        "hat": 1,
+        "tunics": 1
+      }
+    },
+    "base_wins_analysis": {},
+    "ap_diff_fsl_wins_mean": 0.07093253968253968,
+    "fsl_wins_sample": [
+      {
+        "query": "Hat",
+        "l1_category": "accessories",
+        "fsl_ap10": 0.0625,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 8,
+        "base_first_rank": 11,
+        "fsl_max_gold_sim": 0.06955242156982422,
+        "base_max_gold_sim": 0.06261218339204788,
+        "base_top5_cats": [
+          "Caps",
+          "Caps",
+          "Caps",
+          "Caps",
+          "Caps"
+        ],
+        "fsl_top5_cats": [
+          "Caps",
+          "Caps",
+          "Caps",
+          "Caps",
+          "Caps"
+        ]
+      },
+      {
+        "query": "Tunics",
+        "l1_category": "tops",
+        "fsl_ap10": 0.07936507936507937,
+        "base_ap10": 0.0,
+        "fsl_first_rank": 3,
+        "base_first_rank": 17,
+        "fsl_max_gold_sim": 0.1039993092417717,
+        "base_max_gold_sim": 0.10063445568084717,
+        "base_top5_cats": [
+          "Kurtas",
+          "Kurtas",
+          "Kurtas",
+          "Kurtas",
+          "Kurtis"
+        ],
+        "fsl_top5_cats": [
+          "Kurtis",
+          "Kurtis",
+          "Tunics",
+          "Kurtis",
+          "Kurtis"
+        ]
+      }
+    ]
+  },
+  "drift": {
+    "fashion200k": {
+      "mean_cosine_distance": 0.021644879579544068,
+      "median_cosine_distance": 0.019258469343185425,
+      "max_cosine_distance": 0.11340773105621338,
+      "min_cosine_distance": 0.0059149861335754395,
+      "std_cosine_distance": 0.010198933054795167
+    },
+    "atlas": {
+      "mean_cosine_distance": 0.006996273994445801,
+      "median_cosine_distance": 0.005413353443145752,
+      "max_cosine_distance": 0.014443576335906982,
+      "min_cosine_distance": 0.0035313963890075684,
+      "std_cosine_distance": 0.003304595202497419
+    },
+    "polyvore": {
+      "mean_cosine_distance": 0.004597741762797038,
+      "median_cosine_distance": 0.003706306219100952,
+      "max_cosine_distance": 0.015740513801574707,
+      "min_cosine_distance": 0.0016152262687683105,
+      "std_cosine_distance": 0.0026220363459946027
+    },
+    "KAGL": {
+      "mean_cosine_distance": 0.004684065663537314,
+      "median_cosine_distance": 0.004132390022277832,
+      "max_cosine_distance": 0.011013984680175781,
+      "min_cosine_distance": 0.001893460750579834,
+      "std_cosine_distance": 0.001880727837872367
+    }
+  }
+}

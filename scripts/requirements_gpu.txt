@@ -1,0 +1,6 @@
+open_clip_torch
+datasets
+torch
+torchvision
+Pillow
+numpy

@@ -1,0 +1,58 @@
+[
+  {
+    "model": "google-siglip2-b16-384",
+    "dataset": "atlas",
+    "run_name": "Google-SigLIP2-B16-384_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.22388,
+        "MAP@10": 0.3804,
+        "NDCG@1": 0.358,
+        "NDCG@10": 0.46167,
+        "P@1": 0.358,
+        "P@10": 0.1403,
+        "Recall@1": 0.22388,
+        "Recall@10": 0.573,
+        "MRR": 0.46641
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  },
+  {
+    "model": "google-siglip2-b16-384",
+    "dataset": "polyvore",
+    "run_name": "Google-SigLIP2-B16-384_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.555,
+        "MAP@10": 0.64893,
+        "NDCG@1": 0.555,
+        "NDCG@10": 0.69462,
+        "P@1": 0.555,
+        "P@10": 0.0838,
+        "Recall@1": 0.555,
+        "Recall@10": 0.838,
+        "MRR": 0.64893
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "baseline": {
+    "fashion200k": {
+      "recall@1": 0.23,
+      "recall@10": 0.81,
+      "mrr": 0.414545634920635,
+      "precision@1": 0.23,
+      "precision@10": 0.08649999999999991,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "atlas": {
+      "recall@1": 0.365,
+      "recall@10": 0.79,
+      "mrr": 0.4910436507936508,
+      "precision@1": 0.365,
+      "precision@10": 0.10449999999999998,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "polyvore": {
+      "recall@1": 0.68,
+      "recall@10": 0.935,
+      "mrr": 0.7745039682539684,
+      "precision@1": 0.68,
+      "precision@10": 0.09349999999999997,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "KAGL": {
+      "recall@1": 0.41,
+      "recall@10": 0.845,
+      "mrr": 0.5569623015873014,
+      "precision@1": 0.41,
+      "precision@10": 0.08899999999999991,
+      "n_queries": 200,
+      "n_docs": 1200
+    }
+  },
+  "trained": {},
+  "fsl_baseline_path": "/Users/rohit.anand/Desktop/Hobby/MODA/results/v4_gcl/baseline_v4/full_results.json"
+}

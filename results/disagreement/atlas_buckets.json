@@ -1,0 +1,28 @@
+{
+  "dataset": "atlas",
+  "n_queries_with_gold": 2000,
+  "hit10_A": 0.42,
+  "hit10_B": 0.4365,
+  "hit10_Fusion": 0.4465,
+  "hit10_Oracle_AB": 0.516,
+  "buckets_count": {
+    "BOTH_HIT_TOP10": 681,
+    "A_HIT_ONLY_TOP10": 159,
+    "B_HIT_ONLY_TOP10": 192,
+    "FUSION_RECOVERS_TOP10": 15,
+    "FUSION_HURTS_TOP10": 154,
+    "BOTH_MISS_TOP10": 968,
+    "BOTH_MISS_TOP100": 385,
+    "RERANKER_REACHABLE": 583
+  },
+  "buckets_pct": {
+    "BOTH_HIT_TOP10": 34.05,
+    "A_HIT_ONLY_TOP10": 7.95,
+    "B_HIT_ONLY_TOP10": 9.6,
+    "FUSION_RECOVERS_TOP10": 0.75,
+    "FUSION_HURTS_TOP10": 7.7,
+    "BOTH_MISS_TOP10": 48.4,
+    "BOTH_MISS_TOP100": 19.25,
+    "RERANKER_REACHABLE": 29.15
+  }
+}

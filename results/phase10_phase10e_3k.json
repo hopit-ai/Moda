@@ -1,0 +1,145 @@
+{
+  "model_source": "fsl",
+  "checkpoint": "/Users/rohit.anand/Desktop/Hobby/MODA/checkpoints/v3_phase10/phase10e_title_strong_anchor/best.pt",
+  "corpus_size": 3000,
+  "results": {
+    "fashion200k": {
+      "text_to_image": {
+        "map10": 0.6569612599206348,
+        "recall_1": 0.5425,
+        "recall_10": 0.8896527777777778,
+        "avg_recall": 0.7160763888888889,
+        "precision_1": 0.5425,
+        "precision_10": 0.08940000000000001,
+        "mrr": 0.6576253968253968
+      },
+      "text_to_image_map10": 0.6569612599206348,
+      "category3_to_product": {
+        "map10": 0.3142364926739927,
+        "recall_1": 0.34615384615384615,
+        "recall_10": 0.49693047337278107,
+        "avg_recall": 0.4215421597633136,
+        "precision_1": 0.34615384615384615,
+        "precision_10": 0.11634615384615386,
+        "mrr": 0.45664300976800976
+      },
+      "category3_to_product_map10": 0.3142364926739927,
+      "category2_to_product": {
+        "map10": 0.5269662058371735,
+        "recall_1": 0.7419354838709677,
+        "recall_10": 0.09698556891470335,
+        "avg_recall": 0.4194605263928356,
+        "precision_1": 0.7419354838709677,
+        "precision_10": 0.6419354838709677,
+        "mrr": 0.8451612903225806
+      },
+      "category2_to_product_map10": 0.5269662058371735,
+      "category1_to_product": {
+        "map10": 0.9414206349206349,
+        "recall_1": 0.8,
+        "recall_10": 0.017743580889845616,
+        "avg_recall": 0.40887179044492283,
+        "precision_1": 0.8,
+        "precision_10": 0.9800000000000001,
+        "mrr": 0.9
+      },
+      "category1_to_product_map10": 0.9414206349206349,
+      "primary_map10": 0.6569612599206348
+    },
+    "atlas": {
+      "text_to_image": {
+        "map10": 0.3425059892290249,
+        "recall_1": 0.2605,
+        "recall_10": 0.5621421481296481,
+        "avg_recall": 0.4113210740648241,
+        "precision_1": 0.2605,
+        "precision_10": 0.06665,
+        "mrr": 0.35979960317460313
+      },
+      "text_to_image_map10": 0.3425059892290249,
+      "category_to_product": {
+        "map10": 0.6333333333333333,
+        "recall_1": 0.6666666666666666,
+        "recall_10": 0.01147622534549874,
+        "avg_recall": 0.3390714460060827,
+        "precision_1": 0.6666666666666666,
+        "precision_10": 0.6333333333333333,
+        "mrr": 0.6666666666666666
+      },
+      "category_to_product_map10": 0.6333333333333333,
+      "primary_map10": 0.3425059892290249
+    },
+    "polyvore": {
+      "text_to_image": {
+        "map10": 0.7362559523809523,
+        "recall_1": 0.6515,
+        "recall_10": 0.9025,
+        "avg_recall": 0.777,
+        "precision_1": 0.6515,
+        "precision_10": 0.09025000000000001,
+        "mrr": 0.7362559523809523
+      },
+      "text_to_image_map10": 0.7362559523809523,
+      "category_to_product": {
+        "map10": 0.5622231945103623,
+        "recall_1": 0.6511627906976745,
+        "recall_10": 0.550792332935442,
+        "avg_recall": 0.6009775618165583,
+        "precision_1": 0.6511627906976745,
+        "precision_10": 0.44476744186046513,
+        "mrr": 0.7575812107788851
+      },
+      "category_to_product_map10": 0.5622231945103623,
+      "primary_map10": 0.7362559523809523
+    },
+    "KAGL": {
+      "text_to_image": {
+        "map10": 0.5450024537037037,
+        "recall_1": 0.418,
+        "recall_10": 0.8343952380952382,
+        "avg_recall": 0.6261976190476192,
+        "precision_1": 0.418,
+        "precision_10": 0.08875,
+        "mrr": 0.5507771825396826
+      },
+      "text_to_image_map10": 0.5450024537037037,
+      "category3_to_product": {
+        "map10": 0.7600465758504817,
+        "recall_1": 0.8202247191011236,
+        "recall_10": 0.5634827486254214,
+        "avg_recall": 0.6918537338632724,
+        "precision_1": 0.8202247191011236,
+        "precision_10": 0.6370786516853932,
+        "mrr": 0.8793204922418406
+      },
+      "category3_to_product_map10": 0.7600465758504817,
+      "category2_to_product": {
+        "map10": 0.803666973733938,
+        "recall_1": 0.84375,
+        "recall_10": 0.34230692497849785,
+        "avg_recall": 0.593028462489249,
+        "precision_1": 0.84375,
+        "precision_10": 0.7593749999999999,
+        "mrr": 0.8815104166666667
+      },
+      "category2_to_product_map10": 0.803666973733938,
+      "category1_to_product": {
+        "map10": 0.8,
+        "recall_1": 0.8,
+        "recall_10": 0.019149904978743824,
+        "avg_recall": 0.4095749524893719,
+        "precision_1": 0.8,
+        "precision_10": 0.8,
+        "mrr": 0.8
+      },
+      "category1_to_product_map10": 0.8,
+      "primary_map10": 0.5450024537037037
+    }
+  },
+  "fsl_baseline": {
+    "fashion200k": 0.3859,
+    "atlas": 0.6919,
+    "polyvore": 0.5783,
+    "KAGL": 0.6779
+  }
+}

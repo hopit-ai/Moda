@@ -1,0 +1,114 @@
+[
+  {
+    "model": "moda-siglip2-path1",
+    "dataset": "fashion200k",
+    "run_name": "MoDA-SigLIP2-PathOne_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.40554,
+        "MAP@10": 0.52974,
+        "NDCG@1": 0.4125,
+        "NDCG@10": 0.59225,
+        "P@1": 0.4125,
+        "P@10": 0.08175,
+        "Recall@1": 0.40554,
+        "Recall@10": 0.78731,
+        "MRR": 0.53113
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  },
+  {
+    "model": "moda-siglip2-path1",
+    "dataset": "atlas",
+    "run_name": "MoDA-SigLIP2-PathOne_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.20472,
+        "MAP@10": 0.35193,
+        "NDCG@1": 0.3245,
+        "NDCG@10": 0.43003,
+        "P@1": 0.3245,
+        "P@10": 0.13055,
+        "Recall@1": 0.20472,
+        "Recall@10": 0.54289,
+        "MRR": 0.43017
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  },
+  {
+    "model": "moda-siglip2-path1",
+    "dataset": "polyvore",
+    "run_name": "MoDA-SigLIP2-PathOne_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.5155,
+        "MAP@10": 0.61505,
+        "NDCG@1": 0.5155,
+        "NDCG@10": 0.66493,
+        "P@1": 0.5155,
+        "P@10": 0.0822,
+        "Recall@1": 0.5155,
+        "Recall@10": 0.822,
+        "MRR": 0.61505
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  },
+  {
+    "model": "moda-siglip2-path1",
+    "dataset": "KAGL",
+    "run_name": "MoDA-SigLIP2-PathOne_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.34966,
+        "MAP@10": 0.48474,
+        "NDCG@1": 0.3865,
+        "NDCG@10": 0.55164,
+        "P@1": 0.3865,
+        "P@10": 0.0912,
+        "Recall@1": 0.34966,
+        "Recall@10": 0.73302,
+        "MRR": 0.50541
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  }
+]

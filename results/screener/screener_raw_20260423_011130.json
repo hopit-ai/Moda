@@ -1,0 +1,58 @@
+[
+  {
+    "model": "google-siglip-so400m-384",
+    "dataset": "KAGL",
+    "run_name": "Google-SigLIP-SO400M-384_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.38365,
+        "MAP@10": 0.52197,
+        "NDCG@1": 0.4215,
+        "NDCG@10": 0.59145,
+        "P@1": 0.4215,
+        "P@10": 0.0991,
+        "Recall@1": 0.38365,
+        "Recall@10": 0.77918,
+        "MRR": 0.54193
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  },
+  {
+    "model": "google-siglip-so400m-384",
+    "dataset": "fashion200k",
+    "run_name": "Google-SigLIP-SO400M-384_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.32429,
+        "MAP@10": 0.44311,
+        "NDCG@1": 0.3295,
+        "NDCG@10": 0.50789,
+        "P@1": 0.3295,
+        "P@10": 0.07375,
+        "Recall@1": 0.32429,
+        "Recall@10": 0.71111,
+        "MRR": 0.44536
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  }
+]

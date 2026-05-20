@@ -1,0 +1,58 @@
+[
+  {
+    "model": "fashion-siglip",
+    "dataset": "atlas",
+    "run_name": "Marqo-FashionSigLIP_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.2364,
+        "MAP@10": 0.39085,
+        "NDCG@1": 0.3655,
+        "NDCG@10": 0.46623,
+        "P@1": 0.3655,
+        "P@10": 0.1399,
+        "Recall@1": 0.2364,
+        "Recall@10": 0.56773,
+        "MRR": 0.46692
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  },
+  {
+    "model": "fashion-siglip",
+    "dataset": "polyvore",
+    "run_name": "Marqo-FashionSigLIP_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.526,
+        "MAP@10": 0.6249,
+        "NDCG@1": 0.526,
+        "NDCG@10": 0.67313,
+        "P@1": 0.526,
+        "P@10": 0.08245,
+        "Recall@1": 0.526,
+        "Recall@10": 0.8245,
+        "MRR": 0.6249
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  }
+]

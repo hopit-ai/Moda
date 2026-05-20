@@ -1,0 +1,107 @@
+{
+  "gaps": [
+    {
+      "benchmark": "deepfashion_inshop",
+      "task": "text_to_image",
+      "our_mrr": 0.2928391053391054,
+      "ref_mrr": 0.40770717377860244,
+      "delta": -0.11486806843949704,
+      "pct_change": -28.174159256239612,
+      "recipe": {
+        "data_strategy": "More in-shop product photos with matching queries; increase brand+color queries",
+        "pattern": "Studio photography matching, specific product identifiers"
+      }
+    },
+    {
+      "benchmark": "polyvore",
+      "task": "text_to_image",
+      "our_mrr": 0.6257063492063493,
+      "ref_mrr": 0.7401924603174606,
+      "delta": -0.11448611111111129,
+      "pct_change": -15.467073396290667,
+      "recipe": {
+        "data_strategy": "Outfit/styling queries; multi-item coordination; home decor and accessories with style context",
+        "pattern": "Style-centric queries, outfit coordination, lifestyle items"
+      }
+    },
+    {
+      "benchmark": "fashion200k",
+      "task": "text_to_image",
+      "our_mrr": 0.35610119047619065,
+      "ref_mrr": 0.4550654761904763,
+      "delta": -0.09896428571428567,
+      "pct_change": -21.747262952740957,
+      "recipe": {
+        "data_strategy": "Natural language product descriptions 10-30 words; modifier-based queries",
+        "pattern": "Descriptive phrases with modifiers and relative comparisons"
+      }
+    },
+    {
+      "benchmark": "polyvore",
+      "task": "category_to_product",
+      "our_mrr": 0.6096519767327221,
+      "ref_mrr": 0.6938898747904959,
+      "delta": -0.08423789805777382,
+      "pct_change": -12.139952046887485,
+      "recipe": {
+        "data_strategy": "Outfit/styling queries; multi-item coordination; home decor and accessories with style context",
+        "pattern": "Style-centric queries, outfit coordination, lifestyle items"
+      }
+    },
+    {
+      "benchmark": "atlas",
+      "task": "text_to_image",
+      "our_mrr": 0.37407738095238097,
+      "ref_mrr": 0.42260714285714296,
+      "delta": -0.04852976190476199,
+      "pct_change": -11.483422068227291,
+      "recipe": {
+        "data_strategy": "Broad product catalog queries including home, beauty, lifestyle; simple category searches",
+        "pattern": "Short category-based queries across diverse product types"
+      }
+    },
+    {
+      "benchmark": "KAGL",
+      "task": "text_to_image",
+      "our_mrr": 0.5572440476190477,
+      "ref_mrr": 0.5804960317460318,
+      "delta": -0.02325198412698415,
+      "pct_change": -4.005537136411802,
+      "recipe": {
+        "data_strategy": "E-commerce short titles with brand, color, material; categorical labels",
+        "pattern": "Standard e-commerce product titles, Indian fashion terms"
+      }
+    },
+    {
+      "benchmark": "deepfashion_multimodal",
+      "task": "text_to_image",
+      "our_mrr": 0.021541666666666667,
+      "ref_mrr": 0.03285119047619048,
+      "delta": -0.011309523809523811,
+      "pct_change": -34.426526544663886,
+      "recipe": {
+        "data_strategy": "Template descriptions ('The upper clothing has...'); attribute-structured text",
+        "pattern": "Template-structured attribute descriptions"
+      }
+    },
+    {
+      "benchmark": "iMaterialist",
+      "task": "category_to_product",
+      "our_mrr": 0.6427731092436977,
+      "ref_mrr": 0.6502100840336136,
+      "delta": -0.0074369747899158956,
+      "pct_change": -1.1437802907915882,
+      "recipe": {}
+    }
+  ],
+  "wins": [
+    {
+      "benchmark": "atlas",
+      "task": "category_to_product",
+      "our_mrr": 1.0,
+      "ref_mrr": 1.0,
+      "delta": 0.0,
+      "pct_change": 0.0
+    }
+  ]
+}

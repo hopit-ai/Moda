@@ -1,0 +1,30 @@
+[
+  {
+    "model": "siglip-l16-lora-v2-smoke",
+    "dataset": "fashion200k",
+    "run_name": "MoDA-SigLIP-L16-LoRA-V2-Smoke_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.0741,
+        "MAP@10": 0.10448,
+        "NDCG@1": 0.076,
+        "NDCG@10": 0.12449,
+        "P@1": 0.076,
+        "P@10": 0.0194,
+        "Recall@1": 0.0741,
+        "Recall@10": 0.18743,
+        "MRR": 0.10623
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  }
+]

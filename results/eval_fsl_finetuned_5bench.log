@@ -1,0 +1,122 @@
+01:13:38  INFO     Device: mps
+01:13:47  INFO     Loading Marqo-FashionSigLIP...
+01:13:47  INFO     Parsing model identifier. Schema: hf-hub, Identifier: Marqo/marqo-fashionSigLIP
+01:13:47  INFO     Attempting to load config from HF Hub: Marqo/marqo-fashionSigLIP
+01:13:47  INFO     HTTP Request: HEAD https://huggingface.co/Marqo/marqo-fashionSigLIP/resolve/main/open_clip_config.json "HTTP/1.1 307 Temporary Redirect"
+01:13:47  INFO     HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Marqo/marqo-fashionSigLIP/c56244cc94f92419e8369fa71efdaf403b124ce8/open_clip_config.json "HTTP/1.1 200 OK"
+01:13:47  INFO     Loaded model config from HF Hub: Marqo/marqo-fashionSigLIP
+01:13:48  INFO     HTTP Request: HEAD https://huggingface.co/Marqo/marqo-fashionSigLIP/resolve/main/open_clip_model.safetensors "HTTP/1.1 302 Found"
+01:13:48  INFO     Found default weights file on HF Hub: /Users/rohit.anand/.cache/huggingface/hub/models--Marqo--marqo-fashionSigLIP/snapshots/c56244cc94f92419e8369fa71efdaf403b124ce8/open_clip_model.safetensors
+01:13:48  INFO     Instantiating model architecture: CustomTextCLIP
+01:13:53  INFO     Loading full pretrained weights from: /Users/rohit.anand/.cache/huggingface/hub/models--Marqo--marqo-fashionSigLIP/snapshots/c56244cc94f92419e8369fa71efdaf403b124ce8/open_clip_model.safetensors
+01:13:54  INFO     Final image preprocessing configuration set: {'size': (224, 224), 'mode': 'RGB', 'mean': [0.5, 0.5, 0.5], 'std': [0.5, 0.5, 0.5], 'interpolation': 'bicubic', 'resize_mode': 'squash', 'fill_color': 0}
+01:13:54  INFO     Model hf-hub:Marqo/marqo-fashionSigLIP creation process complete.
+01:13:54  INFO     Parsing tokenizer identifier. Schema: hf-hub, Identifier: Marqo/marqo-fashionSigLIP
+01:13:54  INFO     Attempting to load config from hf-hub:Marqo/marqo-fashionSigLIP
+01:13:55  INFO     HTTP Request: HEAD https://huggingface.co/Marqo/marqo-fashionSigLIP/resolve/main/open_clip_config.json "HTTP/1.1 307 Temporary Redirect"
+01:13:55  INFO     HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/Marqo/marqo-fashionSigLIP/c56244cc94f92419e8369fa71efdaf403b124ce8/open_clip_config.json "HTTP/1.1 200 OK"
+01:13:55  INFO     Using HFTokenizer with source: 'timm/ViT-B-16-SigLIP', mode: 'None'
+01:13:55  INFO     HTTP Request: HEAD https://huggingface.co/timm/ViT-B-16-SigLIP/resolve/main/config.json "HTTP/1.1 404 Not Found"
+01:13:55  INFO     HTTP Request: HEAD https://huggingface.co/timm/ViT-B-16-SigLIP/resolve/main/config.json "HTTP/1.1 404 Not Found"
+01:13:56  INFO     HTTP Request: HEAD https://huggingface.co/timm/ViT-B-16-SigLIP/resolve/main/tokenizer_config.json "HTTP/1.1 307 Temporary Redirect"
+01:13:56  INFO     HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/timm/ViT-B-16-SigLIP/41f575766f40e752fdd1383e9565b7f02388c1c4/tokenizer_config.json "HTTP/1.1 200 OK"
+01:13:56  INFO     HTTP Request: GET https://huggingface.co/api/models/timm/ViT-B-16-SigLIP/tree/main/additional_chat_templates?recursive=false&expand=false "HTTP/1.1 404 Not Found"
+01:13:56  INFO     HTTP Request: GET https://huggingface.co/api/models/timm/ViT-B-16-SigLIP/tree/main?recursive=true&expand=false "HTTP/1.1 200 OK"
+01:13:58  INFO     Loading checkpoint: checkpoints/v3_phase10/phase10_fsl_multifield/best.pt
+01:13:58  INFO       Loaded 54 keys (260 missing, 0 unexpected)
+01:13:58  INFO     Evaluating: fashion200k (corpus=3000)
+01:14:00  INFO     Loading Marqo/fashion200k (split=data)...
+01:14:00  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/fashion200k/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+01:14:00  INFO     HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/Marqo/fashion200k/b9d0e6c9c14337620e442c93f40f7906942fe893/README.md "HTTP/1.1 200 OK"
+01:14:00  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/fashion200k/resolve/b9d0e6c9c14337620e442c93f40f7906942fe893/fashion200k.py "HTTP/1.1 404 Not Found"
+01:14:01  INFO     HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Marqo/fashion200k/Marqo/fashion200k.py "HTTP/1.1 404 Not Found"
+01:14:02  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/fashion200k/revision/b9d0e6c9c14337620e442c93f40f7906942fe893 "HTTP/1.1 200 OK"
+01:14:02  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/fashion200k/resolve/b9d0e6c9c14337620e442c93f40f7906942fe893/.huggingface.yaml "HTTP/1.1 404 Not Found"
+01:14:02  INFO     HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Marqo/fashion200k "HTTP/1.1 200 OK"
+01:14:02  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/fashion200k/tree/b9d0e6c9c14337620e442c93f40f7906942fe893/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+01:14:03  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/fashion200k/tree/b9d0e6c9c14337620e442c93f40f7906942fe893?recursive=false&expand=false "HTTP/1.1 200 OK"
+01:14:03  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/fashion200k/resolve/b9d0e6c9c14337620e442c93f40f7906942fe893/dataset_infos.json "HTTP/1.1 404 Not Found"
+01:14:05  INFO       Full size: 201624
+01:14:05  INFO       Subsampled to 3000
+01:14:08  INFO       text-to-image: 2000 queries
+01:16:48  INFO       text-to-image MAP@10=0.6543 R@1=0.540 R@10=0.886 MRR=0.655
+01:16:50  INFO       category-to-product (category3): 104 queries
+01:19:36  INFO       category3 MAP@10=0.3193 P@1=0.365 P@10=0.112 MRR=0.463
+01:19:38  INFO       category-to-product (category2): 31 queries
+01:22:39  INFO       category2 MAP@10=0.5589 P@1=0.742 P@10=0.671 MRR=0.838
+01:22:40  INFO       category-to-product (category1): 5 queries
+01:25:45  INFO       category1 MAP@10=0.9581 P@1=1.000 P@10=0.980 MRR=1.000
+01:25:45  INFO     Evaluating: atlas (corpus=3000)
+01:25:45  INFO     Loading Marqo/atlas (split=data)...
+01:25:45  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/atlas/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+01:25:45  INFO     HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/Marqo/atlas/54924db5b6b2f7f10dfce2053222d20bc614ba0c/README.md "HTTP/1.1 200 OK"
+01:25:45  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/atlas/resolve/54924db5b6b2f7f10dfce2053222d20bc614ba0c/atlas.py "HTTP/1.1 404 Not Found"
+01:25:46  INFO     HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Marqo/atlas/Marqo/atlas.py "HTTP/1.1 404 Not Found"
+01:25:46  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/atlas/revision/54924db5b6b2f7f10dfce2053222d20bc614ba0c "HTTP/1.1 200 OK"
+01:25:47  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/atlas/resolve/54924db5b6b2f7f10dfce2053222d20bc614ba0c/.huggingface.yaml "HTTP/1.1 404 Not Found"
+01:25:47  INFO     HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Marqo/atlas "HTTP/1.1 200 OK"
+01:25:47  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/atlas/tree/54924db5b6b2f7f10dfce2053222d20bc614ba0c/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+01:25:48  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/atlas/tree/54924db5b6b2f7f10dfce2053222d20bc614ba0c?recursive=false&expand=false "HTTP/1.1 200 OK"
+01:25:48  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/atlas/resolve/54924db5b6b2f7f10dfce2053222d20bc614ba0c/dataset_infos.json "HTTP/1.1 404 Not Found"
+01:25:48  INFO       Full size: 78370
+01:25:48  INFO       Subsampled to 3000
+01:25:52  INFO       text-to-image: 2000 queries
+01:28:36  INFO       text-to-image MAP@10=0.3411 R@1=0.258 R@10=0.564 MRR=0.357
+01:28:37  INFO       category-to-product (category): 3 queries
+01:31:40  INFO       category MAP@10=0.6333 P@1=0.667 P@10=0.633 MRR=0.667
+01:31:40  INFO     Evaluating: polyvore (corpus=3000)
+01:31:40  INFO     Loading Marqo/polyvore (split=data)...
+01:31:40  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/polyvore/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+01:31:40  INFO     HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/Marqo/polyvore/8c782ee447faf2d2a0402ac883cf07d3b3f43e1c/README.md "HTTP/1.1 200 OK"
+01:31:41  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/polyvore/resolve/8c782ee447faf2d2a0402ac883cf07d3b3f43e1c/polyvore.py "HTTP/1.1 404 Not Found"
+01:31:42  INFO     HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Marqo/polyvore/Marqo/polyvore.py "HTTP/1.1 404 Not Found"
+01:31:43  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/polyvore/revision/8c782ee447faf2d2a0402ac883cf07d3b3f43e1c "HTTP/1.1 200 OK"
+01:31:43  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/polyvore/resolve/8c782ee447faf2d2a0402ac883cf07d3b3f43e1c/.huggingface.yaml "HTTP/1.1 404 Not Found"
+01:31:43  INFO     HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Marqo/polyvore "HTTP/1.1 200 OK"
+01:31:44  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/polyvore/tree/8c782ee447faf2d2a0402ac883cf07d3b3f43e1c/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+01:31:44  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/polyvore/tree/8c782ee447faf2d2a0402ac883cf07d3b3f43e1c?recursive=false&expand=false "HTTP/1.1 200 OK"
+01:31:44  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/polyvore/resolve/8c782ee447faf2d2a0402ac883cf07d3b3f43e1c/dataset_infos.json "HTTP/1.1 404 Not Found"
+01:31:44  INFO       Full size: 94096
+01:31:44  INFO       Subsampled to 3000
+01:31:46  INFO       text-to-image: 2000 queries
+01:34:29  INFO       text-to-image MAP@10=0.7341 R@1=0.648 R@10=0.905 MRR=0.734
+01:34:30  INFO       category-to-product (category): 172 queries
+01:37:05  INFO       category MAP@10=0.5811 P@1=0.669 P@10=0.456 MRR=0.766
+01:37:05  INFO     Evaluating: KAGL (corpus=3000)
+01:37:05  INFO     Loading Marqo/KAGL (split=data)...
+01:37:05  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/KAGL/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+01:37:05  INFO     HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/Marqo/KAGL/5146654f23da1f808a86370320cc8128c928f6f9/README.md "HTTP/1.1 200 OK"
+01:37:06  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/KAGL/resolve/5146654f23da1f808a86370320cc8128c928f6f9/KAGL.py "HTTP/1.1 404 Not Found"
+01:37:07  INFO     HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/Marqo/KAGL/Marqo/KAGL.py "HTTP/1.1 404 Not Found"
+01:37:07  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/KAGL/revision/5146654f23da1f808a86370320cc8128c928f6f9 "HTTP/1.1 200 OK"
+01:37:07  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/KAGL/resolve/5146654f23da1f808a86370320cc8128c928f6f9/.huggingface.yaml "HTTP/1.1 404 Not Found"
+01:37:08  INFO     HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=Marqo/KAGL "HTTP/1.1 200 OK"
+01:37:08  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/KAGL/tree/5146654f23da1f808a86370320cc8128c928f6f9/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+01:37:08  INFO     HTTP Request: GET https://huggingface.co/api/datasets/Marqo/KAGL/tree/5146654f23da1f808a86370320cc8128c928f6f9?recursive=false&expand=false "HTTP/1.1 200 OK"
+01:37:08  INFO     HTTP Request: HEAD https://huggingface.co/datasets/Marqo/KAGL/resolve/5146654f23da1f808a86370320cc8128c928f6f9/dataset_infos.json "HTTP/1.1 404 Not Found"
+01:37:16  INFO       Full size: 44434
+01:37:16  INFO       Subsampled to 3000
+01:38:09  INFO       text-to-image: 2000 queries
+01:42:00  INFO       text-to-image MAP@10=0.5524 R@1=0.424 R@10=0.845 MRR=0.559
+01:42:41  INFO       category-to-product (category3): 89 queries
+01:47:17  INFO       category3 MAP@10=0.7833 P@1=0.854 P@10=0.643 MRR=0.901
+01:47:54  INFO       category-to-product (category2): 32 queries
+01:52:09  INFO       category2 MAP@10=0.8099 P@1=0.844 P@10=0.759 MRR=0.880
+01:53:01  INFO       category-to-product (category1): 5 queries
+01:57:16  INFO       category1 MAP@10=0.7800 P@1=0.800 P@10=0.780 MRR=0.800
+01:57:16  INFO     
+01:57:16  INFO     ============================================================
+01:57:16  INFO     Phase 10 Evaluation — fsl_finetuned_5bench (fsl)
+01:57:16  INFO     ============================================================
+01:57:16  INFO     
+01:57:16  INFO     | Benchmark | Ours (MAP@10) | FSL Baseline | Delta | Beats +10%? |
+01:57:16  INFO     |---|---:|---:|---:|---|
+01:57:16  INFO     | fashion200k | 0.6543 | 0.3859 | +69.6% | YES |
+01:57:16  INFO     | atlas | 0.3411 | 0.6919 | -50.7% | no |
+01:57:16  INFO     | polyvore | 0.7341 | 0.5783 | +26.9% | YES |
+01:57:16  INFO     | KAGL | 0.5524 | 0.6779 | -18.5% | no |
+01:57:16  INFO     
+01:57:16  INFO     Goal NOT met yet. See results for details.
+01:57:16  INFO     
+01:57:16  INFO     Results saved: /Users/rohit.anand/Desktop/Hobby/MODA/results/phase10_fsl_finetuned_5bench.json
+01:57:16  INFO     Time: 43.6 min

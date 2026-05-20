@@ -1,0 +1,86 @@
+[
+  {
+    "model": "moda-siglip-distilled-fsiglip-smoke",
+    "dataset": "fashion200k",
+    "run_name": "MoDA-SigLIP-Distilled-FSiglip-Smoke_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.08927,
+        "MAP@10": 0.13204,
+        "NDCG@1": 0.092,
+        "NDCG@10": 0.15708,
+        "P@1": 0.092,
+        "P@10": 0.0246,
+        "Recall@1": 0.08927,
+        "Recall@10": 0.2352,
+        "MRR": 0.13407
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  },
+  {
+    "model": "google-siglip-b16-224",
+    "dataset": "fashion200k",
+    "run_name": "Google-SigLIP-B16-224_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.3671,
+        "MAP@10": 0.48783,
+        "NDCG@1": 0.3745,
+        "NDCG@10": 0.54894,
+        "P@1": 0.3745,
+        "P@10": 0.0769,
+        "Recall@1": 0.3671,
+        "Recall@10": 0.73939,
+        "MRR": 0.48961
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  },
+  {
+    "model": "fashion-siglip",
+    "dataset": "fashion200k",
+    "run_name": "Marqo-FashionSigLIP_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.40892,
+        "MAP@10": 0.53693,
+        "NDCG@1": 0.416,
+        "NDCG@10": 0.59855,
+        "P@1": 0.416,
+        "P@10": 0.08195,
+        "Recall@1": 0.40892,
+        "Recall@10": 0.78889,
+        "MRR": 0.53895
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  }
+]

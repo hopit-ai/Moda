@@ -1,0 +1,556 @@
+{
+  "fsl_alignment": {
+    "fashion200k": {
+      "l1_alignment": {
+        "bottoms": {
+          "mean_sim": 0.03298662230372429,
+          "std_sim": 0.013105153106153011,
+          "median_sim": 0.032863568514585495,
+          "n_images": 6
+        },
+        "dresses": {
+          "mean_sim": 0.052092257887125015,
+          "std_sim": 0.010105975903570652,
+          "median_sim": 0.05388060584664345,
+          "n_images": 2943
+        },
+        "other": {
+          "mean_sim": -0.019575538113713264,
+          "std_sim": 0.0049318913370370865,
+          "median_sim": -0.019288666546344757,
+          "n_images": 18
+        },
+        "outerwear": {
+          "mean_sim": 0.014687420800328255,
+          "std_sim": 0.02466602995991707,
+          "median_sim": 0.00931413471698761,
+          "n_images": 15
+        },
+        "tops": {
+          "mean_sim": 0.02651338465511799,
+          "std_sim": 0.021692056208848953,
+          "median_sim": 0.022890031337738037,
+          "n_images": 18
+        }
+      },
+      "per_query_summary": {
+        "mean_align": 0.09817225228482858,
+        "n_queries": 500
+      }
+    },
+    "atlas": {
+      "l1_alignment": {
+        "dresses": {
+          "mean_sim": 0.001927778823301196,
+          "std_sim": 0.008533773943781853,
+          "median_sim": 0.002640998922288418,
+          "n_images": 724
+        },
+        "intimates": {
+          "mean_sim": 0.01717398688197136,
+          "std_sim": 0.017254499718546867,
+          "median_sim": 0.021200180053710938,
+          "n_images": 337
+        },
+        "outerwear": {
+          "mean_sim": 0.03898470476269722,
+          "std_sim": 0.009694951586425304,
+          "median_sim": 0.03986898809671402,
+          "n_images": 1939
+        }
+      },
+      "per_query_summary": {
+        "mean_align": 0.08970966686805089,
+        "n_queries": 9
+      }
+    },
+    "polyvore": {
+      "l1_alignment": {
+        "accessories": {
+          "mean_sim": 0.03586796298623085,
+          "std_sim": 0.01235897932201624,
+          "median_sim": 0.03620652109384537,
+          "n_images": 641
+        },
+        "bags": {
+          "mean_sim": 0.06342294067144394,
+          "std_sim": 0.011349468491971493,
+          "median_sim": 0.06644555926322937,
+          "n_images": 307
+        },
+        "beauty": {
+          "mean_sim": 0.04842129722237587,
+          "std_sim": 0.011327695101499557,
+          "median_sim": 0.048943422734737396,
+          "n_images": 238
+        },
+        "bottoms": {
+          "mean_sim": 0.054000791162252426,
+          "std_sim": 0.010222876444458961,
+          "median_sim": 0.055435508489608765,
+          "n_images": 323
+        },
+        "dresses": {
+          "mean_sim": 0.0449092835187912,
+          "std_sim": 0.01728164218366146,
+          "median_sim": 0.04881101846694946,
+          "n_images": 116
+        },
+        "home": {
+          "mean_sim": 0.01369975320994854,
+          "std_sim": 0.010408115573227406,
+          "median_sim": 0.01275278627872467,
+          "n_images": 159
+        },
+        "intimates": {
+          "mean_sim": 0.07633860409259796,
+          "std_sim": 0.01010330393910408,
+          "median_sim": 0.07821175456047058,
+          "n_images": 10
+        },
+        "other": {
+          "mean_sim": -0.0013358822325244546,
+          "std_sim": 0.018656475469470024,
+          "median_sim": -0.002315143821761012,
+          "n_images": 282
+        },
+        "outerwear": {
+          "mean_sim": 0.059276677668094635,
+          "std_sim": 0.011697783134877682,
+          "median_sim": 0.05918484926223755,
+          "n_images": 176
+        },
+        "shoes": {
+          "mean_sim": 0.06094115599989891,
+          "std_sim": 0.01092575490474701,
+          "median_sim": 0.0632791817188263,
+          "n_images": 363
+        },
+        "swimwear": {
+          "mean_sim": 0.07386083900928497,
+          "std_sim": 0.0038370045367628336,
+          "median_sim": 0.0726330503821373,
+          "n_images": 10
+        },
+        "tops": {
+          "mean_sim": 0.04439372196793556,
+          "std_sim": 0.01163867861032486,
+          "median_sim": 0.04602428525686264,
+          "n_images": 374
+        }
+      },
+      "per_query_summary": {
+        "mean_align": 0.07052026929644246,
+        "n_queries": 150
+      }
+    },
+    "KAGL": {
+      "l1_alignment": {
+        "accessories": {
+          "mean_sim": 0.025129204615950584,
+          "std_sim": 0.011007357388734818,
+          "median_sim": 0.0249478816986084,
+          "n_images": 269
+        },
+        "bags": {
+          "mean_sim": 0.06060579791665077,
+          "std_sim": 0.0175938680768013,
+          "median_sim": 0.06691883504390717,
+          "n_images": 95
+        },
+        "bottoms": {
+          "mean_sim": 0.04829418286681175,
+          "std_sim": 0.009524436667561531,
+          "median_sim": 0.04796638339757919,
+          "n_images": 264
+        },
+        "dresses": {
+          "mean_sim": 0.03987053036689758,
+          "std_sim": 0.012668255716562271,
+          "median_sim": 0.03941444307565689,
+          "n_images": 251
+        },
+        "other": {
+          "mean_sim": -0.005632574204355478,
+          "std_sim": 0.0041998643428087234,
+          "median_sim": -0.007187781855463982,
+          "n_images": 3
+        },
+        "outerwear": {
+          "mean_sim": 0.056931883096694946,
+          "std_sim": 0.007328001316636801,
+          "median_sim": 0.05649535730481148,
+          "n_images": 16
+        },
+        "shoes": {
+          "mean_sim": 0.05747288092970848,
+          "std_sim": 0.0122513547539711,
+          "median_sim": 0.059723563492298126,
+          "n_images": 749
+        },
+        "tops": {
+          "mean_sim": 0.02954261563718319,
+          "std_sim": 0.013204570859670639,
+          "median_sim": 0.026232652366161346,
+          "n_images": 1352
+        }
+      },
+      "per_query_summary": {
+        "mean_align": 0.07406891340952973,
+        "n_queries": 43
+      }
+    }
+  },
+  "base_alignment": {
+    "fashion200k": {
+      "l1_alignment": {
+        "bottoms": {
+          "mean_sim": 0.04442308470606804,
+          "std_sim": 0.0100802481174469,
+          "median_sim": 0.040457919239997864,
+          "n_images": 6
+        },
+        "dresses": {
+          "mean_sim": 0.058046605437994,
+          "std_sim": 0.014117468148469925,
+          "median_sim": 0.06035267934203148,
+          "n_images": 2943
+        },
+        "other": {
+          "mean_sim": -0.02456054836511612,
+          "std_sim": 0.013394912704825401,
+          "median_sim": -0.025900164619088173,
+          "n_images": 18
+        },
+        "outerwear": {
+          "mean_sim": 0.0235595665872097,
+          "std_sim": 0.021463550627231598,
+          "median_sim": 0.019667036831378937,
+          "n_images": 15
+        },
+        "tops": {
+          "mean_sim": 0.0415688119828701,
+          "std_sim": 0.02928117848932743,
+          "median_sim": 0.04208867624402046,
+          "n_images": 18
+        }
+      },
+      "per_query_summary": {
+        "mean_align": 0.09958511649351567,
+        "n_queries": 500
+      }
+    },
+    "atlas": {
+      "l1_alignment": {
+        "dresses": {
+          "mean_sim": 0.014374949969351292,
+          "std_sim": 0.009061007760465145,
+          "median_sim": 0.015426568686962128,
+          "n_images": 724
+        },
+        "intimates": {
+          "mean_sim": 0.017924081534147263,
+          "std_sim": 0.016072221100330353,
+          "median_sim": 0.02017124369740486,
+          "n_images": 337
+        },
+        "outerwear": {
+          "mean_sim": 0.027822868898510933,
+          "std_sim": 0.012392508797347546,
+          "median_sim": 0.02841014973819256,
+          "n_images": 1939
+        }
+      },
+      "per_query_summary": {
+        "mean_align": 0.08491729696591695,
+        "n_queries": 9
+      }
+    },
+    "polyvore": {
+      "l1_alignment": {
+        "accessories": {
+          "mean_sim": 0.034770142287015915,
+          "std_sim": 0.015007941983640194,
+          "median_sim": 0.034756049513816833,
+          "n_images": 641
+        },
+        "bags": {
+          "mean_sim": 0.04955512285232544,
+          "std_sim": 0.012797731906175613,
+          "median_sim": 0.05120803415775299,
+          "n_images": 307
+        },
+        "beauty": {
+          "mean_sim": 0.03599930554628372,
+          "std_sim": 0.01294576097279787,
+          "median_sim": 0.03643805906176567,
+          "n_images": 238
+        },
+        "bottoms": {
+          "mean_sim": 0.0548301562666893,
+          "std_sim": 0.011953064240515232,
+          "median_sim": 0.056518152356147766,
+          "n_images": 323
+        },
+        "dresses": {
+          "mean_sim": 0.04972019046545029,
+          "std_sim": 0.01614856906235218,
+          "median_sim": 0.05321713909506798,
+          "n_images": 116
+        },
+        "home": {
+          "mean_sim": 0.0163507629185915,
+          "std_sim": 0.0125660952180624,
+          "median_sim": 0.01694728434085846,
+          "n_images": 159
+        },
+        "intimates": {
+          "mean_sim": 0.06910628080368042,
+          "std_sim": 0.010220067575573921,
+          "median_sim": 0.06858795881271362,
+          "n_images": 10
+        },
+        "other": {
+          "mean_sim": -0.011902222409844398,
+          "std_sim": 0.02117711864411831,
+          "median_sim": -0.012781526893377304,
+          "n_images": 282
+        },
+        "outerwear": {
+          "mean_sim": 0.057207025587558746,
+          "std_sim": 0.00982644036412239,
+          "median_sim": 0.0578308142721653,
+          "n_images": 176
+        },
+        "shoes": {
+          "mean_sim": 0.05008230358362198,
+          "std_sim": 0.012446299195289612,
+          "median_sim": 0.05116258189082146,
+          "n_images": 363
+        },
+        "swimwear": {
+          "mean_sim": 0.06910659372806549,
+          "std_sim": 0.010392269119620323,
+          "median_sim": 0.06989620625972748,
+          "n_images": 10
+        },
+        "tops": {
+          "mean_sim": 0.04960382357239723,
+          "std_sim": 0.012400963343679905,
+          "median_sim": 0.05105976015329361,
+          "n_images": 374
+        }
+      },
+      "per_query_summary": {
+        "mean_align": 0.06189139085200926,
+        "n_queries": 150
+      }
+    },
+    "KAGL": {
+      "l1_alignment": {
+        "accessories": {
+          "mean_sim": 0.027474286034703255,
+          "std_sim": 0.013834918849170208,
+          "median_sim": 0.02681141346693039,
+          "n_images": 269
+        },
+        "bags": {
+          "mean_sim": 0.05960584804415703,
+          "std_sim": 0.01594018191099167,
+          "median_sim": 0.06417059898376465,
+          "n_images": 95
+        },
+        "bottoms": {
+          "mean_sim": 0.06060425192117691,
+          "std_sim": 0.008145664818584919,
+          "median_sim": 0.06075562536716461,
+          "n_images": 264
+        },
+        "dresses": {
+          "mean_sim": 0.04676388204097748,
+          "std_sim": 0.011192433536052704,
+          "median_sim": 0.04651050269603729,
+          "n_images": 251
+        },
+        "other": {
+          "mean_sim": -0.011266368441283703,
+          "std_sim": 0.0017675169510766864,
+          "median_sim": -0.012127911671996117,
+          "n_images": 3
+        },
+        "outerwear": {
+          "mean_sim": 0.05968163162469864,
+          "std_sim": 0.006350981071591377,
+          "median_sim": 0.05919910967350006,
+          "n_images": 16
+        },
+        "shoes": {
+          "mean_sim": 0.05096418410539627,
+          "std_sim": 0.011576294898986816,
+          "median_sim": 0.05220593512058258,
+          "n_images": 749
+        },
+        "tops": {
+          "mean_sim": 0.04697514325380325,
+          "std_sim": 0.0119518106803298,
+          "median_sim": 0.045905716717243195,
+          "n_images": 1352
+        }
+      },
+      "per_query_summary": {
+        "mean_align": 0.0743079694031283,
+        "n_queries": 43
+      }
+    }
+  },
+  "drift": {
+    "fashion200k": {
+      "benchmark": "fashion200k",
+      "mean_cosine_distance": 0.021644916385412216,
+      "median_cosine_distance": 0.019258499145507812,
+      "std_cosine_distance": 0.01019893866032362,
+      "max_cosine_distance": 0.11340796947479248,
+      "per_l1_drift": {
+        "bottoms": {
+          "mean_drift": 0.009216785430908203,
+          "n_queries": 1
+        },
+        "dresses": {
+          "mean_drift": 0.021677616983652115,
+          "n_queries": 489
+        },
+        "other": {
+          "mean_drift": 0.021279633045196533,
+          "n_queries": 2
+        },
+        "outerwear": {
+          "mean_drift": 0.023731371387839317,
+          "n_queries": 6
+        },
+        "tops": {
+          "mean_drift": 0.01396915316581726,
+          "n_queries": 2
+        }
+      }
+    },
+    "atlas": {
+      "benchmark": "atlas",
+      "mean_cosine_distance": 0.006996260955929756,
+      "median_cosine_distance": 0.0054132938385009766,
+      "std_cosine_distance": 0.0033045639283955097,
+      "max_cosine_distance": 0.014443457126617432,
+      "per_l1_drift": {
+        "dresses": {
+          "mean_drift": 0.008318319916725159,
+          "n_queries": 4
+        },
+        "intimates": {
+          "mean_drift": 0.005189567804336548,
+          "n_queries": 2
+        },
+        "outerwear": {
+          "mean_drift": 0.006437977310270071,
+          "n_queries": 3
+        }
+      }
+    },
+    "polyvore": {
+      "benchmark": "polyvore",
+      "mean_cosine_distance": 0.004597775638103485,
+      "median_cosine_distance": 0.0037064552307128906,
+      "std_cosine_distance": 0.0026220399886369705,
+      "max_cosine_distance": 0.015740573406219482,
+      "per_l1_drift": {
+        "accessories": {
+          "mean_drift": 0.00403386726975441,
+          "n_queries": 17
+        },
+        "bags": {
+          "mean_drift": 0.004303270485252142,
+          "n_queries": 10
+        },
+        "beauty": {
+          "mean_drift": 0.0033907678443938494,
+          "n_queries": 14
+        },
+        "bottoms": {
+          "mean_drift": 0.006261197850108147,
+          "n_queries": 15
+        },
+        "dresses": {
+          "mean_drift": 0.007585299201309681,
+          "n_queries": 5
+        },
+        "home": {
+          "mean_drift": 0.0034525305964052677,
+          "n_queries": 20
+        },
+        "intimates": {
+          "mean_drift": 0.004979809280484915,
+          "n_queries": 3
+        },
+        "other": {
+          "mean_drift": 0.0037658028304576874,
+          "n_queries": 35
+        },
+        "outerwear": {
+          "mean_drift": 0.005560123827308416,
+          "n_queries": 5
+        },
+        "shoes": {
+          "mean_drift": 0.005248776637017727,
+          "n_queries": 14
+        },
+        "swimwear": {
+          "mean_drift": 0.01034170389175415,
+          "n_queries": 3
+        },
+        "tops": {
+          "mean_drift": 0.005626771133393049,
+          "n_queries": 9
+        }
+      }
+    },
+    "KAGL": {
+      "benchmark": "KAGL",
+      "mean_cosine_distance": 0.004684104584157467,
+      "median_cosine_distance": 0.004132390022277832,
+      "std_cosine_distance": 0.0018807156011462212,
+      "max_cosine_distance": 0.01101386547088623,
+      "per_l1_drift": {
+        "accessories": {
+          "mean_drift": 0.0035669803619384766,
+          "n_queries": 9
+        },
+        "bags": {
+          "mean_drift": 0.003832304384559393,
+          "n_queries": 5
+        },
+        "bottoms": {
+          "mean_drift": 0.00464559905230999,
+          "n_queries": 9
+        },
+        "dresses": {
+          "mean_drift": 0.004341110587120056,
+          "n_queries": 4
+        },
+        "other": {
+          "mean_drift": 0.0049256086349487305,
+          "n_queries": 1
+        },
+        "outerwear": {
+          "mean_drift": 0.0037124156951904297,
+          "n_queries": 1
+        },
+        "shoes": {
+          "mean_drift": 0.006241589784622192,
+          "n_queries": 8
+        },
+        "tops": {
+          "mean_drift": 0.005401094909757376,
+          "n_queries": 6
+        }
+      }
+    }
+  }
+}

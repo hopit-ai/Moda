@@ -1,0 +1,2091 @@
+{
+  "name": "polyvore",
+  "hf_id": "Marqo/polyvore",
+  "total_rows": 94096,
+  "tasks": [
+    "text-to-image",
+    "category-to-product"
+  ],
+  "n_tasks": 2,
+  "columns": [
+    "category",
+    "text",
+    "item_ID"
+  ],
+  "text_analysis": {
+    "text": {
+      "field": "text",
+      "total_rows": 94096,
+      "non_null_count": 94096,
+      "null_rate": 0.0,
+      "unique_count": 94096,
+      "uniqueness_ratio": 1.0,
+      "duplication_ratio": 0.0,
+      "top_repeated_values": [
+        [
+          "tibi knit long sleeve dress",
+          1
+        ],
+        [
+          "michael kors leather over-the-knee boots",
+          1
+        ],
+        [
+          "givenchy leather medium antigona duffel black",
+          1
+        ],
+        [
+          "bottega veneta acetate leather sunglasses",
+          1
+        ],
+        [
+          "pier imports stem",
+          1
+        ],
+        [
+          "miranda coat",
+          1
+        ],
+        [
+          "three pocket blazer",
+          1
+        ],
+        [
+          "givenchy skinny jean",
+          1
+        ],
+        [
+          "guess black silver-tone chronograph watch",
+          1
+        ],
+        [
+          "ray-ban original wayfarer sunglasses",
+          1
+        ],
+        [
+          "barrel clip key",
+          1
+        ],
+        [
+          "design key ring magnetic",
+          1
+        ],
+        [
+          "contrast trimmed cotton shirt",
+          1
+        ],
+        [
+          "rochas dress",
+          1
+        ],
+        [
+          "phillip lim red leather satchel",
+          1
+        ],
+        [
+          "classic drop military metal aviator sunglasses",
+          1
+        ],
+        [
+          "river island blue embroidered cut playsuit",
+          1
+        ],
+        [
+          "beige crystal sandals",
+          1
+        ],
+        [
+          "madden girl polka dot backpack",
+          1
+        ],
+        [
+          "naked strawberry banana oz",
+          1
+        ],
+        [
+          "gray mary jane dining chair w/ cushion",
+          1
+        ],
+        [
+          "vintage coffee table french table linen bleached linen chair wood gothic table round wooden table usa",
+          1
+        ],
+        [
+          "femme bustier",
+          1
+        ],
+        [
+          "river city rubber",
+          1
+        ],
+        [
+          "atelier pleat shift tunic",
+          1
+        ],
+        [
+          "givenchy striped print pumps yellow grey black",
+          1
+        ],
+        [
+          "designer black patent belted purse",
+          1
+        ],
+        [
+          "tone triangle accent collar necklace",
+          1
+        ],
+        [
+          "brown horn bangle pale yellow crystals",
+          1
+        ],
+        [
+          "ceramic heart stud earrings",
+          1
+        ]
+      ],
+      "char_length": {
+        "min": 1,
+        "max": 206,
+        "mean": 33.9,
+        "median": 32,
+        "p10": 16,
+        "p90": 54
+      },
+      "word_length": {
+        "min": 0,
+        "max": 32,
+        "mean": 5.4,
+        "median": 5,
+        "p10": 3,
+        "p90": 8
+      },
+      "length_distribution": {
+        "short (3-5 words)": 47101,
+        "medium (6-10 words)": 36070,
+        "very_short (1-2 words)": 7531,
+        "long (11-20 words)": 3317,
+        "very_long (21+ words)": 77
+      },
+      "vocabulary": {
+        "total_tokens": 508987,
+        "unique_tokens": 2664,
+        "top_50_tokens": [
+          [
+            "leather",
+            7795
+          ],
+          [
+            "black",
+            7711
+          ],
+          [
+            "bag",
+            5669
+          ],
+          [
+            "women's",
+            4676
+          ],
+          [
+            "dress",
+            4306
+          ],
+          [
+            "gold",
+            4103
+          ],
+          [
+            "top",
+            3723
+          ],
+          [
+            "white",
+            3351
+          ],
+          [
+            "earrings",
+            3231
+          ],
+          [
+            "necklace",
+            3132
+          ],
+          [
+            "skirt",
+            2979
+          ],
+          [
+            "iphone",
+            2615
+          ],
+          [
+            "jeans",
+            2600
+          ],
+          [
+            "shirt",
+            2589
+          ],
+          [
+            "lace",
+            2541
+          ],
+          [
+            "blue",
+            2500
+          ],
+          [
+            "boots",
+            2411
+          ],
+          [
+            "jacket",
+            2381
+          ],
+          [
+            "suede",
+            2371
+          ],
+          [
+            "high",
+            2366
+          ],
+          [
+            "print",
+            2312
+          ],
+          [
+            "mini",
+            2251
+          ],
+          [
+            "ring",
+            2186
+          ],
+          [
+            "shoulder",
+            2179
+          ],
+          [
+            "bracelet",
+            2166
+          ],
+          [
+            "clutch",
+            2159
+          ],
+          [
+            "case",
+            2158
+          ],
+          [
+            "women",
+            2156
+          ],
+          [
+            "long",
+            2138
+          ],
+          [
+            "denim",
+            2057
+          ],
+          [
+            "sunglasses",
+            2012
+          ],
+          [
+            "plus",
+            1993
+          ],
+          [
+            "sleeve",
+            1952
+          ],
+          [
+            "pink",
+            1938
+          ],
+          [
+            "coat",
+            1875
+          ],
+          [
+            "silver",
+            1866
+          ],
+          [
+            "red",
+            1860
+          ],
+          [
+            "yoins",
+            1814
+          ],
+          [
+            "sandals",
+            1780
+          ],
+          [
+            "pre",
+            1762
+          ],
+          [
+            "owned",
+            1762
+          ],
+          [
+            "set",
+            1720
+          ],
+          [
+            "new",
+            1688
+          ],
+          [
+            "vintage",
+            1667
+          ],
+          [
+            "neck",
+            1638
+          ],
+          [
+            "floral",
+            1622
+          ],
+          [
+            "faux",
+            1618
+          ],
+          [
+            "color",
+            1597
+          ],
+          [
+            "sweater",
+            1550
+          ],
+          [
+            "size",
+            1480
+          ]
+        ],
+        "top_30_bigrams": [
+          [
+            "pre owned",
+            1762
+          ],
+          [
+            "shoulder bag",
+            1327
+          ],
+          [
+            "t shirt",
+            1082
+          ],
+          [
+            "long sleeve",
+            1025
+          ],
+          [
+            "shein sheinside",
+            977
+          ],
+          [
+            "saint laurent",
+            935
+          ],
+          [
+            "case iphone",
+            867
+          ],
+          [
+            "plus size",
+            856
+          ],
+          [
+            "michael kors",
+            844
+          ],
+          [
+            "ankle boots",
+            812
+          ],
+          [
+            "dolce gabbana",
+            801
+          ],
+          [
+            "iphone plus",
+            775
+          ],
+          [
+            "new york",
+            740
+          ],
+          [
+            "stud earrings",
+            736
+          ],
+          [
+            "iphone case",
+            722
+          ],
+          [
+            "kate spade",
+            702
+          ],
+          [
+            "skinny jeans",
+            697
+          ],
+          [
+            "lace up",
+            635
+          ],
+          [
+            "crop top",
+            626
+          ],
+          [
+            "river island",
+            614
+          ],
+          [
+            "crossbody bag",
+            591
+          ],
+          [
+            "faux leather",
+            574
+          ],
+          [
+            "eau de",
+            557
+          ],
+          [
+            "sterling silver",
+            551
+          ],
+          [
+            "rose gold",
+            549
+          ],
+          [
+            "v neck",
+            540
+          ],
+          [
+            "spade new",
+            532
+          ],
+          [
+            "marc jacobs",
+            531
+          ],
+          [
+            "alexander mcqueen",
+            513
+          ],
+          [
+            "mini skirt",
+            488
+          ]
+        ]
+      },
+      "text_style": {
+        "has_comma_pct": 0.0,
+        "has_period_pct": 1.6,
+        "has_numbers_pct": 3.6,
+        "starts_uppercase_pct": 0.0,
+        "all_lowercase_pct": 99.9,
+        "all_uppercase_pct": 0.0
+      },
+      "sample_values": [
+        "tibi knit long sleeve dress",
+        "michael kors leather over-the-knee boots",
+        "givenchy leather medium antigona duffel black",
+        "bottega veneta acetate leather sunglasses",
+        "pier imports stem",
+        "miranda coat",
+        "three pocket blazer",
+        "givenchy skinny jean",
+        "guess black silver-tone chronograph watch",
+        "ray-ban original wayfarer sunglasses",
+        "barrel clip key",
+        "design key ring magnetic",
+        "contrast trimmed cotton shirt",
+        "rochas dress",
+        "phillip lim red leather satchel",
+        "classic drop military metal aviator sunglasses",
+        "river island blue embroidered cut playsuit",
+        "beige crystal sandals",
+        "madden girl polka dot backpack",
+        "naked strawberry banana oz"
+      ]
+    }
+  },
+  "category_analysis": {
+    "category": {
+      "field": "category",
+      "total_rows": 94096,
+      "non_null_count": 94096,
+      "null_rate": 0.0,
+      "n_unique_values": 377,
+      "value_distribution": [
+        [
+          "Earrings",
+          3606
+        ],
+        [
+          "Shoulder Bags",
+          3525
+        ],
+        [
+          "Necklaces",
+          3379
+        ],
+        [
+          "Tops",
+          2851
+        ],
+        [
+          "Sandals",
+          2689
+        ],
+        [
+          "Day Dresses",
+          2525
+        ],
+        [
+          "Bracelets & Bangles",
+          2505
+        ],
+        [
+          "Pumps",
+          2422
+        ],
+        [
+          "Clutches",
+          2377
+        ],
+        [
+          "Ankle Booties",
+          2355
+        ],
+        [
+          "Rings",
+          2116
+        ],
+        [
+          "Jackets",
+          2095
+        ],
+        [
+          "Sweaters",
+          2037
+        ],
+        [
+          "Sunglasses",
+          2021
+        ],
+        [
+          "Coats",
+          1986
+        ],
+        [
+          "Handbags",
+          1863
+        ],
+        [
+          "Tech Accessories",
+          1693
+        ],
+        [
+          "Knee Length Skirts",
+          1692
+        ],
+        [
+          "Sneakers",
+          1578
+        ],
+        [
+          "Tote Bags",
+          1512
+        ],
+        [
+          "Blouses",
+          1481
+        ],
+        [
+          "T-Shirts",
+          1478
+        ],
+        [
+          "Shorts",
+          1451
+        ],
+        [
+          "Hats",
+          1417
+        ],
+        [
+          "Skinny Jeans",
+          1373
+        ],
+        [
+          "Pants",
+          1235
+        ],
+        [
+          "Tank Tops",
+          1158
+        ],
+        [
+          "Clothing",
+          1146
+        ],
+        [
+          "Backpacks",
+          1109
+        ],
+        [
+          "Watches",
+          1099
+        ],
+        [
+          "Cocktail Dresses",
+          1064
+        ],
+        [
+          "Lipstick",
+          962
+        ],
+        [
+          "Fragrance",
+          843
+        ],
+        [
+          "Shoes",
+          837
+        ],
+        [
+          "Mini Skirts",
+          825
+        ],
+        [
+          "Flats",
+          786
+        ],
+        [
+          "Eyeshadow",
+          759
+        ],
+        [
+          "Scarves",
+          745
+        ],
+        [
+          "Hair Accessories",
+          714
+        ],
+        [
+          "Nail Polish",
+          687
+        ],
+        [
+          "Blazers",
+          625
+        ],
+        [
+          "Boots",
+          585
+        ],
+        [
+          "Floral Decor",
+          580
+        ],
+        [
+          "Home Decor",
+          565
+        ],
+        [
+          "Cardigans",
+          526
+        ],
+        [
+          "Sweatshirts",
+          518
+        ],
+        [
+          "Jeans",
+          512
+        ],
+        [
+          "Wallets",
+          423
+        ],
+        [
+          "Belts",
+          412
+        ],
+        [
+          "Dresses",
+          383
+        ],
+        [
+          "Leggings",
+          370
+        ],
+        [
+          "Mascara",
+          369
+        ],
+        [
+          "Jewelry",
+          367
+        ],
+        [
+          "Beauty Products",
+          343
+        ],
+        [
+          "Eyeliner",
+          342
+        ],
+        [
+          "Accessories",
+          330
+        ],
+        [
+          "Makeup",
+          309
+        ],
+        [
+          "Gowns",
+          293
+        ],
+        [
+          "Stationery",
+          289
+        ],
+        [
+          "Office Accessories",
+          286
+        ],
+        [
+          "Capri & Cropped Pants",
+          281
+        ],
+        [
+          "Boyfriend Jeans",
+          278
+        ],
+        [
+          "Lip Gloss",
+          278
+        ],
+        [
+          "Eye Makeup",
+          276
+        ],
+        [
+          "Throw Pillows",
+          275
+        ],
+        [
+          "Accent Tables",
+          267
+        ],
+        [
+          "Vests",
+          264
+        ],
+        [
+          "Hair Styling Tools",
+          248
+        ],
+        [
+          "Makeup Brushes",
+          247
+        ],
+        [
+          "Long Skirts",
+          245
+        ],
+        [
+          "Hoodies",
+          240
+        ],
+        [
+          "Brooches",
+          232
+        ],
+        [
+          "Outerwear",
+          227
+        ],
+        [
+          "Loafers & Moccasins",
+          225
+        ],
+        [
+          "Skirts",
+          223
+        ],
+        [
+          "Eyeglasses",
+          221
+        ],
+        [
+          "Socks",
+          220
+        ],
+        [
+          "Holiday Decorations",
+          213
+        ],
+        [
+          "Drinkware",
+          210
+        ],
+        [
+          "Bags",
+          206
+        ],
+        [
+          "Bras",
+          206
+        ],
+        [
+          "Ceiling Lights",
+          205
+        ],
+        [
+          "Knee High Boots",
+          193
+        ],
+        [
+          "Rugs",
+          186
+        ],
+        [
+          "Lip Makeup",
+          185
+        ],
+        [
+          "Blush",
+          180
+        ],
+        [
+          "Gloves",
+          173
+        ],
+        [
+          "Oxfords",
+          171
+        ],
+        [
+          "Men's Jeans",
+          168
+        ],
+        [
+          "Candles & Candleholders",
+          163
+        ],
+        [
+          "Men's Watches",
+          161
+        ],
+        [
+          "Over-The-Knee Boots",
+          159
+        ],
+        [
+          "Font",
+          158
+        ],
+        [
+          "Nail Treatments",
+          155
+        ],
+        [
+          "Sofas",
+          154
+        ],
+        [
+          "Accent Chairs",
+          153
+        ],
+        [
+          "Messenger Bags",
+          153
+        ],
+        [
+          "Men's Sneakers",
+          153
+        ],
+        [
+          "Rompers",
+          152
+        ],
+        [
+          "Lip Treatments",
+          151
+        ],
+        [
+          "Food & Drink",
+          150
+        ],
+        [
+          "Foundation",
+          149
+        ],
+        [
+          "Electronics",
+          148
+        ],
+        [
+          "Face Powder",
+          142
+        ],
+        [
+          "Tights",
+          141
+        ],
+        [
+          "Men's T-Shirts",
+          141
+        ],
+        [
+          "Charms & Pendants",
+          139
+        ],
+        [
+          "Luggage",
+          136
+        ],
+        [
+          "Baby",
+          129
+        ],
+        [
+          "Blankets",
+          128
+        ],
+        [
+          "Kitchen & Dining",
+          127
+        ],
+        [
+          "Straight Leg Jeans",
+          126
+        ],
+        [
+          "Table Lamps",
+          123
+        ],
+        [
+          "Body Moisturizers",
+          123
+        ],
+        [
+          "Men's Jackets",
+          122
+        ],
+        [
+          "Men's Casual Shirts",
+          121
+        ],
+        [
+          "Small Storage",
+          120
+        ],
+        [
+          "Activewear Pants",
+          116
+        ],
+        [
+          "Bikinis",
+          116
+        ],
+        [
+          "Kids",
+          113
+        ],
+        [
+          "Body Cleansers",
+          113
+        ],
+        [
+          "Books",
+          110
+        ],
+        [
+          "Sports & Outdoors",
+          105
+        ],
+        [
+          "Jumpsuits",
+          104
+        ],
+        [
+          "Panties & Thongs",
+          103
+        ],
+        [
+          "Men's Casual Pants",
+          103
+        ],
+        [
+          "Vases",
+          102
+        ],
+        [
+          "Face Makeup",
+          100
+        ],
+        [
+          "Tunics",
+          100
+        ],
+        [
+          "Men's Hats",
+          98
+        ],
+        [
+          "Slippers",
+          96
+        ],
+        [
+          "Men's Sunglasses",
+          95
+        ],
+        [
+          "Bags & Cases",
+          92
+        ],
+        [
+          "Shapewear",
+          91
+        ],
+        [
+          "Mid Calf Boots",
+          89
+        ],
+        [
+          "Clocks",
+          88
+        ],
+        [
+          "Serveware",
+          86
+        ],
+        [
+          "Flip Flops",
+          85
+        ],
+        [
+          "Outdoor Decor",
+          85
+        ],
+        [
+          "Body Art",
+          83
+        ],
+        [
+          "Girls",
+          81
+        ],
+        [
+          "Men's Wallets",
+          78
+        ],
+        [
+          "Bikini Tops",
+          76
+        ],
+        [
+          "One Piece Swimsuits",
+          74
+        ],
+        [
+          "Men's Fashion",
+          74
+        ],
+        [
+          "Face Care",
+          74
+        ],
+        [
+          "False Eyelashes",
+          72
+        ],
+        [
+          "Flared Jeans",
+          71
+        ],
+        [
+          "Wallpaper",
+          68
+        ],
+        [
+          "Chairs",
+          68
+        ],
+        [
+          "Men's Shoes",
+          68
+        ],
+        [
+          "Men's Clothing",
+          67
+        ],
+        [
+          "Men's Fragrance",
+          66
+        ],
+        [
+          "Cheek Bronzer",
+          65
+        ],
+        [
+          "Sports Bras",
+          65
+        ],
+        [
+          "Men's Backpacks",
+          63
+        ],
+        [
+          "Gift Sets & Kits",
+          61
+        ],
+        [
+          "Concealer",
+          60
+        ],
+        [
+          "Men's Tech Accessories",
+          60
+        ],
+        [
+          "Floor Lamps",
+          59
+        ],
+        [
+          "Nail Care",
+          59
+        ],
+        [
+          "Sun Care",
+          58
+        ],
+        [
+          "Men's Boots",
+          57
+        ],
+        [
+          "Toys",
+          56
+        ],
+        [
+          "Mirrors",
+          55
+        ],
+        [
+          "Lighting",
+          55
+        ],
+        [
+          "Men's Belts",
+          52
+        ],
+        [
+          "Haircare",
+          51
+        ],
+        [
+          "Bootcut Jeans",
+          51
+        ],
+        [
+          "Men's Bracelets",
+          49
+        ],
+        [
+          "Beds",
+          48
+        ],
+        [
+          "Lip Pencils",
+          48
+        ],
+        [
+          "Frames",
+          47
+        ],
+        [
+          "Athletic Shoes",
+          47
+        ],
+        [
+          "Brushes & Combs",
+          46
+        ],
+        [
+          "Dinnerware",
+          45
+        ],
+        [
+          "Men's Dress Shirts",
+          44
+        ],
+        [
+          "Bar Tools",
+          43
+        ],
+        [
+          "Bikini Bottoms",
+          42
+        ],
+        [
+          "Makeup Primer",
+          42
+        ],
+        [
+          "Costumes",
+          41
+        ],
+        [
+          "Styling Products",
+          41
+        ],
+        [
+          "Kitchen Gadgets & Tools",
+          40
+        ],
+        [
+          "Face Masks",
+          40
+        ],
+        [
+          "Curtains",
+          37
+        ],
+        [
+          "Dining Chairs",
+          35
+        ],
+        [
+          "Face Cleansers",
+          35
+        ],
+        [
+          "Bath Towels",
+          35
+        ],
+        [
+          "Face Moisturizers",
+          35
+        ],
+        [
+          "Men's Dress Shoes",
+          34
+        ],
+        [
+          "Flatware",
+          33
+        ],
+        [
+          "Blow Dryers & Irons",
+          33
+        ],
+        [
+          "Men's Shorts",
+          32
+        ],
+        [
+          "Ottomans",
+          32
+        ],
+        [
+          "Men's Coats",
+          32
+        ],
+        [
+          "Hair Color",
+          32
+        ],
+        [
+          "Cover-ups",
+          32
+        ],
+        [
+          "Boys",
+          31
+        ],
+        [
+          "Intimates",
+          30
+        ],
+        [
+          "Media",
+          30
+        ],
+        [
+          "Table Linens",
+          30
+        ],
+        [
+          "Men's Dress Pants",
+          30
+        ],
+        [
+          "Men's Scarves",
+          30
+        ],
+        [
+          "Camisoles",
+          29
+        ],
+        [
+          "Beach Towels",
+          28
+        ],
+        [
+          "Dining Tables",
+          28
+        ],
+        [
+          "Sheets & Pillowcases",
+          28
+        ],
+        [
+          "Pajamas",
+          28
+        ],
+        [
+          "Men's Bags",
+          27
+        ],
+        [
+          "Wide Leg Jeans",
+          27
+        ],
+        [
+          "Outdoor Lighting",
+          26
+        ],
+        [
+          "Pets",
+          25
+        ],
+        [
+          "Umbrellas",
+          25
+        ],
+        [
+          "Food Storage Containers",
+          24
+        ],
+        [
+          "Ties",
+          24
+        ],
+        [
+          "Eye Care",
+          24
+        ],
+        [
+          "Wall Lights",
+          22
+        ],
+        [
+          "Eyewear",
+          22
+        ],
+        [
+          "Beauty Accessories",
+          22
+        ],
+        [
+          "Tinted Moisturizer",
+          22
+        ],
+        [
+          "Clogs",
+          21
+        ],
+        [
+          "Bed Accessories",
+          21
+        ],
+        [
+          "Men's Shirts",
+          20
+        ],
+        [
+          "Dressers",
+          20
+        ],
+        [
+          "Activewear Tank Tops",
+          20
+        ],
+        [
+          "Robes",
+          20
+        ],
+        [
+          "Activewear Shorts",
+          20
+        ],
+        [
+          "Men's Messenger Bags",
+          20
+        ],
+        [
+          "Men's Sweaters",
+          20
+        ],
+        [
+          "Bookcases",
+          19
+        ],
+        [
+          "Bath & Body",
+          19
+        ],
+        [
+          "Men's Eyeglasses",
+          19
+        ],
+        [
+          "Home Fragrance",
+          19
+        ],
+        [
+          "Men's Grooming",
+          19
+        ],
+        [
+          "Men's Key Rings & Chains",
+          19
+        ],
+        [
+          "Activewear",
+          18
+        ],
+        [
+          "Men's Sportcoats & Blazers",
+          18
+        ],
+        [
+          "Manicure Tools",
+          18
+        ],
+        [
+          "Men's Polos",
+          18
+        ],
+        [
+          "Men's Rings",
+          18
+        ],
+        [
+          "Outdoors",
+          17
+        ],
+        [
+          "Duvet Covers",
+          17
+        ],
+        [
+          "Desks",
+          17
+        ],
+        [
+          "Briefcases",
+          16
+        ],
+        [
+          "Office Chairs",
+          16
+        ],
+        [
+          "Men's Loafers & Moccasins",
+          16
+        ],
+        [
+          "Makeup Remover",
+          15
+        ],
+        [
+          "Men's Necklaces",
+          15
+        ],
+        [
+          "Swimwear",
+          15
+        ],
+        [
+          "Teapots",
+          15
+        ],
+        [
+          "Bath Accessories",
+          14
+        ],
+        [
+          "Men's Socks",
+          14
+        ],
+        [
+          "Men's Work Boots",
+          14
+        ],
+        [
+          "Bedding",
+          14
+        ],
+        [
+          "Men's Oxfords",
+          14
+        ],
+        [
+          "Furniture",
+          13
+        ],
+        [
+          "Men's Suits",
+          13
+        ],
+        [
+          "Hair Shampoo",
+          13
+        ],
+        [
+          "Storage & Organization",
+          13
+        ],
+        [
+          "Desk Lamps",
+          13
+        ],
+        [
+          "Lip Stain",
+          13
+        ],
+        [
+          "Tables",
+          12
+        ],
+        [
+          "Hair Conditioner",
+          12
+        ],
+        [
+          "Wedding Dresses",
+          11
+        ],
+        [
+          "Home Improvement",
+          11
+        ],
+        [
+          "Men's Tank Tops",
+          11
+        ],
+        [
+          "Bow Ties",
+          11
+        ],
+        [
+          "Patio Umbrellas",
+          11
+        ],
+        [
+          "Men's Briefcases",
+          11
+        ],
+        [
+          "Activewear Tops",
+          11
+        ],
+        [
+          "Men's Gloves",
+          11
+        ],
+        [
+          "Sideboards",
+          10
+        ],
+        [
+          "Eyelash Curlers",
+          10
+        ],
+        [
+          "Small Appliances",
+          10
+        ],
+        [
+          "Patio Furniture",
+          10
+        ],
+        [
+          "Outdoor Chairs",
+          10
+        ],
+        [
+          "Party Supplies",
+          10
+        ],
+        [
+          "Men's Shaving",
+          10
+        ],
+        [
+          "Men's Vests",
+          9
+        ],
+        [
+          "Men's Activewear Pants",
+          9
+        ],
+        [
+          "Hammocks & Swings",
+          9
+        ],
+        [
+          "Kitchen Linens",
+          9
+        ],
+        [
+          "Activewear Jackets",
+          9
+        ],
+        [
+          "Cheek Makeup",
+          9
+        ],
+        [
+          "Men's Accessories",
+          9
+        ],
+        [
+          "Storage & Shelves",
+          8
+        ],
+        [
+          "Hosiery",
+          8
+        ],
+        [
+          "Nightstands",
+          8
+        ],
+        [
+          "Cabinets",
+          8
+        ],
+        [
+          "Stools",
+          8
+        ],
+        [
+          "Children's Decor",
+          8
+        ],
+        [
+          "Jewelry Storage",
+          8
+        ],
+        [
+          "Fireplace Accessories",
+          8
+        ],
+        [
+          "Bed Pillows",
+          8
+        ],
+        [
+          "Suspenders",
+          8
+        ],
+        [
+          "Cuff Links",
+          8
+        ],
+        [
+          "Men's Hoodies",
+          8
+        ],
+        [
+          "Men's Watches & Jewelry",
+          7
+        ],
+        [
+          "Comforters",
+          7
+        ],
+        [
+          "Men's Bags & Wallets",
+          7
+        ],
+        [
+          "Men's Athletic Shoes",
+          7
+        ],
+        [
+          "Makeup Tools",
+          7
+        ],
+        [
+          "Outdoor Tables",
+          6
+        ],
+        [
+          "Men's Underwear",
+          6
+        ],
+        [
+          "Cookbooks",
+          6
+        ],
+        [
+          "Skincare",
+          6
+        ],
+        [
+          "Cookware",
+          6
+        ],
+        [
+          "Men's Pants",
+          6
+        ],
+        [
+          "Garden Tools",
+          6
+        ],
+        [
+          "Juniors",
+          5
+        ],
+        [
+          "Men's Sweatshirts",
+          5
+        ],
+        [
+          "Aprons",
+          5
+        ],
+        [
+          "Cleaning",
+          5
+        ],
+        [
+          "Men's Deodorant",
+          5
+        ],
+        [
+          "Children's Furniture",
+          5
+        ],
+        [
+          "Cutlery",
+          5
+        ],
+        [
+          "Men's Outerwear",
+          5
+        ],
+        [
+          "Men's Sandals",
+          5
+        ],
+        [
+          "Benches",
+          4
+        ],
+        [
+          "Outdoor Stools",
+          4
+        ],
+        [
+          "Panel Screens",
+          4
+        ],
+        [
+          "Bath",
+          4
+        ],
+        [
+          "Handkerchiefs",
+          4
+        ],
+        [
+          "Barstools",
+          4
+        ],
+        [
+          "Face Toners",
+          4
+        ],
+        [
+          "Baby Bedding",
+          4
+        ],
+        [
+          "Paint",
+          4
+        ],
+        [
+          "Maternity",
+          4
+        ],
+        [
+          "Deodorant",
+          4
+        ],
+        [
+          "Men's Swimwear",
+          4
+        ],
+        [
+          "Gift Cards",
+          4
+        ],
+        [
+          "Bar Cabinets",
+          3
+        ],
+        [
+          "Shower Curtains",
+          3
+        ],
+        [
+          "Napkin Rings",
+          3
+        ],
+        [
+          "Bath Rugs & Mats",
+          3
+        ],
+        [
+          "Armoires",
+          3
+        ],
+        [
+          "Entertainment Units",
+          3
+        ],
+        [
+          "Outdoor Loungers & Day Beds",
+          3
+        ],
+        [
+          "File Cabinets",
+          3
+        ],
+        [
+          "Children's Room",
+          3
+        ],
+        [
+          "Bakeware",
+          3
+        ],
+        [
+          "Suits",
+          3
+        ],
+        [
+          "Quilts & Coverlets",
+          3
+        ],
+        [
+          "Health",
+          3
+        ],
+        [
+          "Men's Gift Sets & Kits",
+          3
+        ],
+        [
+          "Men's Money Clips",
+          3
+        ],
+        [
+          "Men's Skincare",
+          3
+        ],
+        [
+          "Tweezers & Brow Tools",
+          3
+        ],
+        [
+          "Men's Umbrellas",
+          3
+        ],
+        [
+          "Standing Fans",
+          2
+        ],
+        [
+          "Children's Bedding",
+          2
+        ],
+        [
+          "Chemises",
+          2
+        ],
+        [
+          "Men's Activewear Tops",
+          2
+        ],
+        [
+          "Men's Activewear Shorts",
+          2
+        ],
+        [
+          "Fans",
+          2
+        ],
+        [
+          "Window Treatments",
+          2
+        ],
+        [
+          "Outdoor Patio Sets",
+          2
+        ],
+        [
+          "Window Blinds",
+          2
+        ],
+        [
+          "Men's Sleepwear",
+          2
+        ],
+        [
+          "Men's Slippers",
+          2
+        ],
+        [
+          "Men's Flip Flops",
+          2
+        ],
+        [
+          "Sharpeners",
+          2
+        ],
+        [
+          "Sports Accessories",
+          2
+        ],
+        [
+          "Outdoor Benches",
+          1
+        ],
+        [
+          "Men's Activewear Jackets",
+          1
+        ],
+        [
+          "Decorative Hardware",
+          1
+        ],
+        [
+          "Nursery Furniture",
+          1
+        ],
+        [
+          "Oral Care",
+          1
+        ],
+        [
+          "Bedspreads",
+          1
+        ],
+        [
+          "Hair Removal",
+          1
+        ],
+        [
+          "Men's Activewear",
+          1
+        ],
+        [
+          "Men's Grooming Bags",
+          1
+        ],
+        [
+          "Flooring",
+          1
+        ],
+        [
+          "Activewear Skirts",
+          1
+        ],
+        [
+          "Men's Hair Care",
+          1
+        ],
+        [
+          "Curtain Rods",
+          1
+        ],
+        [
+          "Sleepwear",
+          1
+        ]
+      ],
+      "top_5_concentration": 17.1,
+      "top_10_concentration": 30.0,
+      "sample_values": [
+        "Day Dresses",
+        "Boots",
+        "Handbags",
+        "Sunglasses",
+        "Floral Decor",
+        "Coats",
+        "Blazers",
+        "Skinny Jeans",
+        "Watches",
+        "Accessories",
+        "Men's Shirts",
+        "Rompers",
+        "Sandals",
+        "Backpacks",
+        "Food & Drink",
+        "Dining Chairs",
+        "Accent Tables",
+        "Toys",
+        "Font",
+        "Pumps",
+        "Bags",
+        "Necklaces",
+        "Bracelets & Bangles",
+        "Earrings",
+        "Sweatshirts",
+        "Blouses",
+        "Tops",
+        "Sweaters",
+        "Boyfriend Jeans",
+        "Makeup"
+      ]
+    }
+  },
+  "attribute_analysis": {},
+  "text_category_overlap": {
+    "category": {
+      "text_contains_exact_category_pct": 12.4,
+      "text_shares_words_with_category_pct": 43.2,
+      "total_overlap_pct": 55.6
+    }
+  },
+  "cross_field_correlations": {}
+}

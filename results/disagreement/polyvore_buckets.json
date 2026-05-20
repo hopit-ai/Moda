@@ -1,0 +1,28 @@
+{
+  "dataset": "polyvore",
+  "n_queries_with_gold": 2000,
+  "hit10_A": 0.584,
+  "hit10_B": 0.6225,
+  "hit10_Fusion": 0.6285,
+  "hit10_Oracle_AB": 0.6725,
+  "buckets_count": {
+    "BOTH_HIT_TOP10": 1068,
+    "A_HIT_ONLY_TOP10": 100,
+    "B_HIT_ONLY_TOP10": 177,
+    "FUSION_RECOVERS_TOP10": 14,
+    "FUSION_HURTS_TOP10": 102,
+    "BOTH_MISS_TOP10": 655,
+    "BOTH_MISS_TOP100": 238,
+    "RERANKER_REACHABLE": 417
+  },
+  "buckets_pct": {
+    "BOTH_HIT_TOP10": 53.4,
+    "A_HIT_ONLY_TOP10": 5.0,
+    "B_HIT_ONLY_TOP10": 8.85,
+    "FUSION_RECOVERS_TOP10": 0.7,
+    "FUSION_HURTS_TOP10": 5.1,
+    "BOTH_MISS_TOP10": 32.75,
+    "BOTH_MISS_TOP100": 11.9,
+    "RERANKER_REACHABLE": 20.85
+  }
+}

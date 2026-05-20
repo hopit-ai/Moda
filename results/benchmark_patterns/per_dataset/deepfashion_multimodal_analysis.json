@@ -1,0 +1,748 @@
+{
+  "name": "deepfashion_multimodal",
+  "hf_id": "Marqo/deepfashion-multimodal",
+  "total_rows": 42537,
+  "tasks": [
+    "text-to-image",
+    "category-to-product"
+  ],
+  "n_tasks": 2,
+  "columns": [
+    "category1",
+    "category2",
+    "category3",
+    "text",
+    "item_ID"
+  ],
+  "text_analysis": {
+    "text": {
+      "field": "text",
+      "total_rows": 42537,
+      "non_null_count": 42537,
+      "null_rate": 0.0,
+      "unique_count": 40769,
+      "uniqueness_ratio": 0.9584,
+      "duplication_ratio": 0.0416,
+      "top_repeated_values": [
+        [
+          "The upper clothing has short sleeves, cotton fabric and pure color patterns.",
+          29
+        ],
+        [
+          "The upper clothing has long sleeves, cotton fabric and pure color patterns.",
+          27
+        ],
+        [
+          "The upper clothing has no sleeves, cotton fabric and solid color patterns.",
+          25
+        ],
+        [
+          "The upper clothing has sleeves cut off, cotton fabric and pure color patterns.",
+          25
+        ],
+        [
+          "The upper clothing has sleeves cut off, cotton fabric and solid color patterns.",
+          23
+        ],
+        [
+          "The upper clothing has no sleeves, cotton fabric and pure color patterns.",
+          22
+        ],
+        [
+          "The upper clothing has long sleeves, cotton fabric and solid color patterns.",
+          19
+        ],
+        [
+          "The upper clothing has short sleeves, cotton fabric and solid color patterns.",
+          16
+        ],
+        [
+          "The upper clothing has short sleeves, cotton fabric and graphic patterns.",
+          15
+        ],
+        [
+          "Her shirt has long sleeves, cotton fabric and solid color patterns.",
+          14
+        ],
+        [
+          "The upper clothing has short sleeves, cotton fabric and graphic patterns. The neckline of it is lapel.",
+          13
+        ],
+        [
+          "Her tank top has no sleeves, cotton fabric and pure color patterns.",
+          12
+        ],
+        [
+          "His shirt has long sleeves, cotton fabric and pure color patterns.",
+          10
+        ],
+        [
+          "The upper clothing has long sleeves, cotton fabric and graphic patterns.",
+          10
+        ],
+        [
+          "The upper clothing has sleeves cut off, cotton fabric and graphic patterns.",
+          10
+        ],
+        [
+          "Her tank top has sleeves cut off, cotton fabric and pure color patterns.",
+          10
+        ],
+        [
+          "The upper clothing has sleeves cut off, cotton fabric and solid color patterns. The neckline of it is suspenders.",
+          10
+        ],
+        [
+          "The upper clothing has long sleeves, cotton fabric and pure color patterns. The neckline of it is lapel.",
+          9
+        ],
+        [
+          "The upper clothing has short sleeves, cotton fabric and striped patterns.",
+          9
+        ],
+        [
+          "The upper clothing has short sleeves, cotton fabric and stripe patterns.",
+          9
+        ],
+        [
+          "Her tank shirt has no sleeves, cotton fabric and solid color patterns.",
+          9
+        ],
+        [
+          "His T-shirt has short sleeves, cotton fabric and solid color patterns.",
+          8
+        ],
+        [
+          "His shirt has short sleeves, cotton fabric and solid color patterns.",
+          8
+        ],
+        [
+          "Her sweater has long sleeves, cotton fabric and pure color patterns.",
+          8
+        ],
+        [
+          "Her tank shirt has sleeves cut off, cotton fabric and solid color patterns.",
+          8
+        ],
+        [
+          "Her T-shirt has short sleeves, cotton fabric and graphic patterns.",
+          8
+        ],
+        [
+          "Her tank top has sleeves cut off, cotton fabric and solid color patterns.",
+          8
+        ],
+        [
+          "His T-shirt has short sleeves, cotton fabric and graphic patterns. The neckline of it is lapel.",
+          7
+        ],
+        [
+          "His shirt has short sleeves, cotton fabric and graphic patterns.",
+          7
+        ],
+        [
+          "The upper clothing has long sleeves, cotton fabric and graphic patterns. The neckline of it is crew.",
+          7
+        ]
+      ],
+      "char_length": {
+        "min": 23,
+        "max": 514,
+        "mean": 225.8,
+        "median": 230,
+        "p10": 122,
+        "p90": 322
+      },
+      "word_length": {
+        "min": 4,
+        "max": 95,
+        "mean": 41.4,
+        "median": 42,
+        "p10": 22,
+        "p90": 59
+      },
+      "length_distribution": {
+        "very_long (21+ words)": 38984,
+        "long (11-20 words)": 3473,
+        "medium (6-10 words)": 78,
+        "short (3-5 words)": 2
+      },
+      "vocabulary": {
+        "total_tokens": 1759778,
+        "unique_tokens": 104,
+        "top_50_tokens": [
+          [
+            "the",
+            121842
+          ],
+          [
+            "is",
+            118379
+          ],
+          [
+            "a",
+            82364
+          ],
+          [
+            "fabric",
+            73406
+          ],
+          [
+            "with",
+            73098
+          ],
+          [
+            "patterns",
+            70136
+          ],
+          [
+            "and",
+            68623
+          ],
+          [
+            "wears",
+            52329
+          ],
+          [
+            "cotton",
+            49586
+          ],
+          [
+            "her",
+            48779
+          ],
+          [
+            "has",
+            48517
+          ],
+          [
+            "this",
+            46441
+          ],
+          [
+            "color",
+            45285
+          ],
+          [
+            "shirt",
+            40665
+          ],
+          [
+            "on",
+            35107
+          ],
+          [
+            "there",
+            34173
+          ],
+          [
+            "tank",
+            30363
+          ],
+          [
+            "it",
+            28190
+          ],
+          [
+            "neckline",
+            27035
+          ],
+          [
+            "ring",
+            25596
+          ],
+          [
+            "an",
+            25271
+          ],
+          [
+            "person",
+            23531
+          ],
+          [
+            "accessory",
+            23445
+          ],
+          [
+            "pure",
+            22179
+          ],
+          [
+            "solid",
+            21946
+          ],
+          [
+            "sleeves",
+            21767
+          ],
+          [
+            "wearing",
+            21746
+          ],
+          [
+            "lady",
+            21590
+          ],
+          [
+            "female",
+            21509
+          ],
+          [
+            "of",
+            21374
+          ],
+          [
+            "long",
+            20689
+          ],
+          [
+            "pants",
+            20275
+          ],
+          [
+            "are",
+            18122
+          ],
+          [
+            "three",
+            17596
+          ],
+          [
+            "finger",
+            17065
+          ],
+          [
+            "wrist",
+            17030
+          ],
+          [
+            "graphic",
+            17011
+          ],
+          [
+            "point",
+            16995
+          ],
+          [
+            "shorts",
+            14329
+          ],
+          [
+            "clothing",
+            13114
+          ],
+          [
+            "top",
+            13029
+          ],
+          [
+            "sleeve",
+            12057
+          ],
+          [
+            "its",
+            11393
+          ],
+          [
+            "woman",
+            10766
+          ],
+          [
+            "sweater",
+            10679
+          ],
+          [
+            "denim",
+            9677
+          ],
+          [
+            "short",
+            9618
+          ],
+          [
+            "in",
+            9273
+          ],
+          [
+            "his",
+            8812
+          ],
+          [
+            "length",
+            8685
+          ]
+        ],
+        "top_30_bigrams": [
+          [
+            "fabric and",
+            50267
+          ],
+          [
+            "cotton fabric",
+            43285
+          ],
+          [
+            "color patterns",
+            42394
+          ],
+          [
+            "there is",
+            34173
+          ],
+          [
+            "on her",
+            34048
+          ],
+          [
+            "with cotton",
+            33775
+          ],
+          [
+            "patterns the",
+            32165
+          ],
+          [
+            "wears a",
+            31742
+          ],
+          [
+            "is with",
+            28090
+          ],
+          [
+            "a ring",
+            25596
+          ],
+          [
+            "is an",
+            23445
+          ],
+          [
+            "an accessory",
+            23445
+          ],
+          [
+            "pure color",
+            22179
+          ],
+          [
+            "solid color",
+            21946
+          ],
+          [
+            "is wearing",
+            21746
+          ],
+          [
+            "wearing a",
+            20890
+          ],
+          [
+            "are with",
+            18102
+          ],
+          [
+            "it has",
+            17631
+          ],
+          [
+            "ring on",
+            17065
+          ],
+          [
+            "accessory on",
+            17030
+          ],
+          [
+            "three point",
+            16995
+          ],
+          [
+            "her finger",
+            16979
+          ],
+          [
+            "her wrist",
+            16131
+          ],
+          [
+            "graphic patterns",
+            16130
+          ],
+          [
+            "shirt is",
+            15922
+          ],
+          [
+            "has a",
+            14777
+          ],
+          [
+            "the tank",
+            14606
+          ],
+          [
+            "person wears",
+            14466
+          ],
+          [
+            "and solid",
+            14086
+          ],
+          [
+            "and pure",
+            14049
+          ]
+        ]
+      },
+      "text_style": {
+        "has_comma_pct": 45.4,
+        "has_period_pct": 100.0,
+        "has_numbers_pct": 0.0,
+        "starts_uppercase_pct": 100.0,
+        "all_lowercase_pct": 0.0,
+        "all_uppercase_pct": 0.0
+      },
+      "sample_values": [
+        "The lower clothing is of long length. The fabric is cotton and it has plaid patterns.",
+        "His tank top has sleeves cut off, cotton fabric and pure color patterns. The neckline of it is round. The pants this man wears is of long length. The pants are with cotton fabric and pure color patterns.",
+        "His sweater has long sleeves, cotton fabric and stripe patterns. The neckline of it is lapel. The gentleman wears a long pants. The pants are with cotton fabric and solid color patterns.",
+        "His shirt has short sleeves, cotton fabric and pure color patterns. It has a crew neckline. The person wears a long pants. The pants are with cotton fabric and solid color patterns.",
+        "The sweater the person wears has long sleeves, its fabric is denim, and it has solid color patterns. The sweater has a lapel neckline. The person wears a long pants, with cotton fabric and solid color patterns.",
+        "The person wears a short-sleeve T-shirt with solid color patterns and long pants. The T-shirt is with cotton fabric and it has a round neckline. The pants are with cotton fabric and pure color patterns.",
+        "This man is wearing a long-sleeve sweater with plaid patterns. The sweater is with cotton fabric and its neckline is lapel. This man wears a long pants. The pants are with cotton fabric and pure color patterns. The outer clothing is with denim fabric and solid color patterns.",
+        "The upper clothing has short sleeves, cotton fabric and solid color patterns. The neckline of it is lapel. The lower clothing is of long length. The fabric is cotton and it has solid color patterns. There is an accessory on his wrist.",
+        "The gentleman wears a tank tank top with pure color patterns. The tank top is with cotton fabric. It has a square neckline. The gentleman wears a long pants. The pants are with cotton fabric and solid color patterns.",
+        "This guy wears a long-sleeve shirt with solid color patterns and a long trousers. The shirt is with cotton fabric. The neckline of the shirt is round. The trousers are with cotton fabric and solid color patterns.",
+        "The upper clothing has medium sleeves, cotton fabric and pure color patterns. It has a lapel neckline. The lower clothing is of long length. The fabric is cotton and it has solid color patterns.",
+        "His shirt has medium sleeves, cotton fabric and pure color patterns. It has a lapel neckline. The guy wears a long trousers. The trousers are with cotton fabric and pure color patterns.",
+        "This gentleman is wearing a medium-sleeve shirt with pure color patterns. The shirt is with cotton fabric and its neckline is lapel. This gentleman wears a long trousers. The trousers are with cotton fabric and solid color patterns.",
+        "His shirt has long sleeves, cotton fabric and solid color patterns. The neckline of it is round. The trousers this person wears is of long length. The trousers are with cotton fabric and solid color patterns.",
+        "This man is wearing a short-sleeve shirt with pure color patterns. The shirt is with cotton fabric and its neckline is lapel. The trousers this man wears is of long length. The trousers are with cotton fabric and solid color patterns.",
+        "His T-shirt has short sleeves, cotton fabric and solid color patterns. The neckline of it is lapel. The trousers this man wears is of long length. The trousers are with cotton fabric and solid color patterns.",
+        "This man wears a short-sleeve T-shirt with pure color patterns. The T-shirt is with cotton fabric. It has a lapel neckline. The trousers this man wears is of long length. The trousers are with cotton fabric and pure color patterns.",
+        "This guy is wearing a short-sleeve T-shirt with pure color patterns. The T-shirt is with cotton fabric and its neckline is v-shape. The pants this guy wears is of long length. The pants are with cotton fabric and solid color patterns.",
+        "This person is wearing a short-sleeve shirt with solid color patterns. The shirt is with cotton fabric. It has a crew neckline. The pants this person wears is of short length. The pants are with cotton fabric and pure color patterns. There is a hat in his head.",
+        "His T-shirt has short sleeves, cotton fabric and pure color patterns. It has a round neckline. The shorts the guy wears is of medium length. The shorts are with cotton fabric and solid color patterns. The gentleman has a hat in his head."
+      ]
+    }
+  },
+  "category_analysis": {
+    "category1": {
+      "field": "category1",
+      "total_rows": 42537,
+      "non_null_count": 42537,
+      "null_rate": 0.0,
+      "n_unique_values": 2,
+      "value_distribution": [
+        [
+          "women",
+          37577
+        ],
+        [
+          "men",
+          4960
+        ]
+      ],
+      "top_5_concentration": 100.0,
+      "top_10_concentration": 100.0,
+      "sample_values": [
+        "men",
+        "women"
+      ]
+    },
+    "category2": {
+      "field": "category2",
+      "total_rows": 42537,
+      "non_null_count": 42537,
+      "null_rate": 0.0,
+      "n_unique_values": 16,
+      "value_distribution": [
+        [
+          "tees",
+          13356
+        ],
+        [
+          "blouses",
+          7503
+        ],
+        [
+          "dresses",
+          6680
+        ],
+        [
+          "sweaters",
+          3322
+        ],
+        [
+          "jackets",
+          2164
+        ],
+        [
+          "rompers",
+          1627
+        ],
+        [
+          "shorts",
+          1514
+        ],
+        [
+          "sweatshirts",
+          1398
+        ],
+        [
+          "cardigans",
+          1382
+        ],
+        [
+          "graphic",
+          1096
+        ],
+        [
+          "skirts",
+          813
+        ],
+        [
+          "pants",
+          744
+        ],
+        [
+          "shirts",
+          569
+        ],
+        [
+          "denim",
+          243
+        ],
+        [
+          "leggings",
+          101
+        ],
+        [
+          "suiting",
+          25
+        ]
+      ],
+      "top_5_concentration": 77.6,
+      "top_10_concentration": 94.1,
+      "sample_values": [
+        "denim",
+        "jackets",
+        "pants",
+        "shirts",
+        "shorts",
+        "suiting",
+        "sweaters",
+        "sweatshirts",
+        "tees",
+        "blouses",
+        "cardigans",
+        "dresses",
+        "graphic",
+        "leggings",
+        "rompers",
+        "skirts"
+      ]
+    }
+  },
+  "attribute_analysis": {},
+  "text_category_overlap": {
+    "category1": {
+      "text_contains_exact_category_pct": 0.0,
+      "text_shares_words_with_category_pct": 0.0,
+      "total_overlap_pct": 0.0
+    },
+    "category2": {
+      "text_contains_exact_category_pct": 66.2,
+      "text_shares_words_with_category_pct": 0.0,
+      "total_overlap_pct": 66.2
+    }
+  },
+  "cross_field_correlations": {
+    "category1 \u00d7 category2": {
+      "n_combinations": 23,
+      "top_20_combinations": [
+        [
+          "women | tees",
+          11018
+        ],
+        [
+          "women | blouses",
+          7503
+        ],
+        [
+          "women | dresses",
+          6680
+        ],
+        [
+          "women | sweaters",
+          2852
+        ],
+        [
+          "men | tees",
+          2338
+        ],
+        [
+          "women | jackets",
+          1801
+        ],
+        [
+          "women | rompers",
+          1627
+        ],
+        [
+          "women | cardigans",
+          1382
+        ],
+        [
+          "women | shorts",
+          1286
+        ],
+        [
+          "women | graphic",
+          1096
+        ],
+        [
+          "women | skirts",
+          813
+        ],
+        [
+          "women | sweatshirts",
+          767
+        ],
+        [
+          "men | sweatshirts",
+          631
+        ],
+        [
+          "men | shirts",
+          569
+        ],
+        [
+          "women | pants",
+          505
+        ],
+        [
+          "men | sweaters",
+          470
+        ],
+        [
+          "men | jackets",
+          363
+        ],
+        [
+          "men | pants",
+          239
+        ],
+        [
+          "men | shorts",
+          228
+        ],
+        [
+          "women | denim",
+          146
+        ]
+      ]
+    }
+  }
+}

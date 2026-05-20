@@ -1,0 +1,58 @@
+[
+  {
+    "model": "google-siglip-l16-384",
+    "dataset": "fashion200k",
+    "run_name": "Google-SigLIP-L16-384_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.34577,
+        "MAP@10": 0.46767,
+        "NDCG@1": 0.351,
+        "NDCG@10": 0.53077,
+        "P@1": 0.351,
+        "P@10": 0.0756,
+        "Recall@1": 0.34577,
+        "Recall@10": 0.72745,
+        "MRR": 0.46947
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  },
+  {
+    "model": "siglip-l16-lora-smoke",
+    "dataset": "fashion200k",
+    "run_name": "MoDA-SigLIP-L16-LoRA-Smoke_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.0711,
+        "MAP@10": 0.10207,
+        "NDCG@1": 0.073,
+        "NDCG@10": 0.12217,
+        "P@1": 0.073,
+        "P@10": 0.01915,
+        "Recall@1": 0.0711,
+        "Recall@10": 0.18543,
+        "MRR": 0.10397
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  }
+]

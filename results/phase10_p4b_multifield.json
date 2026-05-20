@@ -1,0 +1,37 @@
+{
+  "model_source": "phase4b",
+  "checkpoint": "/Users/rohit.anand/Desktop/Hobby/MODA/checkpoints/v3_phase10/phase10_p4b_multifield/best.pt",
+  "corpus_size": 3000,
+  "results": {
+    "fashion200k": {
+      "text_to_image_map10": 0.554722839506173,
+      "category3_to_product_map10": 0.2987424777603349,
+      "category2_to_product_map10": 0.5515514592933948,
+      "category1_to_product_map10": 1.0,
+      "primary_map10": 0.554722839506173
+    },
+    "atlas": {
+      "text_to_image_map10": 0.33473630432728646,
+      "category_to_product_map10": 0.6833333333333332,
+      "primary_map10": 0.33473630432728646
+    },
+    "polyvore": {
+      "text_to_image_map10": 0.7107343253968254,
+      "category_to_product_map10": 0.5518098402151558,
+      "primary_map10": 0.7107343253968254
+    },
+    "KAGL": {
+      "text_to_image_map10": 0.5316716761148904,
+      "category3_to_product_map10": 0.7631046509323663,
+      "category2_to_product_map10": 0.7976041666666667,
+      "category1_to_product_map10": 0.7670873015873017,
+      "primary_map10": 0.5316716761148904
+    }
+  },
+  "fsl_baseline": {
+    "fashion200k": 0.3859,
+    "atlas": 0.6919,
+    "polyvore": 0.5783,
+    "KAGL": 0.6779
+  }
+}

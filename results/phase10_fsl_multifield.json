@@ -1,0 +1,37 @@
+{
+  "model_source": "fsl",
+  "checkpoint": "checkpoints/v3_phase10/phase10_fsl_multifield/best.pt",
+  "corpus_size": 3000,
+  "results": {
+    "fashion200k": {
+      "text_to_image_map10": 0.6543200562169312,
+      "category3_to_product_map10": 0.3193308295540438,
+      "category2_to_product_map10": 0.5588863287250385,
+      "category1_to_product_map10": 0.9580873015873015,
+      "primary_map10": 0.6543200562169312
+    },
+    "atlas": {
+      "text_to_image_map10": 0.341124196664777,
+      "category_to_product_map10": 0.6333333333333333,
+      "primary_map10": 0.341124196664777
+    },
+    "polyvore": {
+      "text_to_image_map10": 0.7341071428571428,
+      "category_to_product_map10": 0.5811114635884501,
+      "primary_map10": 0.7341071428571428
+    },
+    "KAGL": {
+      "text_to_image_map10": 0.5524270238095238,
+      "category3_to_product_map10": 0.7832767696133801,
+      "category2_to_product_map10": 0.8099032738095238,
+      "category1_to_product_map10": 0.78,
+      "primary_map10": 0.5524270238095238
+    }
+  },
+  "fsl_baseline": {
+    "fashion200k": 0.3859,
+    "atlas": 0.6919,
+    "polyvore": 0.5783,
+    "KAGL": 0.6779
+  }
+}

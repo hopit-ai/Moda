@@ -1,0 +1,38 @@
+{
+  "fashion200k": {
+    "recall@1": 0.23,
+    "recall@10": 0.795,
+    "mrr": 0.3996547619047622,
+    "precision@1": 0.23,
+    "precision@10": 0.08349999999999985,
+    "n_queries": 200,
+    "n_docs": 1200
+  },
+  "atlas": {
+    "recall@1": 0.345,
+    "recall@10": 0.775,
+    "mrr": 0.4568035714285713,
+    "precision@1": 0.345,
+    "precision@10": 0.09899999999999996,
+    "n_queries": 200,
+    "n_docs": 1200
+  },
+  "polyvore": {
+    "recall@1": 0.63,
+    "recall@10": 0.93,
+    "mrr": 0.7405059523809524,
+    "precision@1": 0.63,
+    "precision@10": 0.09299999999999997,
+    "n_queries": 200,
+    "n_docs": 1200
+  },
+  "KAGL": {
+    "recall@1": 0.41,
+    "recall@10": 0.815,
+    "mrr": 0.5449325396825395,
+    "precision@1": 0.41,
+    "precision@10": 0.08599999999999987,
+    "n_queries": 200,
+    "n_docs": 1200
+  }
+}

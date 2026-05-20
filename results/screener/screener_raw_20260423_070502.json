@@ -1,0 +1,30 @@
+[
+  {
+    "model": "google-siglip2-so400m-384",
+    "dataset": "fashion200k",
+    "run_name": "Google-SigLIP2-SO400M-378_subsample10000_seed42",
+    "tasks": {
+      "text-to-image": {
+        "MAP@1": 0.35333,
+        "MAP@10": 0.46924,
+        "NDCG@1": 0.36,
+        "NDCG@10": 0.52935,
+        "P@1": 0.36,
+        "P@10": 0.07445,
+        "Recall@1": 0.35333,
+        "Recall@10": 0.71687,
+        "MRR": 0.47129
+      }
+    },
+    "meta": {
+      "full_corpus_size": 10001,
+      "subsampled_size": 10000,
+      "target_size": 10000,
+      "seed": 42,
+      "queries_dropped_per_task": {
+        "text-to-image::text": 0
+      },
+      "kept_doc_ids_count": 10000
+    }
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "dataset": "KAGL",
+  "n_queries_with_gold": 2000,
+  "hit10_A": 0.522,
+  "hit10_B": 0.5505,
+  "hit10_Fusion": 0.5665,
+  "hit10_Oracle_AB": 0.632,
+  "buckets_count": {
+    "BOTH_HIT_TOP10": 881,
+    "A_HIT_ONLY_TOP10": 163,
+    "B_HIT_ONLY_TOP10": 220,
+    "FUSION_RECOVERS_TOP10": 18,
+    "FUSION_HURTS_TOP10": 149,
+    "BOTH_MISS_TOP10": 736,
+    "BOTH_MISS_TOP100": 174,
+    "RERANKER_REACHABLE": 562
+  },
+  "buckets_pct": {
+    "BOTH_HIT_TOP10": 44.05,
+    "A_HIT_ONLY_TOP10": 8.15,
+    "B_HIT_ONLY_TOP10": 11.0,
+    "FUSION_RECOVERS_TOP10": 0.9,
+    "FUSION_HURTS_TOP10": 7.45,
+    "BOTH_MISS_TOP10": 36.8,
+    "BOTH_MISS_TOP100": 8.7,
+    "RERANKER_REACHABLE": 28.1
+  }
+}

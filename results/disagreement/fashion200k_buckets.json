@@ -1,0 +1,28 @@
+{
+  "dataset": "fashion200k",
+  "n_queries_with_gold": 2000,
+  "hit10_A": 0.383,
+  "hit10_B": 0.34,
+  "hit10_Fusion": 0.406,
+  "hit10_Oracle_AB": 0.4605,
+  "buckets_count": {
+    "BOTH_HIT_TOP10": 525,
+    "A_HIT_ONLY_TOP10": 241,
+    "B_HIT_ONLY_TOP10": 155,
+    "FUSION_RECOVERS_TOP10": 25,
+    "FUSION_HURTS_TOP10": 134,
+    "BOTH_MISS_TOP10": 1079,
+    "BOTH_MISS_TOP100": 448,
+    "RERANKER_REACHABLE": 631
+  },
+  "buckets_pct": {
+    "BOTH_HIT_TOP10": 26.25,
+    "A_HIT_ONLY_TOP10": 12.05,
+    "B_HIT_ONLY_TOP10": 7.75,
+    "FUSION_RECOVERS_TOP10": 1.25,
+    "FUSION_HURTS_TOP10": 6.7,
+    "BOTH_MISS_TOP10": 53.95,
+    "BOTH_MISS_TOP100": 22.4,
+    "RERANKER_REACHABLE": 31.55
+  }
+}

@@ -1,0 +1,3601 @@
+{
+  "name": "KAGL",
+  "hf_id": "Marqo/KAGL",
+  "total_rows": 44434,
+  "tasks": [
+    "text-to-image",
+    "category-to-product",
+    "sub-category-to-product",
+    "fine-category-to-product",
+    "color-to-product",
+    "season-to-product",
+    "usage-to-product"
+  ],
+  "n_tasks": 7,
+  "columns": [
+    "gender",
+    "category1",
+    "category2",
+    "category3",
+    "baseColour",
+    "season",
+    "year",
+    "usage",
+    "text",
+    "item_ID"
+  ],
+  "text_analysis": {
+    "text": {
+      "field": "text",
+      "total_rows": 44434,
+      "non_null_count": 44434,
+      "null_rate": 0.0,
+      "unique_count": 31131,
+      "uniqueness_ratio": 0.7006,
+      "duplication_ratio": 0.2994,
+      "top_repeated_values": [
+        [
+          "Lucera Women Silver Earrings",
+          82
+        ],
+        [
+          "Lucera Women Silver Pendant",
+          56
+        ],
+        [
+          "Lucera Women Silver Ring",
+          50
+        ],
+        [
+          "Catwalk Women Black Heels",
+          48
+        ],
+        [
+          "Q&Q Men Black Dial Watch",
+          42
+        ],
+        [
+          "Fastrack Men Black Dial Watch",
+          41
+        ],
+        [
+          "Maxima Men White Dial Watch",
+          38
+        ],
+        [
+          "Fabindia Women Anusuya Silver Earrings",
+          37
+        ],
+        [
+          "FNF Multi Coloured Printed Sari",
+          32
+        ],
+        [
+          "Coolers Men Black Sandals",
+          31
+        ],
+        [
+          "Miami Blues Women Sunglasses",
+          31
+        ],
+        [
+          "Murcia Women Brown Handbag",
+          28
+        ],
+        [
+          "Murcia Women Black Handbag",
+          28
+        ],
+        [
+          "Lucera Women Silver Pendant with Chain",
+          28
+        ],
+        [
+          "Locomotive Men Washed Blue Jeans",
+          27
+        ],
+        [
+          "Mark Taylor Men Blue Striped Shirt",
+          26
+        ],
+        [
+          "Red Tape Men Brown Shoes",
+          26
+        ],
+        [
+          "Idee Men Black Sunglasses",
+          26
+        ],
+        [
+          "Titan Men White Dial Watch",
+          26
+        ],
+        [
+          "Revv Men Steel Ring",
+          26
+        ],
+        [
+          "W Women Printed White Kurtas",
+          25
+        ],
+        [
+          "Catwalk Women Brown Heels",
+          25
+        ],
+        [
+          "Arrow Men Black Formal Shoes",
+          24
+        ],
+        [
+          "Rocia Women Black Sandals",
+          24
+        ],
+        [
+          "FNF Multi Coloured Sari",
+          24
+        ],
+        [
+          "Franco Leone Men Formal Black Formal Shoes",
+          23
+        ],
+        [
+          "Rocia Women Black Flats",
+          23
+        ],
+        [
+          "Lucera Silver Earrings",
+          23
+        ],
+        [
+          "Catwalk Women Silver Heels",
+          22
+        ],
+        [
+          "BIBA Women Printed Blue Kurta",
+          22
+        ]
+      ],
+      "char_length": {
+        "min": 7,
+        "max": 88,
+        "mean": 34.7,
+        "median": 34,
+        "p10": 25,
+        "p90": 46
+      },
+      "word_length": {
+        "min": 1,
+        "max": 15,
+        "mean": 5.9,
+        "median": 6,
+        "p10": 4,
+        "p90": 8
+      },
+      "length_distribution": {
+        "medium (6-10 words)": 24829,
+        "short (3-5 words)": 19325,
+        "long (11-20 words)": 272,
+        "very_short (1-2 words)": 8
+      },
+      "vocabulary": {
+        "total_tokens": 263499,
+        "unique_tokens": 8762,
+        "top_50_tokens": [
+          [
+            "men",
+            19270
+          ],
+          [
+            "women",
+            14746
+          ],
+          [
+            "black",
+            9680
+          ],
+          [
+            "shirt",
+            7598
+          ],
+          [
+            "blue",
+            6601
+          ],
+          [
+            "white",
+            5805
+          ],
+          [
+            "t",
+            5487
+          ],
+          [
+            "shoes",
+            4088
+          ],
+          [
+            "printed",
+            3437
+          ],
+          [
+            "brown",
+            3242
+          ],
+          [
+            "red",
+            3103
+          ],
+          [
+            "grey",
+            3044
+          ],
+          [
+            "watch",
+            2413
+          ],
+          [
+            "men's",
+            2361
+          ],
+          [
+            "nike",
+            2326
+          ],
+          [
+            "green",
+            2321
+          ],
+          [
+            "casual",
+            2296
+          ],
+          [
+            "of",
+            2111
+          ],
+          [
+            "puma",
+            2102
+          ],
+          [
+            "adidas",
+            2081
+          ],
+          [
+            "unisex",
+            2035
+          ],
+          [
+            "navy",
+            1846
+          ],
+          [
+            "pink",
+            1766
+          ],
+          [
+            "dial",
+            1743
+          ],
+          [
+            "kurta",
+            1688
+          ],
+          [
+            "polo",
+            1651
+          ],
+          [
+            "top",
+            1588
+          ],
+          [
+            "purple",
+            1564
+          ],
+          [
+            "united",
+            1513
+          ],
+          [
+            "sports",
+            1465
+          ],
+          [
+            "benetton",
+            1436
+          ],
+          [
+            "shoe",
+            1427
+          ],
+          [
+            "colors",
+            1419
+          ],
+          [
+            "solid",
+            1343
+          ],
+          [
+            "handbag",
+            1217
+          ],
+          [
+            "check",
+            1150
+          ],
+          [
+            "silver",
+            1125
+          ],
+          [
+            "shirts",
+            1082
+          ],
+          [
+            "sandals",
+            1060
+          ],
+          [
+            "sunglasses",
+            1046
+          ],
+          [
+            "striped",
+            1037
+          ],
+          [
+            "and",
+            963
+          ],
+          [
+            "wallet",
+            853
+          ],
+          [
+            "yellow",
+            814
+          ],
+          [
+            "flip",
+            802
+          ],
+          [
+            "boys",
+            797
+          ],
+          [
+            "tshirts",
+            781
+          ],
+          [
+            "beige",
+            774
+          ],
+          [
+            "kids",
+            772
+          ],
+          [
+            "formal",
+            764
+          ]
+        ],
+        "top_30_bigrams": [
+          [
+            "t shirt",
+            5207
+          ],
+          [
+            "men black",
+            2691
+          ],
+          [
+            "women black",
+            1584
+          ],
+          [
+            "navy blue",
+            1553
+          ],
+          [
+            "of benetton",
+            1426
+          ],
+          [
+            "united colors",
+            1407
+          ],
+          [
+            "colors of",
+            1402
+          ],
+          [
+            "dial watch",
+            1292
+          ],
+          [
+            "sports shoes",
+            1238
+          ],
+          [
+            "men white",
+            1172
+          ],
+          [
+            "puma men",
+            1154
+          ],
+          [
+            "casual shoes",
+            1151
+          ],
+          [
+            "nike men",
+            1139
+          ],
+          [
+            "women printed",
+            1058
+          ],
+          [
+            "adidas men",
+            1022
+          ],
+          [
+            "men blue",
+            1016
+          ],
+          [
+            "men brown",
+            976
+          ],
+          [
+            "women white",
+            884
+          ],
+          [
+            "women blue",
+            843
+          ],
+          [
+            "men grey",
+            810
+          ],
+          [
+            "benetton men",
+            755
+          ],
+          [
+            "men solid",
+            747
+          ],
+          [
+            "catwalk women",
+            735
+          ],
+          [
+            "blue t",
+            695
+          ],
+          [
+            "gini and",
+            684
+          ],
+          [
+            "and jony",
+            682
+          ],
+          [
+            "lino perros",
+            655
+          ],
+          [
+            "women brown",
+            648
+          ],
+          [
+            "white t",
+            646
+          ],
+          [
+            "polo t",
+            636
+          ]
+        ]
+      },
+      "text_style": {
+        "has_comma_pct": 0.0,
+        "has_period_pct": 1.7,
+        "has_numbers_pct": 10.6,
+        "starts_uppercase_pct": 99.3,
+        "all_lowercase_pct": 0.0,
+        "all_uppercase_pct": 0.0
+      },
+      "sample_values": [
+        "Palm Tree Girls Sp Jace Sko White Skirts",
+        "Palm Tree Kids Girls Sp Jema Skt Blue Skirts",
+        "Palm Tree Kids Sp Jema Skt Blue Skirts",
+        "Nike Women As Nike Eleme White T-Shirt",
+        "Nike Men As 7 Sw Temp Grey Shorts",
+        "Nike Men As Ss Trainin Blue T-Shirts",
+        "Nike Men AS T90 Black Tshirts",
+        "Nike Women As Trophy Swo White T-Shirts",
+        "Nike Men Town Navy Blue T-Shirts",
+        "Nike Men Town Round Red Neck T-Shirts",
+        "Nike Men As Showdown F Black T-Shirts",
+        "Nike Men Grey Melange Track Pants",
+        "Nike Men's Breakli Navy Blue Track Pants",
+        "Nike Men As Ss Cruiser Yellow T-Shirts",
+        "Nike Unisex Feather lite Blue Caps",
+        "Locomotive Men American Glory White Tshirts",
+        "Palm Tree Girl's Cr Blossom Drs Pink Dresses",
+        "Nike Women As The Windru Blue Jackets",
+        "Nike Men Black Three Quarter Track Pants",
+        "Nike Women As Miler Ss White T-Shirts"
+      ]
+    }
+  },
+  "category_analysis": {
+    "category1": {
+      "field": "category1",
+      "total_rows": 44434,
+      "non_null_count": 44434,
+      "null_rate": 0.0,
+      "n_unique_values": 7,
+      "value_distribution": [
+        [
+          "Apparel",
+          21395
+        ],
+        [
+          "Accessories",
+          11287
+        ],
+        [
+          "Footwear",
+          9222
+        ],
+        [
+          "Personal Care",
+          2399
+        ],
+        [
+          "Free Items",
+          105
+        ],
+        [
+          "Sporting Goods",
+          25
+        ],
+        [
+          "Home",
+          1
+        ]
+      ],
+      "top_5_concentration": 99.9,
+      "top_10_concentration": 100.0,
+      "sample_values": [
+        "Apparel",
+        "Accessories",
+        "Footwear",
+        "Free Items",
+        "Sporting Goods",
+        "Personal Care",
+        "Home"
+      ]
+    },
+    "category2": {
+      "field": "category2",
+      "total_rows": 44434,
+      "non_null_count": 44434,
+      "null_rate": 0.0,
+      "n_unique_values": 45,
+      "value_distribution": [
+        [
+          "Topwear",
+          15401
+        ],
+        [
+          "Shoes",
+          7344
+        ],
+        [
+          "Bags",
+          3053
+        ],
+        [
+          "Bottomwear",
+          2693
+        ],
+        [
+          "Watches",
+          2542
+        ],
+        [
+          "Innerwear",
+          1808
+        ],
+        [
+          "Jewellery",
+          1080
+        ],
+        [
+          "Eyewear",
+          1073
+        ],
+        [
+          "Fragrance",
+          1007
+        ],
+        [
+          "Sandal",
+          963
+        ],
+        [
+          "Wallets",
+          933
+        ],
+        [
+          "Flip Flops",
+          915
+        ],
+        [
+          "Belts",
+          811
+        ],
+        [
+          "Socks",
+          698
+        ],
+        [
+          "Lips",
+          527
+        ],
+        [
+          "Dress",
+          478
+        ],
+        [
+          "Loungewear and Nightwear",
+          470
+        ],
+        [
+          "Saree",
+          427
+        ],
+        [
+          "Nails",
+          329
+        ],
+        [
+          "Makeup",
+          307
+        ],
+        [
+          "Headwear",
+          293
+        ],
+        [
+          "Ties",
+          258
+        ],
+        [
+          "Accessories",
+          143
+        ],
+        [
+          "Scarves",
+          118
+        ],
+        [
+          "Cufflinks",
+          108
+        ],
+        [
+          "Apparel Set",
+          106
+        ],
+        [
+          "Free Gifts",
+          104
+        ],
+        [
+          "Stoles",
+          90
+        ],
+        [
+          "Skin Care",
+          77
+        ],
+        [
+          "Skin",
+          69
+        ],
+        [
+          "Eyes",
+          43
+        ],
+        [
+          "Mufflers",
+          38
+        ],
+        [
+          "Shoe Accessories",
+          24
+        ],
+        [
+          "Sports Equipment",
+          21
+        ],
+        [
+          "Gloves",
+          20
+        ],
+        [
+          "Hair",
+          19
+        ],
+        [
+          "Bath and Body",
+          12
+        ],
+        [
+          "Water Bottle",
+          7
+        ],
+        [
+          "Umbrellas",
+          6
+        ],
+        [
+          "Perfumes",
+          6
+        ],
+        [
+          "Wristbands",
+          4
+        ],
+        [
+          "Beauty Accessories",
+          4
+        ],
+        [
+          "Sports Accessories",
+          3
+        ],
+        [
+          "Home Furnishing",
+          1
+        ],
+        [
+          "Vouchers",
+          1
+        ]
+      ],
+      "top_5_concentration": 69.8,
+      "top_10_concentration": 83.2,
+      "sample_values": [
+        "Bottomwear",
+        "Topwear",
+        "Headwear",
+        "Dress",
+        "Shoes",
+        "Sandal",
+        "Flip Flops",
+        "Watches",
+        "Bags",
+        "Belts",
+        "Free Gifts",
+        "Innerwear",
+        "Scarves",
+        "Ties",
+        "Saree",
+        "Socks",
+        "Wallets",
+        "Shoe Accessories",
+        "Stoles",
+        "Apparel Set",
+        "Mufflers",
+        "Loungewear and Nightwear",
+        "Sports Equipment",
+        "Cufflinks",
+        "Eyewear",
+        "Jewellery",
+        "Umbrellas",
+        "Accessories",
+        "Water Bottle",
+        "Fragrance"
+      ]
+    },
+    "category3": {
+      "field": "category3",
+      "total_rows": 44434,
+      "non_null_count": 44434,
+      "null_rate": 0.0,
+      "n_unique_values": 142,
+      "value_distribution": [
+        [
+          "Tshirts",
+          7069
+        ],
+        [
+          "Shirts",
+          3215
+        ],
+        [
+          "Casual Shoes",
+          2846
+        ],
+        [
+          "Watches",
+          2542
+        ],
+        [
+          "Sports Shoes",
+          2036
+        ],
+        [
+          "Kurtas",
+          1844
+        ],
+        [
+          "Tops",
+          1762
+        ],
+        [
+          "Handbags",
+          1759
+        ],
+        [
+          "Heels",
+          1323
+        ],
+        [
+          "Sunglasses",
+          1073
+        ],
+        [
+          "Wallets",
+          936
+        ],
+        [
+          "Flip Flops",
+          916
+        ],
+        [
+          "Sandals",
+          897
+        ],
+        [
+          "Briefs",
+          849
+        ],
+        [
+          "Belts",
+          813
+        ],
+        [
+          "Backpacks",
+          724
+        ],
+        [
+          "Socks",
+          686
+        ],
+        [
+          "Formal Shoes",
+          637
+        ],
+        [
+          "Perfume and Body Mist",
+          609
+        ],
+        [
+          "Jeans",
+          608
+        ],
+        [
+          "Shorts",
+          547
+        ],
+        [
+          "Trousers",
+          530
+        ],
+        [
+          "Flats",
+          500
+        ],
+        [
+          "Bra",
+          477
+        ],
+        [
+          "Dresses",
+          464
+        ],
+        [
+          "Sarees",
+          427
+        ],
+        [
+          "Earrings",
+          417
+        ],
+        [
+          "Deodorant",
+          347
+        ],
+        [
+          "Nail Polish",
+          329
+        ],
+        [
+          "Lipstick",
+          315
+        ],
+        [
+          "Track Pants",
+          304
+        ],
+        [
+          "Clutches",
+          288
+        ],
+        [
+          "Sweatshirts",
+          285
+        ],
+        [
+          "Caps",
+          283
+        ],
+        [
+          "Sweaters",
+          277
+        ],
+        [
+          "Ties",
+          263
+        ],
+        [
+          "Jackets",
+          258
+        ],
+        [
+          "Innerwear Vests",
+          242
+        ],
+        [
+          "Kurtis",
+          234
+        ],
+        [
+          "Tunics",
+          229
+        ],
+        [
+          "Nightdress",
+          189
+        ],
+        [
+          "Leggings",
+          177
+        ],
+        [
+          "Pendant",
+          176
+        ],
+        [
+          "Capris",
+          175
+        ],
+        [
+          "Necklace and Chains",
+          160
+        ],
+        [
+          "Lip Gloss",
+          144
+        ],
+        [
+          "Night suits",
+          141
+        ],
+        [
+          "Trunk",
+          140
+        ],
+        [
+          "Skirts",
+          128
+        ],
+        [
+          "Scarves",
+          119
+        ],
+        [
+          "Ring",
+          118
+        ],
+        [
+          "Dupatta",
+          116
+        ],
+        [
+          "Accessory Gift Set",
+          111
+        ],
+        [
+          "Cufflinks",
+          106
+        ],
+        [
+          "Kajal and Eyeliner",
+          102
+        ],
+        [
+          "Kurta Sets",
+          94
+        ],
+        [
+          "Free Gifts",
+          91
+        ],
+        [
+          "Stoles",
+          90
+        ],
+        [
+          "Duffel Bag",
+          88
+        ],
+        [
+          "Bangle",
+          85
+        ],
+        [
+          "Laptop Bag",
+          82
+        ],
+        [
+          "Foundation and Primer",
+          76
+        ],
+        [
+          "Sports Sandals",
+          67
+        ],
+        [
+          "Bracelet",
+          66
+        ],
+        [
+          "Lounge Pants",
+          61
+        ],
+        [
+          "Face Moisturisers",
+          61
+        ],
+        [
+          "Jewellery Set",
+          58
+        ],
+        [
+          "Fragrance Gift Set",
+          57
+        ],
+        [
+          "Highlighter and Blush",
+          53
+        ],
+        [
+          "Boxers",
+          52
+        ],
+        [
+          "Compact",
+          49
+        ],
+        [
+          "Lip Liner",
+          48
+        ],
+        [
+          "Mobile Pouch",
+          47
+        ],
+        [
+          "Messenger Bag",
+          44
+        ],
+        [
+          "Eyeshadow",
+          42
+        ],
+        [
+          "Suspenders",
+          40
+        ],
+        [
+          "Camisoles",
+          39
+        ],
+        [
+          "Mufflers",
+          38
+        ],
+        [
+          "Patiala",
+          38
+        ],
+        [
+          "Lounge Shorts",
+          34
+        ],
+        [
+          "Jeggings",
+          34
+        ],
+        [
+          "Stockings",
+          32
+        ],
+        [
+          "Salwar",
+          32
+        ],
+        [
+          "Churidar",
+          30
+        ],
+        [
+          "Tracksuits",
+          29
+        ],
+        [
+          "Face Wash and Cleanser",
+          28
+        ],
+        [
+          "Sunscreen",
+          25
+        ],
+        [
+          "Shoe Accessories",
+          23
+        ],
+        [
+          "Gloves",
+          20
+        ],
+        [
+          "Bath Robe",
+          20
+        ],
+        [
+          "Hair Colour",
+          19
+        ],
+        [
+          "Rain Jacket",
+          18
+        ],
+        [
+          "Waist Pouch",
+          17
+        ],
+        [
+          "Swimwear",
+          17
+        ],
+        [
+          "Travel Accessory",
+          16
+        ],
+        [
+          "Jumpsuit",
+          16
+        ],
+        [
+          "Baby Dolls",
+          16
+        ],
+        [
+          "Lip Care",
+          16
+        ],
+        [
+          "Waistcoat",
+          15
+        ],
+        [
+          "Basketballs",
+          13
+        ],
+        [
+          "Mascara",
+          13
+        ],
+        [
+          "Booties",
+          12
+        ],
+        [
+          "Rompers",
+          12
+        ],
+        [
+          "Mask and Peel",
+          12
+        ],
+        [
+          "Rucksacks",
+          11
+        ],
+        [
+          "Water Bottle",
+          11
+        ],
+        [
+          "Concealer",
+          11
+        ],
+        [
+          "Tights",
+          9
+        ],
+        [
+          "Shapewear",
+          9
+        ],
+        [
+          "Footballs",
+          8
+        ],
+        [
+          "Blazers",
+          8
+        ],
+        [
+          "Clothing Set",
+          8
+        ],
+        [
+          "Headband",
+          7
+        ],
+        [
+          "Wristbands",
+          7
+        ],
+        [
+          "Salwar and Dupatta",
+          7
+        ],
+        [
+          "Umbrellas",
+          6
+        ],
+        [
+          "Shrug",
+          6
+        ],
+        [
+          "Eye Cream",
+          6
+        ],
+        [
+          "Nail Essentials",
+          6
+        ],
+        [
+          "Body Lotion",
+          6
+        ],
+        [
+          "Nehru Jackets",
+          5
+        ],
+        [
+          "Toner",
+          5
+        ],
+        [
+          "Face Scrub and Exfoliator",
+          5
+        ],
+        [
+          "Lehenga Choli",
+          4
+        ],
+        [
+          "Robe",
+          4
+        ],
+        [
+          "Lip Plumper",
+          4
+        ],
+        [
+          "Beauty Accessory",
+          4
+        ],
+        [
+          "Makeup Remover",
+          4
+        ],
+        [
+          "Hat",
+          3
+        ],
+        [
+          "Tablet Sleeve",
+          3
+        ],
+        [
+          "Trolley Bag",
+          3
+        ],
+        [
+          "Lounge Tshirts",
+          3
+        ],
+        [
+          "Ties and Cufflinks",
+          2
+        ],
+        [
+          "Key chain",
+          2
+        ],
+        [
+          "Rain Trousers",
+          2
+        ],
+        [
+          "Face Serum and Gel",
+          2
+        ],
+        [
+          "Cushion Covers",
+          1
+        ],
+        [
+          "Body Wash and Scrub",
+          1
+        ],
+        [
+          "Ipad",
+          1
+        ],
+        [
+          "Mens Grooming Kit",
+          1
+        ],
+        [
+          "Hair Accessory",
+          1
+        ],
+        [
+          "Shoe Laces",
+          1
+        ]
+      ],
+      "top_5_concentration": 39.9,
+      "top_10_concentration": 57.3,
+      "sample_values": [
+        "Skirts",
+        "Tshirts",
+        "Shorts",
+        "Track Pants",
+        "Caps",
+        "Dresses",
+        "Jackets",
+        "Sweatshirts",
+        "Sports Shoes",
+        "Shirts",
+        "Tracksuits",
+        "Sandals",
+        "Flip Flops",
+        "Watches",
+        "Sports Sandals",
+        "Casual Shoes",
+        "Formal Shoes",
+        "Handbags",
+        "Trousers",
+        "Flats",
+        "Heels",
+        "Tops",
+        "Belts",
+        "Jeans",
+        "Tunics",
+        "Sweaters",
+        "Free Gifts",
+        "Capris",
+        "Bra",
+        "Backpacks"
+      ]
+    }
+  },
+  "attribute_analysis": {
+    "gender": {
+      "field": "gender",
+      "total_rows": 44434,
+      "non_null_count": 44434,
+      "null_rate": 0.0,
+      "n_unique_values": 5,
+      "value_distribution": [
+        [
+          "Men",
+          22157
+        ],
+        [
+          "Women",
+          18628
+        ],
+        [
+          "Unisex",
+          2164
+        ],
+        [
+          "Boys",
+          830
+        ],
+        [
+          "Girls",
+          655
+        ]
+      ],
+      "top_5_concentration": 100.0,
+      "top_10_concentration": 100.0,
+      "sample_values": [
+        "Women",
+        "Men",
+        "Unisex",
+        "Boys",
+        "Girls"
+      ]
+    },
+    "baseColour": {
+      "field": "baseColour",
+      "total_rows": 44434,
+      "non_null_count": 44424,
+      "null_rate": 0.0002,
+      "n_unique_values": 46,
+      "value_distribution": [
+        [
+          "Black",
+          9731
+        ],
+        [
+          "White",
+          5540
+        ],
+        [
+          "Blue",
+          4921
+        ],
+        [
+          "Brown",
+          3493
+        ],
+        [
+          "Grey",
+          2741
+        ],
+        [
+          "Red",
+          2456
+        ],
+        [
+          "Green",
+          2116
+        ],
+        [
+          "Pink",
+          1861
+        ],
+        [
+          "Navy Blue",
+          1791
+        ],
+        [
+          "Purple",
+          1643
+        ],
+        [
+          "Silver",
+          1090
+        ],
+        [
+          "Yellow",
+          779
+        ],
+        [
+          "Beige",
+          749
+        ],
+        [
+          "Gold",
+          629
+        ],
+        [
+          "Maroon",
+          580
+        ],
+        [
+          "Orange",
+          530
+        ],
+        [
+          "Olive",
+          410
+        ],
+        [
+          "Multi",
+          394
+        ],
+        [
+          "Cream",
+          389
+        ],
+        [
+          "Steel",
+          315
+        ],
+        [
+          "Charcoal",
+          228
+        ],
+        [
+          "Peach",
+          195
+        ],
+        [
+          "Off White",
+          182
+        ],
+        [
+          "Skin",
+          179
+        ],
+        [
+          "Lavender",
+          162
+        ],
+        [
+          "Grey Melange",
+          146
+        ],
+        [
+          "Khaki",
+          139
+        ],
+        [
+          "Magenta",
+          129
+        ],
+        [
+          "Teal",
+          120
+        ],
+        [
+          "Tan",
+          114
+        ],
+        [
+          "Mustard",
+          97
+        ],
+        [
+          "Bronze",
+          95
+        ],
+        [
+          "Copper",
+          86
+        ],
+        [
+          "Turquoise Blue",
+          69
+        ],
+        [
+          "Rust",
+          66
+        ],
+        [
+          "Burgundy",
+          45
+        ],
+        [
+          "Metallic",
+          43
+        ],
+        [
+          "Coffee Brown",
+          31
+        ],
+        [
+          "Mauve",
+          29
+        ],
+        [
+          "Rose",
+          28
+        ],
+        [
+          "Nude",
+          23
+        ],
+        [
+          "Sea Green",
+          22
+        ],
+        [
+          "Mushroom Brown",
+          16
+        ],
+        [
+          "Taupe",
+          11
+        ],
+        [
+          "Lime Green",
+          6
+        ],
+        [
+          "Fluorescent Green",
+          5
+        ]
+      ],
+      "top_5_concentration": 59.5,
+      "top_10_concentration": 81.7,
+      "sample_values": [
+        "White",
+        "Blue",
+        "Grey",
+        "Black",
+        "Navy Blue",
+        "Red",
+        "Grey Melange",
+        "Yellow",
+        "Pink",
+        "Brown",
+        "Silver",
+        "Green",
+        "Purple",
+        "Steel",
+        "Gold",
+        "Beige",
+        "Orange",
+        "Copper",
+        "Maroon",
+        "Magenta",
+        "Cream",
+        "Tan",
+        "Olive",
+        "Teal",
+        "Multi",
+        "Khaki",
+        "Peach",
+        "Mauve",
+        "Lavender",
+        "Burgundy"
+      ]
+    },
+    "season": {
+      "field": "season",
+      "total_rows": 44434,
+      "non_null_count": 44413,
+      "null_rate": 0.0005,
+      "n_unique_values": 4,
+      "value_distribution": [
+        [
+          "Summer",
+          21472
+        ],
+        [
+          "Fall",
+          11445
+        ],
+        [
+          "Winter",
+          8517
+        ],
+        [
+          "Spring",
+          2979
+        ]
+      ],
+      "top_5_concentration": 100.0,
+      "top_10_concentration": 100.0,
+      "sample_values": [
+        "Summer",
+        "Fall",
+        "Spring",
+        "Winter"
+      ]
+    },
+    "usage": {
+      "field": "usage",
+      "total_rows": 44434,
+      "non_null_count": 44122,
+      "null_rate": 0.007,
+      "n_unique_values": 8,
+      "value_distribution": [
+        [
+          "Casual",
+          34407
+        ],
+        [
+          "Sports",
+          4025
+        ],
+        [
+          "Ethnic",
+          3208
+        ],
+        [
+          "Formal",
+          2359
+        ],
+        [
+          "Smart Casual",
+          67
+        ],
+        [
+          "Party",
+          29
+        ],
+        [
+          "Travel",
+          26
+        ],
+        [
+          "Home",
+          1
+        ]
+      ],
+      "top_5_concentration": 99.9,
+      "top_10_concentration": 100.0,
+      "sample_values": [
+        "Casual",
+        "Sports",
+        "Formal",
+        "Smart Casual",
+        "Ethnic",
+        "Travel",
+        "Party",
+        "Home"
+      ]
+    }
+  },
+  "text_category_overlap": {
+    "category1": {
+      "text_contains_exact_category_pct": 0.1,
+      "text_shares_words_with_category_pct": 0.2,
+      "total_overlap_pct": 0.2
+    },
+    "category2": {
+      "text_contains_exact_category_pct": 17.1,
+      "text_shares_words_with_category_pct": 9.7,
+      "total_overlap_pct": 26.8
+    },
+    "category3": {
+      "text_contains_exact_category_pct": 27.0,
+      "text_shares_words_with_category_pct": 30.0,
+      "total_overlap_pct": 57.0
+    },
+    "gender": {
+      "text_contains_exact_category_pct": 90.8,
+      "text_shares_words_with_category_pct": 0.0,
+      "total_overlap_pct": 90.8
+    },
+    "baseColour": {
+      "text_contains_exact_category_pct": 48.9,
+      "text_shares_words_with_category_pct": 44.0,
+      "total_overlap_pct": 92.8
+    },
+    "season": {
+      "text_contains_exact_category_pct": 0.4,
+      "text_shares_words_with_category_pct": 0.0,
+      "total_overlap_pct": 0.4
+    },
+    "usage": {
+      "text_contains_exact_category_pct": 5.0,
+      "text_shares_words_with_category_pct": 4.9,
+      "total_overlap_pct": 10.0
+    }
+  },
+  "cross_field_correlations": {
+    "gender \u00d7 category1": {
+      "n_combinations": 23,
+      "top_20_combinations": [
+        [
+          "Men | Apparel",
+          11350
+        ],
+        [
+          "Women | Apparel",
+          8623
+        ],
+        [
+          "Men | Footwear",
+          5751
+        ],
+        [
+          "Women | Accessories",
+          5319
+        ],
+        [
+          "Men | Accessories",
+          4426
+        ],
+        [
+          "Women | Footwear",
+          2836
+        ],
+        [
+          "Women | Personal Care",
+          1807
+        ],
+        [
+          "Unisex | Accessories",
+          1497
+        ],
+        [
+          "Boys | Apparel",
+          759
+        ],
+        [
+          "Men | Personal Care",
+          577
+        ],
+        [
+          "Girls | Apparel",
+          567
+        ],
+        [
+          "Unisex | Footwear",
+          521
+        ],
+        [
+          "Unisex | Apparel",
+          96
+        ],
+        [
+          "Girls | Footwear",
+          60
+        ],
+        [
+          "Boys | Footwear",
+          54
+        ],
+        [
+          "Men | Free Items",
+          53
+        ],
+        [
+          "Women | Free Items",
+          43
+        ],
+        [
+          "Girls | Accessories",
+          28
+        ],
+        [
+          "Unisex | Sporting Goods",
+          25
+        ],
+        [
+          "Boys | Accessories",
+          17
+        ]
+      ]
+    },
+    "gender \u00d7 category2": {
+      "n_combinations": 120,
+      "top_20_combinations": [
+        [
+          "Men | Topwear",
+          8840
+        ],
+        [
+          "Women | Topwear",
+          5499
+        ],
+        [
+          "Men | Shoes",
+          4477
+        ],
+        [
+          "Women | Shoes",
+          2555
+        ],
+        [
+          "Women | Bags",
+          2069
+        ],
+        [
+          "Men | Watches",
+          1473
+        ],
+        [
+          "Men | Bottomwear",
+          1398
+        ],
+        [
+          "Women | Bottomwear",
+          1044
+        ],
+        [
+          "Women | Jewellery",
+          1015
+        ],
+        [
+          "Men | Innerwear",
+          988
+        ],
+        [
+          "Women | Watches",
+          902
+        ],
+        [
+          "Unisex | Bags",
+          891
+        ],
+        [
+          "Women | Innerwear",
+          811
+        ],
+        [
+          "Men | Sandal",
+          778
+        ],
+        [
+          "Boys | Topwear",
+          633
+        ],
+        [
+          "Men | Eyewear",
+          598
+        ],
+        [
+          "Men | Fragrance",
+          572
+        ],
+        [
+          "Men | Belts",
+          539
+        ],
+        [
+          "Men | Socks",
+          535
+        ],
+        [
+          "Women | Lips",
+          527
+        ]
+      ]
+    },
+    "gender \u00d7 category3": {
+      "n_combinations": 280,
+      "top_20_combinations": [
+        [
+          "Men | Tshirts",
+          5245
+        ],
+        [
+          "Men | Shirts",
+          2842
+        ],
+        [
+          "Men | Casual Shoes",
+          2247
+        ],
+        [
+          "Women | Kurtas",
+          1761
+        ],
+        [
+          "Women | Handbags",
+          1689
+        ],
+        [
+          "Men | Sports Shoes",
+          1590
+        ],
+        [
+          "Women | Tops",
+          1532
+        ],
+        [
+          "Men | Watches",
+          1473
+        ],
+        [
+          "Women | Heels",
+          1322
+        ],
+        [
+          "Women | Tshirts",
+          1116
+        ],
+        [
+          "Women | Watches",
+          902
+        ],
+        [
+          "Men | Sandals",
+          749
+        ],
+        [
+          "Men | Formal Shoes",
+          637
+        ],
+        [
+          "Unisex | Backpacks",
+          631
+        ],
+        [
+          "Men | Sunglasses",
+          598
+        ],
+        [
+          "Men | Briefs",
+          564
+        ],
+        [
+          "Men | Belts",
+          541
+        ],
+        [
+          "Men | Socks",
+          535
+        ],
+        [
+          "Boys | Tshirts",
+          531
+        ],
+        [
+          "Women | Flats",
+          500
+        ]
+      ]
+    },
+    "gender \u00d7 baseColour": {
+      "n_combinations": 164,
+      "top_20_combinations": [
+        [
+          "Men | Black",
+          5884
+        ],
+        [
+          "Men | White",
+          3103
+        ],
+        [
+          "Women | Black",
+          2949
+        ],
+        [
+          "Men | Blue",
+          2679
+        ],
+        [
+          "Women | White",
+          2029
+        ],
+        [
+          "Men | Brown",
+          1951
+        ],
+        [
+          "Men | Grey",
+          1810
+        ],
+        [
+          "Women | Blue",
+          1718
+        ],
+        [
+          "Women | Pink",
+          1488
+        ],
+        [
+          "Women | Brown",
+          1399
+        ],
+        [
+          "Men | Navy Blue",
+          1309
+        ],
+        [
+          "Men | Red",
+          1159
+        ],
+        [
+          "Women | Purple",
+          1036
+        ],
+        [
+          "Women | Green",
+          963
+        ],
+        [
+          "Women | Red",
+          961
+        ],
+        [
+          "Men | Green",
+          911
+        ],
+        [
+          "Women | Silver",
+          823
+        ],
+        [
+          "Unisex | Black",
+          774
+        ],
+        [
+          "Women | Grey",
+          751
+        ],
+        [
+          "Women | Gold",
+          530
+        ]
+      ]
+    },
+    "gender \u00d7 season": {
+      "n_combinations": 20,
+      "top_20_combinations": [
+        [
+          "Men | Summer",
+          10875
+        ],
+        [
+          "Women | Summer",
+          8432
+        ],
+        [
+          "Men | Fall",
+          7087
+        ],
+        [
+          "Women | Winter",
+          4620
+        ],
+        [
+          "Women | Fall",
+          3660
+        ],
+        [
+          "Men | Winter",
+          3225
+        ],
+        [
+          "Women | Spring",
+          1909
+        ],
+        [
+          "Men | Spring",
+          962
+        ],
+        [
+          "Unisex | Summer",
+          938
+        ],
+        [
+          "Boys | Summer",
+          691
+        ],
+        [
+          "Unisex | Winter",
+          617
+        ],
+        [
+          "Girls | Summer",
+          536
+        ],
+        [
+          "Unisex | Fall",
+          504
+        ],
+        [
+          "Boys | Fall",
+          113
+        ],
+        [
+          "Unisex | Spring",
+          99
+        ],
+        [
+          "Girls | Fall",
+          81
+        ],
+        [
+          "Girls | Winter",
+          35
+        ],
+        [
+          "Boys | Winter",
+          20
+        ],
+        [
+          "Boys | Spring",
+          6
+        ],
+        [
+          "Girls | Spring",
+          3
+        ]
+      ]
+    },
+    "gender \u00d7 usage": {
+      "n_combinations": 25,
+      "top_20_combinations": [
+        [
+          "Men | Casual",
+          16768
+        ],
+        [
+          "Women | Casual",
+          14365
+        ],
+        [
+          "Women | Ethnic",
+          3083
+        ],
+        [
+          "Men | Sports",
+          2954
+        ],
+        [
+          "Men | Formal",
+          2249
+        ],
+        [
+          "Unisex | Casual",
+          1830
+        ],
+        [
+          "Boys | Casual",
+          799
+        ],
+        [
+          "Women | Sports",
+          765
+        ],
+        [
+          "Girls | Casual",
+          645
+        ],
+        [
+          "Unisex | Sports",
+          283
+        ],
+        [
+          "Women | Formal",
+          109
+        ],
+        [
+          "Men | Ethnic",
+          107
+        ],
+        [
+          "Men | Smart Casual",
+          54
+        ],
+        [
+          "Women | Party",
+          27
+        ],
+        [
+          "Boys | Sports",
+          21
+        ],
+        [
+          "Unisex | Travel",
+          20
+        ],
+        [
+          "Women | Smart Casual",
+          13
+        ],
+        [
+          "Boys | Ethnic",
+          10
+        ],
+        [
+          "Girls | Ethnic",
+          8
+        ],
+        [
+          "Women | Travel",
+          4
+        ]
+      ]
+    },
+    "category1 \u00d7 category2": {
+      "n_combinations": 47,
+      "top_20_combinations": [
+        [
+          "Apparel | Topwear",
+          15401
+        ],
+        [
+          "Footwear | Shoes",
+          7344
+        ],
+        [
+          "Accessories | Bags",
+          3053
+        ],
+        [
+          "Apparel | Bottomwear",
+          2693
+        ],
+        [
+          "Accessories | Watches",
+          2542
+        ],
+        [
+          "Apparel | Innerwear",
+          1808
+        ],
+        [
+          "Accessories | Jewellery",
+          1080
+        ],
+        [
+          "Accessories | Eyewear",
+          1073
+        ],
+        [
+          "Personal Care | Fragrance",
+          1007
+        ],
+        [
+          "Footwear | Sandal",
+          963
+        ],
+        [
+          "Accessories | Wallets",
+          933
+        ],
+        [
+          "Footwear | Flip Flops",
+          915
+        ],
+        [
+          "Accessories | Belts",
+          811
+        ],
+        [
+          "Accessories | Socks",
+          686
+        ],
+        [
+          "Personal Care | Lips",
+          527
+        ],
+        [
+          "Apparel | Dress",
+          478
+        ],
+        [
+          "Apparel | Loungewear and Nightwear",
+          470
+        ],
+        [
+          "Apparel | Saree",
+          427
+        ],
+        [
+          "Personal Care | Nails",
+          329
+        ],
+        [
+          "Personal Care | Makeup",
+          307
+        ]
+      ]
+    },
+    "category1 \u00d7 category3": {
+      "n_combinations": 153,
+      "top_20_combinations": [
+        [
+          "Apparel | Tshirts",
+          7068
+        ],
+        [
+          "Apparel | Shirts",
+          3215
+        ],
+        [
+          "Footwear | Casual Shoes",
+          2846
+        ],
+        [
+          "Accessories | Watches",
+          2542
+        ],
+        [
+          "Footwear | Sports Shoes",
+          2036
+        ],
+        [
+          "Apparel | Kurtas",
+          1844
+        ],
+        [
+          "Apparel | Tops",
+          1762
+        ],
+        [
+          "Accessories | Handbags",
+          1757
+        ],
+        [
+          "Footwear | Heels",
+          1323
+        ],
+        [
+          "Accessories | Sunglasses",
+          1073
+        ],
+        [
+          "Accessories | Wallets",
+          935
+        ],
+        [
+          "Footwear | Flip Flops",
+          916
+        ],
+        [
+          "Footwear | Sandals",
+          897
+        ],
+        [
+          "Apparel | Briefs",
+          849
+        ],
+        [
+          "Accessories | Belts",
+          810
+        ],
+        [
+          "Accessories | Backpacks",
+          722
+        ],
+        [
+          "Accessories | Socks",
+          686
+        ],
+        [
+          "Footwear | Formal Shoes",
+          637
+        ],
+        [
+          "Apparel | Jeans",
+          608
+        ],
+        [
+          "Personal Care | Perfume and Body Mist",
+          608
+        ]
+      ]
+    },
+    "category1 \u00d7 baseColour": {
+      "n_combinations": 198,
+      "top_20_combinations": [
+        [
+          "Apparel | Blue",
+          3435
+        ],
+        [
+          "Accessories | Black",
+          3305
+        ],
+        [
+          "Apparel | Black",
+          3202
+        ],
+        [
+          "Footwear | Black",
+          2935
+        ],
+        [
+          "Apparel | White",
+          2795
+        ],
+        [
+          "Apparel | Grey",
+          1610
+        ],
+        [
+          "Footwear | White",
+          1528
+        ],
+        [
+          "Apparel | Green",
+          1467
+        ],
+        [
+          "Apparel | Red",
+          1430
+        ],
+        [
+          "Footwear | Brown",
+          1338
+        ],
+        [
+          "Accessories | Brown",
+          1320
+        ],
+        [
+          "Apparel | Navy Blue",
+          1270
+        ],
+        [
+          "Apparel | Pink",
+          1107
+        ],
+        [
+          "Apparel | Purple",
+          1001
+        ],
+        [
+          "Accessories | White",
+          984
+        ],
+        [
+          "Accessories | Silver",
+          812
+        ],
+        [
+          "Accessories | Blue",
+          712
+        ],
+        [
+          "Apparel | Brown",
+          565
+        ],
+        [
+          "Apparel | Yellow",
+          556
+        ],
+        [
+          "Footwear | Grey",
+          552
+        ]
+      ]
+    },
+    "category1 \u00d7 season": {
+      "n_combinations": 22,
+      "top_20_combinations": [
+        [
+          "Apparel | Summer",
+          12666
+        ],
+        [
+          "Apparel | Fall",
+          7722
+        ],
+        [
+          "Accessories | Winter",
+          5381
+        ],
+        [
+          "Accessories | Summer",
+          4566
+        ],
+        [
+          "Footwear | Summer",
+          4147
+        ],
+        [
+          "Footwear | Fall",
+          2480
+        ],
+        [
+          "Personal Care | Spring",
+          2361
+        ],
+        [
+          "Footwear | Winter",
+          2208
+        ],
+        [
+          "Accessories | Fall",
+          1231
+        ],
+        [
+          "Apparel | Winter",
+          869
+        ],
+        [
+          "Footwear | Spring",
+          367
+        ],
+        [
+          "Apparel | Spring",
+          137
+        ],
+        [
+          "Accessories | Spring",
+          109
+        ],
+        [
+          "Free Items | Winter",
+          56
+        ],
+        [
+          "Free Items | Summer",
+          44
+        ],
+        [
+          "Personal Care | Summer",
+          37
+        ],
+        [
+          "Sporting Goods | Summer",
+          12
+        ],
+        [
+          "Sporting Goods | Fall",
+          11
+        ],
+        [
+          "Free Items | Spring",
+          5
+        ],
+        [
+          "Sporting Goods | Winter",
+          2
+        ]
+      ]
+    },
+    "category1 \u00d7 usage": {
+      "n_combinations": 31,
+      "top_20_combinations": [
+        [
+          "Apparel | Casual",
+          15600
+        ],
+        [
+          "Accessories | Casual",
+          10095
+        ],
+        [
+          "Footwear | Casual",
+          6492
+        ],
+        [
+          "Apparel | Ethnic",
+          2960
+        ],
+        [
+          "Personal Care | Casual",
+          2138
+        ],
+        [
+          "Footwear | Sports",
+          2031
+        ],
+        [
+          "Apparel | Sports",
+          1595
+        ],
+        [
+          "Apparel | Formal",
+          1172
+        ],
+        [
+          "Footwear | Formal",
+          654
+        ],
+        [
+          "Accessories | Formal",
+          527
+        ],
+        [
+          "Accessories | Sports",
+          375
+        ],
+        [
+          "Accessories | Ethnic",
+          207
+        ],
+        [
+          "Free Items | Casual",
+          78
+        ],
+        [
+          "Accessories | Smart Casual",
+          28
+        ],
+        [
+          "Accessories | Travel",
+          25
+        ],
+        [
+          "Footwear | Ethnic",
+          23
+        ],
+        [
+          "Apparel | Party",
+          22
+        ],
+        [
+          "Apparel | Smart Casual",
+          21
+        ],
+        [
+          "Sporting Goods | Sports",
+          21
+        ],
+        [
+          "Footwear | Smart Casual",
+          18
+        ]
+      ]
+    },
+    "category2 \u00d7 category3": {
+      "n_combinations": 168,
+      "top_20_combinations": [
+        [
+          "Topwear | Tshirts",
+          7068
+        ],
+        [
+          "Topwear | Shirts",
+          3215
+        ],
+        [
+          "Shoes | Casual Shoes",
+          2846
+        ],
+        [
+          "Watches | Watches",
+          2542
+        ],
+        [
+          "Shoes | Sports Shoes",
+          2036
+        ],
+        [
+          "Topwear | Kurtas",
+          1844
+        ],
+        [
+          "Topwear | Tops",
+          1762
+        ],
+        [
+          "Bags | Handbags",
+          1757
+        ],
+        [
+          "Shoes | Heels",
+          1323
+        ],
+        [
+          "Eyewear | Sunglasses",
+          1073
+        ],
+        [
+          "Wallets | Wallets",
+          933
+        ],
+        [
+          "Flip Flops | Flip Flops",
+          915
+        ],
+        [
+          "Sandal | Sandals",
+          895
+        ],
+        [
+          "Innerwear | Briefs",
+          849
+        ],
+        [
+          "Belts | Belts",
+          810
+        ],
+        [
+          "Bags | Backpacks",
+          722
+        ],
+        [
+          "Socks | Socks",
+          686
+        ],
+        [
+          "Shoes | Formal Shoes",
+          637
+        ],
+        [
+          "Bottomwear | Jeans",
+          608
+        ],
+        [
+          "Fragrance | Perfume and Body Mist",
+          603
+        ]
+      ]
+    },
+    "category2 \u00d7 baseColour": {
+      "n_combinations": 852,
+      "top_20_combinations": [
+        [
+          "Topwear | Blue",
+          2449
+        ],
+        [
+          "Shoes | Black",
+          2319
+        ],
+        [
+          "Topwear | White",
+          2240
+        ],
+        [
+          "Topwear | Black",
+          2023
+        ],
+        [
+          "Shoes | White",
+          1448
+        ],
+        [
+          "Topwear | Green",
+          1270
+        ],
+        [
+          "Topwear | Red",
+          1189
+        ],
+        [
+          "Topwear | Grey",
+          1101
+        ],
+        [
+          "Shoes | Brown",
+          1035
+        ],
+        [
+          "Watches | Black",
+          987
+        ],
+        [
+          "Topwear | Purple",
+          833
+        ],
+        [
+          "Bags | Black",
+          823
+        ],
+        [
+          "Topwear | Navy Blue",
+          807
+        ],
+        [
+          "Topwear | Pink",
+          780
+        ],
+        [
+          "Bottomwear | Blue",
+          694
+        ],
+        [
+          "Bottomwear | Black",
+          611
+        ],
+        [
+          "Watches | White",
+          579
+        ],
+        [
+          "Topwear | Yellow",
+          492
+        ],
+        [
+          "Jewellery | Silver",
+          484
+        ],
+        [
+          "Shoes | Grey",
+          452
+        ]
+      ]
+    },
+    "category2 \u00d7 season": {
+      "n_combinations": 122,
+      "top_20_combinations": [
+        [
+          "Topwear | Summer",
+          8830
+        ],
+        [
+          "Topwear | Fall",
+          6247
+        ],
+        [
+          "Shoes | Summer",
+          3192
+        ],
+        [
+          "Watches | Winter",
+          2474
+        ],
+        [
+          "Shoes | Winter",
+          1933
+        ],
+        [
+          "Shoes | Fall",
+          1920
+        ],
+        [
+          "Bags | Summer",
+          1683
+        ],
+        [
+          "Bottomwear | Summer",
+          1608
+        ],
+        [
+          "Innerwear | Summer",
+          1397
+        ],
+        [
+          "Eyewear | Winter",
+          1039
+        ],
+        [
+          "Fragrance | Spring",
+          1003
+        ],
+        [
+          "Bags | Winter",
+          997
+        ],
+        [
+          "Bottomwear | Fall",
+          970
+        ],
+        [
+          "Socks | Summer",
+          569
+        ],
+        [
+          "Belts | Summer",
+          543
+        ],
+        [
+          "Lips | Spring",
+          516
+        ],
+        [
+          "Jewellery | Summer",
+          510
+        ],
+        [
+          "Wallets | Summer",
+          495
+        ],
+        [
+          "Sandal | Summer",
+          484
+        ],
+        [
+          "Flip Flops | Summer",
+          471
+        ]
+      ]
+    },
+    "category2 \u00d7 usage": {
+      "n_combinations": 108,
+      "top_20_combinations": [
+        [
+          "Topwear | Casual",
+          11077
+        ],
+        [
+          "Shoes | Casual",
+          4647
+        ],
+        [
+          "Bags | Casual",
+          2929
+        ],
+        [
+          "Watches | Casual",
+          2450
+        ],
+        [
+          "Topwear | Ethnic",
+          2282
+        ],
+        [
+          "Shoes | Sports",
+          2010
+        ],
+        [
+          "Bottomwear | Casual",
+          1822
+        ],
+        [
+          "Innerwear | Casual",
+          1784
+        ],
+        [
+          "Topwear | Sports",
+          1085
+        ],
+        [
+          "Eyewear | Casual",
+          1065
+        ],
+        [
+          "Fragrance | Casual",
+          1000
+        ],
+        [
+          "Sandal | Casual",
+          937
+        ],
+        [
+          "Jewellery | Casual",
+          933
+        ],
+        [
+          "Topwear | Formal",
+          921
+        ],
+        [
+          "Flip Flops | Casual",
+          908
+        ],
+        [
+          "Wallets | Casual",
+          892
+        ],
+        [
+          "Belts | Casual",
+          676
+        ],
+        [
+          "Shoes | Formal",
+          645
+        ],
+        [
+          "Socks | Casual",
+          516
+        ],
+        [
+          "Bottomwear | Sports",
+          463
+        ]
+      ]
+    },
+    "category3 \u00d7 baseColour": {
+      "n_combinations": 1882,
+      "top_20_combinations": [
+        [
+          "Tshirts | White",
+          1119
+        ],
+        [
+          "Tshirts | Black",
+          1049
+        ],
+        [
+          "Tshirts | Blue",
+          1046
+        ],
+        [
+          "Watches | Black",
+          987
+        ],
+        [
+          "Sports Shoes | White",
+          898
+        ],
+        [
+          "Casual Shoes | Black",
+          875
+        ],
+        [
+          "Shirts | Blue",
+          785
+        ],
+        [
+          "Tshirts | Grey",
+          628
+        ],
+        [
+          "Tshirts | Red",
+          601
+        ],
+        [
+          "Tshirts | Green",
+          591
+        ],
+        [
+          "Watches | White",
+          579
+        ],
+        [
+          "Sports Shoes | Black",
+          554
+        ],
+        [
+          "Shirts | White",
+          526
+        ],
+        [
+          "Casual Shoes | Brown",
+          511
+        ],
+        [
+          "Jeans | Blue",
+          445
+        ],
+        [
+          "Tshirts | Navy Blue",
+          438
+        ],
+        [
+          "Casual Shoes | White",
+          435
+        ],
+        [
+          "Formal Shoes | Black",
+          397
+        ],
+        [
+          "Sunglasses | Black",
+          392
+        ],
+        [
+          "Sandals | Black",
+          349
+        ]
+      ]
+    },
+    "category3 \u00d7 season": {
+      "n_combinations": 341,
+      "top_20_combinations": [
+        [
+          "Tshirts | Summer",
+          4388
+        ],
+        [
+          "Tshirts | Fall",
+          2508
+        ],
+        [
+          "Watches | Winter",
+          2474
+        ],
+        [
+          "Shirts | Fall",
+          1785
+        ],
+        [
+          "Casual Shoes | Summer",
+          1417
+        ],
+        [
+          "Shirts | Summer",
+          1336
+        ],
+        [
+          "Tops | Summer",
+          1274
+        ],
+        [
+          "Sports Shoes | Summer",
+          1191
+        ],
+        [
+          "Kurtas | Summer",
+          1157
+        ],
+        [
+          "Sunglasses | Winter",
+          1039
+        ],
+        [
+          "Heels | Winter",
+          1021
+        ],
+        [
+          "Handbags | Summer",
+          997
+        ],
+        [
+          "Casual Shoes | Fall",
+          881
+        ],
+        [
+          "Sports Shoes | Fall",
+          724
+        ],
+        [
+          "Briefs | Summer",
+          691
+        ],
+        [
+          "Kurtas | Fall",
+          685
+        ],
+        [
+          "Handbags | Winter",
+          639
+        ],
+        [
+          "Perfume and Body Mist | Spring",
+          609
+        ],
+        [
+          "Socks | Summer",
+          557
+        ],
+        [
+          "Belts | Summer",
+          542
+        ]
+      ]
+    },
+    "category3 \u00d7 usage": {
+      "n_combinations": 249,
+      "top_20_combinations": [
+        [
+          "Tshirts | Casual",
+          6112
+        ],
+        [
+          "Casual Shoes | Casual",
+          2813
+        ],
+        [
+          "Watches | Casual",
+          2450
+        ],
+        [
+          "Shirts | Casual",
+          2313
+        ],
+        [
+          "Sports Shoes | Sports",
+          1996
+        ],
+        [
+          "Kurtas | Ethnic",
+          1837
+        ],
+        [
+          "Handbags | Casual",
+          1746
+        ],
+        [
+          "Tops | Casual",
+          1700
+        ],
+        [
+          "Heels | Casual",
+          1287
+        ],
+        [
+          "Sunglasses | Casual",
+          1065
+        ],
+        [
+          "Tshirts | Sports",
+          955
+        ],
+        [
+          "Flip Flops | Casual",
+          909
+        ],
+        [
+          "Wallets | Casual",
+          895
+        ],
+        [
+          "Sandals | Casual",
+          874
+        ],
+        [
+          "Shirts | Formal",
+          866
+        ],
+        [
+          "Briefs | Casual",
+          847
+        ],
+        [
+          "Belts | Casual",
+          675
+        ],
+        [
+          "Backpacks | Casual",
+          630
+        ],
+        [
+          "Jeans | Casual",
+          608
+        ],
+        [
+          "Formal Shoes | Formal",
+          607
+        ]
+      ]
+    },
+    "baseColour \u00d7 season": {
+      "n_combinations": 173,
+      "top_20_combinations": [
+        [
+          "Black | Summer",
+          4472
+        ],
+        [
+          "White | Summer",
+          2840
+        ],
+        [
+          "Black | Winter",
+          2555
+        ],
+        [
+          "Blue | Summer",
+          2527
+        ],
+        [
+          "Black | Fall",
+          2289
+        ],
+        [
+          "Blue | Fall",
+          1595
+        ],
+        [
+          "White | Fall",
+          1518
+        ],
+        [
+          "Grey | Summer",
+          1416
+        ],
+        [
+          "Brown | Summer",
+          1395
+        ],
+        [
+          "Red | Summer",
+          1272
+        ],
+        [
+          "Brown | Winter",
+          1093
+        ],
+        [
+          "Green | Summer",
+          1085
+        ],
+        [
+          "Navy Blue | Summer",
+          1025
+        ],
+        [
+          "Pink | Summer",
+          916
+        ],
+        [
+          "White | Winter",
+          887
+        ],
+        [
+          "Grey | Fall",
+          886
+        ],
+        [
+          "Purple | Summer",
+          728
+        ],
+        [
+          "Red | Fall",
+          704
+        ],
+        [
+          "Brown | Fall",
+          673
+        ],
+        [
+          "Green | Fall",
+          672
+        ]
+      ]
+    },
+    "baseColour \u00d7 usage": {
+      "n_combinations": 181,
+      "top_20_combinations": [
+        [
+          "Black | Casual",
+          7473
+        ],
+        [
+          "Blue | Casual",
+          3867
+        ],
+        [
+          "White | Casual",
+          3792
+        ],
+        [
+          "Brown | Casual",
+          2873
+        ],
+        [
+          "Grey | Casual",
+          2123
+        ],
+        [
+          "Red | Casual",
+          1972
+        ],
+        [
+          "Green | Casual",
+          1612
+        ],
+        [
+          "Pink | Casual",
+          1529
+        ],
+        [
+          "Navy Blue | Casual",
+          1439
+        ],
+        [
+          "Purple | Casual",
+          1247
+        ],
+        [
+          "White | Sports",
+          1199
+        ],
+        [
+          "Black | Sports",
+          1188
+        ],
+        [
+          "Silver | Casual",
+          947
+        ],
+        [
+          "Black | Formal",
+          749
+        ],
+        [
+          "Yellow | Casual",
+          658
+        ],
+        [
+          "Beige | Casual",
+          581
+        ],
+        [
+          "Gold | Casual",
+          542
+        ],
+        [
+          "Maroon | Casual",
+          416
+        ],
+        [
+          "Grey | Sports",
+          407
+        ],
+        [
+          "Orange | Casual",
+          395
+        ]
+      ]
+    },
+    "season \u00d7 usage": {
+      "n_combinations": 28,
+      "top_20_combinations": [
+        [
+          "Summer | Casual",
+          16309
+        ],
+        [
+          "Winter | Casual",
+          7993
+        ],
+        [
+          "Fall | Casual",
+          7552
+        ],
+        [
+          "Spring | Casual",
+          2553
+        ],
+        [
+          "Summer | Sports",
+          2135
+        ],
+        [
+          "Summer | Ethnic",
+          1887
+        ],
+        [
+          "Fall | Sports",
+          1642
+        ],
+        [
+          "Fall | Ethnic",
+          1212
+        ],
+        [
+          "Summer | Formal",
+          1079
+        ],
+        [
+          "Fall | Formal",
+          994
+        ],
+        [
+          "Winter | Formal",
+          247
+        ],
+        [
+          "Winter | Sports",
+          117
+        ],
+        [
+          "Spring | Sports",
+          110
+        ],
+        [
+          "Winter | Ethnic",
+          105
+        ],
+        [
+          "Spring | Formal",
+          39
+        ],
+        [
+          "Winter | Smart Casual",
+          32
+        ],
+        [
+          "Fall | Smart Casual",
+          22
+        ],
+        [
+          "Winter | Travel",
+          12
+        ],
+        [
+          "Summer | Travel",
+          12
+        ],
+        [
+          "Fall | Party",
+          11
+        ]
+      ]
+    }
+  }
+}

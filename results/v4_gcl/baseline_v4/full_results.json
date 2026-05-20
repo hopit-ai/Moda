@@ -1,0 +1,97 @@
+{
+  "deepfashion_inshop": {
+    "text_to_image": {
+      "recall@1": 0.3116883116883117,
+      "recall@10": 0.6428571428571429,
+      "mrr": 0.40770717377860244,
+      "precision@1": 0.3116883116883117,
+      "precision@10": 0.2012987012987014,
+      "n_queries": 154,
+      "n_docs": 1200
+    }
+  },
+  "deepfashion_multimodal": {
+    "text_to_image": {
+      "recall@1": 0.02,
+      "recall@10": 0.075,
+      "mrr": 0.03285119047619048,
+      "precision@1": 0.02,
+      "precision@10": 0.0075000000000000015,
+      "n_queries": 200,
+      "n_docs": 1200
+    }
+  },
+  "fashion200k": {
+    "text_to_image": {
+      "recall@1": 0.275,
+      "recall@10": 0.855,
+      "mrr": 0.4550654761904763,
+      "precision@1": 0.275,
+      "precision@10": 0.08849999999999993,
+      "n_queries": 200,
+      "n_docs": 1200
+    }
+  },
+  "KAGL": {
+    "text_to_image": {
+      "recall@1": 0.44,
+      "recall@10": 0.89,
+      "mrr": 0.5804960317460318,
+      "precision@1": 0.44,
+      "precision@10": 0.09349999999999996,
+      "n_queries": 200,
+      "n_docs": 1200
+    }
+  },
+  "atlas": {
+    "text_to_image": {
+      "recall@1": 0.295,
+      "recall@10": 0.735,
+      "mrr": 0.42260714285714296,
+      "precision@1": 0.295,
+      "precision@10": 0.09849999999999996,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "category_to_product": {
+      "recall@1": 1.0,
+      "recall@10": 1.0,
+      "mrr": 1.0,
+      "precision@1": 1.0,
+      "precision@10": 0.7666666666666666,
+      "n_queries": 3,
+      "n_docs": 1200
+    }
+  },
+  "polyvore": {
+    "text_to_image": {
+      "recall@1": 0.645,
+      "recall@10": 0.925,
+      "mrr": 0.7401924603174606,
+      "precision@1": 0.645,
+      "precision@10": 0.09249999999999997,
+      "n_queries": 200,
+      "n_docs": 1200
+    },
+    "category_to_product": {
+      "recall@1": 0.6024844720496895,
+      "recall@10": 0.8757763975155279,
+      "mrr": 0.6938898747904959,
+      "precision@1": 0.6024844720496895,
+      "precision@10": 0.3366459627329197,
+      "n_queries": 161,
+      "n_docs": 1200
+    }
+  },
+  "iMaterialist": {
+    "category_to_product": {
+      "recall@1": 0.4823529411764706,
+      "recall@10": 0.9058823529411765,
+      "mrr": 0.6502100840336136,
+      "precision@1": 0.4823529411764706,
+      "precision@10": 0.363529411764706,
+      "n_queries": 85,
+      "n_docs": 1054
+    }
+  }
+}

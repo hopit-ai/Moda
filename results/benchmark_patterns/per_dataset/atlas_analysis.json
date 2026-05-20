@@ -1,0 +1,983 @@
+{
+  "name": "atlas",
+  "hf_id": "Marqo/atlas",
+  "total_rows": 78370,
+  "tasks": [
+    "text-to-image",
+    "sub-category-to-product"
+  ],
+  "n_tasks": 2,
+  "columns": [
+    "gender",
+    "category",
+    "sub-category",
+    "text",
+    "item_ID"
+  ],
+  "text_analysis": {
+    "text": {
+      "field": "text",
+      "total_rows": 78370,
+      "non_null_count": 78370,
+      "null_rate": 0.0,
+      "unique_count": 16720,
+      "uniqueness_ratio": 0.2133,
+      "duplication_ratio": 0.7867,
+      "top_repeated_values": [
+        [
+          "Campus Sutra Full Sleeve Printed Men Sweatshirt",
+          1700
+        ],
+        [
+          "Campus Sutra Full Sleeve Solid Men Sweatshirt",
+          712
+        ],
+        [
+          "Sports 52 Wear Men's Cargos",
+          429
+        ],
+        [
+          "Campus Sutra Full Sleeve Solid Men Jacket",
+          341
+        ],
+        [
+          "ShopyBucket Self Design Men's Waistcoat",
+          212
+        ],
+        [
+          "Pepe Jeans Full Sleeve Solid Men's Jacket",
+          191
+        ],
+        [
+          "Lee Skinny Men's Blue Jeans",
+          179
+        ],
+        [
+          "Beevee Men Cargos",
+          178
+        ],
+        [
+          "Rakshita Collection Solid Men's Multicolor Sports Shorts",
+          176
+        ],
+        [
+          "Flying Machine Slim Men's Blue Jeans",
+          173
+        ],
+        [
+          "Kotty Printed Women's Multicolor Night Shorts",
+          170
+        ],
+        [
+          "ManQ Solid Men's Waistcoat",
+          164
+        ],
+        [
+          "Christy World Solid Men's Multicolor Basic Shorts",
+          158
+        ],
+        [
+          "Plutus Full Sleeve Solid Men's Jacket",
+          151
+        ],
+        [
+          "Spykar Skinny Men's Blue Jeans",
+          150
+        ],
+        [
+          "Wrangler Slim Men's Blue Jeans",
+          150
+        ],
+        [
+          "Metronaut Full Sleeve Solid Men's Jacket",
+          143
+        ],
+        [
+          "Campus Sutra Full Sleeve Solid Men Reversible Sweatshirt",
+          143
+        ],
+        [
+          "Rakshita Collection Solid Men's Multicolor Track Pants",
+          143
+        ],
+        [
+          "Jack & Jones Solid Single Breasted Casual Men's Blazer",
+          142
+        ],
+        [
+          "Levi's Slim Men's Blue Jeans",
+          140
+        ],
+        [
+          "Zobello Men's Cargos",
+          139
+        ],
+        [
+          "Peter England Slim Fit Men's Brown Trousers",
+          139
+        ],
+        [
+          "Peter England Skinny Men's Blue Jeans",
+          137
+        ],
+        [
+          "Fifty Two Men's Cargos",
+          126
+        ],
+        [
+          "Rakshita Collection Solid Men's Multicolor Basic Shorts",
+          124
+        ],
+        [
+          "Hangup Solid Men's Waistcoat",
+          119
+        ],
+        [
+          "Showoff Printed Single Breasted Casual Men's Blazer",
+          118
+        ],
+        [
+          "Plus91 Men's Cargos",
+          118
+        ],
+        [
+          "Leezone Solid Men's Waistcoat",
+          117
+        ]
+      ],
+      "char_length": {
+        "min": 12,
+        "max": 152,
+        "mean": 44.6,
+        "median": 44,
+        "p10": 32,
+        "p90": 57
+      },
+      "word_length": {
+        "min": 1,
+        "max": 21,
+        "mean": 7.0,
+        "median": 7,
+        "p10": 5,
+        "p90": 9
+      },
+      "length_distribution": {
+        "medium (6-10 words)": 65903,
+        "short (3-5 words)": 10610,
+        "long (11-20 words)": 1842,
+        "very_short (1-2 words)": 11,
+        "very_long (21+ words)": 4
+      },
+      "vocabulary": {
+        "total_tokens": 549597,
+        "unique_tokens": 4327,
+        "top_50_tokens": [
+          [
+            "men's",
+            41439
+          ],
+          [
+            "solid",
+            33192
+          ],
+          [
+            "blue",
+            17443
+          ],
+          [
+            "sleeve",
+            14100
+          ],
+          [
+            "shirt",
+            13761
+          ],
+          [
+            "casual",
+            12981
+          ],
+          [
+            "printed",
+            12295
+          ],
+          [
+            "full",
+            11555
+          ],
+          [
+            "men",
+            9932
+          ],
+          [
+            "women's",
+            9817
+          ],
+          [
+            "fit",
+            9784
+          ],
+          [
+            "shorts",
+            9702
+          ],
+          [
+            "slim",
+            9459
+          ],
+          [
+            "black",
+            9008
+          ],
+          [
+            "sweatshirt",
+            8326
+          ],
+          [
+            "jeans",
+            7570
+          ],
+          [
+            "trousers",
+            7243
+          ],
+          [
+            "jacket",
+            6643
+          ],
+          [
+            "multicolor",
+            5350
+          ],
+          [
+            "grey",
+            5331
+          ],
+          [
+            "white",
+            5106
+          ],
+          [
+            "regular",
+            4724
+          ],
+          [
+            "with",
+            4617
+          ],
+          [
+            "design",
+            4612
+          ],
+          [
+            "self",
+            4582
+          ],
+          [
+            "formal",
+            4543
+          ],
+          [
+            "dark",
+            4334
+          ],
+          [
+            "track",
+            4252
+          ],
+          [
+            "pants",
+            4243
+          ],
+          [
+            "top",
+            3790
+          ],
+          [
+            "women",
+            3743
+          ],
+          [
+            "campus",
+            3552
+          ],
+          [
+            "sutra",
+            3478
+          ],
+          [
+            "blazer",
+            3325
+          ],
+          [
+            "waistcoat",
+            3209
+          ],
+          [
+            "green",
+            2941
+          ],
+          [
+            "breasted",
+            2916
+          ],
+          [
+            "sports",
+            2884
+          ],
+          [
+            "single",
+            2783
+          ],
+          [
+            "basic",
+            2775
+          ],
+          [
+            "t",
+            2644
+          ],
+          [
+            "checkered",
+            2538
+          ],
+          [
+            "abaya",
+            2502
+          ],
+          [
+            "red",
+            2493
+          ],
+          [
+            "pink",
+            2491
+          ],
+          [
+            "van",
+            2373
+          ],
+          [
+            "neck",
+            2370
+          ],
+          [
+            "denim",
+            2350
+          ],
+          [
+            "skinny",
+            2339
+          ],
+          [
+            "beige",
+            2277
+          ]
+        ],
+        "top_30_bigrams": [
+          [
+            "solid men's",
+            13103
+          ],
+          [
+            "full sleeve",
+            11539
+          ],
+          [
+            "sleeve solid",
+            8361
+          ],
+          [
+            "fit men's",
+            6187
+          ],
+          [
+            "slim fit",
+            6106
+          ],
+          [
+            "blue jeans",
+            4871
+          ],
+          [
+            "solid women's",
+            4708
+          ],
+          [
+            "men's blue",
+            4640
+          ],
+          [
+            "self design",
+            4545
+          ],
+          [
+            "track pants",
+            4243
+          ],
+          [
+            "dark blue",
+            3975
+          ],
+          [
+            "sleeve printed",
+            3949
+          ],
+          [
+            "solid men",
+            3796
+          ],
+          [
+            "men's jacket",
+            3787
+          ],
+          [
+            "campus sutra",
+            3478
+          ],
+          [
+            "men's sweatshirt",
+            3338
+          ],
+          [
+            "solid casual",
+            3298
+          ],
+          [
+            "men's solid",
+            3246
+          ],
+          [
+            "regular fit",
+            3245
+          ],
+          [
+            "sutra full",
+            3187
+          ],
+          [
+            "men's black",
+            3159
+          ],
+          [
+            "slim men's",
+            3009
+          ],
+          [
+            "men sweatshirt",
+            2957
+          ],
+          [
+            "blue shirt",
+            2953
+          ],
+          [
+            "basic shorts",
+            2775
+          ],
+          [
+            "single breasted",
+            2747
+          ],
+          [
+            "men's waistcoat",
+            2729
+          ],
+          [
+            "formal shirt",
+            2662
+          ],
+          [
+            "printed women's",
+            2526
+          ],
+          [
+            "men's blazer",
+            2517
+          ]
+        ]
+      },
+      "text_style": {
+        "has_comma_pct": 6.6,
+        "has_period_pct": 3.1,
+        "has_numbers_pct": 10.2,
+        "starts_uppercase_pct": 93.9,
+        "all_lowercase_pct": 0.0,
+        "all_uppercase_pct": 0.0
+      },
+      "sample_values": [
+        "Plain Dupion Silk Dhoti Kurta in Fawn",
+        "Solid Color Dupion Silk Dhoti Kurta in Royal Blue",
+        "Solid Color Rayon Asymmetric Dhoti Kurta in Black",
+        "Solid Color Art Silk Kurta Set in Beige",
+        "Solid Color Rayon Kurta Set in Black",
+        "Printed Dupion Silk Dhoti Kurta in Red",
+        "Plain Dupion Silk Dhoti Kurta with Jacket in Maroon and Black",
+        "Plain Kurta Set in Navy Blue",
+        "Woven Pure Silk Dhoti with Kurta in Cream",
+        "Solid Color Dupion Silk Dhoti Kurta in White",
+        "Contrast Patch Border Dupion Silk Short Dhoti Kurta in Off White",
+        "Solid Color Rayon Kurta Set in Peach Orange",
+        "Plain Art Dupion Silk Dhoti Kurta in Red",
+        "Mens dhoti with black boarder",
+        "Plain Cotton Silk Churidar in Off White",
+        "Mens dhoti with mejantha boarder",
+        "Mens dhoti with gold boarder",
+        "Mens dhoti with silver boarder",
+        "Dupion Silk Dhoti in Beige",
+        "Dupion Silk Dhoti in Beige"
+      ]
+    }
+  },
+  "category_analysis": {
+    "category": {
+      "field": "category",
+      "total_rows": 78370,
+      "non_null_count": 78370,
+      "null_rate": 0.0,
+      "n_unique_values": 3,
+      "value_distribution": [
+        [
+          "Western Wear",
+          70116
+        ],
+        [
+          "Ethnic Wear",
+          7880
+        ],
+        [
+          "Inner Wear",
+          374
+        ]
+      ],
+      "top_5_concentration": 100.0,
+      "top_10_concentration": 100.0,
+      "sample_values": [
+        "Ethnic Wear",
+        "Inner Wear",
+        "Western Wear"
+      ]
+    },
+    "sub-category": {
+      "field": "sub-category",
+      "total_rows": 78370,
+      "non_null_count": 78370,
+      "null_rate": 0.0,
+      "n_unique_values": 34,
+      "value_distribution": [
+        [
+          "Shorts",
+          10025
+        ],
+        [
+          "Shirts",
+          7513
+        ],
+        [
+          "Tops&Tees",
+          7393
+        ],
+        [
+          "Trousers",
+          7237
+        ],
+        [
+          "Sweatshirts&Hoodies",
+          6733
+        ],
+        [
+          "Blazers&Suits",
+          6678
+        ],
+        [
+          "Jeans",
+          6381
+        ],
+        [
+          "Jackets",
+          5869
+        ],
+        [
+          "Tracks&Joggers",
+          4243
+        ],
+        [
+          "Abayas&Burqas",
+          3333
+        ],
+        [
+          "Formal Shirts",
+          2788
+        ],
+        [
+          "Cargos",
+          2046
+        ],
+        [
+          "Sarees",
+          2016
+        ],
+        [
+          "Sweatshirts&Shirts",
+          1616
+        ],
+        [
+          "Salwar Kameez&Kurtis",
+          1162
+        ],
+        [
+          "Jacket&Shrugs&Cardigans",
+          1085
+        ],
+        [
+          "Kurta",
+          617
+        ],
+        [
+          "Lehenga Choli",
+          556
+        ],
+        [
+          "Boxers",
+          228
+        ],
+        [
+          "Blazers&Waistcoats",
+          200
+        ],
+        [
+          "Dungarees",
+          157
+        ],
+        [
+          "Pyjama",
+          109
+        ],
+        [
+          "Palazzo pants",
+          71
+        ],
+        [
+          "Pants&Trousers",
+          59
+        ],
+        [
+          "Dhoti Pants",
+          58
+        ],
+        [
+          "Skirts",
+          57
+        ],
+        [
+          "Petticoats",
+          37
+        ],
+        [
+          "Galabiyyas",
+          36
+        ],
+        [
+          "Patialas",
+          25
+        ],
+        [
+          "Gowns&Dresses",
+          20
+        ],
+        [
+          "Dhoti Kurta",
+          13
+        ],
+        [
+          "Sherwani",
+          5
+        ],
+        [
+          "Stoles&Scarves",
+          3
+        ],
+        [
+          "Bandhgala",
+          1
+        ]
+      ],
+      "top_5_concentration": 49.6,
+      "top_10_concentration": 83.5,
+      "sample_values": [
+        "Dhoti Kurta",
+        "Dhoti Pants",
+        "Galabiyyas",
+        "Jackets",
+        "Kurta",
+        "Sherwani",
+        "Boxers",
+        "Pyjama",
+        "Blazers&Suits",
+        "Cargos",
+        "Formal Shirts",
+        "Jeans",
+        "Shirts",
+        "Shorts",
+        "Jacket&Shrugs&Cardigans",
+        "Palazzo pants",
+        "Pants&Trousers",
+        "Skirts",
+        "Stoles&Scarves",
+        "Sweatshirts&Shirts",
+        "Tops&Tees",
+        "Bandhgala",
+        "Sweatshirts&Hoodies",
+        "Tracks&Joggers",
+        "Trousers",
+        "Abayas&Burqas",
+        "Gowns&Dresses",
+        "Lehenga Choli",
+        "Patialas",
+        "Salwar Kameez&Kurtis"
+      ]
+    }
+  },
+  "attribute_analysis": {
+    "gender": {
+      "field": "gender",
+      "total_rows": 78370,
+      "non_null_count": 78370,
+      "null_rate": 0.0,
+      "n_unique_values": 2,
+      "value_distribution": [
+        [
+          "Men",
+          54901
+        ],
+        [
+          "Women",
+          23469
+        ]
+      ],
+      "top_5_concentration": 100.0,
+      "top_10_concentration": 100.0,
+      "sample_values": [
+        "Men",
+        "Women"
+      ]
+    }
+  },
+  "text_category_overlap": {
+    "category": {
+      "text_contains_exact_category_pct": 0.0,
+      "text_shares_words_with_category_pct": 2.3,
+      "total_overlap_pct": 2.3
+    },
+    "sub-category": {
+      "text_contains_exact_category_pct": 34.4,
+      "text_shares_words_with_category_pct": 21.0,
+      "total_overlap_pct": 55.4
+    },
+    "gender": {
+      "text_contains_exact_category_pct": 89.8,
+      "text_shares_words_with_category_pct": 0.0,
+      "total_overlap_pct": 89.8
+    }
+  },
+  "cross_field_correlations": {
+    "gender \u00d7 category": {
+      "n_combinations": 6,
+      "top_20_combinations": [
+        [
+          "Men | Western Wear",
+          53796
+        ],
+        [
+          "Women | Western Wear",
+          16320
+        ],
+        [
+          "Women | Ethnic Wear",
+          7112
+        ],
+        [
+          "Men | Ethnic Wear",
+          768
+        ],
+        [
+          "Men | Inner Wear",
+          337
+        ],
+        [
+          "Women | Inner Wear",
+          37
+        ]
+      ]
+    },
+    "gender \u00d7 sub-category": {
+      "n_combinations": 35,
+      "top_20_combinations": [
+        [
+          "Men | Shirts",
+          7513
+        ],
+        [
+          "Women | Tops&Tees",
+          7393
+        ],
+        [
+          "Men | Trousers",
+          7237
+        ],
+        [
+          "Men | Sweatshirts&Hoodies",
+          6733
+        ],
+        [
+          "Men | Blazers&Suits",
+          6678
+        ],
+        [
+          "Men | Jeans",
+          6381
+        ],
+        [
+          "Men | Jackets",
+          5869
+        ],
+        [
+          "Women | Shorts",
+          5679
+        ],
+        [
+          "Men | Shorts",
+          4346
+        ],
+        [
+          "Men | Tracks&Joggers",
+          4243
+        ],
+        [
+          "Women | Abayas&Burqas",
+          3333
+        ],
+        [
+          "Men | Formal Shirts",
+          2788
+        ],
+        [
+          "Men | Cargos",
+          2046
+        ],
+        [
+          "Women | Sarees",
+          2016
+        ],
+        [
+          "Women | Sweatshirts&Shirts",
+          1616
+        ],
+        [
+          "Women | Salwar Kameez&Kurtis",
+          1162
+        ],
+        [
+          "Women | Jacket&Shrugs&Cardigans",
+          1085
+        ],
+        [
+          "Men | Kurta",
+          617
+        ],
+        [
+          "Women | Lehenga Choli",
+          556
+        ],
+        [
+          "Men | Boxers",
+          228
+        ]
+      ]
+    },
+    "category \u00d7 sub-category": {
+      "n_combinations": 35,
+      "top_20_combinations": [
+        [
+          "Western Wear | Shorts",
+          10025
+        ],
+        [
+          "Western Wear | Shirts",
+          7513
+        ],
+        [
+          "Western Wear | Tops&Tees",
+          7393
+        ],
+        [
+          "Western Wear | Trousers",
+          7237
+        ],
+        [
+          "Western Wear | Sweatshirts&Hoodies",
+          6733
+        ],
+        [
+          "Western Wear | Blazers&Suits",
+          6678
+        ],
+        [
+          "Western Wear | Jeans",
+          6381
+        ],
+        [
+          "Western Wear | Jackets",
+          5831
+        ],
+        [
+          "Western Wear | Tracks&Joggers",
+          4243
+        ],
+        [
+          "Ethnic Wear | Abayas&Burqas",
+          3333
+        ],
+        [
+          "Western Wear | Formal Shirts",
+          2788
+        ],
+        [
+          "Western Wear | Cargos",
+          2046
+        ],
+        [
+          "Ethnic Wear | Sarees",
+          2016
+        ],
+        [
+          "Western Wear | Sweatshirts&Shirts",
+          1616
+        ],
+        [
+          "Ethnic Wear | Salwar Kameez&Kurtis",
+          1162
+        ],
+        [
+          "Western Wear | Jacket&Shrugs&Cardigans",
+          1085
+        ],
+        [
+          "Ethnic Wear | Kurta",
+          617
+        ],
+        [
+          "Ethnic Wear | Lehenga Choli",
+          556
+        ],
+        [
+          "Inner Wear | Boxers",
+          228
+        ],
+        [
+          "Western Wear | Blazers&Waistcoats",
+          200
+        ]
+      ]
+    }
+  }
+}

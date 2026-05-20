@@ -1,0 +1,61 @@
+{
+  "model": "p4b_multifield",
+  "benchmarks": {
+    "fashion200k": {
+      "map10": 0.554722839506173,
+      "fsl_baseline": 0.3859,
+      "delta_pct": 43.74782055096474,
+      "beats_10pct": true,
+      "gap_to_target": -0.13023283950617293,
+      "all_task_results": {
+        "text_to_image_map10": 0.554722839506173,
+        "category3_to_product_map10": 0.2987424777603349,
+        "category2_to_product_map10": 0.5515514592933948,
+        "category1_to_product_map10": 1.0,
+        "primary_map10": 0.554722839506173
+      }
+    },
+    "atlas": {
+      "map10": 0.33473630432728646,
+      "fsl_baseline": 0.6919,
+      "delta_pct": -51.620710459996175,
+      "beats_10pct": false,
+      "gap_to_target": 0.4263536956727136,
+      "all_task_results": {
+        "text_to_image_map10": 0.33473630432728646,
+        "category_to_product_map10": 0.6833333333333332,
+        "primary_map10": 0.33473630432728646
+      }
+    },
+    "polyvore": {
+      "map10": 0.7107343253968254,
+      "fsl_baseline": 0.5783,
+      "delta_pct": 22.90062690590097,
+      "beats_10pct": true,
+      "gap_to_target": -0.07460432539682527,
+      "all_task_results": {
+        "text_to_image_map10": 0.7107343253968254,
+        "category_to_product_map10": 0.5518098402151558,
+        "primary_map10": 0.7107343253968254
+      }
+    },
+    "KAGL": {
+      "map10": 0.5316716761148904,
+      "fsl_baseline": 0.6779,
+      "delta_pct": -21.570780924193766,
+      "beats_10pct": false,
+      "gap_to_target": 0.21401832388510955,
+      "all_task_results": {
+        "text_to_image_map10": 0.5316716761148904,
+        "category3_to_product_map10": 0.7631046509323663,
+        "category2_to_product_map10": 0.7976041666666667,
+        "category1_to_product_map10": 0.7670873015873017,
+        "primary_map10": 0.5316716761148904
+      }
+    }
+  },
+  "weakest_benchmark": "atlas",
+  "weakest_delta": -51.620710459996175,
+  "strongest_benchmark": "fashion200k",
+  "strongest_delta": 43.74782055096474
+}

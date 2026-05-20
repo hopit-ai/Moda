@@ -1,0 +1,71 @@
+{
+  "mieb_version": "2.12.25",
+  "harness": "benchmark/mieb_moda_encoder.py",
+  "device": "mps",
+  "date": "2026-04-21",
+  "purpose": "Smoke-test the MoDA -> mteb encoder adapter end-to-end on two small public retrieval tasks before committing to the full ~130-task MIEB run.",
+  "tasks_evaluated": ["GLDv2I2TRetrieval", "Flickr30kT2IRetrieval"],
+  "models": {
+    "FashionSigLIP-base": {
+      "checkpoint": "hf-hub:Marqo/marqo-fashionSigLIP (zero-shot, no MoDA weights)",
+      "results": {
+        "GLDv2I2TRetrieval": {
+          "test_n_queries": 1972,
+          "test_n_corpus": 1939,
+          "ndcg_at_10": 0.54918,
+          "recall_at_1": 0.39319,
+          "recall_at_10": 0.69259,
+          "mrr_at_10": 0.51697,
+          "wallclock_seconds": 32.0
+        },
+        "Flickr30kT2IRetrieval": {
+          "test_n_queries": 5000,
+          "test_n_corpus": 1000,
+          "ndcg_at_10": 0.85777,
+          "recall_at_1": 0.7468,
+          "recall_at_10": 0.9568,
+          "mrr_at_10": 0.82534,
+          "wallclock_seconds": 30.7
+        }
+      }
+    },
+    "MoDA-Distilled-768d": {
+      "checkpoint": "models/moda-siglip-distilled/best/model_state_dict.pt (Recipe A')",
+      "results": {
+        "GLDv2I2TRetrieval": {
+          "test_n_queries": 1972,
+          "test_n_corpus": 1939,
+          "ndcg_at_10": 0.55112,
+          "recall_at_1": 0.40591,
+          "recall_at_10": 0.68779,
+          "mrr_at_10": 0.52085,
+          "wallclock_seconds": 22.6,
+          "delta_vs_fashionsiglip_ndcg10_pp": +0.19
+        },
+        "Flickr30kT2IRetrieval": {
+          "test_n_queries": 5000,
+          "test_n_corpus": 1000,
+          "ndcg_at_10": 0.82803,
+          "recall_at_1": 0.7096,
+          "recall_at_10": 0.9382,
+          "mrr_at_10": 0.79225,
+          "wallclock_seconds": 30.8,
+          "delta_vs_fashionsiglip_ndcg10_pp": -2.97
+        }
+      }
+    }
+  },
+  "interpretation": [
+    "Harness validated end-to-end: encode_image / encode_text / similarity protocols all work with mteb 2.12.25.",
+    "MoDA checkpoint loading via open_clip + load_state_dict(strict=False) works on the SigLIP CustomTextCLIP architecture.",
+    "On out-of-domain landmark photos (GLDv2), MoDA-Distilled is statistically tied with FashionSigLIP base (+0.19 pp nDCG@10).",
+    "On generic-caption T2I (Flickr30k), MoDA-Distilled regresses 2.97 pp vs FashionSigLIP base, expected because the distillation target ensemble was fashion-only.",
+    "Submission-ready JSON files written under results/mieb/<model>/<lazzyPie__name>/v1/<TaskName>.json — same format as the mteb-results repo expects."
+  ],
+  "next_steps": [
+    "P0: Submit smoke-test JSONs as a draft PR to embeddings-benchmark/results to verify schema acceptance.",
+    "P1: Run on fashion-relevant MIEB tasks (Fashion200kT2I, Fashion200kI2T, FashionIQ-IT2I) where MoDA should outperform.",
+    "P1: Run the MIEB low-resource subset (smallest ~30 tasks) for an honest baseline ranking.",
+    "P2: Full MIEB (~130 tasks) — only after fashion-specific wins are confirmed; ~A100-day of compute."
+  ]
+}
