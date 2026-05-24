@@ -5,6 +5,12 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+**Try MODA now:** [Interactive Hugging Face Space](https://huggingface.co/spaces/HopitAI/moda-fashion-search) · [HopitAI on Hugging Face](https://huggingface.co/HopitAI) · [Start with `moda-fashion-deepfashion2`](https://huggingface.co/HopitAI/moda-fashion-deepfashion2)
+
+```bash
+huggingface-cli download HopitAI/moda-fashion-deepfashion2 --local-dir ./moda-fashion-deepfashion2
+```
+
 ---
 
 ## What is this?
