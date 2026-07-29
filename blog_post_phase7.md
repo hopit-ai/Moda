@@ -45,6 +45,14 @@ We improve on all six. Four clear statistical significance, so we count those as
 
 The honest note is the same one that runs through the whole series. The win did not come from a bigger or cleverer model. It came from using the model we already had more carefully, at inference time, for free. That is the cheapest trick that worked, and by the eighth post it is a pattern rather than a surprise.
 
+## A closer look at the last piece
+
+FashionSigLIP was trained once and frozen, and we did not change it. What we changed was how we use it. A product photographed on a model, cropped tightly, or padded to a square does not always land in the same place in the embedding space. Encoding each image a few ways and averaging gives a steadier vector than any single view. We do the same on the query side, mixing the raw text with a short "a fashion product photo of" prompt. The final score keeps that steady combined vector as the main signal, and lets a single sharper view nudge the ranking when a crop or a pad happens to show the product more clearly.
+
+We also tried the harder version. A small learned adapter on top of three encoders scored higher, five of six benchmarks instead of four. But it needed roughly three and a half times the parameters, which broke the rule we had set for ourselves: beat FashionSigLIP at FashionSigLIP's size. So we did not ship it and we do not count it, because a bigger model beating a smaller one tells you nothing.
+
+Two honest notes. The blend weight that combines the views was chosen on separate development data, not on the six benchmarks. And we had already seen the aggregate benchmark numbers several times before this run, so it is not a blind evaluation. There is a sealed test set we have not touched. Running the frozen recipe through it once is the next thing we would do to make the result harder to argue with.
+
 ## Where that leaves us
 
 Across the two tasks that matter for fashion retrieval, we now beat FashionSigLIP on both.
@@ -55,6 +63,20 @@ Across the two tasks that matter for fashion retrieval, we now beat FashionSigLI
 | Text-to-image (six benchmarks, MAP@10) | baseline | wins 4, loses 0 |
 
 We do not lose a benchmark on either side. As far as we know, that makes MODA the strongest openly available fashion retrieval you can run today, on both text and image queries, at FashionSigLIP's size and license.
+
+## What the series taught us
+
+Eight posts, but the lessons compress to a handful.
+
+- [Blog 1](blog_post.md) showed that dense retrieval beats keyword search on real fashion queries, and that the cross-encoder reranker, not any clever retrieval trick, was the single biggest gain. Measuring each component on its own is what told us where to spend effort.
+- [Blog 2](blog_post_phase2b.md) replaced BM25 with SPLADE and beat weeks of tuning around BM25. When the retriever got smarter, the NER boosting we had built for the weaker one stopped helping. It is usually better to swap a component than to prop it up.
+- [Blog 3](blog_post_phase3a_3b.md) is the one people quote most. A million and a half purchase labels barely moved the cross-encoder. A few thousand LLM-graded ones did. Label quality was the budget, not label count or model size.
+- [Blog 4](blog_post_phase3c.md) improved the retriever most by training it on its own top-ranked mistakes. Fine-tuning both retrievers at once made things worse, because their errors started to agree and the hybrid lost its diversity.
+- [Blog 5](blog_post_phase4.md) was a loss we published anyway. The multimodal model scored below the text-only pipeline, and understanding why a method fails turned out to be worth more than another point of gain.
+- [Blog 6](blog_post_phase5.md) reproduced FashionSigLIP's published number before we claimed to beat it. The win came from the training data, cross-domain pairs, not a new architecture. The right data mattered more than the right model.
+- [Blog 7](blog_post_phase6.md) distilled a two-model ensemble into one model with no measurable loss, and found that 256 dimensions retrieved as well as 768. Most fashion embeddings ship more precision and more dimensions than the task needs.
+
+The thread running through all of them: almost every gain came from the cheapest option that fit the constraint, not the most sophisticated one.
 
 ## Everything is open
 
