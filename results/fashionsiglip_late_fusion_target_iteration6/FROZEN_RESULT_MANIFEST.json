@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "fashionsiglip_iteration6_frozen_result_manifest",
+  "status": "FROZEN_4_OF_6_ACHIEVED",
+  "frozen_at_date": "2026-07-29",
+  "neural_parameters": 203155970,
+  "significant_wins": 4,
+  "significant_losses": 0,
+  "point_wins": 6,
+  "files": {
+    "CANDIDATE_LOCK.json": "cc6340fdcd370f2b072f88c887bf40772e79eca2aeab302c67fdd769f0bc0de9",
+    "FINAL_SUMMARY.json": "4514278b77793df67030e69b251127e8d4062829de97ed5daeb45aa20105803b",
+    "FINAL_REPORT.md": "22ec5ebedabda298b7a5a90bdb53111bab62c55b48f6d2acc922d600b35e2bd8",
+    "datasets/KAGL.json": "2d1461334c334eee0e0b080b5e55389576e7a7260ae209f4e5a34f5abb54b5f2",
+    "datasets/atlas.json": "f7c002a78b2db9bbefed8487e891072ae1218f3707ceae7b3df890541d9fe32c",
+    "datasets/deepfashion_inshop.json": "cead6c52704a434b6d0ea6c1b3a24c9b7c4e71e2c77f5b6d5d732b2e3c8d551e",
+    "datasets/deepfashion_multimodal.json": "08321af6e13d666c2c81956087c9daa841138bf6c567421790b9c4998b42e21e",
+    "datasets/fashion200k.json": "f60a763e20da96b6a2ca272cb0e28e6bd2bd8a08e2188108466d59cb617b4cd4",
+    "datasets/polyvore.json": "0e2aef092b83b781468045214998146bf015259558018a8e77bb71461a595d7f",
+    "../fashionsiglip_late_fusion_external_v1/SELECTION.json": "99f688a1a6610db6aba8d89554d9e702d0121c183791a75a74282475d62ad4c1",
+    "../fashionsiglip_late_fusion_external_v1/EXTERNAL_DEVELOPMENT_PROTOCOL.json": "d502962ff390f483fefb4121bce924a00b70453a27168776168c107c6ecafa01"
+  },
+  "rule": "Any hash mismatch invalidates claims that depend on the frozen iteration-6 result."
+}

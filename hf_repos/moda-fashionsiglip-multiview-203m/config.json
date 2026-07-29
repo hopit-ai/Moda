@@ -1,0 +1,43 @@
+{
+  "architectures": [
+    "ModaFashionSigLIPMultiViewRetriever"
+  ],
+  "artifact_type": "retrieval_system",
+  "base_model": "Marqo/marqo-fashionSigLIP",
+  "base_model_parameters": 203155970,
+  "additional_learned_parameters": 0,
+  "embedding_dimension": 768,
+  "query": {
+    "prompt_template": "a fashion product photo of {query}",
+    "raw_weight": 1.0,
+    "prompt_weight": 0.25,
+    "normalize": true
+  },
+  "gallery": {
+    "views": [
+      "official",
+      "square_pad_128",
+      "center_square_crop"
+    ],
+    "parent_weights": {
+      "official": 1.0,
+      "square_pad_128": 0.25,
+      "center_square_crop": 0.25
+    },
+    "normalize_parent": true,
+    "stored_vectors_per_item": 3
+  },
+  "scoring": {
+    "formula": "0.9 * parent + 0.1 * max(parent, square_pad_128, center_square_crop)",
+    "parent_weight": 0.9,
+    "max_view_weight": 0.1,
+    "similarity": "cosine"
+  },
+  "selection": {
+    "candidate_id": "late-maxview-b010",
+    "same_global_recipe_for_all_datasets": true,
+    "target_examples_used_for_selection": false,
+    "fresh_blind_sota_evaluation": false,
+    "benchmark_iteration": 6
+  }
+}

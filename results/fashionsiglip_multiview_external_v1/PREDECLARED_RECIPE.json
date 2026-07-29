@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "fashionsiglip_multiview_external_predeclared_recipe",
+  "architecture": {
+    "model": "Marqo/marqo-fashionSigLIP",
+    "neural_parameters": 203155970,
+    "output_dim": 768,
+    "stored_vectors_per_item": 1,
+    "additional_neural_parameters": 0
+  },
+  "development": {
+    "openvton_records": 4989,
+    "glami_records": 2000,
+    "glami_query_views": [
+      "short",
+      "rich",
+      "structured"
+    ],
+    "target_benchmarks_accessed": false
+  },
+  "grid": {
+    "image_views": [
+      "official",
+      "pad",
+      "center_crop",
+      "foreground_pad"
+    ],
+    "prompt_views": [
+      "raw",
+      "photo",
+      "fashion_product"
+    ],
+    "image_mixes": {
+      "official": {
+        "official": 1.0
+      },
+      "pad025": {
+        "official": 1.0,
+        "pad": 0.25
+      },
+      "pad050": {
+        "official": 1.0,
+        "pad": 0.5
+      },
+      "pad100": {
+        "official": 1.0,
+        "pad": 1.0
+      },
+      "crop025": {
+        "official": 1.0,
+        "center_crop": 0.25
+      },
+      "crop050": {
+        "official": 1.0,
+        "center_crop": 0.5
+      },
+      "foreground025": {
+        "official": 1.0,
+        "foreground_pad": 0.25
+      },
+      "foreground050": {
+        "official": 1.0,
+        "foreground_pad": 0.5
+      },
+      "foreground100": {
+        "official": 1.0,
+        "foreground_pad": 1.0
+      },
+      "pad_crop025": {
+        "official": 1.0,
+        "pad": 0.25,
+        "center_crop": 0.25
+      },
+      "pad_foreground025": {
+        "official": 1.0,
+        "pad": 0.25,
+        "foreground_pad": 0.25
+      }
+    },
+    "prompt_mixes": {
+      "raw": {
+        "raw": 1.0
+      },
+      "photo025": {
+        "raw": 1.0,
+        "photo": 0.25
+      },
+      "product025": {
+        "raw": 1.0,
+        "fashion_product": 0.25
+      },
+      "both025": {
+        "raw": 1.0,
+        "photo": 0.25,
+        "fashion_product": 0.25
+      }
+    },
+    "centering_modes": [
+      false,
+      true
+    ],
+    "candidate_count": 88
+  },
+  "gate": {
+    "minimum_mrr_delta_each_external_slice": 0.0,
+    "minimum_recall1_delta_each_external_slice": 0.0,
+    "minimum_recall10_delta_each_external_slice": 0.0,
+    "minimum_mean_relative_mrr_gain": 0.005,
+    "selection_order": [
+      "higher_worst_relative_mrr_gain",
+      "higher_mean_relative_mrr_gain",
+      "candidate_id"
+    ]
+  },
+  "inputs": {
+    "openvton_base": "MODA/results/fashionsiglip_vocab_adapter/fsl_validation_base.pt",
+    "openvton_base_sha256": "91b367a58a5d5dc6501eb08a1b591d725242b31ec36ab43c16fb1f4efe84f147",
+    "glami_manifest": "MODA/results/fsl_s0_glami_300m_pilot/data/DEV_MANIFEST.jsonl",
+    "glami_manifest_sha256": "f267593c3677546eff56fee2b7d479aa933e76a2b8fbcbce1945a1f0b4d5fd41"
+  },
+  "research_only": true
+}

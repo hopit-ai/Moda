@@ -1,0 +1,5 @@
+huggingface_hub>=0.24
+open_clip_torch>=2.24
+Pillow>=10
+safetensors>=0.4
+torch>=2.2

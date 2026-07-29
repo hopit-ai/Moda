@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "fashionsiglip_multiview_iteration5_candidate_lock",
+  "status": "LOCKED_BEFORE_ITERATION5_TARGET_ACCESS",
+  "candidate": {
+    "candidate_id": "img-pad_crop025__txt-product025__raw",
+    "model": "Marqo/marqo-fashionSigLIP",
+    "model_weights": "MODA/data/hf_cache/models--Marqo--marqo-fashionSigLIP/blobs/88908200434959fa3154ef79d408aac33341e8797fe5ca8ca6f0463aab32e6b3",
+    "model_weights_sha256": "88908200434959fa3154ef79d408aac33341e8797fe5ca8ca6f0463aab32e6b3",
+    "neural_parameters": 203155970,
+    "additional_neural_parameters": 0,
+    "output_dim": 768,
+    "stored_vectors_per_item": 1,
+    "image_weights": {
+      "official": 1.0,
+      "pad": 0.25,
+      "center_crop": 0.25
+    },
+    "text_weights": {
+      "raw": 1.0,
+      "fashion_product": 0.25
+    },
+    "corpus_centering": false
+  },
+  "external_selection": {
+    "selection": "MODA/results/fashionsiglip_multiview_external_v1/SELECTION.json",
+    "selection_sha256": "eae5e26e8bffcc260ea195d44180d2ec59aa7b4dcc942aa1918f03ab22879a3b",
+    "recipe": "MODA/results/fashionsiglip_multiview_external_v1/PREDECLARED_RECIPE.json",
+    "recipe_sha256": "2c8fbacd6e6df81e6ec1e6bad62754b98c48aa7ec6dd2550a912e9f79e04c305",
+    "eligible_candidate_count": 4,
+    "selected_metrics": {
+      "candidate_id": "img-pad_crop025__txt-product025__raw",
+      "image_mix": "pad_crop025",
+      "prompt_mix": "product025",
+      "centered": false,
+      "metrics": {
+        "openvton": {
+          "mrr@10": 0.695614218711853,
+          "recall@1": 0.5923030376434326,
+          "recall@10": 0.9035878777503967
+        },
+        "short": {
+          "mrr@10": 0.6122727990150452,
+          "recall@1": 0.5329999923706055,
+          "recall@10": 0.7795000076293945
+        },
+        "rich": {
+          "mrr@10": 0.3759671151638031,
+          "recall@1": 0.3255000114440918,
+          "recall@10": 0.49799999594688416
+        },
+        "structured": {
+          "mrr@10": 0.6869257688522339,
+          "recall@1": 0.5914999842643738,
+          "recall@10": 0.8765000104904175
+        }
+      },
+      "deltas": {
+        "openvton": {
+          "mrr@10": 0.0041602253913879395,
+          "recall@1": 0.006614506244659424,
+          "recall@10": 0.0
+        },
+        "short": {
+          "mrr@10": 0.00836879014968872,
+          "recall@1": 0.012499988079071045,
+          "recall@10": 0.008000016212463379
+        },
+        "rich": {
+          "mrr@10": 0.006177455186843872,
+          "recall@1": 0.006000012159347534,
+          "recall@10": 0.0040000081062316895
+        },
+        "structured": {
+          "mrr@10": 0.0030144453048706055,
+          "recall@1": 0.0009999871253967285,
+          "recall@10": 0.000500023365020752
+        }
+      },
+      "relative_mrr": {
+        "openvton": 0.006016633690131501,
+        "short": 0.013857815193862422,
+        "rich": 0.016705321579918664,
+        "structured": 0.004407655204822447
+      },
+      "worst_relative_mrr_gain": 0.004407655204822447,
+      "mean_relative_mrr_gain": 0.010246856417183758,
+      "eligible": true
+    }
+  },
+  "protocol": {
+    "datasets": [
+      "atlas",
+      "polyvore",
+      "KAGL",
+      "fashion200k",
+      "deepfashion_inshop",
+      "deepfashion_multimodal"
+    ],
+    "evaluation_order": [
+      "deepfashion_multimodal",
+      "KAGL",
+      "deepfashion_inshop",
+      "atlas",
+      "polyvore",
+      "fashion200k"
+    ],
+    "task": "text-to-image",
+    "full_corpus": true,
+    "primary_metric": "MAP@10",
+    "paired_bootstrap_samples": 10000,
+    "minimum_significant_wins": 4,
+    "same_global_recipe_all_datasets": true,
+    "early_stop_when_four_wins_impossible": true
+  },
+  "disclosure": {
+    "fresh_blind_sota_evaluation": false,
+    "benchmark_iteration": 5,
+    "prior_aggregate_target_results_informed_research_direction": true,
+    "this_recipe_selected_by_target_metrics": false,
+    "target_examples_images_qrels_used_for_recipe_selection": false
+  },
+  "research_only": true
+}

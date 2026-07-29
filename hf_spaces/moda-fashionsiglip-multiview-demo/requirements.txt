@@ -1,0 +1,2 @@
+gradio>=5.20,<7
+git+https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m
