@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "moda-fashionsiglip-multiview"
+version = "0.1.0"
+description = "Zero-additional-parameter multi-view text-to-image retrieval with FashionSigLIP"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "MODA contributors" },
+]
+dependencies = [
+  "huggingface_hub>=0.24",
+  "open_clip_torch>=2.24",
+  "Pillow>=10",
+  "safetensors>=0.4",
+  "torch>=2.2",
+]
+keywords = [
+  "fashion",
+  "FashionSigLIP",
+  "multimodal retrieval",
+  "text-to-image retrieval",
+]
+
+[project.urls]
+Homepage = "https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m"
+Demo = "https://huggingface.co/spaces/HopitAI/moda-fashionsiglip-multiview-demo"
+Base-Model = "https://huggingface.co/Marqo/marqo-fashionSigLIP"
+
+[project.scripts]
+moda-fashion-search = "moda_fashionsiglip_multiview.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+moda_fashionsiglip_multiview = ["recipe.json"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["__pycache__/*", "*.pyc"]

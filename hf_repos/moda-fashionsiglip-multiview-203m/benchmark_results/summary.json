@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "public_fashionsiglip_late_fusion_summary",
+  "status": "AT_LEAST_4_OF_6_ACHIEVED",
+  "frozen_at_date": "2026-07-29",
+  "candidate": {
+    "candidate_id": "late-maxview-b010",
+    "base_model": "Marqo/marqo-fashionSigLIP",
+    "neural_parameters": 203155970,
+    "additional_learned_parameters": 0,
+    "embedding_dimension": 768,
+    "stored_document_vectors": 3,
+    "ann_routes": 3,
+    "formula": "0.9*parent+0.1*max(parent,pad,center_crop)"
+  },
+  "protocol": {
+    "task": "text-to-image",
+    "full_corpus": true,
+    "primary_metric": "MAP@10",
+    "paired_bootstrap_samples": 10000,
+    "same_global_recipe_all_datasets": true,
+    "fresh_blind_sota_evaluation": false,
+    "benchmark_iteration": 6,
+    "target_examples_images_qrels_used_for_selection": false
+  },
+  "datasets": {
+    "KAGL": {
+      "candidate_MAP@10": 0.29074,
+      "baseline_MAP@10": 0.27687,
+      "absolute_delta": 0.013870606533017249,
+      "ci95_low": 0.008940084980330517,
+      "ci95_high": 0.0188327481806801,
+      "classification": "significant_win"
+    },
+    "fashion200k": {
+      "candidate_MAP@10": 0.1951,
+      "baseline_MAP@10": 0.18577,
+      "absolute_delta": 0.009324404761904763,
+      "ci95_low": 0.003819347718253968,
+      "ci95_high": 0.014771639384920635,
+      "classification": "significant_win"
+    },
+    "deepfashion_inshop": {
+      "candidate_MAP@10": 0.16371,
+      "baseline_MAP@10": 0.15865,
+      "absolute_delta": 0.005066924557275024,
+      "ci95_low": 0.0030408831185772256,
+      "ci95_high": 0.007095991747488355,
+      "classification": "significant_win"
+    },
+    "polyvore": {
+      "candidate_MAP@10": 0.37191,
+      "baseline_MAP@10": 0.36645,
+      "absolute_delta": 0.005465674603174603,
+      "ci95_low": 0.0008606845238095241,
+      "ci95_high": 0.01014109623015873,
+      "classification": "significant_win"
+    },
+    "atlas": {
+      "candidate_MAP@10": 0.18637,
+      "baseline_MAP@10": 0.18264,
+      "absolute_delta": 0.003737096945082783,
+      "ci95_low": -0.00016614619280408522,
+      "ci95_high": 0.007746641375037741,
+      "classification": "inconclusive"
+    },
+    "deepfashion_multimodal": {
+      "candidate_MAP@10": 0.01504,
+      "baseline_MAP@10": 0.01477,
+      "absolute_delta": 0.0002765873015873017,
+      "ci95_low": -0.0012055704365079366,
+      "ci95_high": 0.001916284722222222,
+      "classification": "inconclusive"
+    }
+  },
+  "evaluated_datasets": 6,
+  "significant_wins": 4,
+  "significant_losses": 0,
+  "point_wins": 6
+}

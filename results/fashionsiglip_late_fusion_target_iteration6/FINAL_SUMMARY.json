@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "artifact_kind": "fashionsiglip_late_fusion_iteration6_summary",
+  "status": "AT_LEAST_4_OF_6_ACHIEVED",
+  "candidate": {
+    "candidate_id": "late-maxview-b010",
+    "model": "Marqo/marqo-fashionSigLIP",
+    "neural_parameters": 203155970,
+    "additional_neural_parameters": 0,
+    "output_dim": 768,
+    "stored_document_vectors": 3,
+    "stored_query_vectors": 1,
+    "ann_routes": 3,
+    "blend": 0.1,
+    "score_formula": "0.9*score(parent_multi_view)+0.1*max(score(parent_multi_view),score(pad),score(center_crop))",
+    "parent_image_weights": {
+      "official": 1.0,
+      "pad": 0.25,
+      "center_crop": 0.25
+    },
+    "parent_text_weights": {
+      "raw": 1.0,
+      "fashion_product": 0.25
+    }
+  },
+  "external_selection": {
+    "selection": "MODA/results/fashionsiglip_late_fusion_external_v1/SELECTION.json",
+    "selection_sha256": "99f688a1a6610db6aba8d89554d9e702d0121c183791a75a74282475d62ad4c1",
+    "protocol": "MODA/results/fashionsiglip_late_fusion_external_v1/EXTERNAL_DEVELOPMENT_PROTOCOL.json",
+    "protocol_sha256": "d502962ff390f483fefb4121bce924a00b70453a27168776168c107c6ecafa01",
+    "eligible_candidate_count": 1,
+    "selected_metrics": {
+      "candidate_id": "late-maxview-b010",
+      "blend": 0.1,
+      "metrics": {
+        "openvton": {
+          "mrr@10": 0.6963357925415039,
+          "recall@1": 0.5927039384841919,
+          "recall@10": 0.9041892290115356
+        },
+        "short": {
+          "mrr@10": 0.6125730276107788,
+          "recall@1": 0.5329999923706055,
+          "recall@10": 0.7804999947547913
+        },
+        "rich": {
+          "mrr@10": 0.3765014111995697,
+          "recall@1": 0.32600000500679016,
+          "recall@10": 0.49950000643730164
+        },
+        "structured": {
+          "mrr@10": 0.6872632503509521,
+          "recall@1": 0.5929999947547913,
+          "recall@10": 0.8769999742507935
+        }
+      },
+      "deltas_vs_parent": {
+        "openvton": {
+          "mrr@10": 0.0007215738296508789,
+          "recall@1": 0.00040090084075927734,
+          "recall@10": 0.000601351261138916
+        },
+        "short": {
+          "mrr@10": 0.0003002285957336426,
+          "recall@1": 0.0,
+          "recall@10": 0.0009999871253967285
+        },
+        "rich": {
+          "mrr@10": 0.0005342960357666016,
+          "recall@1": 0.0004999935626983643,
+          "recall@10": 0.0015000104904174805
+        },
+        "structured": {
+          "mrr@10": 0.0003374814987182617,
+          "recall@1": 0.0015000104904174805,
+          "recall@10": 0.0004999637603759766
+        }
+      },
+      "relative_mrr_vs_parent": {
+        "openvton": 0.0010373189768706492,
+        "short": 0.0004903510268896571,
+        "rich": 0.0014211243861947942,
+        "structured": 0.0004912925297331228
+      },
+      "worst_relative_mrr_gain": 0.0004903510268896571,
+      "mean_relative_mrr_gain": 0.0008600217299220558,
+      "eligible": true
+    }
+  },
+  "parent_iteration": {
+    "lock": "MODA/results/fashionsiglip_multiview_target_iteration5_sizeordered/CANDIDATE_LOCK.json",
+    "lock_sha256": "af579d1eafb07c17c8d53b139446d0ad227d030ed6b466db971b4f2bb9560155",
+    "candidate": {
+      "candidate_id": "img-pad_crop025__txt-product025__raw",
+      "model": "Marqo/marqo-fashionSigLIP",
+      "model_weights": "MODA/data/hf_cache/models--Marqo--marqo-fashionSigLIP/blobs/88908200434959fa3154ef79d408aac33341e8797fe5ca8ca6f0463aab32e6b3",
+      "model_weights_sha256": "88908200434959fa3154ef79d408aac33341e8797fe5ca8ca6f0463aab32e6b3",
+      "neural_parameters": 203155970,
+      "additional_neural_parameters": 0,
+      "output_dim": 768,
+      "stored_vectors_per_item": 1,
+      "image_weights": {
+        "official": 1.0,
+        "pad": 0.25,
+        "center_crop": 0.25
+      },
+      "text_weights": {
+        "raw": 1.0,
+        "fashion_product": 0.25
+      },
+      "corpus_centering": false
+    }
+  },
+  "protocol": {
+    "datasets": [
+      "atlas",
+      "polyvore",
+      "KAGL",
+      "fashion200k",
+      "deepfashion_inshop",
+      "deepfashion_multimodal"
+    ],
+    "evaluation_order": [
+      "deepfashion_multimodal",
+      "KAGL",
+      "deepfashion_inshop",
+      "atlas",
+      "polyvore",
+      "fashion200k"
+    ],
+    "task": "text-to-image",
+    "full_corpus": true,
+    "primary_metric": "MAP@10",
+    "paired_bootstrap_samples": 10000,
+    "minimum_significant_wins": 4,
+    "same_global_recipe_all_datasets": true,
+    "early_stop_when_four_wins_impossible": true
+  },
+  "disclosure": {
+    "fresh_blind_sota_evaluation": false,
+    "benchmark_iteration": 6,
+    "previous_target_aggregate_results_known": true,
+    "this_exact_blend_selected_by_target_metrics": false,
+    "target_examples_images_qrels_used_for_selection": false
+  },
+  "datasets": {
+    "deepfashion_multimodal": {
+      "candidate_MAP@10": 0.01504,
+      "baseline_MAP@10": 0.01477,
+      "absolute_delta": 0.0002765873015873017,
+      "relative_delta": 0.018280297901150933,
+      "ci95_low": -0.0012055704365079366,
+      "ci95_high": 0.001916284722222222,
+      "classification": "inconclusive"
+    },
+    "KAGL": {
+      "candidate_MAP@10": 0.29074,
+      "baseline_MAP@10": 0.27687,
+      "absolute_delta": 0.013870606533017249,
+      "relative_delta": 0.05009571278939573,
+      "ci95_low": 0.008940084980330517,
+      "ci95_high": 0.0188327481806801,
+      "classification": "significant_win"
+    },
+    "deepfashion_inshop": {
+      "candidate_MAP@10": 0.16371,
+      "baseline_MAP@10": 0.15865,
+      "absolute_delta": 0.005066924557275024,
+      "relative_delta": 0.03189410652379432,
+      "ci95_low": 0.0030408831185772256,
+      "ci95_high": 0.007095991747488355,
+      "classification": "significant_win"
+    },
+    "atlas": {
+      "candidate_MAP@10": 0.18637,
+      "baseline_MAP@10": 0.18264,
+      "absolute_delta": 0.003737096945082783,
+      "relative_delta": 0.020422689443714503,
+      "ci95_low": -0.00016614619280408522,
+      "ci95_high": 0.007746641375037741,
+      "classification": "inconclusive"
+    },
+    "polyvore": {
+      "candidate_MAP@10": 0.37191,
+      "baseline_MAP@10": 0.36645,
+      "absolute_delta": 0.005465674603174603,
+      "relative_delta": 0.01489971346704877,
+      "ci95_low": 0.0008606845238095241,
+      "ci95_high": 0.01014109623015873,
+      "classification": "significant_win"
+    },
+    "fashion200k": {
+      "candidate_MAP@10": 0.1951,
+      "baseline_MAP@10": 0.18577,
+      "absolute_delta": 0.009324404761904763,
+      "relative_delta": 0.0502233945201056,
+      "ci95_low": 0.003819347718253968,
+      "ci95_high": 0.014771639384920635,
+      "classification": "significant_win"
+    }
+  },
+  "evaluated_datasets": 6,
+  "significant_wins": 4,
+  "significant_losses": 0,
+  "goal_achieved": true,
+  "research_only": true
+}

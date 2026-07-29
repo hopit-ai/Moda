@@ -1,7 +1,7 @@
 # MODA
 
 **The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
-253,685 purchase-grounded queries · 105,542 H&M products · 40+ pipeline configs · nDCG@10 = 0.1063 on H&M text retrieval (+301% over dense baseline) · Fine R@1 = 67.68 on LookBench image-to-image retrieval (+3.84 over FashionSigLIP) · 5 model checkpoints on HuggingFace (MIT, vision-only fp16 at 186 MB, Matryoshka with 64-768 dim slices)
+253,685 purchase-grounded queries · 105,542 H&M products · 40+ pipeline configs · nDCG@10 = 0.1063 on H&M text retrieval (+301% over dense baseline) · Fine R@1 = 67.68 on LookBench image-to-image retrieval (+3.84 over FashionSigLIP) · beats FashionSigLIP on text-to-image too (4 of 6 benchmarks significant, 0 losses, at equal parameters) · 5 model checkpoints on HuggingFace (MIT, vision-only fp16 at 186 MB, Matryoshka with 64-768 dim slices)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -37,6 +37,7 @@ We are publishing this work as a series of technical blog posts, each covering o
 | [Blog 5](blog_post_phase4.md) | Adding eyes to the search engine | Three-Tower multimodal retriever (text + image) | nDCG@10 = 0.0833 (lateral) |
 | [Blog 6](blog_post_phase5.md) | Beating FashionSigLIP | Cross-domain fine-tuning on LookBench | Fine R@1 = 67.68 (+3.84 over baseline) |
 | [Blog 7](blog_post_phase6.md) | One model, five sizes | Matryoshka distillation + quantization, HF release | 32-byte vector at +3.45, 96x smaller than baseline at equal quality |
+| [Blog 8](blog_post_phase7.md) | Where we started, and where we ended up | Multi-view + late fusion on frozen FashionSigLIP (text-to-image) | 4/6 significant MAP@10 wins over FashionSigLIP, 0 losses |
 
 ---
 
@@ -53,6 +54,8 @@ All MIT licensed. Built on ViT-B/16-SigLIP. Every model beats the FashionSigLIP 
 | `HopitAI/moda-fashion-deepfashion2` | 768 | 775 MB | 66.52 | 52.46 | +2.68 | **Simplest recipe.** Phase 5 single-model fine-tune on DeepFashion2 cross-domain pairs. No distillation, no ensemble. Ships for research reproducibility. |
 
 Every model card ships with a standalone `inference.py` (run `python inference.py --image <path>` to get embeddings, no external config needed), the full per-subset LookBench evaluation, paper-reproduction deltas against the FashionSigLIP baseline, and the leakage audit artifact. Evaluation scripts live in this repo.
+
+**Text-to-image (Phase 7).** [`HopitAI/moda-fashionsiglip-multiview-203m`](https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m) is a zero-added-parameter retrieval system over the frozen FashionSigLIP checkpoint, not a new set of weights. It wins 4 of 6 public text-to-image benchmarks (full-corpus MAP@10, paired bootstrap) and loses none, at the same 203M parameters and 768 dimensions. The recipe and frozen result receipts are in [`FSL_203M_SYSTEM_ARCHITECTURE.md`](FSL_203M_SYSTEM_ARCHITECTURE.md) and `results/fashionsiglip_late_fusion_target_iteration6/`.
 
 ---
 
@@ -210,6 +213,21 @@ For a 100M-product index, that's the difference between 307GB (FashionSigLIP fp3
 
 **MODA-SigLIP-Matryoshka is on HuggingFace**, MIT licensed. Deployment recipe in the model card: choose your dimension (recommended: 256), choose your precision (recommended: binary + fp16 rerank for 32 bytes per vector), drop into your existing FAISS or vector database.
 
+### Phase 7: Text-to-image retrieval at equal parameters (six public benchmarks)
+
+Blogs 5 to 7 beat FashionSigLIP on image-to-image. Phase 7 closes the series by beating it on text-to-image, the task it was built for, without adding a single parameter. Instead of training a new model, we wrap the frozen `Marqo/marqo-fashionSigLIP` checkpoint in a multi-view encoding and late-fusion recipe (same 203M parameters, same 768 dimensions). Full-corpus MAP@10, significance from a paired bootstrap over 10,000 resamples.
+
+| Benchmark | FashionSigLIP | MODA | Δ | 95% CI | Result |
+|---|---|---|---|---|---|
+| KAGL | 0.2769 | **0.2907** | +5.0% | [+0.0089, +0.0188] | significant win |
+| Fashion200K | 0.1858 | **0.1951** | +5.0% | [+0.0038, +0.0148] | significant win |
+| DeepFashion In-Shop | 0.1587 | **0.1637** | +3.2% | [+0.0030, +0.0071] | significant win |
+| Polyvore | 0.3665 | **0.3719** | +1.5% | [+0.0009, +0.0101] | significant win |
+| Atlas | 0.1826 | 0.1864 | +2.0% | [-0.0002, +0.0078] | inconclusive |
+| DeepFashion Multimodal | 0.0148 | 0.0150 | +1.8% | [-0.0012, +0.0019] | inconclusive |
+
+4 of 6 significant wins, positive point estimates on all 6, zero significant losses. Atlas and DeepFashion Multimodal improve numerically but their confidence intervals cross zero, so we do not count them as wins. This is a retrieval system over frozen weights, not a new checkpoint, and the `0.10` late-fusion blend was selected on external development data (OpenVTON and leakage-audited GLAMI), not on the target benchmarks. See [Blog 8](blog_post_phase7.md) and [`FSL_203M_SYSTEM_ARCHITECTURE.md`](FSL_203M_SYSTEM_ARCHITECTURE.md).
+
 ### Latency (Apple M-series, per query)
 
 | Stage | Mean | p50 | p95 |
@@ -267,6 +285,8 @@ For a 100M-product index, that's the difference between 307GB (FashionSigLIP fp3
 20. **Multi-task joint embeddings fight themselves** -- Recipe Z (scaling the text training corpus while keeping the joint encoder) regressed image-image retrieval by -3.59 points despite improving text-to-product retrieval. Text alignment and pure image retrieval pull a joint model in different directions. If you need both, ship two models.
 
 21. **~80ms full pipeline on $0 hardware** -- Everything runs on Apple Silicon with no cloud GPU cost.
+
+22. **You can beat FashionSigLIP on text-to-image without training anything** -- A zero-added-parameter multi-view encoding and late-fusion recipe over the frozen FashionSigLIP checkpoint wins 4 of 6 public text-to-image benchmarks (full-corpus MAP@10, paired bootstrap) and loses none, at the same 203M parameters and 768 dimensions. The cost is at inference time: two text encodings per query, three stored vectors and three retrieval routes per product. A separate learned residual variant scored higher on more datasets but needed a larger three-encoder backbone, so it did not meet the equal-parameter bar. The win came from using the existing model more carefully, not from a bigger one.
 
 ---
 
@@ -494,6 +514,7 @@ Each query in `qrels.csv` has:
 | **4** | Three-Tower multimodal retriever on H&M (lateral experiment, 0.0833 aggregate) | Done |
 | **5** | LookBench image-to-image retrieval: cross-domain fine-tuning beats FashionSigLIP by +3.84 | Done |
 | **6** | Matryoshka distillation + quantization: one model at five sizes, 96x compression at equal quality, HF release | Done |
+| **7** | Text-to-image retrieval at equal parameters: multi-view + late fusion on frozen FashionSigLIP wins 4 of 6 benchmarks, loses none | Done |
 
 ---
 

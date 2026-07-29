@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "candidate_id": "late-maxview-b010",
+  "base_model": "Marqo/marqo-fashionSigLIP",
+  "base_model_parameters": 203155970,
+  "additional_learned_parameters": 0,
+  "embedding_dimension": 768,
+  "query_prompt_template": "a fashion product photo of {query}",
+  "query_raw_weight": 1.0,
+  "query_prompt_weight": 0.25,
+  "square_pad_fill": 128,
+  "parent_official_weight": 1.0,
+  "parent_pad_weight": 0.25,
+  "parent_crop_weight": 0.25,
+  "late_fusion_parent_weight": 0.9,
+  "late_fusion_max_view_weight": 0.1,
+  "stored_vectors_per_item": 3,
+  "ann_routes": 3
+}
