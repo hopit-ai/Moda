@@ -96,6 +96,28 @@ moda-fashion-search \
   --device mps
 ```
 
+## Standalone inference script
+
+`inference.py` runs from a plain clone of this repository without installing
+the package. It covers the three things people usually want first: ranking a
+folder against a query, embedding images, and embedding a query.
+
+```bash
+# rank a folder of product images against a text query
+python inference.py --gallery ./my_catalog --query "red floral summer dress"
+
+# embed images (768-d parent vectors)
+python inference.py --image img1.jpg img2.jpg
+
+# embed a query
+python inference.py --query "black leather ankle boots"
+
+# build once, reuse the saved index later
+python inference.py --gallery ./my_catalog --query "navy linen shirt" \
+  --save-index ./catalog_index
+python inference.py --load-index ./catalog_index --query "wool coat"
+```
+
 ## Save and reload a gallery
 
 The three gallery routes are stored with SafeTensors; no pickle loading is
