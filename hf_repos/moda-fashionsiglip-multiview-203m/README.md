@@ -34,14 +34,17 @@ text-to-image wins over official FashionSigLIP.
 The same global recipe was evaluated on all six datasets using full-corpus
 MAP@10 and 10,000 paired-bootstrap samples.
 
-| Dataset | MODA MAP@10 | FashionSigLIP | Delta | 95% CI | Classification |
+| Dataset | MODA MAP@10 | FashionSigLIP | Delta | 95% CI (absolute) | Classification |
 |---|---:|---:|---:|---:|---|
-| KAGL | **0.29074** | 0.27687 | +0.01387 | [+0.00894, +0.01883] | significant win |
-| Fashion200K | **0.19510** | 0.18577 | +0.00932 | [+0.00382, +0.01477] | significant win |
-| DeepFashion In-Shop | **0.16371** | 0.15865 | +0.00507 | [+0.00304, +0.00710] | significant win |
-| Polyvore | **0.37191** | 0.36645 | +0.00547 | [+0.00086, +0.01014] | significant win |
-| Atlas | **0.18637** | 0.18264 | +0.00374 | [-0.00017, +0.00775] | inconclusive |
-| DeepFashion Multimodal | **0.01504** | 0.01477 | +0.00028 | [-0.00121, +0.00192] | inconclusive |
+| KAGL | **0.29074** | 0.27687 | +5.01% | [+0.00894, +0.01883] | significant win |
+| Fashion200K | **0.19510** | 0.18577 | +5.02% | [+0.00382, +0.01477] | significant win |
+| DeepFashion In-Shop | **0.16371** | 0.15865 | +3.19% | [+0.00304, +0.00710] | significant win |
+| Polyvore | **0.37191** | 0.36645 | +1.49% | [+0.00086, +0.01014] | significant win |
+| Atlas | **0.18637** | 0.18264 | +2.05% | [-0.00017, +0.00775] | inconclusive |
+| DeepFashion Multimodal | **0.01504** | 0.01477 | +1.87% | [-0.00121, +0.00192] | inconclusive |
+
+Delta is relative to the FashionSigLIP baseline. The confidence interval is on
+the absolute MAP@10 difference, which is what the bootstrap resamples.
 
 Accurate summary: **4/6 significant wins, positive point estimates on 6/6,
 and zero significant losses**.
@@ -94,6 +97,28 @@ moda-fashion-search \
   --query "black leather ankle boots" \
   --top-k 10 \
   --device mps
+```
+
+## Standalone inference script
+
+`inference.py` runs from a plain clone of this repository without installing
+the package. It covers the three things people usually want first: ranking a
+folder against a query, embedding images, and embedding a query.
+
+```bash
+# rank a folder of product images against a text query
+python inference.py --gallery ./my_catalog --query "red floral summer dress"
+
+# embed images (768-d parent vectors)
+python inference.py --image img1.jpg img2.jpg
+
+# embed a query
+python inference.py --query "black leather ankle boots"
+
+# build once, reuse the saved index later
+python inference.py --gallery ./my_catalog --query "navy linen shirt" \
+  --save-index ./catalog_index
+python inference.py --load-index ./catalog_index --query "wool coat"
 ```
 
 ## Save and reload a gallery
