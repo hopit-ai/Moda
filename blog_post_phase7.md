@@ -66,15 +66,12 @@ We do not lose a benchmark on either side. As far as we know, that makes MODA th
 
 ## What the series taught us
 
-Eight posts, but the lessons compress to a handful.
+Eight posts, and a few lessons stand out.
 
-- [Blog 1](blog_post.md) showed that dense retrieval beats keyword search on real fashion queries, and that the cross-encoder reranker, not any clever retrieval trick, was the single biggest gain. Measuring each component on its own is what told us where to spend effort.
-- [Blog 2](blog_post_phase2b.md) replaced BM25 with SPLADE and beat weeks of tuning around BM25. When the retriever got smarter, the NER boosting we had built for the weaker one stopped helping. It is usually better to swap a component than to prop it up.
-- [Blog 3](blog_post_phase3a_3b.md) is the one people quote most. A million and a half purchase labels barely moved the cross-encoder. A few thousand LLM-graded ones did. Label quality was the budget, not label count or model size.
-- [Blog 4](blog_post_phase3c.md) improved the retriever most by training it on its own top-ranked mistakes. Fine-tuning both retrievers at once made things worse, because their errors started to agree and the hybrid lost its diversity.
-- [Blog 5](blog_post_phase4.md) was a loss we published anyway. The multimodal model scored below the text-only pipeline, and understanding why a method fails turned out to be worth more than another point of gain.
-- [Blog 6](blog_post_phase5.md) reproduced FashionSigLIP's published number before we claimed to beat it. The win came from the training data, cross-domain pairs, not a new architecture. The right data mattered more than the right model.
-- [Blog 7](blog_post_phase6.md) distilled a two-model ensemble into one model with no measurable loss, and found that 256 dimensions retrieved as well as 768. Most fashion embeddings ship more precision and more dimensions than the task needs.
+- Dense retrieval beat keyword search on real fashion queries, and the cross-encoder reranker, not any clever retrieval trick, was the single biggest gain ([Blog 1](blog_post.md)). Measuring each component on its own is what told us where to spend effort.
+- A million and a half purchase labels barely moved the cross-encoder, and a few thousand LLM-graded ones did ([Blog 3](blog_post_phase3a_3b.md)). Label quality was the budget, not label count or model size.
+- The multimodal model scored below the plain text pipeline, and we published it anyway ([Blog 5](blog_post_phase4.md)). Understanding why a method fails was worth more than another point of gain.
+- Before claiming we beat FashionSigLIP, we reproduced its published number, and the win came from the training data rather than a new architecture ([Blog 6](blog_post_phase5.md)). The right data mattered more than the right model.
 
 The thread running through all of them: almost every gain came from the cheapest option that fit the constraint, not the most sophisticated one.
 
