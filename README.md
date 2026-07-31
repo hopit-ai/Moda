@@ -1,11 +1,11 @@
 # MODA
 
 **The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
-253,685 purchase-grounded queries · 105,542 H&M products · 40+ pipeline configs · nDCG@10 = 0.1063 on H&M text retrieval (+301% over dense baseline) · Fine R@1 = 67.68 on LookBench image-to-image retrieval (+3.84 over FashionSigLIP) · beats FashionSigLIP on text-to-image too (4 of 6 benchmarks significant, 0 losses, at equal parameters) · 5 model checkpoints on HuggingFace (MIT, vision-only fp16 at 186 MB, Matryoshka with 64-768 dim slices)
+253,685 purchase-grounded queries · 105,542 H&M products · 40+ pipeline configs · nDCG@10 = 0.1063 on H&M text retrieval (+301% over dense baseline) · Fine R@1 = 67.68 on LookBench image-to-image retrieval (+3.84 over FashionSigLIP) · beats FashionSigLIP on text-to-image too (4 of 6 benchmarks significant, 0 losses, at equal parameters) · 5 model checkpoints plus 1 text-to-image retrieval system on HuggingFace (MIT, vision-only fp16 at 186 MB, Matryoshka with 64-768 dim slices)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Try MODA now:** [Interactive Hugging Face Space](https://huggingface.co/spaces/HopitAI/moda-fashion-search) · [HopitAI on Hugging Face](https://huggingface.co/HopitAI) · [Start with `moda-fashion-deepfashion2`](https://huggingface.co/HopitAI/moda-fashion-deepfashion2)
+**Try MODA now:** [Interactive Hugging Face Space](https://huggingface.co/spaces/HopitAI/moda-fashion-search) · [HopitAI on Hugging Face](https://huggingface.co/HopitAI) · [Image search: `moda-fashion-deepfashion2`](https://huggingface.co/HopitAI/moda-fashion-deepfashion2) · [Text search: `moda-fashionsiglip-multiview-203m`](https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m)
 
 ```bash
 huggingface-cli download HopitAI/moda-fashion-deepfashion2 --local-dir ./moda-fashion-deepfashion2
@@ -43,7 +43,11 @@ We are publishing this work as a series of technical blog posts, each covering o
 
 ## Released models
 
-All MIT licensed. Built on ViT-B/16-SigLIP. Every model beats the FashionSigLIP baseline on LookBench.
+All MIT licensed. Built on ViT-B/16-SigLIP. Two families: image-to-image checkpoints (LookBench) and one text-to-image retrieval system.
+
+### Image-to-image checkpoints
+
+Every model below beats the FashionSigLIP baseline on LookBench.
 
 | Model | Dim | Size | Fine R@1 | nDCG@5 | Δ vs FashionSigLIP | Use when |
 |---|---|---|---|---|---|---|
@@ -55,7 +59,18 @@ All MIT licensed. Built on ViT-B/16-SigLIP. Every model beats the FashionSigLIP 
 
 Every model card ships with a standalone `inference.py` (run `python inference.py --image <path>` to get embeddings, no external config needed), the full per-subset LookBench evaluation, paper-reproduction deltas against the FashionSigLIP baseline, and the leakage audit artifact. Evaluation scripts live in this repo.
 
-**Text-to-image (Phase 7).** [`HopitAI/moda-fashionsiglip-multiview-203m`](https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m) is a zero-added-parameter retrieval system over the frozen FashionSigLIP checkpoint, not a new set of weights. It wins 4 of 6 public text-to-image benchmarks (full-corpus MAP@10, paired bootstrap) and loses none, at the same 203M parameters and 768 dimensions. The recipe and frozen result receipts are in [`FSL_203M_SYSTEM_ARCHITECTURE.md`](FSL_203M_SYSTEM_ARCHITECTURE.md) and `results/fashionsiglip_late_fusion_target_iteration6/`.
+### Text-to-image retrieval system
+
+| Model | Dim | Params | Added params | Benchmarks won | Use when |
+|---|---|---|---|---|---|
+| `HopitAI/moda-fashionsiglip-multiview-203m` | 768 | 203M (frozen FashionSigLIP) | **0** | **4 of 6 significant, 0 losses** | **Text-to-image search.** Multi-view encoding plus late fusion over the unchanged Marqo checkpoint. Same parameters and dimension as FashionSigLIP. |
+
+This one is a retrieval system, not a new set of weights: it downloads the unchanged Apache-2.0 [`Marqo/marqo-fashionSigLIP`](https://huggingface.co/Marqo/marqo-fashionSigLIP) checkpoint and applies a frozen query, gallery, and scoring recipe. The cost is at inference time: two text encodings per query, three stored vectors and three retrieval routes per product. The recipe and frozen result receipts are in [`FSL_203M_SYSTEM_ARCHITECTURE.md`](FSL_203M_SYSTEM_ARCHITECTURE.md) and `results/fashionsiglip_late_fusion_target_iteration6/`.
+
+```bash
+pip install "git+https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m"
+python inference.py --gallery ./my_catalog --query "red floral summer dress"
+```
 
 ---
 
@@ -217,14 +232,16 @@ For a 100M-product index, that's the difference between 307GB (FashionSigLIP fp3
 
 Blogs 5 to 7 beat FashionSigLIP on image-to-image. Phase 7 closes the series by beating it on text-to-image, the task it was built for, without adding a single parameter. Instead of training a new model, we wrap the frozen `Marqo/marqo-fashionSigLIP` checkpoint in a multi-view encoding and late-fusion recipe (same 203M parameters, same 768 dimensions). Full-corpus MAP@10, significance from a paired bootstrap over 10,000 resamples.
 
-| Benchmark | FashionSigLIP | MODA | Δ | 95% CI | Result |
+| Benchmark | FashionSigLIP | MODA | Δ | 95% CI (absolute) | Result |
 |---|---|---|---|---|---|
-| KAGL | 0.2769 | **0.2907** | +5.0% | [+0.0089, +0.0188] | significant win |
-| Fashion200K | 0.1858 | **0.1951** | +5.0% | [+0.0038, +0.0148] | significant win |
-| DeepFashion In-Shop | 0.1587 | **0.1637** | +3.2% | [+0.0030, +0.0071] | significant win |
-| Polyvore | 0.3665 | **0.3719** | +1.5% | [+0.0009, +0.0101] | significant win |
-| Atlas | 0.1826 | 0.1864 | +2.0% | [-0.0002, +0.0078] | inconclusive |
-| DeepFashion Multimodal | 0.0148 | 0.0150 | +1.8% | [-0.0012, +0.0019] | inconclusive |
+| KAGL | 0.27687 | **0.29074** | +5.01% | [+0.00894, +0.01883] | significant win |
+| Fashion200K | 0.18577 | **0.19510** | +5.02% | [+0.00382, +0.01477] | significant win |
+| DeepFashion In-Shop | 0.15865 | **0.16371** | +3.19% | [+0.00304, +0.00710] | significant win |
+| Polyvore | 0.36645 | **0.37191** | +1.49% | [+0.00086, +0.01014] | significant win |
+| Atlas | 0.18264 | 0.18637 | +2.05% | [-0.00017, +0.00775] | inconclusive |
+| DeepFashion Multimodal | 0.01477 | 0.01504 | +1.87% | [-0.00121, +0.00192] | inconclusive |
+
+Δ is relative to the FashionSigLIP baseline. The confidence interval is on the absolute MAP@10 difference, which is what the bootstrap resamples.
 
 4 of 6 significant wins, positive point estimates on all 6, zero significant losses. Atlas and DeepFashion Multimodal improve numerically but their confidence intervals cross zero, so we do not count them as wins. This is a retrieval system over frozen weights, not a new checkpoint, and the `0.10` late-fusion blend was selected on external development data (OpenVTON and leakage-audited GLAMI), not on the target benchmarks. See [Blog 8](blog_post_phase7.md) and [`FSL_203M_SYSTEM_ARCHITECTURE.md`](FSL_203M_SYSTEM_ARCHITECTURE.md).
 
