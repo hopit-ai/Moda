@@ -39,7 +39,7 @@ Here is the result: full-corpus MAP@10 on six public fashion benchmarks, with si
 | DeepFashion In-Shop | 0.1587 | 0.1637 | +3.2%, win |
 | Polyvore | 0.3665 | 0.3719 | +1.5%, win |
 | Atlas | 0.1826 | 0.1864 | +2.0%, within noise |
-| DeepFashion Multimodal | 0.0148 | 0.0150 | +1.8%, within noise |
+| DeepFashion Multimodal | 0.0148 | 0.0150 | +1.9%, within noise |
 
 We improve on all six. Four clear statistical significance, so we count those as wins. The other two, Atlas and DeepFashion Multimodal, come out ahead on the point estimate but sit inside the confidence interval, so we do not claim them. What we can say plainly is that on this suite the recipe never loses.
 
