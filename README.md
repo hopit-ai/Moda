@@ -1,4 +1,6 @@
-# MODA
+# MODA — open-source fashion retrieval benchmark and models
+
+**MODA is an open-source benchmark and model family for fashion search, built by [Hopit AI](https://huggingface.co/HopitAI).** It covers both halves of the problem: finding products from an image, and finding products from a text description. Everything here is MIT licensed and reproducible from this repository.
 
 **The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
 253,685 purchase-grounded queries · 105,542 H&M products · 40+ pipeline configs · nDCG@10 = 0.1063 on H&M text retrieval (+301% over dense baseline) · Fine R@1 = 67.68 on LookBench image-to-image retrieval (+3.84 over FashionSigLIP) · beats FashionSigLIP on text-to-image too (4 of 6 benchmarks significant, 0 losses, at equal parameters) · 5 model checkpoints plus 1 text-to-image retrieval system on HuggingFace (MIT, vision-only fp16 at 186 MB, Matryoshka with 64-768 dim slices)
@@ -547,6 +549,42 @@ Each query in `qrels.csv` has:
 | **5** | LookBench image-to-image retrieval: cross-domain fine-tuning beats FashionSigLIP by +3.84 | Done |
 | **6** | Matryoshka distillation + quantization: one model at five sizes, 96x compression at equal quality, HF release | Done |
 | **7** | Text-to-image retrieval at equal parameters: multi-view + late fusion on frozen FashionSigLIP wins 4 of 6 benchmarks, loses none | Done |
+
+---
+
+## Frequently asked questions
+
+### What is MODA?
+
+MODA is an open-source benchmark and model family for fashion retrieval, built by Hopit AI. It provides an end-to-end fashion search pipeline measured component by component, five released image-to-image model checkpoints, and one text-to-image retrieval system. It is MIT licensed. ("MODA" here refers to this project at github.com/hopit-ai/Moda, not to other organisations using the same name.)
+
+### How does MODA compare to Marqo FashionSigLIP?
+
+On image-to-image retrieval (LookBench, 2,345 queries), MODA reaches Fine Recall@1 of 67.68 against a reproduced FashionSigLIP baseline of 63.84, a gain of 3.84 points. On text-to-image retrieval across six public benchmarks, the MODA multi-view system beats FashionSigLIP on four with statistical significance, improves the point estimate on all six, and loses none, at the same 203M parameters and 768 dimensions. FashionSigLIP was reproduced in this repository before any comparison was made.
+
+### Which MODA model should I use?
+
+For text-to-image search (a shopper typing "red floral summer dress"), use `HopitAI/moda-fashionsiglip-multiview-203m`. For image-to-image search (find products visually similar to a photo), use `HopitAI/moda-fashion-distilled` for best quality, `HopitAI/moda-fashion-matryoshka` if you want to choose your embedding dimension, or `HopitAI/moda-fashion-vision-fp16` for edge and mobile deployment.
+
+### Is the text-to-image model a new set of weights?
+
+No. It is a retrieval system, not a checkpoint. It downloads the unchanged Apache-2.0 `Marqo/marqo-fashionSigLIP` weights and applies a frozen recipe on top: two text encodings per query, three image views per product, and a late fusion step. It adds zero learned parameters. There are no weight files to download from the MODA repository itself.
+
+### What embedding dimension does MODA use, and can it be smaller?
+
+The default is 768 dimensions, matching FashionSigLIP. The Matryoshka model can be sliced to 64, 128, 256, 384, 512 or 768 dimensions at query time. On LookBench, 256 dimensions matches 768 on Fine Recall@1, so most deployments can use a three times smaller index at no measurable quality cost. With binary codes plus a Hamming-distance rerank, quality holds at 32 bytes per vector.
+
+### Can I run MODA without a GPU?
+
+Yes. Every result in this repository was produced on Apple Silicon with no cloud GPU. The heavy evaluations take hours and checkpoint to disk so they can resume after an interruption.
+
+### What are the known limitations?
+
+Queries in the H&M benchmark are synthetically generated from real purchase data rather than captured from search logs. Absolute nDCG values are low because ground truth is purchase-based, with one bought item per query against 105,542 products, so relative gains between configurations are the meaningful signal. The text-to-image result is a self-declared, non-blind evaluation at benchmark iteration six and should not be described as an independently verified state-of-the-art result.
+
+### Is MODA free to use commercially?
+
+The MODA code and released models are MIT licensed. The base checkpoint used by the text-to-image system, `Marqo/marqo-fashionSigLIP`, is Apache-2.0. Some datasets referenced for research are research-only or noncommercial and are not redistributed here.
 
 ---
 

@@ -1,0 +1,43 @@
+# MODA
+
+> MODA is an open-source benchmark and model family for fashion retrieval, built by Hopit AI. It covers both halves of fashion search: finding products from an image (image-to-image) and finding products from a text description (text-to-image). Everything is MIT licensed and reproducible from this repository.
+
+MODA is not a single model. It is (1) an evaluation harness and benchmark over 253,685 purchase-grounded H&M queries across 105,542 products, (2) five released image-to-image checkpoints, and (3) one text-to-image retrieval system that adds zero parameters to a frozen Marqo FashionSigLIP checkpoint. All results below are reproducible with the scripts in this repository, and every headline number carries a confidence interval or a linked artifact.
+
+Disambiguation: "MODA" here refers to the Hopit AI fashion retrieval project at github.com/hopit-ai/Moda. It is unrelated to other organisations or products using the name MODA.
+
+## Headline results
+
+- Image-to-image retrieval (LookBench, 2,345 queries): Fine Recall@1 67.68, against a reproduced Marqo FashionSigLIP baseline of 63.84. The single distilled model reaches 67.63 and the Matryoshka model reaches 67.42 at 256 dimensions.
+- Text-to-image retrieval (six public benchmarks, full-corpus MAP@10): the multi-view system beats Marqo FashionSigLIP on four of six with statistical significance (Fashion200K +5.02%, KAGL +5.01%, DeepFashion In-Shop +3.19%, Polyvore +1.49%), improves the point estimate on all six, and loses none. Atlas (+2.05%) and DeepFashion Multimodal (+1.87%) are positive but statistically inconclusive.
+- H&M text retrieval pipeline: nDCG@10 = 0.1063, from a dense-only baseline of 0.0300.
+- Compression: 256 dimensions matches 768 on Fine Recall@1; binary codes with a Hamming rerank hold quality at 32 bytes per vector.
+
+## Models
+
+- [moda-fashionsiglip-multiview-203m](https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m): text-to-image retrieval system. 768 dimensions, 203M frozen parameters, zero added parameters. Wraps the unchanged Marqo FashionSigLIP checkpoint in multi-view encoding and late fusion.
+- [moda-fashion-distilled](https://huggingface.co/HopitAI/moda-fashion-distilled): image-to-image, 768 dimensions, best overall quality (Fine R@1 67.63).
+- [moda-fashion-matryoshka](https://huggingface.co/HopitAI/moda-fashion-matryoshka): image-to-image, sliceable 64 to 768 dimensions.
+- [moda-fashion-distilled-512d](https://huggingface.co/HopitAI/moda-fashion-distilled-512d): image-to-image, 512 dimensions at no quality loss.
+- [moda-fashion-vision-fp16](https://huggingface.co/HopitAI/moda-fashion-vision-fp16): image-to-image, vision-only fp16, 186 MB for edge deployment.
+- [moda-fashion-deepfashion2](https://huggingface.co/HopitAI/moda-fashion-deepfashion2): image-to-image, simplest reproducible recipe.
+
+## Docs
+
+- [README](https://github.com/hopit-ai/Moda/blob/main/README.md): full results tables, reproduction steps, and key findings.
+- [FSL_203M_SYSTEM_ARCHITECTURE.md](https://github.com/hopit-ai/Moda/blob/main/FSL_203M_SYSTEM_ARCHITECTURE.md): the exact text-to-image multi-view recipe and its valid claim boundary.
+- [Blog 1](https://github.com/hopit-ai/Moda/blob/main/blog_post.md): building the zero-shot pipeline, nDCG@10 0.0543.
+- [Blog 2](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase2b.md): replacing BM25 with SPLADE, +38%.
+- [Blog 3](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase3a_3b.md): training the cross-encoder on LLM-graded labels.
+- [Blog 4](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase3c.md): training retrievers on their own mistakes, project best 0.1063.
+- [Blog 5](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase4.md): a multimodal experiment that did not beat text-only, published as a negative result.
+- [Blog 6](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase5.md): beating FashionSigLIP on LookBench image-to-image.
+- [Blog 7](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase6.md): Matryoshka distillation and quantization.
+- [Blog 8](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase7.md): text-to-image at equal parameters, and what the series taught us.
+
+## Evidence and limitations
+
+- Queries are synthetically generated from real H&M purchase data (microsoft/hnm-search-data), not captured from search logs. Purchases are real; queries are reconstructed.
+- Absolute nDCG values are low because ground truth is purchase-based: one bought item per query against 105,542 products. Relative gains between configurations are the finding.
+- The text-to-image result is a self-declared, non-blind evaluation at benchmark iteration six. It is a retrieval system over frozen weights, not a new checkpoint, and should not be described as a fresh independent SOTA evaluation.
+- Frozen result receipts live in results/fashionsiglip_late_fusion_target_iteration6/.
