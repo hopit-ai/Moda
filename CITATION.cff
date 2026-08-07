@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use MODA, please cite it as below."
+title: "MODA: Open-source benchmark and models for fashion search"
+abstract: >-
+  MODA is an open-source benchmark and model family for fashion retrieval,
+  built by Hopit AI. It provides an end-to-end fashion search pipeline
+  evaluated component by component on 253,685 purchase-grounded H&M queries
+  over 105,542 products, plus released model checkpoints for image-to-image
+  retrieval and a zero-added-parameter retrieval system for text-to-image
+  retrieval. On LookBench image-to-image retrieval MODA reaches Fine Recall@1
+  of 67.68 against a 63.84 Marqo FashionSigLIP baseline. On six public
+  text-to-image benchmarks the multi-view retrieval system wins four with
+  statistical significance and loses none, at the same parameter count and
+  embedding dimension as Marqo FashionSigLIP.
+type: software
+authors:
+  - name: "Hopit AI"
+    website: "https://huggingface.co/HopitAI"
+repository-code: "https://github.com/hopit-ai/Moda"
+url: "https://huggingface.co/HopitAI"
+license: MIT
+year: 2026
+keywords:
+  - fashion retrieval
+  - information retrieval
+  - text-to-image retrieval
+  - image-to-image retrieval
+  - multimodal embeddings
+  - CLIP
+  - SigLIP
+  - SPLADE
+  - cross-encoder reranking
+  - vector search
+  - ecommerce search
+  - benchmark
