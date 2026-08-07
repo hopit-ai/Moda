@@ -18,6 +18,11 @@ dependencies = [
   "Pillow>=10",
   "safetensors>=0.4",
   "torch>=2.2",
+  # The FashionSigLIP checkpoint declares hf_tokenizer_name
+  # "timm/ViT-B-16-SigLIP", so open_clip builds an HFTokenizer, which needs
+  # transformers and the SigLIP sentencepiece vocabulary at load time.
+  "transformers>=4.40",
+  "sentencepiece>=0.1.99",
 ]
 keywords = [
   "fashion",

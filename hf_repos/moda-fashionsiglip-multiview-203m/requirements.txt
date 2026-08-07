@@ -3,3 +3,5 @@ open_clip_torch>=2.24
 Pillow>=10
 safetensors>=0.4
 torch>=2.2
+transformers>=4.40
+sentencepiece>=0.1.99
