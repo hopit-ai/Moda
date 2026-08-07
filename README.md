@@ -61,9 +61,24 @@ Every model card ships with a standalone `inference.py` (run `python inference.p
 
 ### Text-to-image retrieval system
 
-| Model | Dim | Params | Added params | Benchmarks won | Use when |
-|---|---|---|---|---|---|
-| `HopitAI/moda-fashionsiglip-multiview-203m` | 768 | 203M (frozen FashionSigLIP) | **0** | **4 of 6 significant, 0 losses** | **Text-to-image search.** Multi-view encoding plus late fusion over the unchanged Marqo checkpoint. Same parameters and dimension as FashionSigLIP. |
+Beats the FashionSigLIP baseline on 4 of 6 public benchmarks and loses none, at the same parameter count and dimension.
+
+| Model | Dim | Params | Added params | MAP@10 vs FashionSigLIP | Benchmarks won | Use when |
+|---|---|---|---|---|---|---|
+| `HopitAI/moda-fashionsiglip-multiview-203m` | 768 | 203M (frozen FashionSigLIP) | **0** | **+3.11% mean, up to +5.02%** | **4 of 6 significant, 0 losses** | **Text-to-image search.** Multi-view encoding plus late fusion over the unchanged Marqo checkpoint. Same parameters and dimension as FashionSigLIP. |
+
+Per benchmark, full-corpus MAP@10:
+
+| Benchmark | FashionSigLIP | MODA | Δ | Result |
+|---|---|---|---|---|
+| Fashion200K | 0.18577 | **0.19510** | **+5.02%** | significant win |
+| KAGL | 0.27687 | **0.29074** | **+5.01%** | significant win |
+| DeepFashion In-Shop | 0.15865 | **0.16371** | **+3.19%** | significant win |
+| Polyvore | 0.36645 | **0.37191** | **+1.49%** | significant win |
+| Atlas | 0.18264 | 0.18637 | +2.05% | inconclusive |
+| DeepFashion Multimodal | 0.01477 | 0.01504 | +1.87% | inconclusive |
+
+Confidence intervals and the evaluation protocol are in [Phase 7](#phase-7-text-to-image-retrieval-at-equal-parameters-six-public-benchmarks) below.
 
 This one is a retrieval system, not a new set of weights: it downloads the unchanged Apache-2.0 [`Marqo/marqo-fashionSigLIP`](https://huggingface.co/Marqo/marqo-fashionSigLIP) checkpoint and applies a frozen query, gallery, and scoring recipe. The cost is at inference time: two text encodings per query, three stored vectors and three retrieval routes per product. The recipe and frozen result receipts are in [`FSL_203M_SYSTEM_ARCHITECTURE.md`](FSL_203M_SYSTEM_ARCHITECTURE.md) and `results/fashionsiglip_late_fusion_target_iteration6/`.
 
