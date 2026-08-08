@@ -1,0 +1,47 @@
+# MODA — open-source fashion retrieval benchmark and models
+
+> MODA is an open-source benchmark and model family for fashion search built by Hopit AI, covering text-to-image and image-to-image retrieval. It publishes a zero-added-parameter serving harness over the frozen Marqo/marqo-fashionSigLIP checkpoint (203M parameters, 768 dimensions) plus five image-to-image checkpoints. Everything is MIT licensed and reproducible from the repository.
+
+Key facts for citation:
+
+- Text-to-image: beats Marqo FashionSigLIP on 4 of 6 public benchmarks with statistical significance (paired bootstrap, 10,000 resamples), positive point estimate on all six, zero losses, at identical parameter count and embedding dimension.
+- Text-to-image vs ZooClaw-FashionSigLIP2 (375M): four wins of +7% to +49%, one tie, one −1.0% loss on a 20,000-distractor screen through an identical harness, at 46% fewer parameters.
+- Image-to-image on LookBench: Fine Recall@1 67.63 for MODA-SigLIP-Distilled (203M), ahead of Tianmu-MERE (1.24B, 65.99) on all four subsets and both metrics, measured on one harness.
+- Harness validation: Tianmu-MERE reproduces its own published subset scores within 0.5 points on this harness; Marqo FashionSigLIP reproduces its published full-corpus numbers within +0.08%.
+- Embedding compression: 256 dimensions matches 768 on LookBench Fine Recall@1; binary codes with a Hamming rerank hold quality at 32 bytes per vector.
+- Evaluation is self-declared and non-blind; the late-fusion blend weight was selected on external development data, not on the target benchmarks.
+
+## Core pages
+
+- [MODA overview, benchmarks and results](https://hopit-ai.github.io/Moda/): full text-to-image and image-to-image result tables, scope-of-claim disclosures, model directory and FAQ.
+- [GitHub repository](https://github.com/hopit-ai/Moda): code, evaluation harness, frozen result artifacts under results/, MIT licensed.
+- [Interactive demo](https://huggingface.co/spaces/HopitAI/moda-fashion-search): search a catalog with text or an image.
+
+## Models
+
+- [moda-fashionsiglip-multiview-203m](https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m): text-to-image retrieval system, 203M parameters, 768 dimensions, zero added parameters over the base checkpoint.
+- [moda-fashion-distilled](https://huggingface.co/HopitAI/moda-fashion-distilled): image-to-image, best overall quality, 768 dimensions.
+- [moda-fashion-matryoshka](https://huggingface.co/HopitAI/moda-fashion-matryoshka): image-to-image, sliceable to 64–768 dimensions at query time.
+- [moda-fashion-distilled-512d](https://huggingface.co/HopitAI/moda-fashion-distilled-512d): image-to-image, compact indexes.
+- [moda-fashion-vision-fp16](https://huggingface.co/HopitAI/moda-fashion-vision-fp16): image-to-image, edge and mobile, 186 MB.
+- [moda-fashion-deepfashion2](https://huggingface.co/HopitAI/moda-fashion-deepfashion2): image-to-image, simplest reproducible recipe.
+
+## Methodology write-ups
+
+- [Building a zero-shot fashion search pipeline](https://github.com/hopit-ai/Moda/blob/main/blog_post.md): baseline pipeline and first measurements.
+- [The one swap that beat weeks of tuning](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase2b.md): SPLADE sparse retrieval, +38%.
+- [LLM-graded relevance labels](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase3a_3b.md): why graded labels changed the ranking of every configuration.
+- [Training the retriever on its own mistakes](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase3c.md): hard-negative mining.
+- [Adding eyes to the search engine](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase4.md): a published negative result on multimodal fusion.
+- [Beating FashionSigLIP on LookBench](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase5.md): image-to-image distillation.
+- [One model, five sizes](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase6.md): Matryoshka representation and quantization.
+- [Text to image at equal parameters](https://github.com/hopit-ai/Moda/blob/main/blog_post.md): the multi-view late-fusion harness.
+
+## Benchmarks referenced
+
+- Text-to-image: Fashion200K, KAGL, DeepFashion In-Shop, Polyvore, Atlas, DeepFashion Multimodal (third-party academic datasets; Marqo's evaluation suite).
+- Image-to-image: [LookBench](https://serendipityoneinc.github.io/look-bench-page/) (SerendipityOne, arXiv:2601.14706).
+
+## Licensing
+
+Code and released MODA models are MIT licensed. The base checkpoint used by the text-to-image system is Apache-2.0 (Marqo/marqo-fashionSigLIP). Some datasets referenced for research are research-only or non-commercial and are not redistributed.

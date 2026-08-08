@@ -1,4 +1,44 @@
 User-agent: *
 Allow: /
 
+# MODA is MIT-licensed open research; AI crawling, training and answer-engine
+# citation are explicitly permitted. Stated rather than implied so that
+# assistants do not have to infer permission from the wildcard rule above.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# IETF AI preferences (draft-ietf-aipref-attach): search, AI input and training
+# are all permitted for this content.
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+
 Sitemap: https://hopit-ai.github.io/Moda/sitemap.xml
