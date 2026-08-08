@@ -161,7 +161,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <div class="wrap">
 
 <h1>MODA — open-source fashion retrieval benchmark and models</h1>
-<p class="lede">MODA is an open-source benchmark and model family for fashion retrieval, built by <a href="https://huggingface.co/HopitAI">Hopit AI</a>. It covers both halves of fashion search: finding products from an image, and finding products from a text description. Everything is MIT licensed and reproducible from the repository.</p>
+<p class="lede">MODA is an open-source benchmark and model family for fashion retrieval, built by <a href="https://hopit.ai">Hopit AI</a>. It covers both halves of fashion search: finding products from an image, and finding products from a text description. Everything is MIT licensed and reproducible from the repository.</p>
 <p class="tags">6 public text-to-image benchmarks · LookBench image-to-image · 5 released checkpoints + 1 retrieval system · MIT</p>
 
 <div class="btns">
@@ -213,7 +213,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <p>Four wins of +7% to +49%, one tie, one −1.0% loss — at 46% fewer parameters.</p>
 
 <h2>Image-to-image retrieval</h2>
-<p>Finding visually similar products from a photo, measured on LookBench (2,345 queries). FashionSigLIP was reproduced in the repository before any comparison was made.</p>
+<p>Finding visually similar products from a photo, measured on <a href="https://serendipityoneinc.github.io/look-bench-page/">LookBench</a> (2,345 queries), the live fashion retrieval benchmark from SerendipityOne (<a href="https://arxiv.org/abs/2601.14706">Gao et al., 2026</a>). FashionSigLIP was reproduced in the repository before any comparison was made.</p>
 
 <table>
 <thead><tr><th>Model</th><th>Params</th><th>Dim</th><th>Fine R@1</th><th>nDCG@5</th><th>Δ vs FashionSigLIP</th></tr></thead>
@@ -227,7 +227,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 </tbody>
 </table>
 
-<p>Tianmu-MERE — the top open model on the LookBench multi-attribute leaderboard — was evaluated through this same harness (weighted across the four subsets); it reproduces its own published subset scores within 0.5 points, which independently validates the harness. <strong>MODA-SigLIP-Distilled leads it on all four subsets, on Fine R@1 and nDCG@5 alike, at 6× fewer parameters.</strong></p>
+<p><a href="https://huggingface.co/TianmuLab/Tianmu-MERE">Tianmu-MERE</a> — the top open model on the <a href="https://serendipityoneinc.github.io/look-bench-page/">LookBench multi-attribute leaderboard</a> — was evaluated through this same harness (weighted across the four subsets); it reproduces its own published subset scores within 0.5 points, which independently validates the harness. <strong>MODA-SigLIP-Distilled leads it on all four subsets, on Fine R@1 and nDCG@5 alike, at 6× fewer parameters.</strong></p>
 
 <p>On LookBench, 256 dimensions matches 768 on Fine Recall@1, so a three times smaller index costs no measurable quality. With binary codes plus a Hamming-distance rerank, quality holds at <strong>32 bytes per vector</strong>.</p>
 
@@ -294,7 +294,7 @@ python inference.py --image path/to/image.jpg</code></pre>
 }</code></pre>
 
 <footer>
-<p>MODA is built by The FI Company, a project within Hopit AI. Code and models: <a href="https://github.com/hopit-ai/Moda">github.com/hopit-ai/Moda</a> · <a href="https://huggingface.co/HopitAI">huggingface.co/HopitAI</a>. MIT License.</p>
+<p>MODA is built by The FI Company, a project within <a href="https://hopit.ai">Hopit AI</a>. Code and models: <a href="https://github.com/hopit-ai/Moda">github.com/hopit-ai/Moda</a> · <a href="https://huggingface.co/HopitAI">huggingface.co/HopitAI</a>. MIT License.</p>
 <p>All figures on this page are reproducible from the repository and trace to frozen result artifacts under <code>results/</code>.</p>
 </footer>
 
