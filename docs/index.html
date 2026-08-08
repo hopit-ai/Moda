@@ -247,7 +247,7 @@ python inference.py --image path/to/image.jpg</code></pre>
 <p>Yes. Every result was produced on Apple Silicon with no cloud GPU. The heavy evaluations take hours and checkpoint to disk so they can resume.</p>
 
 <h3>What are the known limitations?</h3>
-<p>Queries in the H&amp;M benchmark are synthetically generated from real purchase data rather than captured from search logs. Absolute nDCG values are low because ground truth is purchase-based, one bought item per query against 105,542 products, so relative gains between configurations are the meaningful signal. The text-to-image result is self-declared and non-blind, as stated above.</p>
+<p>Absolute nDCG values are low because ground truth is purchase-based, one bought item per query against 105,542 products, so relative gains between configurations are the meaningful signal. The text-to-image result is self-declared and non-blind, as stated above.</p>
 
 <h3>Is MODA free to use commercially?</h3>
 <p>The MODA code and released models are MIT licensed. The base checkpoint used by the text-to-image system is Apache-2.0. Some datasets referenced for research are research-only or noncommercial and are not redistributed.</p>
