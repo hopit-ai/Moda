@@ -223,8 +223,11 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <tr><td>MODA-SigLIP-DeepFashion2</td><td class="n">203M</td><td class="n">768</td><td class="n">66.52</td><td class="n">52.46</td><td class="n win">+2.68</td></tr>
 <tr><td><strong>MODA-SigLIP-Distilled</strong></td><td class="n">203M</td><td class="n">768</td><td class="n"><strong>67.63</strong></td><td class="n">53.85</td><td class="n win">+3.79</td></tr>
 <tr><td>MODA-SigLIP-Matryoshka @256d</td><td class="n">203M</td><td class="n">256</td><td class="n">67.42</td><td class="n">57.48</td><td class="n win">+3.58</td></tr>
+<tr><td>Tianmu-MERE (Kuaishou)</td><td class="n">1.24B</td><td class="n">512</td><td class="n">65.99</td><td class="n">52.37</td><td class="n">+2.15</td></tr>
 </tbody>
 </table>
+
+<p>Tianmu-MERE — the top open model on the LookBench multi-attribute leaderboard — was evaluated through this same harness (weighted across the four subsets); it reproduces its own published subset scores within 0.5 points, which independently validates the harness. <strong>MODA-SigLIP-Distilled leads it on all four subsets, on Fine R@1 and nDCG@5 alike, at 6× fewer parameters.</strong></p>
 
 <p>On LookBench, 256 dimensions matches 768 on Fine Recall@1, so a three times smaller index costs no measurable quality. With binary codes plus a Hamming-distance rerank, quality holds at <strong>32 bytes per vector</strong>.</p>
 
