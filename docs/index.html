@@ -195,17 +195,34 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <p>The evaluation is self-declared and non-blind: aggregate benchmark results were already known at iteration six. It should not be described as a fresh independent state-of-the-art evaluation. The late-fusion blend weight was selected on external development data (OpenVTON and leakage-audited GLAMI), not on the target benchmarks.</p>
 </div>
 
+<h3>Versus ZooClaw-FashionSigLIP2</h3>
+<p>ZooClaw-FashionSigLIP2 (open weights, <a href="https://arxiv.org/abs/2606.27708">Xue &amp; Xu 2026</a>) evaluated through the identical harness and subsample on a 20,000-distractor screen — scores are not comparable to the full-corpus table above. The same pipeline reproduces published FashionSigLIP within +0.08% at full corpus. MAP@10:</p>
+
+<table>
+<thead><tr><th>Benchmark</th><th>MODA<br><span class="muted">203,155,970 params · 768-d</span></th><th>ZooClaw-FashionSigLIP2<br><span class="muted">375,479,810 params · 768-d</span></th><th>Δ</th></tr></thead>
+<tbody>
+<tr><td>DeepFashion In-Shop</td><td class="n"><strong>0.24448</strong></td><td class="n">0.16389</td><td class="n win">+49.2%</td></tr>
+<tr><td>DeepFashion Multimodal</td><td class="n"><strong>0.02526</strong></td><td class="n">0.01887</td><td class="n win">+33.9%</td></tr>
+<tr><td>Atlas</td><td class="n"><strong>0.30892</strong></td><td class="n">0.27458</td><td class="n win">+12.5%</td></tr>
+<tr><td>Fashion200K</td><td class="n"><strong>0.46066</strong></td><td class="n">0.43052</td><td class="n win">+7.0%</td></tr>
+<tr><td>KAGL</td><td class="n">0.38513</td><td class="n">0.38487</td><td class="muted">≈ tie (+0.07%)</td></tr>
+<tr><td>Polyvore</td><td class="n">0.54617</td><td class="n"><strong>0.55152</strong></td><td class="n">−1.0%</td></tr>
+</tbody>
+</table>
+
+<p>Four wins of +7% to +49%, one tie, one −1.0% loss — at 46% fewer parameters.</p>
+
 <h2>Image-to-image retrieval</h2>
 <p>Finding visually similar products from a photo, measured on LookBench (2,345 queries). FashionSigLIP was reproduced in the repository before any comparison was made.</p>
 
 <table>
-<thead><tr><th>Model</th><th>Dim</th><th>Fine R@1</th><th>nDCG@5</th><th>Δ vs FashionSigLIP</th></tr></thead>
+<thead><tr><th>Model</th><th>Params</th><th>Dim</th><th>Fine R@1</th><th>nDCG@5</th><th>Δ vs FashionSigLIP</th></tr></thead>
 <tbody>
-<tr><td>FashionSigLIP (published)</td><td class="n">768</td><td class="n">62.77</td><td class="n">49.44</td><td class="muted">baseline (paper)</td></tr>
-<tr><td>FashionSigLIP (our reproduction)</td><td class="n">768</td><td class="n">63.84</td><td class="n">49.63</td><td class="muted">baseline used here</td></tr>
-<tr><td>MODA-SigLIP-DeepFashion2</td><td class="n">768</td><td class="n">66.52</td><td class="n">52.46</td><td class="n win">+2.68</td></tr>
-<tr><td><strong>MODA-SigLIP-Distilled</strong></td><td class="n">768</td><td class="n"><strong>67.63</strong></td><td class="n">53.85</td><td class="n win">+3.79</td></tr>
-<tr><td>MODA-SigLIP-Matryoshka @256d</td><td class="n">256</td><td class="n">67.42</td><td class="n">57.48</td><td class="n win">+3.58</td></tr>
+<tr><td>FashionSigLIP (published)</td><td class="n">203M</td><td class="n">768</td><td class="n">62.77</td><td class="n">49.44</td><td class="muted">baseline (paper)</td></tr>
+<tr><td>FashionSigLIP (our reproduction)</td><td class="n">203M</td><td class="n">768</td><td class="n">63.84</td><td class="n">49.63</td><td class="muted">baseline used here</td></tr>
+<tr><td>MODA-SigLIP-DeepFashion2</td><td class="n">203M</td><td class="n">768</td><td class="n">66.52</td><td class="n">52.46</td><td class="n win">+2.68</td></tr>
+<tr><td><strong>MODA-SigLIP-Distilled</strong></td><td class="n">203M</td><td class="n">768</td><td class="n"><strong>67.63</strong></td><td class="n">53.85</td><td class="n win">+3.79</td></tr>
+<tr><td>MODA-SigLIP-Matryoshka @256d</td><td class="n">203M</td><td class="n">256</td><td class="n">67.42</td><td class="n">57.48</td><td class="n win">+3.58</td></tr>
 </tbody>
 </table>
 
@@ -213,14 +230,14 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 
 <h2>Models</h2>
 <table>
-<thead><tr><th>Model</th><th>Task</th><th>Dim</th><th>Best for</th></tr></thead>
+<thead><tr><th>Model</th><th>Task</th><th>Params</th><th>Dim</th><th>Best for</th></tr></thead>
 <tbody>
-<tr><td><a href="https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m">moda-fashionsiglip-multiview-203m</a></td><td>Text to image</td><td class="n">768</td><td>Searching a catalog in plain language. Zero added parameters.</td></tr>
-<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled">moda-fashion-distilled</a></td><td>Image to image</td><td class="n">768</td><td>Best overall quality</td></tr>
-<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-matryoshka">moda-fashion-matryoshka</a></td><td>Image to image</td><td class="n">64–768</td><td>Choose your dimension at query time</td></tr>
-<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled-512d">moda-fashion-distilled-512d</a></td><td>Image to image</td><td class="n">512</td><td>Compact indexes at no quality loss</td></tr>
-<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-vision-fp16">moda-fashion-vision-fp16</a></td><td>Image to image</td><td class="n">768</td><td>Edge and mobile (186 MB)</td></tr>
-<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-deepfashion2">moda-fashion-deepfashion2</a></td><td>Image to image</td><td class="n">768</td><td>Simplest reproducible recipe</td></tr>
+<tr><td><a href="https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m">moda-fashionsiglip-multiview-203m</a></td><td>Text to image</td><td class="n">203M</td><td class="n">768</td><td>Searching a catalog in plain language. Zero added parameters.</td></tr>
+<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled">moda-fashion-distilled</a></td><td>Image to image</td><td class="n">203M</td><td class="n">768</td><td>Best overall quality</td></tr>
+<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-matryoshka">moda-fashion-matryoshka</a></td><td>Image to image</td><td class="n">203M</td><td class="n">64–768</td><td>Choose your dimension at query time</td></tr>
+<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled-512d">moda-fashion-distilled-512d</a></td><td>Image to image</td><td class="n">203M</td><td class="n">512</td><td>Compact indexes at no quality loss</td></tr>
+<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-vision-fp16">moda-fashion-vision-fp16</a></td><td>Image to image</td><td class="n">93M vision</td><td class="n">768</td><td>Edge and mobile (186 MB)</td></tr>
+<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-deepfashion2">moda-fashion-deepfashion2</a></td><td>Image to image</td><td class="n">203M</td><td class="n">768</td><td>Simplest reproducible recipe</td></tr>
 </tbody>
 </table>
 
