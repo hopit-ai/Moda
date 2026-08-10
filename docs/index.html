@@ -219,7 +219,7 @@
       "@id": "https://hopit-ai.github.io/Moda/#moda-pro-lite",
       "name": "MODA Pro Lite",
       "applicationCategory": "DeveloperApplication",
-      "description": "A trained 213M fashion encoder on a SigLIP2-base-384 backbone with a verified fashion-vocabulary build. Beats MODA at full corpus on catalog and title search: KAGL +10.2%, Polyvore +7.3%, Atlas +3.2%. Plain bi-encoder, no serving recipe required.",
+      "description": "A trained 213M fashion encoder on a SigLIP2-base-384 backbone with a verified fashion-vocabulary build. Beats MODA at full corpus on catalog and title search: KAGL +10.2%, Polyvore +7.3%. Plain bi-encoder, no serving recipe required.",
       "url": "https://huggingface.co/HopitAI/moda-pro-lite",
       "author": {
         "@id": "https://hopit-ai.github.io/Moda/#org"
@@ -357,7 +357,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <tr><td>DeepFashion Multimodal (43K)</td><td class="n win">0.0148</td><td class="n"><strong>0.0147</strong></td><td class="n">0.0118</td></tr>
 </tbody>
 </table>
-<p>Every benchmark in this class is led by a MODA-family model except DeepFashion Multimodal, where frozen FashionSigLIP itself holds a 0.8% edge. <strong><a href="https://huggingface.co/HopitAI/moda-pro-lite">MODA Pro Lite</a> owns catalog and title search</strong> (KAGL +10.2%, Polyvore +7.3%, Atlas +3.2% over MODA) from a single checkpoint with no serving machinery; <strong>MODA owns caption-style and instance retrieval</strong>, with 4 of 6 wins over FashionSigLIP statistically significant under a paired bootstrap (confidence intervals in the <a href="https://github.com/hopit-ai/Moda">repository</a>).</p>
+<p>Every benchmark in this class is led by a MODA-family model except DeepFashion Multimodal, where frozen FashionSigLIP itself holds a 0.8% edge. <strong><a href="https://huggingface.co/HopitAI/moda-pro-lite">MODA Pro Lite</a> owns catalog and title search</strong> (KAGL +10.2%, Polyvore +7.3% over MODA, both significant under a paired bootstrap) from a single checkpoint with no serving machinery; <strong>MODA owns caption-style and instance retrieval</strong>, with 4 of 6 wins over FashionSigLIP statistically significant under a paired bootstrap (confidence intervals in the <a href="https://github.com/hopit-ai/Moda">repository</a>).</p>
 
 <h3>All systems, including larger models</h3>
 <p><a href="https://huggingface.co/srpone/zooclaw-fashionsiglip2">ZooClaw-FashionSigLIP2</a> (375M, <a href="https://arxiv.org/abs/2606.27708">Xue &amp; Xu 2026</a>) and SigLIP SO400M-384 (878M) measured at full corpus through the same harness; the pipeline reproduces published FashionSigLIP within +0.08%. Values come from a single aligned run. Best per row in green, second in bold.</p>
@@ -372,7 +372,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <tr><td>DeepFashion Multimodal (43K)</td><td class="n win">0.0148</td><td class="n"><strong>0.0147</strong></td><td class="n">0.0079</td><td class="n">0.0099</td><td class="n">0.0118</td><td class="n">0.0144</td></tr>
 </tbody>
 </table>
-<p><strong>MODA Pro is rank 1 or 2 on every row above</strong>, and on 9 of 10 cells once the H&amp;M and ZooClaw-Fashion query sets are included (receipts in the repository) — the only system in the comparison without a bad benchmark. Its mean gain over MODA on these six is <strong>+6.9%</strong> (peak +12.9%). The 878M SO400M wins the three generic-catalog benchmarks and pays 1152-d vectors on every query; ZooClaw leads only on its own vendor-constructed query sets. <strong>MODA Pro Lite</strong> is the strongest open single model at &le;250M on catalog search (KAGL +10.2%, Polyvore +7.3%, Atlas +3.2% over MODA), from one checkpoint with no serving machinery.</p>
+<p><strong>MODA Pro is rank 1 or 2 on every row above</strong>, and on 9 of 10 cells once the H&amp;M and ZooClaw-Fashion query sets are included (receipts in the repository) — the only system in the comparison without a bad benchmark. Its mean gain over MODA on these six is <strong>+6.9%</strong> (peak +12.9%). The 878M SO400M wins the three generic-catalog benchmarks and pays 1152-d vectors on every query; ZooClaw leads only on its own vendor-constructed query sets. <strong>MODA Pro Lite</strong> is the strongest open single model at &le;250M on catalog search (KAGL +10.2%, Polyvore +7.3% over MODA, both significant under a paired bootstrap), from one checkpoint with no serving machinery.</p>
 
 <div class="note">
 <p>The evaluation is self-declared and non-blind: benchmark results were known during development. The comparison protocol — one harness, identical preprocessing per model, full corpus only — is reproducible from the repository, and each model's losses are shown, not hidden.</p>

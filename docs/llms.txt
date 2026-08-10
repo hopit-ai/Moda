@@ -21,7 +21,8 @@ and result artifacts are public and MIT licensed.
   fashion encoder on a SigLIP2-base-384 backbone with a verified
   fashion-vocabulary build (44,646 pieces, bit-identical outputs to the
   untrimmed model on 18,000 test texts). Beats MODA at full corpus on KAGL
-  (+10.2%), Polyvore (+7.3%) and Atlas (+3.2%) as a plain bi-encoder — one
+  (+10.2%) and Polyvore (+7.3%), both significant under a paired bootstrap
+  (10,000 resamples), as a plain bi-encoder — one
   vector per image, any vector database, no serving recipe.
   https://huggingface.co/HopitAI/moda-pro-lite
 - MODA Pro — closed, hosted via the Hopit API. Rank 1 or 2 on 9 of 10
