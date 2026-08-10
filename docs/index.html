@@ -6,16 +6,17 @@
 <title>MODA — open-source fashion retrieval benchmark and models | Hopit AI</title>
 <meta name="description" content="MODA is an open-source benchmark and model family for fashion retrieval by Hopit AI: MODA (open source), MODA Pro Lite (open weights, 213M), and the hosted MODA Pro system — rank 1 or 2 on 9 of 10 full-corpus fashion benchmarks. #1 open model on LookBench image-to-image.">
 <link rel="canonical" href="https://hopit-ai.github.io/Moda/">
+<link rel="alternate" type="text/plain" href="/Moda/llms.txt" title="llms.txt">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MODA by Hopit AI">
 <meta property="og:title" content="MODA — open-source fashion retrieval benchmark and models">
-<meta property="og:description" content="Open-source fashion retrieval. Beats Marqo FashionSigLIP on image-to-image (Fine R@1 67.68) and on 4 of 6 public text-to-image benchmarks at equal parameters.">
+<meta property="og:description" content="Three fashion retrieval models measured at full corpus through one harness — competitors included, losses shown. #1 open model on LookBench; rank 1 or 2 on 9 of 10 text-to-image cells.">
 <meta property="og:url" content="https://hopit-ai.github.io/Moda/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MODA — open-source fashion retrieval benchmark and models">
-<meta name="twitter:description" content="Beats Marqo FashionSigLIP on image-to-image retrieval and on 4 of 6 public text-to-image benchmarks at equal parameters. MIT licensed.">
+<meta name="twitter:description" content="Three fashion retrieval models, measured at full corpus through one harness. Competitors included, losses shown.">
 
 <script type="application/ld+json">
 {
@@ -47,24 +48,34 @@
       "@id": "https://hopit-ai.github.io/Moda/#software",
       "name": "MODA",
       "alternateName": "MODA fashion retrieval benchmark",
-      "description": "An open-source benchmark and model family for fashion retrieval, covering image-to-image and text-to-image search. Evaluated on six public human-authored fashion benchmarks (Fashion200K, KAGL, DeepFashion In-Shop, Polyvore, Atlas, DeepFashion Multimodal) and LookBench, with five released image-to-image checkpoints and a zero-added-parameter text-to-image retrieval system.",
+      "description": "An open benchmark and model family for fashion retrieval covering image-to-image and text-to-image search. The MODA family: MODA (203M, open source and open weights), MODA Pro Lite (213M, open weights), MODA Pro (closed, hosted) and four image-to-image checkpoints. Evaluated at full corpus on six public fashion benchmarks plus H&M, ZooClaw-Fashion and LookBench, through one shared harness with competitors run under identical protocol.",
       "codeRepository": "https://github.com/hopit-ai/Moda",
       "url": "https://hopit-ai.github.io/Moda/",
       "programmingLanguage": "Python",
       "license": "https://opensource.org/licenses/MIT",
-      "author": { "@id": "https://hopit-ai.github.io/Moda/#org" },
+      "author": {
+        "@id": "https://hopit-ai.github.io/Moda/#org"
+      },
       "keywords": "fashion retrieval, information retrieval, text-to-image retrieval, image-to-image retrieval, multimodal embeddings, CLIP, SigLIP, SPLADE, vector search, ecommerce search"
     },
     {
       "@type": "Dataset",
       "@id": "https://hopit-ai.github.io/Moda/#benchmark",
       "name": "MODA fashion search benchmark",
-      "description": "Text-to-image retrieval results across six public fashion benchmarks (Fashion200K, KAGL, DeepFashion In-Shop, Polyvore, Atlas, DeepFashion Multimodal) and image-to-image results on LookBench, from an open-source fashion retrieval model family.",
+      "description": "Full-corpus text-to-image retrieval results across six public fashion benchmarks (KAGL, Polyvore, Atlas, Fashion200K, DeepFashion In-Shop, DeepFashion Multimodal) plus H&M and ZooClaw-Fashion, and image-to-image results on LookBench, comparing MODA, MODA Pro Lite, MODA Pro, Marqo FashionSigLIP, SigLIP-SO400M and ZooClaw-FashionSigLIP2 under one harness.",
       "url": "https://github.com/hopit-ai/Moda",
       "license": "https://opensource.org/licenses/MIT",
-      "creator": { "@id": "https://hopit-ai.github.io/Moda/#org" },
+      "creator": {
+        "@id": "https://hopit-ai.github.io/Moda/#org"
+      },
       "isAccessibleForFree": true,
-      "measurementTechnique": "Full-corpus MAP@10 with paired bootstrap confidence intervals; nDCG@10; Fine Recall@1"
+      "measurementTechnique": "Full-corpus MAP@10 with paired bootstrap confidence intervals; nDCG@10; Fine Recall@1",
+      "variableMeasured": [
+        "MAP@10",
+        "Fine Recall@1",
+        "nDCG@5",
+        "MRR"
+      ]
     },
     {
       "@type": "FAQPage",
@@ -141,6 +152,135 @@
             "@type": "Answer",
             "text": "The MODA code and released models are MIT licensed. The base checkpoint used by the text-to-image system, Marqo/marqo-fashionSigLIP, is Apache-2.0. Some datasets referenced for research are research-only or noncommercial and are not redistributed."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Which fashion retrieval model is best under 250M parameters?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the query type. MODA Pro Lite (213M) leads on catalog and title search — at full corpus it beats MODA by 10.2% on KAGL, 7.3% on Polyvore and 3.2% on Atlas. MODA (203M) leads on caption-style and exact-item retrieval, winning Fashion200K, DeepFashion In-Shop and the H&M registers in the same class. Both are open weights."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best open model on the LookBench fashion image retrieval benchmark?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MODA-SigLIP-Distilled, at Fine Recall@1 of 67.63 measured through the LookBench harness. It places above GR-Pro (67.38, closed), Tianmu-MERE (65.99, 1.24B parameters) and GR-Lite (65.71). The harness reproduces Tianmu-MERE's published subset scores within 0.5 points."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is MODA Pro's architecture published?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. MODA Pro is a closed, hosted system available through the Hopit API; its weights and architecture are not distributed. Its measured results are published alongside every other system in the comparison."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://hopit-ai.github.io/Moda/#moda",
+      "name": "MODA",
+      "applicationCategory": "DeveloperApplication",
+      "description": "A zero-new-parameter retrieval system over the frozen Marqo/marqo-fashionSigLIP checkpoint: three image views per product, two prompt-blended query encodings, late fusion. Four of six full-corpus wins over its base model are statistically significant.",
+      "url": "https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m",
+      "author": {
+        "@id": "https://hopit-ai.github.io/Moda/#org"
+      },
+      "softwareVersion": "1.0",
+      "operatingSystem": "Linux, macOS, Windows (CPU or GPU)",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "parameters",
+          "value": "203000000"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "embedding dimensions",
+          "value": "768"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "availability",
+          "value": "Open source, open weights (MIT)"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://hopit-ai.github.io/Moda/#moda-pro-lite",
+      "name": "MODA Pro Lite",
+      "applicationCategory": "DeveloperApplication",
+      "description": "A trained 213M fashion encoder on a SigLIP2-base-384 backbone with a verified fashion-vocabulary build. Beats MODA at full corpus on catalog and title search: KAGL +10.2%, Polyvore +7.3%, Atlas +3.2%. Plain bi-encoder, no serving recipe required.",
+      "url": "https://huggingface.co/HopitAI/moda-pro-lite",
+      "author": {
+        "@id": "https://hopit-ai.github.io/Moda/#org"
+      },
+      "softwareVersion": "1.0",
+      "operatingSystem": "Linux, macOS, Windows (CPU or GPU)",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "parameters",
+          "value": "213159938"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "embedding dimensions",
+          "value": "768"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "availability",
+          "value": "Open weights (Apache-2.0)"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://hopit-ai.github.io/Moda/#moda-siglip-distilled",
+      "name": "MODA-SigLIP-Distilled",
+      "applicationCategory": "DeveloperApplication",
+      "description": "Image-to-image fashion retrieval model. LookBench Fine Recall@1 of 67.63, the top open model on that benchmark, above a 1.24B-parameter model.",
+      "url": "https://huggingface.co/HopitAI/moda-fashion-distilled",
+      "author": {
+        "@id": "https://hopit-ai.github.io/Moda/#org"
+      },
+      "softwareVersion": "1.0",
+      "operatingSystem": "Linux, macOS, Windows (CPU or GPU)",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "parameters",
+          "value": "203000000"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "embedding dimensions",
+          "value": "768"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "availability",
+          "value": "Open weights (MIT)"
         }
       ]
     }
