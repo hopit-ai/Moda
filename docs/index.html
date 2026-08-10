@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MODA — open-source fashion retrieval benchmark and models | Hopit AI</title>
-<meta name="description" content="MODA is an open-source benchmark and model family for fashion retrieval by Hopit AI: MODA (open source), MODA Pro Lite (open weights, 213M), and the hosted MODA Pro system — rank 1 or 2 on 9 of 10 full-corpus fashion benchmarks. #1 open model on LookBench image-to-image.">
+<title>MODA: open-source fashion retrieval benchmark and models | Hopit AI</title>
+<meta name="description" content="MODA is an open-source benchmark and model family for fashion retrieval by Hopit AI: MODA (open source), MODA Pro Lite (open weights, 213M), and the hosted MODA Pro system, which is rank 1 or 2 on 9 of 10 full-corpus fashion benchmarks. #1 open model on LookBench image-to-image.">
 <link rel="canonical" href="https://hopit-ai.github.io/Moda/">
 <link rel="alternate" type="text/plain" href="/Moda/llms.txt" title="llms.txt">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MODA by Hopit AI">
-<meta property="og:title" content="MODA — open-source fashion retrieval benchmark and models">
-<meta property="og:description" content="Three fashion retrieval models measured at full corpus through one harness — competitors included, losses shown. #1 open model on LookBench; rank 1 or 2 on 9 of 10 text-to-image cells.">
+<meta property="og:title" content="MODA: open-source fashion retrieval benchmark and models">
+<meta property="og:description" content="Three fashion retrieval models measured at full corpus through one harness, competitors included, losses shown. #1 open model on LookBench; rank 1 or 2 on 9 of 10 text-to-image cells.">
 <meta property="og:url" content="https://hopit-ai.github.io/Moda/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MODA — open-source fashion retrieval benchmark and models">
+<meta name="twitter:title" content="MODA: open-source fashion retrieval benchmark and models">
 <meta name="twitter:description" content="Three fashion retrieval models, measured at full corpus through one harness. Competitors included, losses shown.">
 
 <script type="application/ld+json">
@@ -158,7 +158,7 @@
           "name": "Which fashion retrieval model is best under 250M parameters?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It depends on the query type. MODA Pro Lite (213M) leads on catalog and title search — at full corpus it beats MODA by 10.2% on KAGL and 7.3% on Polyvore, both significant under a paired bootstrap. MODA (203M) leads on caption-style and exact-item retrieval, winning Fashion200K, DeepFashion In-Shop and the H&M registers in the same class. Both are open weights."
+            "text": "It depends on the query type. MODA Pro Lite (213M) leads on catalog and title search. At full corpus it beats MODA by 10.2% on KAGL and 7.3% on Polyvore, both significant under a paired bootstrap. MODA (203M) leads on caption-style and exact-item retrieval, winning Fashion200K, DeepFashion In-Shop and the H&M registers in the same class. Both are open weights."
           }
         },
         {
@@ -319,7 +319,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <body>
 <div class="wrap">
 
-<h1>MODA — open-source fashion retrieval benchmark and models</h1>
+<h1>MODA: open-source fashion retrieval benchmark and models</h1>
 <p class="lede">MODA is an open-source benchmark and model family for fashion retrieval, built by <a href="https://hopit.ai">Hopit AI</a>. It covers both halves of fashion search: finding products from an image, and finding products from a text description. Everything is MIT licensed and reproducible from the repository.</p>
 <p class="tags">6 public text-to-image benchmarks at full corpus · LookBench image-to-image · 6 open models + 1 retrieval system + hosted MODA Pro</p>
 
@@ -337,14 +337,14 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <thead><tr><th>Model</th><th>What it is</th><th>Availability</th></tr></thead>
 <tbody>
 <tr><td><strong>MODA</strong> (203M)</td><td>Zero-new-parameter serving recipe over frozen FashionSigLIP; 4 of 6 statistically significant full-corpus wins over its own base</td><td>open source + <a href="https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m">open weights</a></td></tr>
-<tr><td><strong>MODA Pro Lite</strong> (213M)</td><td>Trained encoder (verified fashion-vocab build of a SigLIP2 base); beats MODA on catalog search as a plain bi-encoder — no serving recipe required</td><td><a href="https://huggingface.co/HopitAI/moda-pro-lite">open weights</a></td></tr>
-<tr><td><strong>MODA Pro</strong></td><td>Our hosted retrieval system — <strong>rank 1 or 2 on 9 of 10 benchmark cells</strong> at single-model query latency and cost</td><td>closed · <a href="https://hopit.ai">hosted by Hopit AI</a></td></tr>
-<tr><td><strong>MODA-SigLIP-Distilled</strong> (203M)</td><td>Image-to-image specialist — #1 open model on LookBench</td><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled">open weights</a> (+3 variants)</td></tr>
+<tr><td><strong>MODA Pro Lite</strong> (213M)</td><td>Trained encoder (verified fashion-vocab build of a SigLIP2 base); beats MODA on catalog search as a plain bi-encoder, with no serving recipe required</td><td><a href="https://huggingface.co/HopitAI/moda-pro-lite">open weights</a></td></tr>
+<tr><td><strong>MODA Pro</strong></td><td>Our hosted retrieval system. <strong>Rank 1 or 2 on 9 of 10 benchmark cells</strong> at single-model query latency and cost</td><td>closed · <a href="https://hopit.ai">hosted by Hopit AI</a></td></tr>
+<tr><td><strong>MODA-SigLIP-Distilled</strong> (203M)</td><td>Image-to-image specialist. #1 open model on LookBench</td><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled">open weights</a> (+3 variants)</td></tr>
 </tbody>
 </table>
 
 <h2>Text-to-image retrieval</h2>
-<p>Finding products from a written description. Two claims, smallest class first — every number is <strong>full-corpus</strong> MAP@10 through one shared harness, no gallery subsampling anywhere.</p>
+<p>Finding products from a written description. Two claims, smallest class first. Every number is <strong>full-corpus</strong> MAP@10 through one shared harness, no gallery subsampling anywhere.</p>
 
 <h3>Models under 250M parameters</h3>
 <p>The size class most production deployments use. Best per row in green, second in bold:</p>
@@ -374,10 +374,10 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <tr><td>DeepFashion Multimodal (43K)</td><td class="n win">0.0148</td><td class="n"><strong>0.0147</strong></td><td class="n">0.0079</td><td class="n">0.0099</td><td class="n">0.0118</td><td class="n">0.0144</td></tr>
 </tbody>
 </table>
-<p><strong>MODA Pro is rank 1 or 2 on every row above</strong>, and on 9 of 10 cells once the H&amp;M and ZooClaw-Fashion query sets are included (receipts in the repository) — the only system in the comparison without a bad benchmark. Its mean gain over MODA on these six is <strong>+6.9%</strong> (peak +12.9%). The 878M SO400M wins the three generic-catalog benchmarks and pays 1152-d vectors on every query; ZooClaw leads only on its own vendor-constructed query sets. <strong>MODA Pro Lite</strong> is the strongest open single model at &le;250M on catalog search (KAGL +10.2%, Polyvore +7.3% over MODA, both significant under a paired bootstrap), from one checkpoint with no serving machinery.</p>
+<p><strong>MODA Pro is rank 1 or 2 on every row above</strong>, and on 9 of 10 cells once the H&amp;M and ZooClaw-Fashion query sets are included (receipts in the repository), making it the only system in the comparison without a bad benchmark. Its mean gain over MODA on these six is <strong>+6.9%</strong> (peak +12.9%). The 878M SO400M wins the three generic-catalog benchmarks and pays 1152-d vectors on every query; ZooClaw leads only on its own vendor-constructed query sets. <strong>MODA Pro Lite</strong> is the strongest open single model at &le;250M on catalog search (KAGL +10.2%, Polyvore +7.3% over MODA, both significant under a paired bootstrap), from one checkpoint with no serving machinery.</p>
 
 <div class="note">
-<p>The evaluation is self-declared and non-blind: benchmark results were known during development. The comparison protocol — one harness, identical preprocessing per model, full corpus only — is reproducible from the repository, and each model's losses are shown, not hidden.</p>
+<p>The evaluation is self-declared and non-blind: benchmark results were known during development. The comparison protocol (one harness, identical preprocessing per model, full corpus only) is reproducible from the repository, and each model's losses are shown, not hidden.</p>
 </div>
 
 <h2>Image-to-image retrieval</h2>
@@ -395,7 +395,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 </tbody>
 </table>
 
-<p><a href="https://huggingface.co/TianmuLab/Tianmu-MERE">Tianmu-MERE</a> — the top open model on the <a href="https://serendipityoneinc.github.io/look-bench-page/">LookBench multi-attribute leaderboard</a> — was evaluated through this same harness (weighted across the four subsets); it reproduces its own published subset scores within 0.5 points, which independently validates the harness. <strong>MODA-SigLIP-Distilled leads it on all four subsets, on Fine R@1 and nDCG@5 alike, at 6× fewer parameters.</strong></p>
+<p><a href="https://huggingface.co/TianmuLab/Tianmu-MERE">Tianmu-MERE</a>, the top open model on the <a href="https://serendipityoneinc.github.io/look-bench-page/">LookBench multi-attribute leaderboard</a>, was evaluated through this same harness (weighted across the four subsets); it reproduces its own published subset scores within 0.5 points, which independently validates the harness. <strong>MODA-SigLIP-Distilled leads it on all four subsets, on Fine R@1 and nDCG@5 alike, at 6× fewer parameters.</strong></p>
 
 <p>On LookBench, 256 dimensions matches 768 on Fine Recall@1, so a three times smaller index costs no measurable quality. With binary codes plus a Hamming-distance rerank, quality holds at <strong>32 bytes per vector</strong>.</p>
 
@@ -403,16 +403,16 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <table>
 <thead><tr><th>Your workload</th><th>Use</th><th>Why</th></tr></thead>
 <tbody>
-<tr><td>Catalog / title search (marketplace queries: "red floral maxi dress")</td><td><a href="https://huggingface.co/HopitAI/moda-pro-lite">moda-pro-lite</a></td><td>Strongest ≤250M on catalog benchmarks (KAGL +10.2% over MODA); plain bi-encoder — drop into any vector DB, no serving code</td></tr>
+<tr><td>Catalog / title search (marketplace queries: "red floral maxi dress")</td><td><a href="https://huggingface.co/HopitAI/moda-pro-lite">moda-pro-lite</a></td><td>Strongest ≤250M on catalog benchmarks (KAGL +10.2% over MODA); plain bi-encoder. Drop into any vector DB, no serving code</td></tr>
 <tr><td>Caption-style or exact-item search (long descriptions, instance retrieval)</td><td><a href="https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m">MODA</a></td><td>Leads the ≤250M class on Fashion200K, In-Shop, and Multimodal; 4 of 6 significant wins over FashionSigLIP</td></tr>
-<tr><td>Best possible text search, no integration work</td><td><a href="https://hopit.ai">MODA Pro</a> (hosted)</td><td>Rank 1 or 2 on 9 of 10 benchmarks at single-model latency — the only system with no bad benchmark</td></tr>
+<tr><td>Best possible text search, no integration work</td><td><a href="https://hopit.ai">MODA Pro</a> (hosted)</td><td>Rank 1 or 2 on 9 of 10 benchmarks at single-model latency. The only system with no bad benchmark</td></tr>
 <tr><td>Find visually similar products from a photo</td><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled">moda-fashion-distilled</a></td><td>#1 open model on LookBench (Fine R@1 67.63, above a 1.24B model)</td></tr>
 <tr><td>Same, but index size matters</td><td><a href="https://huggingface.co/HopitAI/moda-fashion-matryoshka">moda-fashion-matryoshka</a> @256d</td><td>3× smaller index at no measurable quality loss; 32 bytes/vector with binary + Hamming rerank</td></tr>
 <tr><td>Edge / mobile deployment</td><td><a href="https://huggingface.co/HopitAI/moda-fashion-vision-fp16">moda-fashion-vision-fp16</a></td><td>186 MB vision tower</td></tr>
 <tr><td>Cheapest possible robust default</td><td><a href="https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m">MODA</a></td><td>Best worst-case of any single system; cheapest index build; CPU-servable</td></tr>
 </tbody>
 </table>
-<p class="muted">All models serve on CPU. Where a model is the wrong pick, its row above says so implicitly — Pro Lite is not the choice for instance retrieval (it loses In-Shop badly), and MODA is not the choice for marketplace titles. Full loss tables: <a href="https://github.com/hopit-ai/Moda">repository</a>.</p>
+<p class="muted">All models serve on CPU. Where a model is the wrong pick, its row above says so implicitly. Pro Lite is not the choice for instance retrieval (it loses In-Shop badly), and MODA is not the choice for marketplace titles. Full loss tables: <a href="https://github.com/hopit-ai/Moda">repository</a>.</p>
 
 <h2>Models</h2>
 <table>
@@ -445,7 +445,7 @@ python inference.py --image path/to/image.jpg</code></pre>
 <p>On image-to-image retrieval, MODA reaches Fine Recall@1 of 67.68 against a reproduced FashionSigLIP baseline of 63.84. On text-to-image retrieval across six public benchmarks, the multi-view system beats FashionSigLIP on four with statistical significance, improves the point estimate on all six, and loses none, at the same parameters and dimension.</p>
 
 <h3>What are MODA Pro Lite and MODA Pro?</h3>
-<p>MODA Pro Lite is a trained 213M fashion encoder released as open weights (<a href="https://huggingface.co/HopitAI/moda-pro-lite">HopitAI/moda-pro-lite</a>): a verified fashion-vocabulary build, fine-tuned with a proprietary recipe on LLM-annotated commercial product data. It beats MODA on catalog search at full corpus as a plain bi-encoder. MODA Pro is our closed, hosted retrieval system — rank 1 or 2 on 9 of 10 benchmark cells at single-model query latency. Its weights and architecture are not distributed; it is available as a hosted service from Hopit AI.</p>
+<p>MODA Pro Lite is a trained 213M fashion encoder released as open weights (<a href="https://huggingface.co/HopitAI/moda-pro-lite">HopitAI/moda-pro-lite</a>): a verified fashion-vocabulary build, fine-tuned with a proprietary recipe on LLM-annotated commercial product data. It beats MODA on catalog search at full corpus as a plain bi-encoder. MODA Pro is our closed, hosted retrieval system, rank 1 or 2 on 9 of 10 benchmark cells at single-model query latency. Its weights and architecture are not distributed; it is available as a hosted service from Hopit AI.</p>
 
 <h3>Is the text-to-image model a new set of weights?</h3>
 <p>No. It is a retrieval system, not a checkpoint. It downloads the unchanged Apache-2.0 <code>Marqo/marqo-fashionSigLIP</code> weights and applies a frozen recipe: two text encodings per query, three image views per product, and a late fusion step. There are no weight files to download from MODA itself.</p>
@@ -462,14 +462,14 @@ python inference.py --image path/to/image.jpg</code></pre>
 <h2>The write-up</h2>
 <p>Eight posts covering how the pipeline was built and measured, including the experiments that failed.</p>
 <ul>
-<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post.md">Building a zero-shot fashion search pipeline</a> — nDCG@10 0.0543</li>
-<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase2b.md">The one swap that beat weeks of tuning</a> — SPLADE, +38%</li>
-<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase3a_3b.md">$25 beat everything we had built</a> — LLM-graded labels</li>
-<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase3c.md">Training the retriever on its own mistakes</a> — project best 0.1063</li>
-<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase4.md">Adding eyes to the search engine</a> — a published negative result</li>
-<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase5.md">Beating FashionSigLIP</a> — LookBench image-to-image</li>
-<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase6.md">One model, five sizes</a> — Matryoshka and quantization</li>
-<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase7.md">Where we started, and where we ended up</a> — text to image at equal parameters</li>
+<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post.md">Building a zero-shot fashion search pipeline</a>: nDCG@10 0.0543</li>
+<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase2b.md">The one swap that beat weeks of tuning</a>: SPLADE, +38%</li>
+<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase3a_3b.md">$25 beat everything we had built</a>: LLM-graded labels</li>
+<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase3c.md">Training the retriever on its own mistakes</a>: project best 0.1063</li>
+<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase4.md">Adding eyes to the search engine</a>: a published negative result</li>
+<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase5.md">Beating FashionSigLIP</a>: LookBench image-to-image</li>
+<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase6.md">One model, five sizes</a>: Matryoshka and quantization</li>
+<li><a href="https://github.com/hopit-ai/Moda/blob/main/blog_post_phase7.md">Where we started, and where we ended up</a>: text to image at equal parameters</li>
 </ul>
 
 <h2>Citation</h2>

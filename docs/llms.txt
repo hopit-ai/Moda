@@ -1,4 +1,4 @@
-# MODA — open fashion retrieval benchmark and models
+# MODA: open fashion retrieval benchmark and models
 
 > An open benchmark and model family for fashion retrieval by Hopit AI. Every
 > number is measured at full corpus through one shared harness, with competitor
@@ -10,26 +10,26 @@ and result artifacts are public and MIT licensed.
 
 ## The model family
 
-- MODA (203M params, 768-d) — open source + open weights. A zero-new-parameter
+- MODA (203M params, 768-d). Open source + open weights. A zero-new-parameter
   serving recipe over the frozen Apache-2.0 Marqo/marqo-fashionSigLIP
   checkpoint: three image views per product, two prompt-blended query
   encodings, late fusion. Four of six full-corpus wins over its own base model
   are statistically significant under a paired bootstrap. Leads the sub-250M
   class on caption-style and exact-item retrieval.
   https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m
-- MODA Pro Lite (213M params, 768-d) — open weights, Apache-2.0. A trained
+- MODA Pro Lite (213M params, 768-d). Open weights, Apache-2.0. A trained
   fashion encoder on a SigLIP2-base-384 backbone with a verified
   fashion-vocabulary build (44,646 pieces, bit-identical outputs to the
   untrimmed model on 18,000 test texts). Beats MODA at full corpus on KAGL
   (+10.2%) and Polyvore (+7.3%), both significant under a paired bootstrap
-  (10,000 resamples), as a plain bi-encoder — one
+  (10,000 resamples), as a plain bi-encoder: one
   vector per image, any vector database, no serving recipe.
   https://huggingface.co/HopitAI/moda-pro-lite
-- MODA Pro — closed, hosted via the Hopit API. Rank 1 or 2 on 9 of 10
+- MODA Pro. Closed, hosted via the Hopit API. Rank 1 or 2 on 9 of 10
   text-to-image benchmark cells across three venues; +6.9% mean over MODA on
   the six academic sets at full corpus (peak +12.9%). The only system in the
   comparison without a bad benchmark, at single-model query latency.
-- MODA-SigLIP-Distilled (203M, 768-d) — open weights. Image-to-image retrieval.
+- MODA-SigLIP-Distilled (203M, 768-d). Open weights. Image-to-image retrieval.
   LookBench Fine Recall@1 67.63, the top open model, above a 1.24B-parameter
   model. https://huggingface.co/HopitAI/moda-fashion-distilled
 - Variants: Matryoshka (64–768 dimensions selectable at query time; 256-d
