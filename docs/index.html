@@ -202,32 +202,25 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 </table>
 
 <h2>Text-to-image retrieval</h2>
-<p>Finding products from a written description. The MODA multi-view system wraps the frozen <code>Marqo/marqo-fashionSigLIP</code> checkpoint in multi-view encoding and late fusion, adding <strong>zero parameters</strong>. Same 203M parameters and 768 dimensions as the baseline.</p>
-<p>Full-corpus MAP@10, significance from a paired bootstrap over 10,000 resamples:</p>
+<p>Finding products from a written description. Two claims, smallest class first — every number is <strong>full-corpus</strong> MAP@10 through one shared harness, no gallery subsampling anywhere.</p>
 
+<h3>Models under 250M parameters</h3>
+<p>The size class most production deployments use. Best per row in green, second in bold:</p>
 <table>
-<thead><tr><th>Benchmark</th><th>FashionSigLIP</th><th>MODA</th><th>Δ</th><th>95% CI (absolute)</th><th>Result</th></tr></thead>
+<thead><tr><th>Benchmark (corpus)</th><th>FashionSigLIP<br><span class="muted">203M</span></th><th>MODA<br><span class="muted">203M</span></th><th>MODA Pro Lite<br><span class="muted">213M</span></th></tr></thead>
 <tbody>
-<tr><td>Fashion200K</td><td class="n">0.18577</td><td class="n"><strong>0.19510</strong></td><td class="n win">+5.02%</td><td class="n">[+0.00382, +0.01477]</td><td class="win">significant win</td></tr>
-<tr><td>KAGL</td><td class="n">0.27687</td><td class="n"><strong>0.29074</strong></td><td class="n win">+5.01%</td><td class="n">[+0.00894, +0.01883]</td><td class="win">significant win</td></tr>
-<tr><td>DeepFashion In-Shop</td><td class="n">0.15865</td><td class="n"><strong>0.16371</strong></td><td class="n win">+3.19%</td><td class="n">[+0.00304, +0.00710]</td><td class="win">significant win</td></tr>
-<tr><td>Polyvore</td><td class="n">0.36645</td><td class="n"><strong>0.37191</strong></td><td class="n win">+1.49%</td><td class="n">[+0.00086, +0.01014]</td><td class="win">significant win</td></tr>
-<tr><td>Atlas</td><td class="n">0.18264</td><td class="n">0.18637</td><td class="n">+2.05%</td><td class="n">[-0.00017, +0.00775]</td><td class="muted">inconclusive</td></tr>
-<tr><td>DeepFashion Multimodal</td><td class="n">0.01477</td><td class="n">0.01504</td><td class="n">+1.87%</td><td class="n">[-0.00121, +0.00192]</td><td class="muted">inconclusive</td></tr>
+<tr><td>KAGL (44K)</td><td class="n">0.2769</td><td class="n"><strong>0.2890</strong></td><td class="n win">0.3185</td></tr>
+<tr><td>Polyvore (94K)</td><td class="n">0.3665</td><td class="n"><strong>0.3726</strong></td><td class="n win">0.3997</td></tr>
+<tr><td>Atlas (78K)</td><td class="n">0.1826</td><td class="n"><strong>0.1884</strong></td><td class="n win">0.1945</td></tr>
+<tr><td>Fashion200K (202K)</td><td class="n"><strong>0.1858</strong></td><td class="n win">0.1947</td><td class="n">0.1802</td></tr>
+<tr><td>DeepFashion In-Shop (53K)</td><td class="n"><strong>0.1587</strong></td><td class="n win">0.1703</td><td class="n">0.1031</td></tr>
+<tr><td>DeepFashion Multimodal (43K)</td><td class="n win">0.0148</td><td class="n"><strong>0.0147</strong></td><td class="n">0.0118</td></tr>
 </tbody>
 </table>
+<p>Every benchmark in this class is led by a MODA-family model except DeepFashion Multimodal, where frozen FashionSigLIP itself holds a 0.8% edge. <strong><a href="https://huggingface.co/HopitAI/moda-pro-lite">MODA Pro Lite</a> owns catalog and title search</strong> (KAGL +10.2%, Polyvore +7.3%, Atlas +3.2% over MODA) from a single checkpoint with no serving machinery; <strong>MODA owns caption-style and instance retrieval</strong>, with 4 of 6 wins over FashionSigLIP statistically significant under a paired bootstrap (confidence intervals in the <a href="https://github.com/hopit-ai/Moda">repository</a>).</p>
 
-<p><strong>Four significant wins, positive point estimates on all six, zero losses.</strong> Atlas and DeepFashion Multimodal improve numerically but their confidence intervals cross zero, so they are not counted as wins.</p>
-
-<h3>Scope of this claim</h3>
-<div class="note">
-<p>This is a comparison against Marqo FashionSigLIP <strong>at equal parameter count and embedding dimension</strong> (203M, 768-d). It is not a claim of being the best fashion retrieval model overall.</p>
-<p>Larger off-the-shelf SigLIP variants exceed the 768-dimension budget. SigLIP SO400M-384 (878M parameters, 1152 dimensions) has now been measured at full corpus through the same harness — it appears in the six-system table below, where it wins the three generic-catalog benchmarks and loses the three fashion-caption ones.</p>
-<p>The evaluation is self-declared and non-blind: aggregate benchmark results were already known at iteration six. It should not be described as a fresh independent state-of-the-art evaluation. The late-fusion blend weight was selected on external development data (OpenVTON and leakage-audited GLAMI), not on the target benchmarks.</p>
-</div>
-
-<h2>The full comparison — six systems, full corpus, one harness</h2>
-<p>Every cell below is a <strong>full-corpus</strong> MAP@10 through one shared pipeline with identical preprocessing per model — no gallery subsampling anywhere. <a href="https://huggingface.co/srpone/zooclaw-fashionsiglip2">ZooClaw-FashionSigLIP2</a> (375M, <a href="https://arxiv.org/abs/2606.27708">Xue &amp; Xu 2026</a>) and SigLIP SO400M-384 (878M) were evaluated at full corpus through this harness; the same pipeline reproduces published FashionSigLIP within +0.08%. Values here come from a single aligned run and can differ from the per-pair tables above by &le;1% due to gallery alignment. Best per row in green, second in bold.</p>
+<h3>All systems, including larger models</h3>
+<p><a href="https://huggingface.co/srpone/zooclaw-fashionsiglip2">ZooClaw-FashionSigLIP2</a> (375M, <a href="https://arxiv.org/abs/2606.27708">Xue &amp; Xu 2026</a>) and SigLIP SO400M-384 (878M) measured at full corpus through the same harness; the pipeline reproduces published FashionSigLIP within +0.08%. Values come from a single aligned run. Best per row in green, second in bold.</p>
 <table>
 <thead><tr><th>Benchmark (corpus)</th><th>FashionSigLIP<br><span class="muted">203M</span></th><th>MODA<br><span class="muted">203M</span></th><th>SO400M<br><span class="muted">878M</span></th><th>ZooClaw<br><span class="muted">375M</span></th><th>MODA Pro Lite<br><span class="muted">213M</span></th><th>MODA Pro<br><span class="muted">416M system</span></th></tr></thead>
 <tbody>
@@ -240,6 +233,10 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 </tbody>
 </table>
 <p><strong>MODA Pro is rank 1 or 2 on every row above</strong>, and on 9 of 10 cells once the H&amp;M and ZooClaw-Fashion registers are included (receipts in the repository) — the only system in the comparison without a bad benchmark. Its mean gain over MODA on these six is <strong>+6.9%</strong> (peak +12.9%). The 878M SO400M wins the three generic-catalog benchmarks and pays 1152-d vectors on every query; ZooClaw leads only on its own vendor-constructed registers. <strong>MODA Pro Lite</strong> is the strongest open single model at &le;250M on catalog search (KAGL +10.2%, Polyvore +7.3%, Atlas +3.2% over MODA), from one checkpoint with no serving machinery.</p>
+
+<div class="note">
+<p>The evaluation is self-declared and non-blind: benchmark results were known during development. The comparison protocol — one harness, identical preprocessing per model, full corpus only — is reproducible from the repository, and each model's losses are shown, not hidden.</p>
+</div>
 
 <h2>Image-to-image retrieval</h2>
 <p>Finding visually similar products from a photo, measured on <a href="https://serendipityoneinc.github.io/look-bench-page/">LookBench</a> (2,345 queries), the live fashion retrieval benchmark from SerendipityOne (<a href="https://arxiv.org/abs/2601.14706">Gao et al., 2026</a>). FashionSigLIP was reproduced in the repository before any comparison was made.</p>
