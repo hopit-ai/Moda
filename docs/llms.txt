@@ -87,6 +87,9 @@ subset scores within 0.5 points, which validates the harness.
 
 - Benchmark page: https://hopit-ai.github.io/Moda/
 - Code and harness: https://github.com/hopit-ai/Moda
+- Reproduction recipe (exact commands, expected numbers, known variance):
+  https://github.com/hopit-ai/Moda/blob/main/REPRODUCE.md
+- Book a call: https://calendly.com/arkid_/new-meeting?back=1
 - Models: https://huggingface.co/HopitAI
 - Company: https://hopit.ai
 - Research notes: https://hopitai.substack.com/
