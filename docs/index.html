@@ -207,7 +207,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <h3>Models under 250M parameters</h3>
 <p>The size class most production deployments use. Best per row in green, second in bold:</p>
 <table>
-<thead><tr><th>Benchmark (corpus)</th><th>FashionSigLIP<br><span class="muted">203M</span></th><th>MODA<br><span class="muted">203M</span></th><th>MODA Pro Lite<br><span class="muted">213M</span></th></tr></thead>
+<thead><tr><th>Benchmark (corpus)</th><th><a href="https://huggingface.co/Marqo/marqo-fashionSigLIP">FashionSigLIP</a><br><span class="muted">203M</span></th><th>MODA<br><span class="muted">203M</span></th><th>MODA Pro Lite<br><span class="muted">213M</span></th></tr></thead>
 <tbody>
 <tr><td>KAGL (44K)</td><td class="n">0.2769</td><td class="n"><strong>0.2890</strong></td><td class="n win">0.3185</td></tr>
 <tr><td>Polyvore (94K)</td><td class="n">0.3665</td><td class="n"><strong>0.3726</strong></td><td class="n win">0.3997</td></tr>
@@ -222,7 +222,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <h3>All systems, including larger models</h3>
 <p><a href="https://huggingface.co/srpone/zooclaw-fashionsiglip2">ZooClaw-FashionSigLIP2</a> (375M, <a href="https://arxiv.org/abs/2606.27708">Xue &amp; Xu 2026</a>) and SigLIP SO400M-384 (878M) measured at full corpus through the same harness; the pipeline reproduces published FashionSigLIP within +0.08%. Values come from a single aligned run. Best per row in green, second in bold.</p>
 <table>
-<thead><tr><th>Benchmark (corpus)</th><th>FashionSigLIP<br><span class="muted">203M</span></th><th>MODA<br><span class="muted">203M</span></th><th>SO400M<br><span class="muted">878M</span></th><th>ZooClaw<br><span class="muted">375M</span></th><th>MODA Pro Lite<br><span class="muted">213M</span></th><th>MODA Pro<br><span class="muted">416M system</span></th></tr></thead>
+<thead><tr><th>Benchmark (corpus)</th><th><a href="https://huggingface.co/Marqo/marqo-fashionSigLIP">FashionSigLIP</a><br><span class="muted">203M</span></th><th>MODA<br><span class="muted">203M</span></th><th><a href="https://huggingface.co/timm/ViT-SO400M-14-SigLIP-384">SO400M</a><br><span class="muted">878M</span></th><th><a href="https://huggingface.co/srpone/zooclaw-fashionsiglip2">ZooClaw</a><br><span class="muted">375M</span></th><th>MODA Pro Lite<br><span class="muted">213M</span></th><th>MODA Pro<br><span class="muted">416M system</span></th></tr></thead>
 <tbody>
 <tr><td>KAGL (44K)</td><td class="n">0.2769</td><td class="n">0.2890</td><td class="n win">0.3370</td><td class="n">0.2951</td><td class="n">0.3185</td><td class="n"><strong>0.3263</strong></td></tr>
 <tr><td>Polyvore (94K)</td><td class="n">0.3665</td><td class="n">0.3726</td><td class="n win">0.4378</td><td class="n">0.3804</td><td class="n">0.3997</td><td class="n"><strong>0.4088</strong></td></tr>
@@ -247,8 +247,8 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <tr><td><strong>MODA-SigLIP-Distilled</strong></td><td class="n">203M</td><td class="n">768</td><td class="n"><strong>67.63</strong></td><td class="n">53.85</td><td class="n win">+3.79</td></tr>
 <tr><td>MODA-SigLIP-Matryoshka @256d</td><td class="n">203M</td><td class="n">256</td><td class="n">67.42</td><td class="n">57.48</td><td class="n win">+3.58</td></tr>
 <tr><td>MODA-SigLIP-DeepFashion2</td><td class="n">203M</td><td class="n">768</td><td class="n">66.52</td><td class="n">52.46</td><td class="n win">+2.68</td></tr>
-<tr><td>Tianmu-MERE (Kuaishou)</td><td class="n">1.24B</td><td class="n">512</td><td class="n">65.99</td><td class="n">52.37</td><td class="n">+2.15</td></tr>
-<tr><td>FashionSigLIP (our reproduction)</td><td class="n">203M</td><td class="n">768</td><td class="n">63.84</td><td class="n">49.63</td><td class="muted">baseline used here</td></tr>
+<tr><td><a href="https://huggingface.co/TianmuLab/Tianmu-MERE">Tianmu-MERE</a> (Kuaishou)</td><td class="n">1.24B</td><td class="n">512</td><td class="n">65.99</td><td class="n">52.37</td><td class="n">+2.15</td></tr>
+<tr><td><a href="https://huggingface.co/Marqo/marqo-fashionSigLIP">FashionSigLIP</a> (our reproduction)</td><td class="n">203M</td><td class="n">768</td><td class="n">63.84</td><td class="n">49.63</td><td class="muted">baseline used here</td></tr>
 <tr><td>FashionSigLIP (published)</td><td class="n">203M</td><td class="n">768</td><td class="n">62.77</td><td class="n">49.44</td><td class="muted">baseline (paper)</td></tr>
 </tbody>
 </table>
