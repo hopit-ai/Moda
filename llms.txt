@@ -1,43 +1,91 @@
-# MODA
+# MODA — open fashion retrieval benchmark and models
 
-> MODA is an open-source benchmark and model family for fashion retrieval, built by Hopit AI. It covers both halves of fashion search: finding products from an image (image-to-image) and finding products from a text description (text-to-image). Everything is MIT licensed and reproducible from this repository.
+> An open benchmark and model family for fashion retrieval by Hopit AI. Every
+> number is measured at full corpus through one shared harness, with competitor
+> models run under identical protocol and every losing cell disclosed.
 
-MODA is not a single model. It is (1) an evaluation harness and benchmark over 253,685 purchase-grounded H&M queries across 105,542 products, (2) five released image-to-image checkpoints, and (3) one text-to-image retrieval system that adds zero parameters to a frozen Marqo FashionSigLIP checkpoint. All results below are reproducible with the scripts in this repository, and every headline number carries a confidence interval or a linked artifact.
+MODA covers both halves of fashion search: finding products from a written
+description (text-to-image) and from a photo (image-to-image). Code, harness
+and result artifacts are public and MIT licensed.
 
-Disambiguation: "MODA" here refers to the Hopit AI fashion retrieval project at github.com/hopit-ai/Moda. It is unrelated to other organisations or products using the name MODA.
+## The model family
 
-## Headline results
+- MODA (203M params, 768-d) — open source + open weights. A zero-new-parameter
+  serving recipe over the frozen Apache-2.0 Marqo/marqo-fashionSigLIP
+  checkpoint: three image views per product, two prompt-blended query
+  encodings, late fusion. Four of six full-corpus wins over its own base model
+  are statistically significant under a paired bootstrap. Leads the sub-250M
+  class on caption-style and exact-item retrieval.
+  https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m
+- MODA Pro Lite (213M params, 768-d) — open weights, Apache-2.0. A trained
+  fashion encoder on a SigLIP2-base-384 backbone with a verified
+  fashion-vocabulary build (44,646 pieces, bit-identical outputs to the
+  untrimmed model on 18,000 test texts). Beats MODA at full corpus on KAGL
+  (+10.2%), Polyvore (+7.3%) and Atlas (+3.2%) as a plain bi-encoder — one
+  vector per image, any vector database, no serving recipe.
+  https://huggingface.co/HopitAI/moda-pro-lite
+- MODA Pro — closed, hosted via the Hopit API. Rank 1 or 2 on 9 of 10
+  text-to-image benchmark cells across three venues; +6.9% mean over MODA on
+  the six academic sets at full corpus (peak +12.9%). The only system in the
+  comparison without a bad benchmark, at single-model query latency.
+- MODA-SigLIP-Distilled (203M, 768-d) — open weights. Image-to-image retrieval.
+  LookBench Fine Recall@1 67.63, the top open model, above a 1.24B-parameter
+  model. https://huggingface.co/HopitAI/moda-fashion-distilled
+- Variants: Matryoshka (64–768 dimensions selectable at query time; 256-d
+  matches 768-d on LookBench Fine R@1), 512d, and an FP16 vision tower
+  (186 MB) for edge deployment.
 
-- Image-to-image retrieval (LookBench, 2,345 queries): Fine Recall@1 67.68, against a reproduced Marqo FashionSigLIP baseline of 63.84. The single distilled model reaches 67.63 and the Matryoshka model reaches 67.42 at 256 dimensions.
-- Text-to-image retrieval (six public benchmarks, full-corpus MAP@10): the multi-view system beats Marqo FashionSigLIP on four of six with statistical significance (Fashion200K +5.02%, KAGL +5.01%, DeepFashion In-Shop +3.19%, Polyvore +1.49%), improves the point estimate on all six, and loses none. Atlas (+2.05%) and DeepFashion Multimodal (+1.87%) are positive but statistically inconclusive.
-- H&M text retrieval pipeline: nDCG@10 = 0.1063, from a dense-only baseline of 0.0300.
-- Compression: 256 dimensions matches 768 on Fine Recall@1; binary codes with a Hamming rerank hold quality at 32 bytes per vector.
+## Text-to-image results (full corpus, MAP@10)
 
-## Models
+Six academic benchmarks, no gallery subsampling. Systems compared: Marqo
+FashionSigLIP (203M), MODA (203M), SigLIP-SO400M-384 (878M),
+ZooClaw-FashionSigLIP2 (375M), MODA Pro Lite (213M), MODA Pro.
 
-- [moda-fashionsiglip-multiview-203m](https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m): text-to-image retrieval system. 768 dimensions, 203M frozen parameters, zero added parameters. Wraps the unchanged Marqo FashionSigLIP checkpoint in multi-view encoding and late fusion.
-- [moda-fashion-distilled](https://huggingface.co/HopitAI/moda-fashion-distilled): image-to-image, 768 dimensions, best overall quality (Fine R@1 67.63).
-- [moda-fashion-matryoshka](https://huggingface.co/HopitAI/moda-fashion-matryoshka): image-to-image, sliceable 64 to 768 dimensions.
-- [moda-fashion-distilled-512d](https://huggingface.co/HopitAI/moda-fashion-distilled-512d): image-to-image, 512 dimensions at no quality loss.
-- [moda-fashion-vision-fp16](https://huggingface.co/HopitAI/moda-fashion-vision-fp16): image-to-image, vision-only fp16, 186 MB for edge deployment.
-- [moda-fashion-deepfashion2](https://huggingface.co/HopitAI/moda-fashion-deepfashion2): image-to-image, simplest reproducible recipe.
+| Benchmark (corpus) | FashionSigLIP | MODA | SO400M | ZooClaw | Pro Lite | MODA Pro |
+|---|---|---|---|---|---|---|
+| KAGL (44K) | 0.2769 | 0.2890 | 0.3370 | 0.2951 | 0.3185 | 0.3263 |
+| Polyvore (94K) | 0.3665 | 0.3726 | 0.4378 | 0.3804 | 0.3997 | 0.4088 |
+| Atlas (78K) | 0.1826 | 0.1884 | 0.2309 | 0.1583 | 0.1945 | 0.2053 |
+| Fashion200K (202K) | 0.1858 | 0.1947 | 0.1353 | 0.1775 | 0.1802 | 0.2101 |
+| DeepFashion In-Shop (53K) | 0.1587 | 0.1703 | 0.1695 | 0.1024 | 0.1031 | 0.1762 |
+| DeepFashion Multimodal (43K) | 0.0148 | 0.0147 | 0.0079 | 0.0099 | 0.0118 | 0.0144 |
 
-## Docs
+MODA Pro wins Fashion200K and DeepFashion In-Shop outright and is second on
+KAGL, Polyvore and Atlas, where the 878M SigLIP-SO400M leads. FashionSigLIP
+holds DeepFashion Multimodal by 0.8%.
 
-- [README](https://github.com/hopit-ai/Moda/blob/main/README.md): full results tables, reproduction steps, and key findings.
-- [FSL_203M_SYSTEM_ARCHITECTURE.md](https://github.com/hopit-ai/Moda/blob/main/FSL_203M_SYSTEM_ARCHITECTURE.md): the exact text-to-image multi-view recipe and its valid claim boundary.
-- [Blog 1](https://github.com/hopit-ai/Moda/blob/main/blog_post.md): building the zero-shot pipeline, nDCG@10 0.0543.
-- [Blog 2](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase2b.md): replacing BM25 with SPLADE, +38%.
-- [Blog 3](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase3a_3b.md): training the cross-encoder on LLM-graded labels.
-- [Blog 4](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase3c.md): training retrievers on their own mistakes, project best 0.1063.
-- [Blog 5](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase4.md): a multimodal experiment that did not beat text-only, published as a negative result.
-- [Blog 6](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase5.md): beating FashionSigLIP on LookBench image-to-image.
-- [Blog 7](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase6.md): Matryoshka distillation and quantization.
-- [Blog 8](https://github.com/hopit-ai/Moda/blob/main/blog_post_phase7.md): text-to-image at equal parameters, and what the series taught us.
+## Image-to-image results (LookBench, Fine Recall@1)
 
-## Evidence and limitations
+| Model | Params | Fine R@1 |
+|---|---|---|
+| MODA-SigLIP-Distilled | 203M | 67.63 |
+| GR-Pro (closed) | n/a | 67.38 |
+| Tianmu-MERE | 1.24B | 65.99 |
+| GR-Lite | n/a | 65.71 |
+| FashionSigLIP (our reproduction) | 203M | 63.84 |
 
-- Queries are synthetically generated from real H&M purchase data (microsoft/hnm-search-data), not captured from search logs. Purchases are real; queries are reconstructed.
-- Absolute nDCG values are low because ground truth is purchase-based: one bought item per query against 105,542 products. Relative gains between configurations are the finding.
-- The text-to-image result is a self-declared, non-blind evaluation at benchmark iteration six. It is a retrieval system over frozen weights, not a new checkpoint, and should not be described as a fresh independent SOTA evaluation.
-- Frozen result receipts live in results/fashionsiglip_late_fusion_target_iteration6/.
+Tianmu-MERE was re-run through this harness and reproduces its own published
+subset scores within 0.5 points, which validates the harness.
+
+## Method and limitations
+
+- Full corpus only. Subsampled screening runs are never mixed with full-corpus
+  rows in the same comparison.
+- One harness, identical preprocessing per model. Published baselines are
+  reproduced before any comparison (FashionSigLIP within +0.08%).
+- Losses are published alongside wins; each model card links the benchmarks it
+  loses.
+- The evaluation is self-declared and non-blind: aggregate results were known
+  during development. It should not be described as an independently verified
+  state-of-the-art result.
+- Absolute values on purchase-grounded sets are low by construction (one bought
+  item per query against a large catalog); relative differences carry the
+  signal.
+
+## Links
+
+- Benchmark page: https://hopit-ai.github.io/Moda/
+- Code and harness: https://github.com/hopit-ai/Moda
+- Models: https://huggingface.co/HopitAI
+- Company: https://hopit.ai
+- Research notes: https://hopitai.substack.com/
