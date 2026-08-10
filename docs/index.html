@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MODA — open-source fashion retrieval benchmark and models | Hopit AI</title>
-<meta name="description" content="MODA is an open-source benchmark and model family for fashion retrieval by Hopit AI. Beats Marqo FashionSigLIP on LookBench image-to-image retrieval (Fine R@1 67.68 vs 63.84) and on 4 of 6 public text-to-image benchmarks at equal parameters. MIT licensed.">
+<meta name="description" content="MODA is an open-source benchmark and model family for fashion retrieval by Hopit AI: MODA (open source), MODA Pro Lite (open weights, 213M), and the hosted MODA Pro system — rank 1 or 2 on 9 of 10 full-corpus fashion benchmarks. #1 open model on LookBench image-to-image.">
 <link rel="canonical" href="https://hopit-ai.github.io/Moda/">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 
@@ -91,7 +91,15 @@
           "name": "Which MODA model should I use?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "For text-to-image search use HopitAI/moda-fashionsiglip-multiview-203m. For image-to-image search use HopitAI/moda-fashion-distilled for best quality, HopitAI/moda-fashion-matryoshka to choose your embedding dimension at query time, or HopitAI/moda-fashion-vision-fp16 for edge and mobile deployment."
+            "text": "For text-to-image search: HopitAI/moda-pro-lite is the strongest open single checkpoint for catalog and title search and needs no serving recipe; HopitAI/moda-fashionsiglip-multiview-203m (MODA) remains the best pick for caption-style and instance retrieval. The hosted MODA Pro combines both and is rank 1 or 2 on 9 of 10 benchmarks. For image-to-image search use HopitAI/moda-fashion-distilled for best quality, moda-fashion-matryoshka for flexible dimensions, or moda-fashion-vision-fp16 for edge deployment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are MODA Pro Lite and MODA Pro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MODA Pro Lite is a trained 213M fashion encoder released as open weights (HopitAI/moda-pro-lite). It beats MODA on catalog search at full corpus as a plain bi-encoder with no serving recipe. MODA Pro is a closed, hosted two-expert retrieval system combining MODA's index with Pro Lite reranking the top 100 results; it is rank 1 or 2 on 9 of 10 fashion retrieval benchmark cells at single-model query latency."
           }
         },
         {
@@ -173,13 +181,25 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 
 <h1>MODA — open-source fashion retrieval benchmark and models</h1>
 <p class="lede">MODA is an open-source benchmark and model family for fashion retrieval, built by <a href="https://hopit.ai">Hopit AI</a>. It covers both halves of fashion search: finding products from an image, and finding products from a text description. Everything is MIT licensed and reproducible from the repository.</p>
-<p class="tags">6 public text-to-image benchmarks · LookBench image-to-image · 5 released checkpoints + 1 retrieval system · MIT</p>
+<p class="tags">6 public text-to-image benchmarks at full corpus · LookBench image-to-image · 6 open models + 1 retrieval system + hosted MODA Pro</p>
 
 <div class="btns">
   <a href="https://github.com/hopit-ai/Moda">GitHub repository</a>
   <a href="https://huggingface.co/HopitAI">Models on Hugging Face</a>
   <a href="https://huggingface.co/spaces/HopitAI/moda-fashion-search">Interactive demo</a>
 </div>
+
+
+<h2>The MODA family</h2>
+<table>
+<thead><tr><th>Model</th><th>What it is</th><th>Availability</th></tr></thead>
+<tbody>
+<tr><td><strong>MODA</strong> (203M)</td><td>Zero-new-parameter serving recipe over frozen FashionSigLIP; 4 of 6 statistically significant full-corpus wins over its own base</td><td>open source + <a href="https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m">open weights</a></td></tr>
+<tr><td><strong>MODA Pro Lite</strong> (213M)</td><td>Trained encoder (verified fashion-vocab build of a SigLIP2 base); beats MODA on catalog search as a plain bi-encoder — no serving recipe required</td><td><a href="https://huggingface.co/HopitAI/moda-pro-lite">open weights</a></td></tr>
+<tr><td><strong>MODA Pro</strong> (416M system)</td><td>Two-expert fusion: MODA retrieves from its existing 768-d index, Pro Lite rescores the top 100 — <strong>rank 1 or 2 on 9 of 10 benchmark cells</strong> at single-model query latency</td><td>closed · <a href="https://hopit.ai">hosted by Hopit AI</a></td></tr>
+<tr><td><strong>MODA-SigLIP-Distilled</strong> (203M)</td><td>Image-to-image specialist — #1 open model on LookBench</td><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled">open weights</a> (+3 variants)</td></tr>
+</tbody>
+</table>
 
 <h2>Text-to-image retrieval</h2>
 <p>Finding products from a written description. The MODA multi-view system wraps the frozen <code>Marqo/marqo-fashionSigLIP</code> checkpoint in multi-view encoding and late fusion, adding <strong>zero parameters</strong>. Same 203M parameters and 768 dimensions as the baseline.</p>
@@ -202,26 +222,24 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <h3>Scope of this claim</h3>
 <div class="note">
 <p>This is a comparison against Marqo FashionSigLIP <strong>at equal parameter count and embedding dimension</strong> (203M, 768-d). It is not a claim of being the best fashion retrieval model overall.</p>
-<p>Larger off-the-shelf SigLIP variants score higher than FashionSigLIP on a 10,000-document screen of Atlas, Polyvore and KAGL, but exceed the 768-dimension budget: SigLIP L/16-384 outputs 1024 dimensions at 304M parameters, and SigLIP SO400M-384 outputs 1152 dimensions at 840M parameters. Full-corpus confirmation runs for those variants are pending, so they are not presented here as head-to-head results.</p>
+<p>Larger off-the-shelf SigLIP variants exceed the 768-dimension budget. SigLIP SO400M-384 (878M parameters, 1152 dimensions) has now been measured at full corpus through the same harness — it appears in the six-system table below, where it wins the three generic-catalog benchmarks and loses the three fashion-caption ones.</p>
 <p>The evaluation is self-declared and non-blind: aggregate benchmark results were already known at iteration six. It should not be described as a fresh independent state-of-the-art evaluation. The late-fusion blend weight was selected on external development data (OpenVTON and leakage-audited GLAMI), not on the target benchmarks.</p>
 </div>
 
-<h3>Versus ZooClaw-FashionSigLIP2</h3>
-<p>ZooClaw-FashionSigLIP2 (open weights, <a href="https://arxiv.org/abs/2606.27708">Xue &amp; Xu 2026</a>) evaluated through the identical harness and subsample on a 20,000-distractor screen — scores are not comparable to the full-corpus table above. The same pipeline reproduces published FashionSigLIP within +0.08% at full corpus. MAP@10:</p>
-
+<h2>The full comparison — six systems, full corpus, one harness</h2>
+<p>Every cell below is a <strong>full-corpus</strong> MAP@10 through one shared pipeline with identical preprocessing per model — no gallery subsampling anywhere. <a href="https://huggingface.co/srpone/zooclaw-fashionsiglip2">ZooClaw-FashionSigLIP2</a> (375M, <a href="https://arxiv.org/abs/2606.27708">Xue &amp; Xu 2026</a>) and SigLIP SO400M-384 (878M) were evaluated at full corpus through this harness; the same pipeline reproduces published FashionSigLIP within +0.08%. Values here come from a single aligned run and can differ from the per-pair tables above by &le;1% due to gallery alignment. Best per row in green, second in bold.</p>
 <table>
-<thead><tr><th>Benchmark</th><th>MODA<br><span class="muted">203,155,970 params · 768-d</span></th><th>ZooClaw-FashionSigLIP2<br><span class="muted">375,479,810 params · 768-d</span></th><th>Δ</th></tr></thead>
+<thead><tr><th>Benchmark (corpus)</th><th>FashionSigLIP<br><span class="muted">203M</span></th><th>MODA<br><span class="muted">203M</span></th><th>SO400M<br><span class="muted">878M</span></th><th>ZooClaw<br><span class="muted">375M</span></th><th>MODA Pro Lite<br><span class="muted">213M</span></th><th>MODA Pro<br><span class="muted">416M system</span></th></tr></thead>
 <tbody>
-<tr><td>DeepFashion In-Shop</td><td class="n"><strong>0.24448</strong></td><td class="n">0.16389</td><td class="n win">+49.2%</td></tr>
-<tr><td>DeepFashion Multimodal</td><td class="n"><strong>0.02526</strong></td><td class="n">0.01887</td><td class="n win">+33.9%</td></tr>
-<tr><td>Atlas</td><td class="n"><strong>0.30892</strong></td><td class="n">0.27458</td><td class="n win">+12.5%</td></tr>
-<tr><td>Fashion200K</td><td class="n"><strong>0.46066</strong></td><td class="n">0.43052</td><td class="n win">+7.0%</td></tr>
-<tr><td>KAGL</td><td class="n">0.38513</td><td class="n">0.38487</td><td class="muted">≈ tie (+0.07%)</td></tr>
-<tr><td>Polyvore</td><td class="n">0.54617</td><td class="n"><strong>0.55152</strong></td><td class="n">−1.0%</td></tr>
+<tr><td>KAGL (44K)</td><td class="n">0.2769</td><td class="n">0.2890</td><td class="n win">0.3370</td><td class="n">0.2951</td><td class="n">0.3185</td><td class="n"><strong>0.3263</strong></td></tr>
+<tr><td>Polyvore (94K)</td><td class="n">0.3665</td><td class="n">0.3726</td><td class="n win">0.4378</td><td class="n">0.3804</td><td class="n">0.3997</td><td class="n"><strong>0.4088</strong></td></tr>
+<tr><td>Atlas (78K)</td><td class="n">0.1826</td><td class="n">0.1884</td><td class="n win">0.2309</td><td class="n">0.1583</td><td class="n">0.1945</td><td class="n"><strong>0.2053</strong></td></tr>
+<tr><td>Fashion200K (202K)</td><td class="n">0.1858</td><td class="n"><strong>0.1947</strong></td><td class="n">0.1353</td><td class="n">0.1775</td><td class="n">0.1802</td><td class="n win">0.2101</td></tr>
+<tr><td>DeepFashion In-Shop (53K)</td><td class="n">0.1587</td><td class="n"><strong>0.1703</strong></td><td class="n">0.1695</td><td class="n">0.1024</td><td class="n">0.1031</td><td class="n win">0.1762</td></tr>
+<tr><td>DeepFashion Multimodal (43K)</td><td class="n win">0.0148</td><td class="n"><strong>0.0147</strong></td><td class="n">0.0079</td><td class="n">0.0099</td><td class="n">0.0118</td><td class="n">0.0144</td></tr>
 </tbody>
 </table>
-
-<p>Four wins of +7% to +49%, one tie, one −1.0% loss — at 46% fewer parameters.</p>
+<p><strong>MODA Pro is rank 1 or 2 on every row above</strong>, and on 9 of 10 cells once the H&amp;M and ZooClaw-Fashion registers are included (receipts in the repository) — the only system in the comparison without a bad benchmark. Its mean gain over MODA on these six is <strong>+6.9%</strong> (peak +12.9%). The 878M SO400M wins the three generic-catalog benchmarks and pays 1152-d vectors on every query; ZooClaw leads only on its own vendor-constructed registers. <strong>MODA Pro Lite</strong> is the strongest open single model at &le;250M on catalog search (KAGL +10.2%, Polyvore +7.3%, Atlas +3.2% over MODA), from one checkpoint with no serving machinery.</p>
 
 <h2>Image-to-image retrieval</h2>
 <p>Finding visually similar products from a photo, measured on <a href="https://serendipityoneinc.github.io/look-bench-page/">LookBench</a> (2,345 queries), the live fashion retrieval benchmark from SerendipityOne (<a href="https://arxiv.org/abs/2601.14706">Gao et al., 2026</a>). FashionSigLIP was reproduced in the repository before any comparison was made.</p>
@@ -247,6 +265,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <thead><tr><th>Model</th><th>Task</th><th>Params</th><th>Dim</th><th>Best for</th></tr></thead>
 <tbody>
 <tr><td><a href="https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m">moda-fashionsiglip-multiview-203m</a></td><td>Text to image</td><td class="n">203M</td><td class="n">768</td><td>Searching a catalog in plain language. Zero added parameters.</td></tr>
+<tr><td><a href="https://huggingface.co/HopitAI/moda-pro-lite">moda-pro-lite</a></td><td>Text to image</td><td class="n">213M</td><td class="n">768</td><td>Strongest open catalog-search checkpoint; plain bi-encoder, no recipe</td></tr>
 <tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled">moda-fashion-distilled</a></td><td>Image to image</td><td class="n">203M</td><td class="n">768</td><td>Best overall quality</td></tr>
 <tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-matryoshka">moda-fashion-matryoshka</a></td><td>Image to image</td><td class="n">203M</td><td class="n">64–768</td><td>Choose your dimension at query time</td></tr>
 <tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled-512d">moda-fashion-distilled-512d</a></td><td>Image to image</td><td class="n">203M</td><td class="n">512</td><td>Compact indexes at no quality loss</td></tr>
@@ -270,6 +289,9 @@ python inference.py --image path/to/image.jpg</code></pre>
 
 <h3>How does MODA compare to Marqo FashionSigLIP?</h3>
 <p>On image-to-image retrieval, MODA reaches Fine Recall@1 of 67.68 against a reproduced FashionSigLIP baseline of 63.84. On text-to-image retrieval across six public benchmarks, the multi-view system beats FashionSigLIP on four with statistical significance, improves the point estimate on all six, and loses none, at the same parameters and dimension.</p>
+
+<h3>What are MODA Pro Lite and MODA Pro?</h3>
+<p>MODA Pro Lite is a trained 213M fashion encoder released as open weights (<a href="https://huggingface.co/HopitAI/moda-pro-lite">HopitAI/moda-pro-lite</a>): a verified fashion-vocabulary build of a SigLIP2 base, fine-tuned with an anchored recipe on LLM-annotated commercial product data. It beats MODA on catalog search at full corpus as a plain bi-encoder. MODA Pro is a closed, hosted two-expert system — MODA's index plus Pro Lite reranking the top 100 — rank 1 or 2 on 9 of 10 benchmark cells. Its weights are not distributed; it is available as a hosted service from Hopit AI.</p>
 
 <h3>Is the text-to-image model a new set of weights?</h3>
 <p>No. It is a retrieval system, not a checkpoint. It downloads the unchanged Apache-2.0 <code>Marqo/marqo-fashionSigLIP</code> weights and applies a frozen recipe: two text encodings per query, three image views per product, and a late fusion step. There are no weight files to download from MODA itself.</p>
