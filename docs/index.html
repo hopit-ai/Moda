@@ -99,7 +99,7 @@
           "name": "What are MODA Pro Lite and MODA Pro?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "MODA Pro Lite is a trained 213M fashion encoder released as open weights (HopitAI/moda-pro-lite). It beats MODA on catalog search at full corpus as a plain bi-encoder with no serving recipe. MODA Pro is a closed, hosted two-expert retrieval system combining MODA's index with Pro Lite reranking the top 100 results; it is rank 1 or 2 on 9 of 10 fashion retrieval benchmark cells at single-model query latency."
+            "text": "MODA Pro Lite is a trained 213M fashion encoder released as open weights (HopitAI/moda-pro-lite). It beats MODA on catalog search at full corpus as a plain bi-encoder with no serving recipe. MODA Pro is our closed, hosted retrieval system; it is rank 1 or 2 on 9 of 10 fashion retrieval benchmark cells at single-model query latency. Its architecture is not published."
           }
         },
         {
@@ -196,7 +196,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <tbody>
 <tr><td><strong>MODA</strong> (203M)</td><td>Zero-new-parameter serving recipe over frozen FashionSigLIP; 4 of 6 statistically significant full-corpus wins over its own base</td><td>open source + <a href="https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m">open weights</a></td></tr>
 <tr><td><strong>MODA Pro Lite</strong> (213M)</td><td>Trained encoder (verified fashion-vocab build of a SigLIP2 base); beats MODA on catalog search as a plain bi-encoder — no serving recipe required</td><td><a href="https://huggingface.co/HopitAI/moda-pro-lite">open weights</a></td></tr>
-<tr><td><strong>MODA Pro</strong> (416M system)</td><td>Two-expert fusion: MODA retrieves from its existing 768-d index, Pro Lite rescores the top 100 — <strong>rank 1 or 2 on 9 of 10 benchmark cells</strong> at single-model query latency</td><td>closed · <a href="https://hopit.ai">hosted by Hopit AI</a></td></tr>
+<tr><td><strong>MODA Pro</strong></td><td>Our hosted retrieval system — <strong>rank 1 or 2 on 9 of 10 benchmark cells</strong> at single-model query latency and cost</td><td>closed · <a href="https://hopit.ai">hosted by Hopit AI</a></td></tr>
 <tr><td><strong>MODA-SigLIP-Distilled</strong> (203M)</td><td>Image-to-image specialist — #1 open model on LookBench</td><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled">open weights</a> (+3 variants)</td></tr>
 </tbody>
 </table>
@@ -222,7 +222,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <h3>All systems, including larger models</h3>
 <p><a href="https://huggingface.co/srpone/zooclaw-fashionsiglip2">ZooClaw-FashionSigLIP2</a> (375M, <a href="https://arxiv.org/abs/2606.27708">Xue &amp; Xu 2026</a>) and SigLIP SO400M-384 (878M) measured at full corpus through the same harness; the pipeline reproduces published FashionSigLIP within +0.08%. Values come from a single aligned run. Best per row in green, second in bold.</p>
 <table>
-<thead><tr><th>Benchmark (corpus)</th><th><a href="https://huggingface.co/Marqo/marqo-fashionSigLIP">FashionSigLIP</a><br><span class="muted">203M</span></th><th>MODA<br><span class="muted">203M</span></th><th><a href="https://huggingface.co/timm/ViT-SO400M-14-SigLIP-384">SO400M</a><br><span class="muted">878M</span></th><th><a href="https://huggingface.co/srpone/zooclaw-fashionsiglip2">ZooClaw</a><br><span class="muted">375M</span></th><th>MODA Pro Lite<br><span class="muted">213M</span></th><th>MODA Pro<br><span class="muted">416M system</span></th></tr></thead>
+<thead><tr><th>Benchmark (corpus)</th><th><a href="https://huggingface.co/Marqo/marqo-fashionSigLIP">FashionSigLIP</a><br><span class="muted">203M</span></th><th>MODA<br><span class="muted">203M</span></th><th><a href="https://huggingface.co/timm/ViT-SO400M-14-SigLIP-384">SO400M</a><br><span class="muted">878M</span></th><th><a href="https://huggingface.co/srpone/zooclaw-fashionsiglip2">ZooClaw</a><br><span class="muted">375M</span></th><th>MODA Pro Lite<br><span class="muted">213M</span></th><th>MODA Pro<br><span class="muted">hosted</span></th></tr></thead>
 <tbody>
 <tr><td>KAGL (44K)</td><td class="n">0.2769</td><td class="n">0.2890</td><td class="n win">0.3370</td><td class="n">0.2951</td><td class="n">0.3185</td><td class="n"><strong>0.3263</strong></td></tr>
 <tr><td>Polyvore (94K)</td><td class="n">0.3665</td><td class="n">0.3726</td><td class="n win">0.4378</td><td class="n">0.3804</td><td class="n">0.3997</td><td class="n"><strong>0.4088</strong></td></tr>
@@ -288,7 +288,7 @@ python inference.py --image path/to/image.jpg</code></pre>
 <p>On image-to-image retrieval, MODA reaches Fine Recall@1 of 67.68 against a reproduced FashionSigLIP baseline of 63.84. On text-to-image retrieval across six public benchmarks, the multi-view system beats FashionSigLIP on four with statistical significance, improves the point estimate on all six, and loses none, at the same parameters and dimension.</p>
 
 <h3>What are MODA Pro Lite and MODA Pro?</h3>
-<p>MODA Pro Lite is a trained 213M fashion encoder released as open weights (<a href="https://huggingface.co/HopitAI/moda-pro-lite">HopitAI/moda-pro-lite</a>): a verified fashion-vocabulary build of a SigLIP2 base, fine-tuned with an anchored recipe on LLM-annotated commercial product data. It beats MODA on catalog search at full corpus as a plain bi-encoder. MODA Pro is a closed, hosted two-expert system — MODA's index plus Pro Lite reranking the top 100 — rank 1 or 2 on 9 of 10 benchmark cells. Its weights are not distributed; it is available as a hosted service from Hopit AI.</p>
+<p>MODA Pro Lite is a trained 213M fashion encoder released as open weights (<a href="https://huggingface.co/HopitAI/moda-pro-lite">HopitAI/moda-pro-lite</a>): a verified fashion-vocabulary build of a SigLIP2 base, fine-tuned with an anchored recipe on LLM-annotated commercial product data. It beats MODA on catalog search at full corpus as a plain bi-encoder. MODA Pro is our closed, hosted retrieval system — rank 1 or 2 on 9 of 10 benchmark cells at single-model query latency. Its weights and architecture are not distributed; it is available as a hosted service from Hopit AI.</p>
 
 <h3>Is the text-to-image model a new set of weights?</h3>
 <p>No. It is a retrieval system, not a checkpoint. It downloads the unchanged Apache-2.0 <code>Marqo/marqo-fashionSigLIP</code> weights and applies a frozen recipe: two text encodings per query, three image views per product, and a late fusion step. There are no weight files to download from MODA itself.</p>
