@@ -257,6 +257,21 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 
 <p>On LookBench, 256 dimensions matches 768 on Fine Recall@1, so a three times smaller index costs no measurable quality. With binary codes plus a Hamming-distance rerank, quality holds at <strong>32 bytes per vector</strong>.</p>
 
+<h2>Which model should I use?</h2>
+<table>
+<thead><tr><th>Your workload</th><th>Use</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Catalog / title search (marketplace queries: "red floral maxi dress")</td><td><a href="https://huggingface.co/HopitAI/moda-pro-lite">moda-pro-lite</a></td><td>Strongest ≤250M on catalog benchmarks (KAGL +10.2% over MODA); plain bi-encoder — drop into any vector DB, no serving code</td></tr>
+<tr><td>Caption-style or exact-item search (long descriptions, instance retrieval)</td><td><a href="https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m">MODA</a></td><td>Leads the ≤250M class on Fashion200K, In-Shop, and Multimodal; 4 of 6 significant wins over FashionSigLIP</td></tr>
+<tr><td>Best possible text search, no integration work</td><td><a href="https://hopit.ai">MODA Pro</a> (hosted)</td><td>Rank 1 or 2 on 9 of 10 benchmarks at single-model latency — the only system with no bad benchmark</td></tr>
+<tr><td>Find visually similar products from a photo</td><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled">moda-fashion-distilled</a></td><td>#1 open model on LookBench (Fine R@1 67.63, above a 1.24B model)</td></tr>
+<tr><td>Same, but index size matters</td><td><a href="https://huggingface.co/HopitAI/moda-fashion-matryoshka">moda-fashion-matryoshka</a> @256d</td><td>3× smaller index at no measurable quality loss; 32 bytes/vector with binary + Hamming rerank</td></tr>
+<tr><td>Edge / mobile deployment</td><td><a href="https://huggingface.co/HopitAI/moda-fashion-vision-fp16">moda-fashion-vision-fp16</a></td><td>186 MB vision tower</td></tr>
+<tr><td>Cheapest possible robust default</td><td><a href="https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m">MODA</a></td><td>Best worst-case of any single system; cheapest index build; CPU-servable</td></tr>
+</tbody>
+</table>
+<p class="muted">All models serve on CPU. Where a model is the wrong pick, its row above says so implicitly — Pro Lite is not the choice for instance retrieval (it loses In-Shop badly), and MODA is not the choice for marketplace titles. Full loss tables: <a href="https://github.com/hopit-ai/Moda">repository</a>.</p>
+
 <h2>Models</h2>
 <table>
 <thead><tr><th>Model</th><th>Task</th><th>Params</th><th>Dim</th><th>Best for</th></tr></thead>
