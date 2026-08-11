@@ -1,17 +1,55 @@
-# MODA — open-source fashion retrieval benchmark and models
+<h1 align="center">MODA</h1>
+<p align="center"><b>Open fashion retrieval: benchmark, harness and models.</b><br>
+Find products from a photo, or from a sentence. Measured at full corpus, one harness, competitors included, losses shown.</p>
 
-**MODA is an open-source benchmark and model family for fashion search, built by [Hopit AI](https://huggingface.co/HopitAI).** It covers both halves of the problem: finding products from an image, and finding products from a text description. Everything here is MIT licensed and reproducible from this repository.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT"></a>
+  <a href="https://huggingface.co/HopitAI"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Models-HopitAI-blue" alt="Hugging Face"></a>
+  <a href="https://hopit-ai.github.io/Moda/"><img src="https://img.shields.io/badge/Benchmarks-full%20corpus-0f7b4a" alt="Benchmarks"></a>
+  <a href="REPRODUCE.md"><img src="https://img.shields.io/badge/Results-reproducible-informational" alt="Reproduce"></a>
+</p>
 
-**The first open-source, end-to-end benchmark for fashion search with a full component-by-component breakdown.**  
-253,685 purchase-grounded queries · 105,542 H&M products · 40+ pipeline configs · nDCG@10 = 0.1063 on H&M text retrieval (+301% over dense baseline) · Fine R@1 = 67.68 on LookBench image-to-image retrieval (+3.84 over FashionSigLIP) · beats FashionSigLIP on text-to-image too (4 of 6 benchmarks significant, 0 losses, at equal parameters) · 5 model checkpoints plus 1 text-to-image retrieval system on HuggingFace (MIT, vision-only fp16 at 186 MB, Matryoshka with 64-768 dim slices)
+<p align="center">
+  <a href="https://hopit-ai.github.io/Moda/">Benchmarks</a> ·
+  <a href="https://huggingface.co/HopitAI">Models</a> ·
+  <a href="REPRODUCE.md">Reproduce</a> ·
+  <a href="https://huggingface.co/spaces/HopitAI/moda-fashion-search">Demo</a> ·
+  <a href="https://hopit.ai">Hopit AI</a>
+</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+---
 
-**Try MODA now:** [Interactive Hugging Face Space](https://huggingface.co/spaces/HopitAI/moda-fashion-search) · [HopitAI on Hugging Face](https://huggingface.co/HopitAI) · [Image search: `moda-fashion-deepfashion2`](https://huggingface.co/HopitAI/moda-fashion-deepfashion2) · [Text search: `moda-fashionsiglip-multiview-203m`](https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m)
+## Where these models stand
+
+| | Result | Measured against |
+|---|---|---|
+| **Image to image** | `moda-fashion-distilled` — **Fine R@1 67.63** on LookBench, the top open model | above a 1.24B-parameter model, at 203M |
+| **Text to image** | `moda-pro-lite` beats MODA on catalog search: **KAGL +10.2%, Polyvore +7.3%** | both significant under a paired bootstrap |
+| **Text to image** | MODA: **4 of 6** significant full-corpus wins over its own base model | at identical parameters and dimensions |
+
+Every cell is full corpus with no gallery subsampling, run through one harness with
+identical preprocessing per model, and the benchmarks we lose are published alongside
+the ones we win. [Full tables →](https://hopit-ai.github.io/Moda/) · [reproduce them →](REPRODUCE.md)
+
+## Quick start
 
 ```bash
-huggingface-cli download HopitAI/moda-fashion-deepfashion2 --local-dir ./moda-fashion-deepfashion2
+pip install open_clip_torch torch pillow
 ```
+
+```python
+import open_clip
+
+# Image to image: find visually similar products
+model, _, preprocess = open_clip.create_model_and_transforms("hf-hub:HopitAI/moda-fashion-distilled")
+
+# Text to image: search a catalog in plain language
+model, _, preprocess = open_clip.create_model_and_transforms("hf-hub:HopitAI/moda-pro-lite")
+tokenizer = open_clip.get_tokenizer("hf-hub:HopitAI/moda-pro-lite")
+```
+
+One 768-d vector per product, cosine similarity, any vector database. No reranker and
+no prompt template required.
 
 ---
 
@@ -26,7 +64,9 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 
 ---
 
-## Blog series
+<details>
+<summary><h2 style="display:inline">How it was built: the blog series</h2></summary>
+
 
 We are publishing this work as a series of technical blog posts, each covering one phase of the pipeline:
 
@@ -42,6 +82,8 @@ We are publishing this work as a series of technical blog posts, each covering o
 | [Blog 8](blog_post_phase7.md) | Where we started, and where we ended up | Multi-view + late fusion on frozen FashionSigLIP (text-to-image) | 4/6 significant MAP@10 wins over FashionSigLIP, 0 losses |
 
 ---
+
+</details>
 
 ## Released models
 
@@ -91,7 +133,15 @@ python inference.py --gallery ./my_catalog --query "red floral summer dress"
 
 ---
 
-## Key results
+## Results in detail
+
+The tables below are the historical record: every phase of the build, measured, including
+the ones that went sideways. For the current headline numbers see
+[the benchmark page](https://hopit-ai.github.io/Moda/).
+
+<details>
+<summary><b>Expand the phase-by-phase results</b> (H&M pipeline, LookBench, six public benchmarks, latency)</summary>
+
 
 ### Phase 1: Zero-shot pipeline (253,685 queries, 105,542 products)
 
@@ -188,7 +238,7 @@ A different task from Blog 1-5. No text queries, no H&M catalog, no reranker. Lo
 | FashionSigLIP (our reproduction) | 768 | 63.84 | 83.67 | 49.63 | +1.07 vs paper (clean reproduction) |
 | FashionCLIP (our reproduction) | 512 | 59.36 | 78.46 | 45.20 | -4.48 |
 | MODA-SigLIP-DeepFashion2 (single model) | 768 | 66.52 | 85.67 | 52.46 | **+2.68** |
-| **MODA-SigLIP-DF2 + FashionCLIP ensemble** | **2048** | **67.68** | **86.74** | **53.85** | **+3.84** |
+| **MODA-SigLIP-DF2 + FashionCLIP ensemble** *(not released; 2 models)* | **2048** | **67.68** | **86.74** | **53.85** | **+3.84** |
 
 Win-loss across all metric × subset cells: 14W / 1T / 0L for the standalone fine-tuned model; 12W / 0T / 1L for the ensemble (the loss is a 1-query flip on a saturated subset). Data leakage check passed on every training pool.
 
@@ -276,6 +326,9 @@ Blogs 5 to 7 beat FashionSigLIP on image-to-image. Phase 7 closes the series by 
 
 ---
 
+
+</details>
+
 ## Key findings
 
 1. **Dense > BM25 on fashion queries (-30%)** -- H&M product names are brand-style identifiers ("Ben zip hoodie"). Real users search semantically ("zip hoodie"). This contradicts general e-commerce benchmarks like WANDS where BM25 is competitive.
@@ -302,7 +355,7 @@ Blogs 5 to 7 beat FashionSigLIP on image-to-image. Phase 7 closes the series by 
 
 12. **Multimodal retrieval is not free on text-rich catalogs** -- Adding an image channel to the H&M pipeline did not improve aggregate nDCG@10. The text-only pipeline (0.1063) beats the three-tower multimodal pipeline (0.0833). Image features help on visually-specific queries ("floral midi dress") but hurt on text-dominated queries where the title already carries the answer. On H&M's clean merchandising-written titles, text-only retrieval done well beats multimodal retrieval done adequately. On catalogs with noisier text, the trade-off likely flips.
 
-13. **Beating FashionSigLIP on LookBench by +3.84 points** -- Cross-domain fine-tuning on DeepFashion2 (shop ↔ consumer pairs) plus a test-time ensemble with FashionCLIP lifts Fine R@1 from 63.84 to 67.68. The standalone fine-tuned model alone reaches 66.52. Reproduced FashionSigLIP's paper number within 1.07 points before measuring the delta. All training pools passed leakage audits against the LookBench evaluation set.
+13. **Beating FashionSigLIP on LookBench by +3.84 points** -- Cross-domain fine-tuning on DeepFashion2 (shop ↔ consumer pairs) plus a test-time ensemble with FashionCLIP lifts Fine R@1 from 63.84 to 67.68, at twice the vector width and two forward passes; the released single model reaches 67.63 at 768-d. The standalone fine-tuned model alone reaches 66.52. Reproduced FashionSigLIP's paper number within 1.07 points before measuring the delta. All training pools passed leakage audits against the LookBench evaluation set.
 
 14. **Fashion-specific pretraining is essential for image-to-image retrieval** -- DINOv2-Base (general self-supervised vision features) scored 39.49 Fine R@1 on LookBench, 24 points below FashionSigLIP. General vision foundation models do not capture fashion's fine-grained attributes (sleeve length, neckline, print pattern, fabric).
 
@@ -552,7 +605,9 @@ Each query in `qrels.csv` has:
 
 ---
 
-## Frequently asked questions
+<details>
+<summary><h2 style="display:inline">Frequently asked questions</h2></summary>
+
 
 ### What is MODA?
 
@@ -560,7 +615,7 @@ MODA is an open-source benchmark and model family for fashion retrieval, built b
 
 ### How does MODA compare to Marqo FashionSigLIP?
 
-On image-to-image retrieval (LookBench, 2,345 queries), MODA reaches Fine Recall@1 of 67.68 against a reproduced FashionSigLIP baseline of 63.84, a gain of 3.84 points. On text-to-image retrieval across six public benchmarks, the MODA multi-view system beats FashionSigLIP on four with statistical significance, improves the point estimate on all six, and loses none, at the same 203M parameters and 768 dimensions. FashionSigLIP was reproduced in this repository before any comparison was made.
+On image-to-image retrieval (LookBench, 2,345 queries), the released single model `moda-fashion-distilled` reaches Fine Recall@1 of 67.63 at 768 dimensions, against a reproduced FashionSigLIP baseline of 63.84. A two-model ensemble at 2,048 dimensions reaches 67.68, but we ship and benchmark the single model, a gain of 3.84 points. On text-to-image retrieval across six public benchmarks, the MODA multi-view system beats FashionSigLIP on four with statistical significance, improves the point estimate on all six, and loses none, at the same 203M parameters and 768 dimensions. FashionSigLIP was reproduced in this repository before any comparison was made.
 
 ### Which MODA model should I use?
 
@@ -587,6 +642,9 @@ Queries in the H&M benchmark are synthetically generated from real purchase data
 The MODA code and released models are MIT licensed. The base checkpoint used by the text-to-image system, `Marqo/marqo-fashionSigLIP`, is Apache-2.0. Some datasets referenced for research are research-only or noncommercial and are not redistributed here.
 
 ---
+
+
+</details>
 
 ## Citation
 
