@@ -65,7 +65,7 @@ Marqo has great embeddings. Algolia/Bloomreach are proprietary. Nobody has put i
 ---
 
 <details>
-<summary><h2 style="display:inline">How it was built: the blog series</h2></summary>
+<summary><b>How it was built: the blog series</b> (eight posts, one per phase)</summary>
 
 
 We are publishing this work as a series of technical blog posts, each covering one phase of the pipeline:
@@ -606,7 +606,7 @@ Each query in `qrels.csv` has:
 ---
 
 <details>
-<summary><h2 style="display:inline">Frequently asked questions</h2></summary>
+<summary><b>Frequently asked questions</b> (what MODA is, which model to use, limitations, licensing)</summary>
 
 
 ### What is MODA?
