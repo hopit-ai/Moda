@@ -31,6 +31,11 @@ and result artifacts are public and MIT licensed.
 - MODA-SigLIP-Distilled (203M, 768-d) — open weights. Image-to-image retrieval.
   LookBench Fine Recall@1 67.63, the top open model, above a 1.24B-parameter
   model. https://huggingface.co/HopitAI/moda-fashion-distilled
+- [MODA-Fashion-CrossDomain](https://huggingface.co/HopitAI/moda-fashion-crossdomain)
+  (203M, 768-d) — open weights. The single-model image-to-image variant: a
+  vision-tower fine-tune on cross-domain shop/consumer pairs, no distillation
+  and no ensemble. Fine R@1 66.52 on LookBench. The simplest recipe in the
+  family; the corpus specification needed to reproduce it is in REPRODUCE.md.
 - Variants: Matryoshka (64–768 dimensions selectable at query time; 256-d
   matches 768-d on LookBench Fine R@1), 512d, and an FP16 vision tower
   (186 MB) for edge deployment.
