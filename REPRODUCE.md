@@ -128,9 +128,55 @@ Two systems in the comparison are products, and we say so plainly:
   with the command above — but the **training pipeline and training data are
   proprietary**, so you cannot retrain it from scratch.
 
-Everything else on the benchmark page — the protocol, the MODA recipe, the
-distilled image model, and every competitor comparison — is reproducible from
-this repository.
+- **The image-to-image models' evaluation** is reproducible with the command
+  above, against published weights. Their **training data is not redistributed
+  here**; to retrain from scratch you must source an equivalent corpus yourself
+  (specification below).
+
+Everything else on the benchmark page — the protocol, the MODA recipe, and
+every competitor comparison — is reproducible from this repository.
+
+## Retraining the image-to-image model on your own data
+
+The recipe is specified so that it can be reproduced with **any** corpus
+meeting the description below. We do not redistribute training images or
+annotations, and any dataset you choose carries its own licence, which is
+yours to satisfy — including whether it permits commercial use.
+
+**What the corpus must contain.** Cross-domain pairs of the *same physical
+garment* photographed under two very different conditions:
+
+| | |
+|---|---|
+| Domain A | catalogue / studio: clean background, garment flat or on a model, even lighting |
+| Domain B | consumer / street: in the wild, worn, variable pose, occlusion, background clutter |
+| Link | an identity label joining A and B for the same product |
+
+**Scale.** Order **10⁴ triplets** — we used roughly 1.4 × 10⁴ training triplets
+with a ~5% validation split. The result is not knife-edge sensitive to this:
+anything in the same order of magnitude should land in the same region.
+Substantially less (10³) will underfit the cross-domain gap; substantially more
+(10⁵⁺) is likely to help, and we have not tested it.
+
+**Optional.** Bounding boxes per garment. We crop to the item before encoding,
+which matters more in Domain B where the garment is a small part of the frame.
+Without boxes, use the full image; expect a modest loss on street-like queries.
+
+**Training configuration** (this part is fully specified):
+
+| | |
+|---|---|
+| Base | `ViT-B-16-SigLIP` (webli), vision tower only |
+| Objective | InfoNCE over cross-domain positives + L2 weight-drift regularisation |
+| Optimiser | AdamW, LR 2e-6, batch 24 |
+| Schedule | 4 epochs; we selected epoch 3 on validation triplet accuracy |
+| Hardware | trains on a single Apple M-series (MPS) machine |
+
+**How to tell it worked.** On LookBench, a correct run of this recipe should
+land near **66.5 Fine R@1**, up from 63.8 for the untuned base — i.e. roughly
++2.7 points. If your corpus differs in scale or domain balance you should
+expect a different number; the check is that cross-domain fine-tuning moves
+the street-like subsets more than the studio ones.
 
 ## Known sources of variance
 
