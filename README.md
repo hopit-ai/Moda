@@ -99,7 +99,7 @@ Every model below beats the FashionSigLIP baseline on LookBench.
 | `HopitAI/moda-fashion-matryoshka` | flexible (64-768) | 775 MB | **67.42 @ 256d** | 57.48 @ 256d | **+3.58 at 256d** | **Flexible dimension.** Slice the embedding to your storage budget at query time. 256d saturates Fine R@1 (3x smaller index than 768d, no quality loss). Combine with binary + Hamming rerank for 32 bytes per vector. |
 | `HopitAI/moda-fashion-vision-fp16` | 768 | **186 MB** | 67.42 | 53.87 | +3.58 | **Smallest deployment.** Vision-only encoder, fp16 weights. 4.2x smaller than the full CLIP variant, only -0.21 points on Fine R@1. Built for edge, mobile, and serverless inference. |
 | `HopitAI/moda-fashion-distilled-512d` | 512 | 777 MB | **67.63** | **54.11** | **+3.79** | **512-d at no quality loss.** Distilled backbone plus a learned Linear(768→512) projection head. Highest nDCG@5 of any MODA variant. 33% smaller embeddings than 768d. |
-| `HopitAI/moda-fashion-distilled` | 768 | 775 MB | 66.52 | 52.46 | +2.68 | **Simplest recipe.** Phase 5 single-model fine-tune on cross-domain pairs. No distillation, no ensemble. Ships for research reproducibility. |
+| `HopitAI/moda-fashion-crossdomain` | 768 | 775 MB | 66.52 | 52.46 | +2.68 | **Simplest recipe.** Phase 5 single-model fine-tune on cross-domain pairs. No distillation, no ensemble. Ships for research reproducibility. |
 
 Every model card ships with a standalone `inference.py` (run `python inference.py --image <path>` to get embeddings, no external config needed), the full per-subset LookBench evaluation, paper-reproduction deltas against the FashionSigLIP baseline, and the leakage audit artifact. Evaluation scripts live in this repo.
 
@@ -237,7 +237,7 @@ A different task from Blog 1-5. No text queries, no H&M catalog, no reranker. Lo
 | FashionSigLIP (paper) | 768 | 62.77 | 82.77 | 49.44 | – |
 | FashionSigLIP (our reproduction) | 768 | 63.84 | 83.67 | 49.63 | +1.07 vs paper (clean reproduction) |
 | FashionCLIP (our reproduction) | 512 | 59.36 | 78.46 | 45.20 | -4.48 |
-| MODA-SigLIP (single-model) (single model) | 768 | 66.52 | 85.67 | 52.46 | **+2.68** |
+| MODA-SigLIP-CrossDomain (single model) | 768 | 66.52 | 85.67 | 52.46 | **+2.68** |
 | **MODA-SigLIP-single + FashionCLIP ensemble** *(not released; 2 models)* | **2048** | **67.68** | **86.74** | **53.85** | **+3.84** |
 
 Win-loss across all metric × subset cells: 14W / 1T / 0L for the standalone fine-tuned model; 12W / 0T / 1L for the ensemble (the loss is a 1-query flip on a saturated subset). Data leakage check passed on every training pool.
@@ -549,7 +549,7 @@ MODA/
 │       └── gliner2_ablation.json       <- GLiNER v1 vs GLiNER2 results
 │   ├── lookbench/                       <- Phase 5 image-to-image retrieval results
 │   │   ├── baseline_eval.json               <- FashionSigLIP / FashionCLIP baselines
-│   │   ├── cross-domain corpus_eval.json           <- MODA-SigLIP (single-model) (single model FT)
+│   │   ├── cross-domain corpus_eval.json           <- MODA-SigLIP-CrossDomain (single model FT)
 │   │   ├── ensemble_tta_eval.json           <- Ensemble (DF2 + FashionCLIP) — project best 67.68
 │   │   ├── dinov2_eval.json                 <- DINOv2 zero-shot (failure mode comparison)
 │   │   ├── data_leakage_check.json          <- Train/eval leakage audit
