@@ -388,7 +388,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <tbody>
 <tr><td><strong>MODA-SigLIP-Distilled</strong></td><td class="n">203M</td><td class="n">768</td><td class="n"><strong>67.63</strong></td><td class="n">53.85</td><td class="n win">+3.79</td></tr>
 <tr><td>MODA-SigLIP-Matryoshka @256d</td><td class="n">203M</td><td class="n">256</td><td class="n">67.42</td><td class="n">57.48</td><td class="n win">+3.58</td></tr>
-<tr><td>MODA-SigLIP-DeepFashion2</td><td class="n">203M</td><td class="n">768</td><td class="n">66.52</td><td class="n">52.46</td><td class="n win">+2.68</td></tr>
+<tr><td>MODA-SigLIP (single-model)</td><td class="n">203M</td><td class="n">768</td><td class="n">66.52</td><td class="n">52.46</td><td class="n win">+2.68</td></tr>
 <tr><td><a href="https://huggingface.co/TianmuLab/Tianmu-MERE">Tianmu-MERE</a> (Kuaishou)</td><td class="n">1.24B</td><td class="n">512</td><td class="n">65.99</td><td class="n">52.37</td><td class="n">+2.15</td></tr>
 <tr><td><a href="https://huggingface.co/Marqo/marqo-fashionSigLIP">FashionSigLIP</a> (our reproduction)</td><td class="n">203M</td><td class="n">768</td><td class="n">63.84</td><td class="n">49.63</td><td class="muted">baseline used here</td></tr>
 <tr><td>FashionSigLIP (published)</td><td class="n">203M</td><td class="n">768</td><td class="n">62.77</td><td class="n">49.44</td><td class="muted">baseline (paper)</td></tr>
@@ -424,7 +424,6 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-matryoshka">moda-fashion-matryoshka</a></td><td>Image to image</td><td class="n">203M</td><td class="n">64–768</td><td>Choose your dimension at query time</td></tr>
 <tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-distilled-512d">moda-fashion-distilled-512d</a></td><td>Image to image</td><td class="n">203M</td><td class="n">512</td><td>Compact indexes at no quality loss</td></tr>
 <tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-vision-fp16">moda-fashion-vision-fp16</a></td><td>Image to image</td><td class="n">93M vision</td><td class="n">768</td><td>Edge and mobile (186 MB)</td></tr>
-<tr><td><a href="https://huggingface.co/HopitAI/moda-fashion-deepfashion2">moda-fashion-deepfashion2</a></td><td>Image to image</td><td class="n">203M</td><td class="n">768</td><td>Simplest reproducible recipe</td></tr>
 </tbody>
 </table>
 
@@ -433,7 +432,7 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <pre><code>pip install "git+https://huggingface.co/HopitAI/moda-fashionsiglip-multiview-203m"
 python inference.py --gallery ./my_catalog --query "red floral summer dress"</code></pre>
 <p>Image to image, finding visually similar products:</p>
-<pre><code>huggingface-cli download HopitAI/moda-fashion-deepfashion2 --local-dir ./moda-fashion-deepfashion2
+<pre><code>huggingface-cli download HopitAI/moda-fashion-distilled --local-dir ./moda-fashion-distilled
 python inference.py --image path/to/image.jpg</code></pre>
 
 <h2>Frequently asked questions</h2>

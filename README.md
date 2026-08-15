@@ -99,7 +99,7 @@ Every model below beats the FashionSigLIP baseline on LookBench.
 | `HopitAI/moda-fashion-matryoshka` | flexible (64-768) | 775 MB | **67.42 @ 256d** | 57.48 @ 256d | **+3.58 at 256d** | **Flexible dimension.** Slice the embedding to your storage budget at query time. 256d saturates Fine R@1 (3x smaller index than 768d, no quality loss). Combine with binary + Hamming rerank for 32 bytes per vector. |
 | `HopitAI/moda-fashion-vision-fp16` | 768 | **186 MB** | 67.42 | 53.87 | +3.58 | **Smallest deployment.** Vision-only encoder, fp16 weights. 4.2x smaller than the full CLIP variant, only -0.21 points on Fine R@1. Built for edge, mobile, and serverless inference. |
 | `HopitAI/moda-fashion-distilled-512d` | 512 | 777 MB | **67.63** | **54.11** | **+3.79** | **512-d at no quality loss.** Distilled backbone plus a learned Linear(768→512) projection head. Highest nDCG@5 of any MODA variant. 33% smaller embeddings than 768d. |
-| `HopitAI/moda-fashion-deepfashion2` | 768 | 775 MB | 66.52 | 52.46 | +2.68 | **Simplest recipe.** Phase 5 single-model fine-tune on DeepFashion2 cross-domain pairs. No distillation, no ensemble. Ships for research reproducibility. |
+| `HopitAI/moda-fashion-distilled` | 768 | 775 MB | 66.52 | 52.46 | +2.68 | **Simplest recipe.** Phase 5 single-model fine-tune on cross-domain pairs. No distillation, no ensemble. Ships for research reproducibility. |
 
 Every model card ships with a standalone `inference.py` (run `python inference.py --image <path>` to get embeddings, no external config needed), the full per-subset LookBench evaluation, paper-reproduction deltas against the FashionSigLIP baseline, and the leakage audit artifact. Evaluation scripts live in this repo.
 
@@ -230,15 +230,15 @@ This is a lateral experiment, not a successor to Blog 4. We report it because th
 
 ### Phase 5: Beating FashionSigLIP on LookBench (image-to-image retrieval, 2,345 queries)
 
-A different task from Blog 1-5. No text queries, no H&M catalog, no reranker. LookBench is pure image-to-image retrieval: query image of a person wearing an outfit, gallery of 60K+ product images, find the matching product. The state-of-the-art is Marqo's FashionSigLIP. We beat it by cross-domain fine-tuning on DeepFashion2.
+A different task from Blog 1-5. No text queries, no H&M catalog, no reranker. LookBench is pure image-to-image retrieval: query image of a person wearing an outfit, gallery of 60K+ product images, find the matching product. The state-of-the-art is Marqo's FashionSigLIP. We beat it by cross-domain fine-tuning on shop↔consumer pairs.
 
 | Model | Dim | Fine R@1 | Coarse R@1 | nDCG@5 | Δ vs SigLIP |
 |---|---|---|---|---|---|
 | FashionSigLIP (paper) | 768 | 62.77 | 82.77 | 49.44 | – |
 | FashionSigLIP (our reproduction) | 768 | 63.84 | 83.67 | 49.63 | +1.07 vs paper (clean reproduction) |
 | FashionCLIP (our reproduction) | 512 | 59.36 | 78.46 | 45.20 | -4.48 |
-| MODA-SigLIP-DeepFashion2 (single model) | 768 | 66.52 | 85.67 | 52.46 | **+2.68** |
-| **MODA-SigLIP-DF2 + FashionCLIP ensemble** *(not released; 2 models)* | **2048** | **67.68** | **86.74** | **53.85** | **+3.84** |
+| MODA-SigLIP (single-model) (single model) | 768 | 66.52 | 85.67 | 52.46 | **+2.68** |
+| **MODA-SigLIP-single + FashionCLIP ensemble** *(not released; 2 models)* | **2048** | **67.68** | **86.74** | **53.85** | **+3.84** |
 
 Win-loss across all metric × subset cells: 14W / 1T / 0L for the standalone fine-tuned model; 12W / 0T / 1L for the ensemble (the loss is a 1-query flip on a saturated subset). Data leakage check passed on every training pool.
 
@@ -250,7 +250,7 @@ Win-loss across all metric × subset cells: 14W / 1T / 0L for the standalone fin
 | MODA-SigLIP-Vision-FT (H&M only) | 58.85 | -4.99 | Single-domain fine-tuning narrowed the model |
 | MODA-FashionCLIP-Phase4F (joint text-image FT on H&M) | 54.80 | -9.04 | Multimodal joint training pulled vision encoder toward text alignment |
 
-The winning recipe was specifically cross-domain (DeepFashion2 shop ↔ consumer pairs) plus an ensemble with a different model family at test time. Three of four intuitive approaches failed before we found it.
+The winning recipe was specifically cross-domain (shop↔consumer pairs) plus an ensemble with a different model family at test time. Three of four intuitive approaches failed before we found it.
 
 ### Phase 6: Matryoshka distillation, quantization, and the deployable model (LookBench, 2,345 queries)
 
@@ -355,11 +355,11 @@ Blogs 5 to 7 beat FashionSigLIP on image-to-image. Phase 7 closes the series by 
 
 12. **Multimodal retrieval is not free on text-rich catalogs** -- Adding an image channel to the H&M pipeline did not improve aggregate nDCG@10. The text-only pipeline (0.1063) beats the three-tower multimodal pipeline (0.0833). Image features help on visually-specific queries ("floral midi dress") but hurt on text-dominated queries where the title already carries the answer. On H&M's clean merchandising-written titles, text-only retrieval done well beats multimodal retrieval done adequately. On catalogs with noisier text, the trade-off likely flips.
 
-13. **Beating FashionSigLIP on LookBench by +3.84 points** -- Cross-domain fine-tuning on DeepFashion2 (shop ↔ consumer pairs) plus a test-time ensemble with FashionCLIP lifts Fine R@1 from 63.84 to 67.68, at twice the vector width and two forward passes; the released single model reaches 67.63 at 768-d. The standalone fine-tuned model alone reaches 66.52. Reproduced FashionSigLIP's paper number within 1.07 points before measuring the delta. All training pools passed leakage audits against the LookBench evaluation set.
+13. **Beating FashionSigLIP on LookBench by +3.84 points** -- Cross-domain fine-tuning on shop↔consumer pairs plus a test-time ensemble with FashionCLIP lifts Fine R@1 from 63.84 to 67.68, at twice the vector width and two forward passes; the released single model reaches 67.63 at 768-d. The standalone fine-tuned model alone reaches 66.52. Reproduced FashionSigLIP's paper number within 1.07 points before measuring the delta. All training pools passed leakage audits against the LookBench evaluation set.
 
 14. **Fashion-specific pretraining is essential for image-to-image retrieval** -- DINOv2-Base (general self-supervised vision features) scored 39.49 Fine R@1 on LookBench, 24 points below FashionSigLIP. General vision foundation models do not capture fashion's fine-grained attributes (sleeve length, neckline, print pattern, fabric).
 
-15. **Single-domain fine-tuning narrows, cross-domain fine-tuning broadens** -- Fine-tuning the SigLIP vision encoder on H&M images alone (single-domain studio flat-lay) regressed Fine R@1 by -4.99 points vs the baseline. Fine-tuning on DeepFashion2 (shop image ↔ consumer image pairs across diverse settings) lifted the same model by +2.68. The training data distribution decides whether fine-tuning generalizes or specializes.
+15. **Single-domain fine-tuning narrows, cross-domain fine-tuning broadens** -- Fine-tuning the SigLIP vision encoder on H&M images alone (single-domain studio flat-lay) regressed Fine R@1 by -4.99 points vs the baseline. Fine-tuning on cross-domain shop↔consumer pairs across diverse settings lifted the same model by +2.68. The training data distribution decides whether fine-tuning generalizes or specializes.
 
 16. **Joint text-image fine-tuning hurts pure image-to-image retrieval** -- Phase 4F's multimodal joint training, which improved text-to-product retrieval on H&M, regressed LookBench Fine R@1 by -9.04 points. Multi-task joint embeddings fight themselves: text alignment and image-image retrieval pull in different directions. Single-task models win when the task is narrow.
 
@@ -517,7 +517,7 @@ MODA/
 │   ├── eval_lookbench_baseline.py <- Phase 5: FashionSigLIP / FashionCLIP baselines on LookBench
 │   ├── eval_lookbench_dinov2.py   <- Phase 5: DINOv2 vision foundation model baseline
 │   ├── eval_lookbench_ensemble.py <- Phase 5: ensemble + test-time augmentation eval
-│   ├── train_deepfashion2_contrastive.py <- Phase 5: cross-domain DeepFashion2 contrastive fine-tune
+│   ├── train_cross-domain corpus_contrastive.py <- Phase 5: cross-domain cross-domain corpus contrastive fine-tune
 │   ├── marqo_clean_leakage_audit.py <- Phase 5: cross-benchmark leakage audit
 │   ├── data_leakage_check_extended.py <- Phase 5: extended train/eval leakage check across all pools
 │   ├── distill_ensemble_to_student.py <- Phase 6: distill the Phase 5 ensemble into a single 768d student (Recipe A')
@@ -549,7 +549,7 @@ MODA/
 │       └── gliner2_ablation.json       <- GLiNER v1 vs GLiNER2 results
 │   ├── lookbench/                       <- Phase 5 image-to-image retrieval results
 │   │   ├── baseline_eval.json               <- FashionSigLIP / FashionCLIP baselines
-│   │   ├── deepfashion2_eval.json           <- MODA-SigLIP-DeepFashion2 (single model FT)
+│   │   ├── cross-domain corpus_eval.json           <- MODA-SigLIP (single-model) (single model FT)
 │   │   ├── ensemble_tta_eval.json           <- Ensemble (DF2 + FashionCLIP) — project best 67.68
 │   │   ├── dinov2_eval.json                 <- DINOv2 zero-shot (failure mode comparison)
 │   │   ├── data_leakage_check.json          <- Train/eval leakage audit
