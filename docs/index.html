@@ -94,7 +94,7 @@
           "name": "How does MODA compare to Marqo FashionSigLIP?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "On image-to-image retrieval (LookBench, 2,345 queries) MODA reaches Fine Recall@1 of 67.68 against a reproduced FashionSigLIP baseline of 63.84, a gain of 3.84 points. On text-to-image retrieval across six public benchmarks, the MODA multi-view system beats FashionSigLIP on four with statistical significance, improves the point estimate on all six, and loses none, at the same 203M parameters and 768 dimensions. FashionSigLIP was reproduced in the repository before any comparison was made."
+            "text": "On image-to-image retrieval (LookBench, 2,345 queries) MODA reaches Fine Recall@1 of 67.63 against a reproduced FashionSigLIP baseline of 63.84, a gain of 3.79 points, as a single 203M model. On text-to-image retrieval across six public benchmarks, the MODA multi-view system beats FashionSigLIP on four with statistical significance, improves the point estimate on all six, and loses none, at the same 203M parameters and 768 dimensions. FashionSigLIP was reproduced in the repository before any comparison was made."
           }
         },
         {
@@ -388,14 +388,27 @@ footer{margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--line);colo
 <tbody>
 <tr><td><strong>MODA-SigLIP-Distilled</strong></td><td class="n">203M</td><td class="n">768</td><td class="n"><strong>67.63</strong></td><td class="n">53.85</td><td class="n win">+3.79</td></tr>
 <tr><td>MODA-SigLIP-Matryoshka @256d</td><td class="n">203M</td><td class="n">256</td><td class="n">67.42</td><td class="n">57.48</td><td class="n win">+3.58</td></tr>
+<tr><td><a href="https://serendipityoneinc.github.io/look-bench-page/">GR-Pro</a> (SerendipityOne, closed)</td><td class="n">n/a</td><td class="n">1024</td><td class="n">67.38</td><td class="n muted">&mdash;</td><td class="muted">published, not re-run here</td></tr>
 <tr><td>MODA-SigLIP-CrossDomain</td><td class="n">203M</td><td class="n">768</td><td class="n">66.52</td><td class="n">52.46</td><td class="n win">+2.68</td></tr>
 <tr><td><a href="https://huggingface.co/TianmuLab/Tianmu-MERE">Tianmu-MERE</a> (Kuaishou)</td><td class="n">1.24B</td><td class="n">512</td><td class="n">65.99</td><td class="n">52.37</td><td class="n">+2.15</td></tr>
+<tr><td><a href="https://huggingface.co/srpone/gr-lite">GR-Lite</a> (SerendipityOne, open)</td><td class="n">303M</td><td class="n">1024</td><td class="n">65.71</td><td class="n muted">&mdash;</td><td class="muted">published, not re-run here</td></tr>
 <tr><td><a href="https://huggingface.co/Marqo/marqo-fashionSigLIP">FashionSigLIP</a> (our reproduction)</td><td class="n">203M</td><td class="n">768</td><td class="n">63.84</td><td class="n">49.63</td><td class="muted">baseline used here</td></tr>
 <tr><td>FashionSigLIP (published)</td><td class="n">203M</td><td class="n">768</td><td class="n">62.77</td><td class="n">49.44</td><td class="muted">baseline (paper)</td></tr>
 </tbody>
 </table>
 
 <p><a href="https://huggingface.co/TianmuLab/Tianmu-MERE">Tianmu-MERE</a>, the top open model on the <a href="https://serendipityoneinc.github.io/look-bench-page/">LookBench multi-attribute leaderboard</a>, was evaluated through this same harness (weighted across the four subsets); it reproduces its own published subset scores within 0.5 points, which independently validates the harness. <strong>MODA-SigLIP-Distilled leads it on all four subsets, on Fine R@1 and nDCG@5 alike, at 6× fewer parameters.</strong></p>
+
+<p><strong>Selection and provenance.</strong> The configuration above was chosen
+from eight candidates ranked on LookBench itself, so the headline carries the upward bias of a
+maximum over eight. Two things bound that. The figure was independently reproduced at
+<strong>67.59</strong> by a separately built harness &mdash; different encode path, different
+scorer, different handling of the distractor pool. And when the configuration is instead selected
+on a held-out DeepFashion In-shop development set, with LookBench scored once on the winner,
+score-level fusion gains <strong>+0.56</strong> over the FashionSigLIP baseline; that is the honest
+size of that class of intervention, and it is smaller than an on-benchmark ranking implies.
+GR-Pro and GR-Lite rows are the authors' published figures and have not been re-run in this
+harness, unlike Tianmu-MERE.</p>
 
 <p>On LookBench, 256 dimensions matches 768 on Fine Recall@1, so a three times smaller index costs no measurable quality. With binary codes plus a Hamming-distance rerank, quality holds at <strong>32 bytes per vector</strong>.</p>
 
@@ -441,7 +454,7 @@ python inference.py --image path/to/image.jpg</code></pre>
 <p>MODA is an open-source benchmark and model family for fashion retrieval, built by Hopit AI. It provides an end-to-end fashion search pipeline measured component by component, five released image-to-image checkpoints, and one text-to-image retrieval system, all MIT licensed. "MODA" here refers to this project at github.com/hopit-ai/Moda, not to other organisations using the same name.</p>
 
 <h3>How does MODA compare to Marqo FashionSigLIP?</h3>
-<p>On image-to-image retrieval, MODA reaches Fine Recall@1 of 67.68 against a reproduced FashionSigLIP baseline of 63.84. On text-to-image retrieval across six public benchmarks, the multi-view system beats FashionSigLIP on four with statistical significance, improves the point estimate on all six, and loses none, at the same parameters and dimension.</p>
+<p>On image-to-image retrieval, MODA reaches Fine Recall@1 of 67.63 against a reproduced FashionSigLIP baseline of 63.84, as a single 203M model. On text-to-image retrieval across six public benchmarks, the multi-view system beats FashionSigLIP on four with statistical significance, improves the point estimate on all six, and loses none, at the same parameters and dimension.</p>
 
 <h3>What are MODA Pro Lite and MODA Pro?</h3>
 <p>MODA Pro Lite is a trained 213M fashion encoder released as open weights (<a href="https://huggingface.co/HopitAI/moda-pro-lite">HopitAI/moda-pro-lite</a>): a verified fashion-vocabulary build, fine-tuned with a proprietary recipe on LLM-annotated commercial product data. It beats MODA on catalog search at full corpus as a plain bi-encoder. MODA Pro is our closed, hosted retrieval system, rank 1 or 2 on 9 of 10 benchmark cells at single-model query latency. Its weights and architecture are not distributed; it is available as a hosted service from Hopit AI.</p>
