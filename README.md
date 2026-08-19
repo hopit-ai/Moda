@@ -24,8 +24,9 @@ Find products from a photo, or from a sentence. Measured at full corpus, one har
 | | Result | Measured against |
 |---|---|---|
 | **Image to image** | `moda-fashion-distilled` — **Fine R@1 67.63** on LookBench, the top open model | above a 1.24B-parameter model, at 203M |
-| **Text to image** | `moda-pro-lite` beats MODA on catalog search: **KAGL +10.2%, Polyvore +7.3%** | both significant under a paired bootstrap |
-| **Text to image** | MODA: **4 of 6** significant full-corpus wins over its own base model | at identical parameters and dimensions |
+| **Text to image** | `moda-pro-lite-plus` leads the ≤250M class on catalogue search: **KAGL +10.9%, Polyvore +8.7%** over MODA | both significant under a paired bootstrap |
+| **Text to image** | `moda-duo` routes each query by its shape and beats **both** its constituents on a mixed workload: **+5.0% / +5.4%** pooled over 12,000 queries | both significant under a paired bootstrap |
+| **Text to image** | MODA: **5 of 6** full-corpus wins over its own base model | at identical parameters and dimensions |
 
 Every cell is full corpus with no gallery subsampling, run through one harness with
 identical preprocessing per model, and the benchmarks we lose are published alongside
@@ -105,11 +106,25 @@ Every model card ships with a standalone `inference.py` (run `python inference.p
 
 ### Text-to-image retrieval system
 
-Beats the FashionSigLIP baseline on 4 of 6 public benchmarks and loses none, at the same parameter count and dimension.
+Three open systems. Pick by the shape of your queries.
 
-| Model | Dim | Params | Added params | MAP@10 vs FashionSigLIP | Benchmarks won | Use when |
-|---|---|---|---|---|---|---|
-| `HopitAI/moda-fashionsiglip-multiview-203m` | 768 | 203M (frozen FashionSigLIP) | **0** | **+3.11% mean, up to +5.02%** | **4 of 6 significant, 0 losses** | **Text-to-image search.** Multi-view encoding plus late fusion over the unchanged Marqo checkpoint. Same parameters and dimension as FashionSigLIP. |
+| Model | Dim | Params | Added params | Use when |
+|---|---|---|---|---|
+| `HopitAI/moda-pro-lite-plus` (**MODA Pro Lite+**) | 768 | 213M | **0** | **Catalogue and title search.** Trained encoder plus a calibrated serving recipe. Leads the ≤250M class on KAGL, Polyvore and Atlas. One vector per item. |
+| `HopitAI/moda-duo` (**MODA Duo**) | 768 | recipe over two encoders | **0** | **Mixed workloads.** Routes each query to the constituent that suits it. Beats either alone pooled over all six benchmarks; one encoder and one ANN query per search. |
+| `HopitAI/moda-fashionsiglip-multiview-203m` (**MODA**) | 768 | 203M (frozen FashionSigLIP) | **0** | **Long descriptions and exact-item retrieval.** Multi-view encoding over the unchanged Marqo checkpoint, same parameters and dimension as FashionSigLIP. |
+
+Full corpus, MAP@10, one evaluator (`pytrec_eval map_cut.10`):
+
+| Benchmark | FashionSigLIP | MODA | MODA Pro Lite+ | MODA Duo |
+|---|---|---|---|---|
+| KAGL | 0.2769 | 0.2887 | **0.3201** | **0.3201** |
+| Polyvore | 0.3664 | 0.3726 | **0.4049** | **0.4049** |
+| Atlas | 0.1826 | 0.1862 | **0.1904** | **0.1904** |
+| Fashion200K | 0.1858 | **0.1946** | 0.1846 | 0.1866 |
+| DeepFashion In-Shop | 0.1586 | **0.1642** | 0.1026 | 0.1640 |
+| DeepFashion Multimodal | 0.0148 | 0.0147 | 0.0133 | **0.0159** |
+| **pooled, 12,000 queries** | 0.1975 | 0.2035 | 0.2026 | **0.2137** |
 
 Per benchmark, full-corpus MAP@10:
 
@@ -309,6 +324,15 @@ Blogs 5 to 7 beat FashionSigLIP on image-to-image. Phase 7 closes the series by 
 | DeepFashion Multimodal | 0.01477 | 0.01504 | +1.87% | [-0.00121, +0.00192] | inconclusive |
 
 Δ is relative to the FashionSigLIP baseline. The confidence interval is on the absolute MAP@10 difference, which is what the bootstrap resamples.
+
+> **Superseded, 2026-08-19.** The figures in this Phase 7 section were computed under a
+> MAP@10 convention that divides by `min(relevant, 10)`; the tables at the top of this README
+> use `pytrec_eval map_cut.10`, which divides by the query's total relevant count. The two
+> agree except on DeepFashion In-Shop and Atlas. Under the single convention MODA wins 5 of 6
+> against FashionSigLIP. The shipped MODA system also stores **one** vector per item and
+> issues **one** retrieval route, not the three described below — the three-vector late-max
+> variant was an earlier candidate that is not what we publish. This section is kept as a
+> record of what was measured at the time.
 
 4 of 6 significant wins, positive point estimates on all 6, zero significant losses. Atlas and DeepFashion Multimodal improve numerically but their confidence intervals cross zero, so we do not count them as wins. This is a retrieval system over frozen weights, not a new checkpoint, and the `0.10` late-fusion blend was selected on external development data (OpenVTON and leakage-audited GLAMI), not on the target benchmarks. See [Blog 8](blog_post_phase7.md) and [`FSL_203M_SYSTEM_ARCHITECTURE.md`](FSL_203M_SYSTEM_ARCHITECTURE.md).
 
